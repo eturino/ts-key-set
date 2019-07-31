@@ -51,6 +51,24 @@ export class KeySetSome<T extends string | number> extends KeySetByKeys<T> {
 
     return new KeySetNone();
   }
+
+  public intersect(other: KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>): KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number> {
+    if (other instanceof KeySetAll) return new KeySetSome(this.keys);
+
+    if (other instanceof KeySetSome) {
+      const otherKeys = other.keys;
+      const keys = [...this.keys].filter((key) => otherKeys.includes(key));
+      return some(keys);
+    }
+
+    if (other instanceof KeySetAllExceptSome) {
+      const otherKeys = other.keys;
+      const keys = [...this.keys].filter((key) => !otherKeys.includes(key));
+      return some(keys);
+    }
+
+    return new KeySetNone();
+  }
 }
 
 export function some<T extends string | number>(keys: T[]): KeySetNone | KeySetSome<T> {

@@ -35,6 +35,10 @@ export class KeySetNone implements IKeySetClass {
   public remove(_other: KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>) {
     return new KeySetNone();
   }
+
+  public intersect(_other: KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>): KeySetNone {
+    return new KeySetNone();
+  }
 }
 
 export function none(): KeySetNone {

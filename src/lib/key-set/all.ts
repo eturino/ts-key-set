@@ -39,6 +39,13 @@ export class KeySetAll implements IKeySetClass {
 
     return new KeySetAll();
   }
+
+  public intersect(other: KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>): KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number> {
+    if (other instanceof KeySetAll) return new KeySetAll();
+    if (other instanceof KeySetNone) return new KeySetNone();
+    if (other instanceof KeySetSome) return new KeySetSome(other.keys);
+    return new KeySetAllExceptSome(other.keys);
+  }
 }
 
 export function all(): KeySetAll {
