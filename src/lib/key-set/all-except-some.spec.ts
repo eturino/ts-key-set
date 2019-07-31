@@ -18,6 +18,21 @@ test('#clone()', t => {
 test('#invert()', t => {
   const result = keySet.invert();
   t.assert(result instanceof KeySetSome);
-  t.false(keySet === result, 'different object');
   t.deepEqual(keySet.keys, result.keys);
+});
+
+test('#representsAll()', t => {
+  t.false(keySet.representsAll());
+});
+
+test('#representsNone()', t => {
+  t.false(keySet.representsNone());
+});
+
+test('#representsSome()', t => {
+  t.false(keySet.representsSome());
+});
+
+test('#representsAllExceptSome()', t => {
+  t.true(keySet.representsAllExceptSome());
 });
