@@ -17,4 +17,6 @@ export interface IKeySetClass {
   remove(other: KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>): KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>;
 
   clone(): KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>;
+
+  invert(): KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>;
 }

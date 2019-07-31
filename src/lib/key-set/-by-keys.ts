@@ -50,6 +50,8 @@ export abstract class KeySetByKeys<T extends string | number> implements IKeySet
 
   public abstract clone(): KeySetSome<string | number> | KeySetAllExceptSome<string | number>;
 
+  public abstract invert(): KeySetSome<string | number> | KeySetAllExceptSome<string | number>;
+
   public abstract isEqual(other: KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>): boolean;
 
   public abstract remove(other: KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>): KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>;

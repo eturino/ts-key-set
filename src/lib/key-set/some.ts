@@ -24,6 +24,10 @@ export class KeySetSome<T extends string | number> extends KeySetByKeys<T> {
     return new KeySetSome(this.keys);
   }
 
+  public invert(): KeySetAllExceptSome<T> {
+    return new KeySetAllExceptSome(this.keys);
+  }
+
   public isEqual(other: KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>): boolean {
     return other instanceof KeySetSome && this.hasSameKeys(other);
   }

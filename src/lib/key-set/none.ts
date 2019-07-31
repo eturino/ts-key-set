@@ -24,6 +24,10 @@ export class KeySetNone implements IKeySetClass {
     return new KeySetNone();
   }
 
+  public invert(): KeySetAll {
+    return new KeySetAll();
+  }
+
   public isEqual(other: KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>): boolean {
     return other.representsNone();
   }
