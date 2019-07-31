@@ -20,6 +20,10 @@ export class KeySetNone implements IKeySetClass {
     return false;
   }
 
+  public clone(): KeySetNone {
+    return new KeySetNone();
+  }
+
   public isEqual(other: KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>): boolean {
     return other.representsNone();
   }

@@ -20,6 +20,10 @@ export class KeySetAll implements IKeySetClass {
     return false;
   }
 
+  public clone(): KeySetAll {
+    return new KeySetAll();
+  }
+
   public isEqual(other: KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>) {
     return other instanceof KeySetAll;
   }

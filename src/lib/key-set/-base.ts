@@ -15,4 +15,6 @@ export interface IKeySetClass {
   isEqual(other: KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>): boolean;
 
   remove(other: KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>): KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>;
+
+  clone(): KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>;
 }

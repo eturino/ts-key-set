@@ -20,6 +20,10 @@ export class KeySetAllExceptSome<T extends string | number> extends KeySetByKeys
     return false;
   }
 
+  public clone(): KeySetAllExceptSome<T> {
+    return new KeySetAllExceptSome(this.keys);
+  }
+
   public isEqual(other: KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>): boolean {
     return other instanceof KeySetAllExceptSome && this.hasSameKeys(other);
   }
