@@ -28,11 +28,27 @@ export class KeySetAll implements IKeySetClass {
     return new KeySetNone();
   }
 
-  public isEqual(other: KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>) {
+  public isEqual(
+    other:
+      | KeySetAll
+      | KeySetNone
+      | KeySetSome<string | number>
+      | KeySetAllExceptSome<string | number>
+  ) {
     return other instanceof KeySetAll;
   }
 
-  public remove(other: KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>): KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number> {
+  public remove(
+    other:
+      | KeySetAll
+      | KeySetNone
+      | KeySetSome<string | number>
+      | KeySetAllExceptSome<string | number>
+  ):
+    | KeySetAll
+    | KeySetNone
+    | KeySetSome<string | number>
+    | KeySetAllExceptSome<string | number> {
     if (other instanceof KeySetSome) return new KeySetAllExceptSome(other.keys);
     if (other instanceof KeySetAllExceptSome) return new KeySetSome(other.keys);
     if (other instanceof KeySetAll) return new KeySetNone();
@@ -40,7 +56,17 @@ export class KeySetAll implements IKeySetClass {
     return new KeySetAll();
   }
 
-  public intersect(other: KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>): KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number> {
+  public intersect(
+    other:
+      | KeySetAll
+      | KeySetNone
+      | KeySetSome<string | number>
+      | KeySetAllExceptSome<string | number>
+  ):
+    | KeySetAll
+    | KeySetNone
+    | KeySetSome<string | number>
+    | KeySetAllExceptSome<string | number> {
     if (other instanceof KeySetAll) return new KeySetAll();
     if (other instanceof KeySetNone) return new KeySetNone();
     if (other instanceof KeySetSome) return new KeySetSome(other.keys);

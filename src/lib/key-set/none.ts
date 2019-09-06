@@ -28,15 +28,33 @@ export class KeySetNone implements IKeySetClass {
     return new KeySetAll();
   }
 
-  public isEqual(other: KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>): boolean {
+  public isEqual(
+    other:
+      | KeySetAll
+      | KeySetNone
+      | KeySetSome<string | number>
+      | KeySetAllExceptSome<string | number>
+  ): boolean {
     return other.representsNone();
   }
 
-  public remove(_other: KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>) {
+  public remove(
+    _other:
+      | KeySetAll
+      | KeySetNone
+      | KeySetSome<string | number>
+      | KeySetAllExceptSome<string | number>
+  ) {
     return new KeySetNone();
   }
 
-  public intersect(_other: KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>): KeySetNone {
+  public intersect(
+    _other:
+      | KeySetAll
+      | KeySetNone
+      | KeySetSome<string | number>
+      | KeySetAllExceptSome<string | number>
+  ): KeySetNone {
     return new KeySetNone();
   }
 }

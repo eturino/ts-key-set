@@ -7,7 +7,6 @@ import { KeySetSome } from '../some';
 const keySetAll = new KeySetAll();
 const keySetNone = new KeySetNone();
 
-
 const subSetKeys = [1, 2];
 const restKeys = [3];
 const keys = [...subSetKeys, ...restKeys];

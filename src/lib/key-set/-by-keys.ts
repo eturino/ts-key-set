@@ -4,7 +4,11 @@ import { KeySetAllExceptSome } from './all-except-some';
 import { KeySetNone } from './none';
 import { KeySetSome } from './some';
 
-function onlyUnique<T extends string | number>(value: T, index: number, self: T[]) {
+function onlyUnique<T extends string | number>(
+  value: T,
+  index: number,
+  self: T[]
+) {
   return self.indexOf(value) === index;
 }
 
@@ -33,7 +37,8 @@ function arraysEqual<T extends string | number>(a: T[], b: T[]) {
   return true;
 }
 
-export abstract class KeySetByKeys<T extends string | number> implements IKeySetClass {
+export abstract class KeySetByKeys<T extends string | number>
+  implements IKeySetClass {
   private readonly keySet: T[];
 
   constructor(keys: T[]) {
@@ -48,13 +53,33 @@ export abstract class KeySetByKeys<T extends string | number> implements IKeySet
 
   public abstract representsAllExceptSome(): boolean;
 
-  public abstract clone(): KeySetSome<string | number> | KeySetAllExceptSome<string | number>;
+  public abstract clone():
+    | KeySetSome<string | number>
+    | KeySetAllExceptSome<string | number>;
 
-  public abstract invert(): KeySetSome<string | number> | KeySetAllExceptSome<string | number>;
+  public abstract invert():
+    | KeySetSome<string | number>
+    | KeySetAllExceptSome<string | number>;
 
-  public abstract isEqual(other: KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>): boolean;
+  public abstract isEqual(
+    other:
+      | KeySetAll
+      | KeySetNone
+      | KeySetSome<string | number>
+      | KeySetAllExceptSome<string | number>
+  ): boolean;
 
-  public abstract remove(other: KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>): KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>;
+  public abstract remove(
+    other:
+      | KeySetAll
+      | KeySetNone
+      | KeySetSome<string | number>
+      | KeySetAllExceptSome<string | number>
+  ):
+    | KeySetAll
+    | KeySetNone
+    | KeySetSome<string | number>
+    | KeySetAllExceptSome<string | number>;
 
   public get keys(): T[] {
     return [...this.keySet];

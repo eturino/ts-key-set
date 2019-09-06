@@ -28,20 +28,36 @@ export class KeySetSome<T extends string | number> extends KeySetByKeys<T> {
     return new KeySetAllExceptSome(this.keys);
   }
 
-  public isEqual(other: KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>): boolean {
+  public isEqual(
+    other:
+      | KeySetAll
+      | KeySetNone
+      | KeySetSome<string | number>
+      | KeySetAllExceptSome<string | number>
+  ): boolean {
     return other instanceof KeySetSome && this.hasSameKeys(other);
   }
 
-  public remove(other: KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>): KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number> {
+  public remove(
+    other:
+      | KeySetAll
+      | KeySetNone
+      | KeySetSome<string | number>
+      | KeySetAllExceptSome<string | number>
+  ):
+    | KeySetAll
+    | KeySetNone
+    | KeySetSome<string | number>
+    | KeySetAllExceptSome<string | number> {
     if (other instanceof KeySetSome) {
       const otherKeys = other.keys;
-      const keys = [...this.keys].filter((key) => !otherKeys.includes(key));
+      const keys = [...this.keys].filter(key => !otherKeys.includes(key));
       return some(keys);
     }
 
     if (other instanceof KeySetAllExceptSome) {
       const otherKeys = other.keys;
-      const keys = [...this.keys].filter((key) => otherKeys.includes(key));
+      const keys = [...this.keys].filter(key => otherKeys.includes(key));
       return some(keys);
     }
 
@@ -52,18 +68,28 @@ export class KeySetSome<T extends string | number> extends KeySetByKeys<T> {
     return new KeySetNone();
   }
 
-  public intersect(other: KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number>): KeySetAll | KeySetNone | KeySetSome<string | number> | KeySetAllExceptSome<string | number> {
+  public intersect(
+    other:
+      | KeySetAll
+      | KeySetNone
+      | KeySetSome<string | number>
+      | KeySetAllExceptSome<string | number>
+  ):
+    | KeySetAll
+    | KeySetNone
+    | KeySetSome<string | number>
+    | KeySetAllExceptSome<string | number> {
     if (other instanceof KeySetAll) return new KeySetSome(this.keys);
 
     if (other instanceof KeySetSome) {
       const otherKeys = other.keys;
-      const keys = [...this.keys].filter((key) => otherKeys.includes(key));
+      const keys = [...this.keys].filter(key => otherKeys.includes(key));
       return some(keys);
     }
 
     if (other instanceof KeySetAllExceptSome) {
       const otherKeys = other.keys;
-      const keys = [...this.keys].filter((key) => !otherKeys.includes(key));
+      const keys = [...this.keys].filter(key => !otherKeys.includes(key));
       return some(keys);
     }
 
@@ -71,7 +97,9 @@ export class KeySetSome<T extends string | number> extends KeySetByKeys<T> {
   }
 }
 
-export function some<T extends string | number>(keys: T[]): KeySetNone | KeySetSome<T> {
+export function some<T extends string | number>(
+  keys: T[]
+): KeySetNone | KeySetSome<T> {
   if (!keys.length) {
     return none();
   }

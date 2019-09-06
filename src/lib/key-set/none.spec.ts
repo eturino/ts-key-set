@@ -30,4 +30,3 @@ test('#representsSome()', t => {
 test('#representsAllExceptSome()', t => {
   t.false(keySet.representsAllExceptSome());
 });
-

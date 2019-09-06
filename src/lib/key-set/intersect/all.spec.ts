@@ -15,7 +15,6 @@ test('#intersect(keySetAll)', t => {
   const rest = keySet.intersect(keySetAll);
   t.assert(rest instanceof KeySetAll);
   t.false(keySet === rest, 'different object');
-
 });
 
 test('#intersect(keySetNone)', t => {
