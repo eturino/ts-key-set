@@ -56,4 +56,10 @@ If the KeySet is `KeySetSome` or `KeySetAllExceptSome`, they will have an array 
 all KeySet has an `invert()` method that returns an instance of the opposite class, which represents the opposite KeySet.
 
 `KeySetAll` <- -> `KeySetNone`
-`representsSome` <- -> `representsAllExceptSome`
+`KeySetSome` <- -> `KeySetAllExceptSome`
+
+### `isEqual()`
+
+all KeySet has an `isEqual(other)` method that returns true if the `other` keySet is of the same class and represents the same KeySet.
+
+If the KeySet is `KeySetSome` or `KeySetAllExceptSome`, they will have to have an array with the same keys.
