@@ -1,10 +1,10 @@
-import { KeySet } from './-base';
+import { Key, KeySet } from './-base';
 import { KeySetByKeys } from './-by-keys';
 import { KeySetAll } from './all';
 import { KeySetAllExceptSome } from './all-except-some';
 import { KeySetNone, none } from './none';
 
-export class KeySetSome<T extends string | number> extends KeySetByKeys<T> {
+export class KeySetSome<T extends Key> extends KeySetByKeys<T> {
   public representsAll() {
     return false;
   }
@@ -35,15 +35,11 @@ export class KeySetSome<T extends string | number> extends KeySetByKeys<T> {
 
   public remove(other: KeySet): KeySet {
     if (other instanceof KeySetSome) {
-      const otherKeys = other.keys;
-      const keys = [...this.keys].filter(key => !otherKeys.includes(key));
-      return some(keys);
+      return some(this.excludeKeys(other.keys));
     }
 
     if (other instanceof KeySetAllExceptSome) {
-      const otherKeys = other.keys;
-      const keys = [...this.keys].filter(key => otherKeys.includes(key));
-      return some(keys);
+      return some(this.intersectKeys(other.keys));
     }
 
     if (other instanceof KeySetNone) {
@@ -57,27 +53,27 @@ export class KeySetSome<T extends string | number> extends KeySetByKeys<T> {
     if (other instanceof KeySetAll) return new KeySetSome(this.keys);
 
     if (other instanceof KeySetSome) {
-      const otherKeys = other.keys;
-      const keys = [...this.keys].filter(key => otherKeys.includes(key));
-      return some(keys);
+      return some(this.intersectKeys(other.keys));
     }
 
     if (other instanceof KeySetAllExceptSome) {
-      const otherKeys = other.keys;
-      const keys = [...this.keys].filter(key => !otherKeys.includes(key));
-      return some(keys);
+      return some(this.excludeKeys(other.keys));
     }
 
     return new KeySetNone();
   }
+
+  private intersectKeys(otherKeys: Key[]) {
+    return [...this.keys].filter(key => otherKeys.includes(key));
+  }
+
+  private excludeKeys(otherKeys: Key[]) {
+    return [...this.keys].filter(key => !otherKeys.includes(key));
+  }
 }
 
-export function some<T extends string | number>(
-  keys: T[]
-): KeySetNone | KeySetSome<T> {
-  if (!keys.length) {
-    return none();
-  }
+export function some<T extends Key>(keys: T[]): KeySetNone | KeySetSome<T> {
+  if (!keys.length) return none();
 
   return new KeySetSome(keys);
 }

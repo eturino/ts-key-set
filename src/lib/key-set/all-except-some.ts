@@ -1,12 +1,10 @@
-import { KeySet } from './-base';
+import { Key, KeySet } from './-base';
 import { KeySetByKeys } from './-by-keys';
 import { all, KeySetAll } from './all';
 import { KeySetNone } from './none';
 import { KeySetSome, some } from './some';
 
-export class KeySetAllExceptSome<
-  T extends string | number
-> extends KeySetByKeys<T> {
+export class KeySetAllExceptSome<T extends Key> extends KeySetByKeys<T> {
   public representsAll() {
     return false;
   }
@@ -42,8 +40,7 @@ export class KeySetAllExceptSome<
     }
 
     if (other instanceof KeySetAllExceptSome) {
-      const keys = [...other.keys].filter(key => !this.keys.includes(key as T));
-      return some(keys);
+      return some(this.excludeMyKeys(other.keys));
     }
 
     if (other instanceof KeySetAll) return new KeySetNone();
@@ -60,15 +57,18 @@ export class KeySetAllExceptSome<
 
     if (other instanceof KeySetSome) {
       // we have all except some, we remove some others => we have all except the ones that we didn't have before and the ones that we don't have now
-      const keys = [...other.keys].filter(key => !this.keys.includes(key as T));
-      return some(keys);
+      return some(this.excludeMyKeys(other.keys));
     }
 
     return allExceptSome([...this.keys, ...other.keys]);
   }
+
+  private excludeMyKeys(keys: Key[]) {
+    return [...keys].filter(key => !this.keys.includes(key as T));
+  }
 }
 
-export function allExceptSome<T extends string | number>(
+export function allExceptSome<T extends Key>(
   keys: T[]
 ): KeySetAll | KeySetAllExceptSome<T> {
   if (!keys.length) {

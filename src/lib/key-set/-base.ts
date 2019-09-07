@@ -3,7 +3,9 @@ import { KeySetAllExceptSome } from './all-except-some';
 import { KeySetNone } from './none';
 import { KeySetSome } from './some';
 
-export type KeySet<T extends string | number = string | number> =
+export type Key = string | number;
+
+export type KeySet<T extends Key = Key> =
   | KeySetAll
   | KeySetNone
   | KeySetSome<T>

@@ -1,11 +1,10 @@
 import { arraysEqual } from '../util/arrays-equal';
 import { uniqueArray } from '../util/unique-array';
-import { IKeySetClass, KeySet } from './-base';
+import { IKeySetClass, Key, KeySet } from './-base';
 import { KeySetAllExceptSome } from './all-except-some';
 import { KeySetSome } from './some';
 
-export abstract class KeySetByKeys<T extends string | number>
-  implements IKeySetClass {
+export abstract class KeySetByKeys<T extends Key> implements IKeySetClass {
   private readonly keySet: T[];
 
   constructor(keys: T[]) {
@@ -34,7 +33,7 @@ export abstract class KeySetByKeys<T extends string | number>
     return [...this.keySet];
   }
 
-  protected hasSameKeys(other: KeySetByKeys<string | number>): boolean {
+  protected hasSameKeys(other: KeySetByKeys<Key>): boolean {
     return arraysEqual(this.keys, other.keys);
   }
 }
