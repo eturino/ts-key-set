@@ -5,7 +5,7 @@
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
   "module": "build/module/index.js",
-  "repository": "https://github.com/eturino/key-set",
+  "repository": "https://github.com/eturino/ts-key-set",
   "license": "MIT",
   "keywords": [],
   "scripts": {
@@ -18,7 +18,7 @@
     "fix:tslint": "tslint --fix --project .",
     "test": "run-s build test:*",
     "test:lint": "tslint --project . && prettier \"src/**/*.ts\" --list-different",
-    "test:unit": "nyc --silent ava",
+    "test:unit": "nyc ava",
     "watch": "run-s clean build:main && run-p \"build:main -- -w\" \"test:unit -- --watch\"",
     "cov": "run-s build test:unit cov:html && open-cli coverage/index.html",
     "cov:html": "nyc report --reporter=html",
@@ -53,7 +53,7 @@
   "dependencies": {},
   "devDependencies": {
     "@bitjson/npm-scripts-info": "^1.0.0",
-    "ava": "2.2.0",
+    "ava": "2.3.0",
     "codecov": "^3.5.0",
     "cz-conventional-changelog": "^3.0.2",
     "gh-pages": "^2.0.1",
@@ -63,6 +63,7 @@
     "prettier": "^1.18.2",
     "standard-version": "^7.0.0",
     "trash-cli": "^3.0.0",
+    "ts-node": "^8.3.0",
     "tslint": "^5.18.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-immutable": "^6.0.1",
@@ -71,11 +72,18 @@
   },
   "ava": {
     "failFast": true,
-    "files": [
-      "build/main/**/*.spec.js"
+    "compileEnhancements": false,
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
     ],
     "sources": [
-      "build/main/**/*.js"
+      "src/**/*"
+    ],
+    "files": [
+      "src/**/*.spec.ts"
     ]
   },
   "config": {
