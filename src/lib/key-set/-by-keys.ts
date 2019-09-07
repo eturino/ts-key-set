@@ -1,22 +1,15 @@
 import { arraysEqual } from '../util/arrays-equal';
+import { uniqueArray } from '../util/unique-array';
 import { IKeySetClass, KeySet } from './-base';
 import { KeySetAllExceptSome } from './all-except-some';
 import { KeySetSome } from './some';
-
-function onlyUnique<T extends string | number>(
-  value: T,
-  index: number,
-  self: T[]
-) {
-  return self.indexOf(value) === index;
-}
 
 export abstract class KeySetByKeys<T extends string | number>
   implements IKeySetClass {
   private readonly keySet: T[];
 
   constructor(keys: T[]) {
-    this.keySet = [...keys].filter(onlyUnique).sort();
+    this.keySet = uniqueArray(keys).sort();
   }
 
   public abstract representsAll(): boolean;

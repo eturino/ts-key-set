@@ -91,3 +91,12 @@ returns a new KeySet with the intersection of both Sets (A ∩ B), representing 
 ```ts
 const diffKeySet = keySet.intersect(other);
 ```
+
+## Util functions
+
+The lib also exports the 2 util functions used in the code
+
+- `uniqueArray(list)`: returns another array with unique items
+  - __adapted from <https://medium.com/@jakubsynowiec/unique-array-values-in-javascript-7c932682766c> (credit to Jakub Synowiec)__
+- `arraysEqual(a, b)`: returns true if the 2 arrays have the same keys
+  - __adapted from <https://stackoverflow.com/questions/3115982/how-to-check-if-two-arrays-are-equal-with-javascript> (credit to [enyo](https://stackoverflow.com/users/170851/enyo))__

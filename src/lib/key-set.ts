@@ -3,15 +3,22 @@ import { all, KeySetAll } from './key-set/all';
 import { allExceptSome, KeySetAllExceptSome } from './key-set/all-except-some';
 import { KeySetNone, none } from './key-set/none';
 import { KeySetSome, some } from './key-set/some';
+import { arraysEqual } from './util/arrays-equal';
+import { uniqueArray } from './util/unique-array';
 
 export {
-  KeySet,
+  // builders
   all,
   allExceptSome,
+  none,
+  some,
+  // types and classes
+  KeySet,
   KeySetAll,
   KeySetAllExceptSome,
   KeySetNone,
   KeySetSome,
-  none,
-  some
+  // util functions
+  uniqueArray,
+  arraysEqual
 };
