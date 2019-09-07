@@ -14,10 +14,10 @@ Library bootstrapped using [typescript-starter](https://github.com/bitjson/types
 
 We have 4 classes:
 
-- `KeySetAll`
-- `KeySetNone`
-- `KeySetSome`
-- `KeySetAllExceptSome`
+- `KeySetAll`: represents the entirety of possible keys (`𝕌`)
+- `KeySetNone`: represents an empty set (`∅`)
+- `KeySetSome`: represents a concrete set (`A ⊂ 𝕌`)
+- `KeySetAllExceptSome`: represents the complementary of a set, all the elements except the given ones (`A' = {x ∈ 𝕌 | x ∉ A}`) _(see [Complement in Wikipedia](https://en.wikipedia.org/wiki/Complement_\(set_theory\)))_
 
 ### Creation: `all()`, `none()`, `some([...])` and `allExceptSome([...])`
 
@@ -33,7 +33,7 @@ some([1, 3, 2, 3]); // returns a new instance of KeySetSome with keys [1, 2, 3] 
 some([]); // returns a new instance of KeySetNone
 
 allExceptSome([1, 3, 2, 3]); // returns a new instance of KeySetAllExceptSome with keys [1, 2, 3] (sorted, unique)
-allExceptSome([]); // returnsa  new instance of KeySetAll
+allExceptSome([]); // returns a new instance of KeySetAll
 ```
 
 ### `representsXXX()`
@@ -52,7 +52,7 @@ all KeySet has a `clone()` method, which will return a new instance of the same 
 If the KeySet is `KeySetSome` or `KeySetAllExceptSome`, they will have an array with the same keys.
 
 ```ts
-const newKeySet = keySet.invert();
+const newKeySet = keySet.clone();
 ```
 
 ### `isEqual(other)`
@@ -67,10 +67,10 @@ if (keySet.isEqual(otherKeySet))
 
 ### `invert()`
 
-all KeySet has an `invert()` method that returns an instance of the opposite class, which represents the complementary KeySet.
+all KeySet has an `invert()` method that returns an instance of the opposite class, which represents the complementary KeySet. _(see [Complement in Wikipedia](https://en.wikipedia.org/wiki/Complement_\(set_theory\)))_
 
-- `KeySetAll` <- -> `KeySetNone`
-- `KeySetSome` <- -> `KeySetAllExceptSome`
+- `KeySetAll` ⟷ `KeySetNone`
+- `KeySetSome` ⟷ `KeySetAllExceptSome`
 
 ```ts
 const complementaryKeySet = keySet.invert();
@@ -78,7 +78,7 @@ const complementaryKeySet = keySet.invert();
 
 ### `remove(other)`
 
-returns a new KeySet with the difference between ThisSet - OtherSet (A - B)
+returns a new KeySet with the difference between ThisSet - OtherSet `(A - B)`
 
 ```ts
 const diffKeySet = keySet.remove(other);
@@ -86,7 +86,7 @@ const diffKeySet = keySet.remove(other);
 
 ### `intersect(other)`
 
-returns a new KeySet with the intersection of both Sets (A ∩ B), representing the elements present in both sets
+returns a new KeySet with the intersection of both Sets `(A ∩ B)`, representing the elements present in both sets
 
 ```ts
 const diffKeySet = keySet.intersect(other);
