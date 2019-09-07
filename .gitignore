@@ -3,6 +3,7 @@ build
 test
 src/**.js
 .idea/*
+yarn-error.log
 
 coverage
 .nyc_output
