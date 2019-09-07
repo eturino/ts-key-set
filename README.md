@@ -19,7 +19,7 @@ We have 4 classes:
 - `KeySetSome`
 - `KeySetAllExceptSome`
 
-### Creation
+### Creation: `all()`, `none()`, `some([...])` and `allExceptSome([...])`
 
 Build your KeySets using the build functions
 
@@ -51,15 +51,43 @@ all KeySet has a `clone()` method, which will return a new instance of the same 
 
 If the KeySet is `KeySetSome` or `KeySetAllExceptSome`, they will have an array with the same keys.
 
-### `invert()`
+```ts
+const newKeySet = keySet.invert();
+```
 
-all KeySet has an `invert()` method that returns an instance of the opposite class, which represents the opposite KeySet.
-
-`KeySetAll` <- -> `KeySetNone`
-`KeySetSome` <- -> `KeySetAllExceptSome`
-
-### `isEqual()`
+### `isEqual(other)`
 
 all KeySet has an `isEqual(other)` method that returns true if the `other` keySet is of the same class and represents the same KeySet.
 
 If the KeySet is `KeySetSome` or `KeySetAllExceptSome`, they will have to have an array with the same keys.
+
+```ts
+if (keySet.isEqual(otherKeySet))
+```
+
+### `invert()`
+
+all KeySet has an `invert()` method that returns an instance of the opposite class, which represents the complementary KeySet.
+
+- `KeySetAll` <- -> `KeySetNone`
+- `KeySetSome` <- -> `KeySetAllExceptSome`
+
+```ts
+const complementaryKeySet = keySet.invert();
+```
+
+### `remove(other)`
+
+returns a new KeySet with the difference between ThisSet - OtherSet (A - B)
+
+```ts
+const diffKeySet = keySet.remove(other);
+```
+
+### `intersect(other)`
+
+returns a new KeySet with the intersection of both Sets (A ∩ B), representing the elements present in both sets
+
+```ts
+const diffKeySet = keySet.intersect(other);
+```
