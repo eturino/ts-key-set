@@ -79,10 +79,10 @@
 				</a>
 				<p>We have 4 classes:</p>
 				<ul>
-					<li><code>KeySetAll</code></li>
-					<li><code>KeySetNone</code></li>
-					<li><code>KeySetSome</code></li>
-					<li><code>KeySetAllExceptSome</code></li>
+					<li><code>KeySetAll</code>: represents the entirety of possible keys (<code>𝕌</code>)</li>
+					<li><code>KeySetNone</code>: represents an empty set (<code>∅</code>)</li>
+					<li><code>KeySetSome</code>: represents a concrete set (<code>A ⊂ 𝕌</code>)</li>
+					<li><code>KeySetAllExceptSome</code>: represents the complementary of a set, all the elements except the given ones (<code>A&#39; = {x ∈ 𝕌 | x ∉ A}</code>) <em>(see <a href="https://en.wikipedia.org/wiki/Complement_(set_theory)">Complement in Wikipedia</a>)</em></li>
 				</ul>
 				<a href="#creation-codeallcode-codenonecode-codesomecode-and-codeallexceptsomecode" id="creation-codeallcode-codenonecode-codesomecode-and-codeallexceptsomecode" style="color: inherit; text-decoration: none;">
 					<h3>Creation: <code>all()</code>, <code>none()</code>, <code>some([...])</code> and <code>allExceptSome([...])</code></h3>
@@ -97,7 +97,7 @@ some([<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <s
 some([]); <span class="hljs-comment">// returns a new instance of KeySetNone</span>
 
 allExceptSome([<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]); <span class="hljs-comment">// returns a new instance of KeySetAllExceptSome with keys [1, 2, 3] (sorted, unique)</span>
-allExceptSome([]); <span class="hljs-comment">// returnsa  new instance of KeySetAll</span></code></pre>
+allExceptSome([]); <span class="hljs-comment">// returns a new instance of KeySetAll</span></code></pre>
 				<a href="#coderepresentsxxxcode" id="coderepresentsxxxcode" style="color: inherit; text-decoration: none;">
 					<h3><code>representsXXX()</code></h3>
 				</a>
@@ -113,7 +113,7 @@ allExceptSome([]); <span class="hljs-comment">// returnsa  new instance of KeySe
 				</a>
 				<p>all KeySet has a <code>clone()</code> method, which will return a new instance of the same class that represents the same KeySet.</p>
 				<p>If the KeySet is <code>KeySetSome</code> or <code>KeySetAllExceptSome</code>, they will have an array with the same keys.</p>
-				<pre><code class="language-ts"><span class="hljs-keyword">const</span> newKeySet = keySet.invert();</code></pre>
+				<pre><code class="language-ts"><span class="hljs-keyword">const</span> newKeySet = keySet.clone();</code></pre>
 				<a href="#codeisequalothercode" id="codeisequalothercode" style="color: inherit; text-decoration: none;">
 					<h3><code>isEqual(other)</code></h3>
 				</a>
@@ -123,21 +123,21 @@ allExceptSome([]); <span class="hljs-comment">// returnsa  new instance of KeySe
 				<a href="#codeinvertcode" id="codeinvertcode" style="color: inherit; text-decoration: none;">
 					<h3><code>invert()</code></h3>
 				</a>
-				<p>all KeySet has an <code>invert()</code> method that returns an instance of the opposite class, which represents the complementary KeySet.</p>
+				<p>all KeySet has an <code>invert()</code> method that returns an instance of the opposite class, which represents the complementary KeySet. <em>(see <a href="https://en.wikipedia.org/wiki/Complement_(set_theory)">Complement in Wikipedia</a>)</em></p>
 				<ul>
-					<li><code>KeySetAll</code> &lt;- -&gt; <code>KeySetNone</code></li>
-					<li><code>KeySetSome</code> &lt;- -&gt; <code>KeySetAllExceptSome</code></li>
+					<li><code>KeySetAll</code> ⟷ <code>KeySetNone</code></li>
+					<li><code>KeySetSome</code> ⟷ <code>KeySetAllExceptSome</code></li>
 				</ul>
 				<pre><code class="language-ts"><span class="hljs-keyword">const</span> complementaryKeySet = keySet.invert();</code></pre>
 				<a href="#coderemoveothercode" id="coderemoveothercode" style="color: inherit; text-decoration: none;">
 					<h3><code>remove(other)</code></h3>
 				</a>
-				<p>returns a new KeySet with the difference between ThisSet - OtherSet (A - B)</p>
+				<p>returns a new KeySet with the difference between ThisSet - OtherSet <code>(A - B)</code></p>
 				<pre><code class="language-ts"><span class="hljs-keyword">const</span> diffKeySet = keySet.remove(other);</code></pre>
 				<a href="#codeintersectothercode" id="codeintersectothercode" style="color: inherit; text-decoration: none;">
 					<h3><code>intersect(other)</code></h3>
 				</a>
-				<p>returns a new KeySet with the intersection of both Sets (A ∩ B), representing the elements present in both sets</p>
+				<p>returns a new KeySet with the intersection of both Sets <code>(A ∩ B)</code>, representing the elements present in both sets</p>
 				<pre><code class="language-ts"><span class="hljs-keyword">const</span> diffKeySet = keySet.intersect(other);</code></pre>
 				<a href="#util-functions" id="util-functions" style="color: inherit; text-decoration: none;">
 					<h2>Util functions</h2>
