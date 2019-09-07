@@ -1,3 +1,4 @@
+import { KeySet } from './-base';
 import { KeySetByKeys } from './-by-keys';
 import { KeySetAll } from './all';
 import { KeySetAllExceptSome } from './all-except-some';
@@ -28,27 +29,11 @@ export class KeySetSome<T extends string | number> extends KeySetByKeys<T> {
     return new KeySetAllExceptSome(this.keys);
   }
 
-  public isEqual(
-    other:
-      | KeySetAll
-      | KeySetNone
-      | KeySetSome<string | number>
-      | KeySetAllExceptSome<string | number>
-  ): boolean {
+  public isEqual(other: KeySet): boolean {
     return other instanceof KeySetSome && this.hasSameKeys(other);
   }
 
-  public remove(
-    other:
-      | KeySetAll
-      | KeySetNone
-      | KeySetSome<string | number>
-      | KeySetAllExceptSome<string | number>
-  ):
-    | KeySetAll
-    | KeySetNone
-    | KeySetSome<string | number>
-    | KeySetAllExceptSome<string | number> {
+  public remove(other: KeySet): KeySet {
     if (other instanceof KeySetSome) {
       const otherKeys = other.keys;
       const keys = [...this.keys].filter(key => !otherKeys.includes(key));
@@ -68,17 +53,7 @@ export class KeySetSome<T extends string | number> extends KeySetByKeys<T> {
     return new KeySetNone();
   }
 
-  public intersect(
-    other:
-      | KeySetAll
-      | KeySetNone
-      | KeySetSome<string | number>
-      | KeySetAllExceptSome<string | number>
-  ):
-    | KeySetAll
-    | KeySetNone
-    | KeySetSome<string | number>
-    | KeySetAllExceptSome<string | number> {
+  public intersect(other: KeySet): KeySet {
     if (other instanceof KeySetAll) return new KeySetSome(this.keys);
 
     if (other instanceof KeySetSome) {

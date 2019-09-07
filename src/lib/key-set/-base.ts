@@ -3,6 +3,12 @@ import { KeySetAllExceptSome } from './all-except-some';
 import { KeySetNone } from './none';
 import { KeySetSome } from './some';
 
+export type KeySet<T extends string | number = string | number> =
+  | KeySetAll
+  | KeySetNone
+  | KeySetSome<T>
+  | KeySetAllExceptSome<T>;
+
 export interface IKeySetClass {
   representsAll(): boolean;
 
@@ -12,35 +18,13 @@ export interface IKeySetClass {
 
   representsAllExceptSome(): boolean;
 
-  isEqual(
-    other:
-      | KeySetAll
-      | KeySetNone
-      | KeySetSome<string | number>
-      | KeySetAllExceptSome<string | number>
-  ): boolean;
+  isEqual(other: KeySet): boolean;
 
-  remove(
-    other:
-      | KeySetAll
-      | KeySetNone
-      | KeySetSome<string | number>
-      | KeySetAllExceptSome<string | number>
-  ):
-    | KeySetAll
-    | KeySetNone
-    | KeySetSome<string | number>
-    | KeySetAllExceptSome<string | number>;
+  remove(other: KeySet): KeySet;
 
-  clone():
-    | KeySetAll
-    | KeySetNone
-    | KeySetSome<string | number>
-    | KeySetAllExceptSome<string | number>;
+  clone(): KeySet;
 
-  invert():
-    | KeySetAll
-    | KeySetNone
-    | KeySetSome<string | number>
-    | KeySetAllExceptSome<string | number>;
+  invert(): KeySet;
+
+  intersect(other: KeySet): KeySet;
 }

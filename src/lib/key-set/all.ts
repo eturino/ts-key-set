@@ -1,4 +1,4 @@
-import { IKeySetClass } from './-base';
+import { IKeySetClass, KeySet } from './-base';
 import { KeySetAllExceptSome } from './all-except-some';
 import { KeySetNone } from './none';
 import { KeySetSome } from './some';
@@ -28,27 +28,11 @@ export class KeySetAll implements IKeySetClass {
     return new KeySetNone();
   }
 
-  public isEqual(
-    other:
-      | KeySetAll
-      | KeySetNone
-      | KeySetSome<string | number>
-      | KeySetAllExceptSome<string | number>
-  ) {
+  public isEqual(other: KeySet) {
     return other instanceof KeySetAll;
   }
 
-  public remove(
-    other:
-      | KeySetAll
-      | KeySetNone
-      | KeySetSome<string | number>
-      | KeySetAllExceptSome<string | number>
-  ):
-    | KeySetAll
-    | KeySetNone
-    | KeySetSome<string | number>
-    | KeySetAllExceptSome<string | number> {
+  public remove(other: KeySet): KeySet {
     if (other instanceof KeySetSome) return new KeySetAllExceptSome(other.keys);
     if (other instanceof KeySetAllExceptSome) return new KeySetSome(other.keys);
     if (other instanceof KeySetAll) return new KeySetNone();
@@ -56,17 +40,7 @@ export class KeySetAll implements IKeySetClass {
     return new KeySetAll();
   }
 
-  public intersect(
-    other:
-      | KeySetAll
-      | KeySetNone
-      | KeySetSome<string | number>
-      | KeySetAllExceptSome<string | number>
-  ):
-    | KeySetAll
-    | KeySetNone
-    | KeySetSome<string | number>
-    | KeySetAllExceptSome<string | number> {
+  public intersect(other: KeySet): KeySet {
     if (other instanceof KeySetAll) return new KeySetAll();
     if (other instanceof KeySetNone) return new KeySetNone();
     if (other instanceof KeySetSome) return new KeySetSome(other.keys);

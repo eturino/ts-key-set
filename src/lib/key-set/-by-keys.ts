@@ -1,7 +1,6 @@
-import { IKeySetClass } from './-base';
-import { KeySetAll } from './all';
+import { arraysEqual } from '../util/arrays-equal';
+import { IKeySetClass, KeySet } from './-base';
 import { KeySetAllExceptSome } from './all-except-some';
-import { KeySetNone } from './none';
 import { KeySetSome } from './some';
 
 function onlyUnique<T extends string | number>(
@@ -10,31 +9,6 @@ function onlyUnique<T extends string | number>(
   self: T[]
 ) {
   return self.indexOf(value) === index;
-}
-
-// copied from https://stackoverflow.com/questions/3115982/how-to-check-if-two-arrays-are-equal-with-javascript
-function arraysEqual<T extends string | number>(a: T[], b: T[]) {
-  if (a === b) {
-    return true;
-  }
-  if (a == null || b == null) {
-    return false;
-  }
-  if (a.length !== b.length) {
-    return false;
-  }
-
-  // If you don't care about the order of the elements inside
-  // the array, you should sort both arrays here.
-  // Please note that calling sort on an array will modify that array.
-  // you might want to clone your array first.
-
-  for (let i = 0; i < a.length; ++i) {
-    if (a[i] !== b[i]) {
-      return false;
-    }
-  }
-  return true;
 }
 
 export abstract class KeySetByKeys<T extends string | number>
@@ -53,33 +27,15 @@ export abstract class KeySetByKeys<T extends string | number>
 
   public abstract representsAllExceptSome(): boolean;
 
-  public abstract clone():
-    | KeySetSome<string | number>
-    | KeySetAllExceptSome<string | number>;
+  public abstract clone(): KeySetSome<T> | KeySetAllExceptSome<T>;
 
-  public abstract invert():
-    | KeySetSome<string | number>
-    | KeySetAllExceptSome<string | number>;
+  public abstract invert(): KeySetSome<T> | KeySetAllExceptSome<T>;
 
-  public abstract isEqual(
-    other:
-      | KeySetAll
-      | KeySetNone
-      | KeySetSome<string | number>
-      | KeySetAllExceptSome<string | number>
-  ): boolean;
+  public abstract isEqual(other: KeySet): boolean;
 
-  public abstract remove(
-    other:
-      | KeySetAll
-      | KeySetNone
-      | KeySetSome<string | number>
-      | KeySetAllExceptSome<string | number>
-  ):
-    | KeySetAll
-    | KeySetNone
-    | KeySetSome<string | number>
-    | KeySetAllExceptSome<string | number>;
+  public abstract remove(other: KeySet): KeySet;
+
+  public abstract intersect(other: KeySet): KeySet;
 
   public get keys(): T[] {
     return [...this.keySet];
