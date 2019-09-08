@@ -30,7 +30,7 @@ const keySet = new KeySetSome(keys); // => keys 1, 2, 3
 
 test('#remove(keySetAll)', t => {
   const rest = keySet.remove(keySetAll);
-  t.assert(rest instanceof KeySetNone);
+  t.truthy(rest instanceof KeySetNone);
   t.false(keySet === rest, 'different object');
 });
 
@@ -38,7 +38,7 @@ test('#remove(keySetAll)', t => {
 
 test('#remove(keySetNone)', t => {
   const rest = keySet.remove(keySetNone);
-  t.assert(rest instanceof KeySetSome);
+  t.truthy(rest instanceof KeySetSome);
   t.false(keySet === rest, 'different object');
   const r = rest as KeySetSome<number>;
   t.deepEqual(r.keys, keySet.keys);
@@ -48,13 +48,13 @@ test('#remove(keySetNone)', t => {
 
 test('#remove(keySetSomeSameKeys)', t => {
   const rest = keySet.remove(keySetSomeSameKeys);
-  t.assert(rest instanceof KeySetNone);
+  t.truthy(rest instanceof KeySetNone);
   t.false(keySet === rest, 'different object');
 });
 
 test('#remove(keySetSomeSubSetKeys)', t => {
   const rest = keySet.remove(keySetSomeSubSetKeys);
-  t.assert(rest instanceof KeySetSome);
+  t.truthy(rest instanceof KeySetSome);
   t.false(keySet === rest, 'different object');
   const r = rest as KeySetSome<number>;
   t.deepEqual(r.keys, restKeys);
@@ -62,13 +62,13 @@ test('#remove(keySetSomeSubSetKeys)', t => {
 
 test('#remove(keySetSomeMoreKeys)', t => {
   const rest = keySet.remove(keySetSomeMoreKeys);
-  t.assert(rest instanceof KeySetNone);
+  t.truthy(rest instanceof KeySetNone);
   t.false(keySet === rest, 'different object');
 });
 
 test('#remove(keySetSomeDiffKeys)', t => {
   const rest = keySet.remove(keySetSomeDiffKeys);
-  t.assert(rest instanceof KeySetSome);
+  t.truthy(rest instanceof KeySetSome);
   t.false(keySet === rest, 'different object');
   const r = rest as KeySetSome<number>;
   t.deepEqual(r.keys, keySet.keys);
@@ -78,7 +78,7 @@ test('#remove(keySetSomeDiffKeys)', t => {
 
 test('#remove(keySetAllExceptSomeSameKeys)', t => {
   const rest = keySet.remove(keySetAllExceptSomeSameKeys);
-  t.assert(rest instanceof KeySetSome);
+  t.truthy(rest instanceof KeySetSome);
   t.false(keySet === rest, 'different object');
   const r = rest as KeySetSome<number>;
   t.deepEqual(r.keys, keySet.keys);
@@ -86,7 +86,7 @@ test('#remove(keySetAllExceptSomeSameKeys)', t => {
 
 test('#remove(keySetAllExceptSomeSubSetKeys)', t => {
   const rest = keySet.remove(keySetAllExceptSomeSubSetKeys);
-  t.assert(rest instanceof KeySetSome);
+  t.truthy(rest instanceof KeySetSome);
   t.false(keySet === rest, 'different object');
   const r = rest as KeySetSome<number>;
   t.deepEqual(r.keys, subSetKeys);
@@ -94,7 +94,7 @@ test('#remove(keySetAllExceptSomeSubSetKeys)', t => {
 
 test('#remove(keySetAllExceptSomeMoreKeys)', t => {
   const rest = keySet.remove(keySetAllExceptSomeMoreKeys);
-  t.assert(rest instanceof KeySetSome);
+  t.truthy(rest instanceof KeySetSome);
   t.false(keySet === rest, 'different object');
   const r = rest as KeySetSome<number>;
   t.deepEqual(r.keys, keySet.keys);
@@ -102,6 +102,6 @@ test('#remove(keySetAllExceptSomeMoreKeys)', t => {
 
 test('#remove(keySetAllExceptSomeDiffKeys)', t => {
   const rest = keySet.remove(keySetAllExceptSomeDiffKeys);
-  t.assert(rest instanceof KeySetNone);
+  t.truthy(rest instanceof KeySetNone);
   t.false(keySet === rest, 'different object');
 });

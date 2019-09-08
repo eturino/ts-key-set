@@ -10,14 +10,14 @@ test('removes duplicates and sorts', t => {
 
 test('#clone()', t => {
   const result = keySet.clone();
-  t.assert(result instanceof KeySetAllExceptSome);
+  t.truthy(result instanceof KeySetAllExceptSome);
   t.false(keySet === result, 'different object');
   t.deepEqual(keySet.keys, result.keys);
 });
 
 test('#invert()', t => {
   const result = keySet.invert();
-  t.assert(result instanceof KeySetSome);
+  t.truthy(result instanceof KeySetSome);
   t.deepEqual(keySet.keys, result.keys);
 });
 

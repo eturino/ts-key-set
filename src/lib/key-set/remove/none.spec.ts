@@ -13,24 +13,24 @@ const keySet = new KeySetNone();
 
 test('#remove(keySetAll)', t => {
   const rest = keySet.remove(keySetAll);
-  t.assert(rest instanceof KeySetNone);
+  t.truthy(rest instanceof KeySetNone);
   t.false(keySet === rest, 'different object');
 });
 
 test('#remove(keySetNone)', t => {
   const rest = keySet.remove(keySetNone);
-  t.assert(rest instanceof KeySetNone);
+  t.truthy(rest instanceof KeySetNone);
   t.false(keySet === rest, 'different object');
 });
 
 test('#remove(keySetSome)', t => {
   const rest = keySet.remove(keySetSome);
-  t.assert(rest instanceof KeySetNone);
+  t.truthy(rest instanceof KeySetNone);
   t.false(keySet === rest, 'different object');
 });
 
 test('#remove(keySetAllExceptSome)', t => {
   const rest = keySet.remove(keySetAllExceptSome);
-  t.assert(rest instanceof KeySetNone);
+  t.truthy(rest instanceof KeySetNone);
   t.false(keySet === rest, 'different object');
 });

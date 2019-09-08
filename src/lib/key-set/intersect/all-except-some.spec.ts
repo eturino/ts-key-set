@@ -30,7 +30,7 @@ const keySet = new KeySetAllExceptSome(keys); // => keys 1, 2, 3
 
 test('#intersect(keySetAll)', t => {
   const rest = keySet.intersect(keySetAll);
-  t.assert(rest instanceof KeySetAllExceptSome);
+  t.truthy(rest instanceof KeySetAllExceptSome);
   t.false(keySet === rest, 'different object');
   const r = rest as KeySetAllExceptSome<number>;
   t.deepEqual(r.keys, keySet.keys);
@@ -40,7 +40,7 @@ test('#intersect(keySetAll)', t => {
 
 test('#intersect(keySetNone)', t => {
   const rest = keySet.intersect(keySetNone);
-  t.assert(rest instanceof KeySetNone);
+  t.truthy(rest instanceof KeySetNone);
   t.false(keySet === rest, 'different object');
 });
 
@@ -48,19 +48,19 @@ test('#intersect(keySetNone)', t => {
 
 test('#intersect(keySetSomeSameKeys)', t => {
   const rest = keySet.intersect(keySetSomeSameKeys);
-  t.assert(rest instanceof KeySetNone);
+  t.truthy(rest instanceof KeySetNone);
   t.false(keySet === rest, 'different object');
 });
 
 test('#intersect(keySetSomeSubSetKeys)', t => {
   const rest = keySet.intersect(keySetSomeSubSetKeys);
-  t.assert(rest instanceof KeySetNone);
+  t.truthy(rest instanceof KeySetNone);
   t.false(keySet === rest, 'different object');
 });
 
 test('#intersect(keySetSomeMoreKeys)', t => {
   const rest = keySet.intersect(keySetSomeMoreKeys);
-  t.assert(rest instanceof KeySetSome);
+  t.truthy(rest instanceof KeySetSome);
   t.false(keySet === rest, 'different object');
   const r = rest as KeySetSome<number>;
   t.deepEqual(r.keys, extraKeys);
@@ -68,7 +68,7 @@ test('#intersect(keySetSomeMoreKeys)', t => {
 
 test('#intersect(keySetSomeDiffKeys)', t => {
   const rest = keySet.intersect(keySetSomeDiffKeys);
-  t.assert(rest instanceof KeySetSome);
+  t.truthy(rest instanceof KeySetSome);
   t.false(keySet === rest, 'different object');
   const r = rest as KeySetSome<number>;
   t.deepEqual(r.keys, otherKeys);
@@ -78,7 +78,7 @@ test('#intersect(keySetSomeDiffKeys)', t => {
 
 test('#intersect(keySetAllExceptSomeSameKeys)', t => {
   const rest = keySet.intersect(keySetAllExceptSomeSameKeys);
-  t.assert(rest instanceof KeySetAllExceptSome);
+  t.truthy(rest instanceof KeySetAllExceptSome);
   t.false(keySet === rest, 'different object');
   const r = rest as KeySetAllExceptSome<number>;
   t.deepEqual(r.keys, keys);
@@ -86,7 +86,7 @@ test('#intersect(keySetAllExceptSomeSameKeys)', t => {
 
 test('#intersect(keySetAllExceptSomeSubSetKeys)', t => {
   const rest = keySet.intersect(keySetAllExceptSomeSubSetKeys);
-  t.assert(rest instanceof KeySetAllExceptSome);
+  t.truthy(rest instanceof KeySetAllExceptSome);
   t.false(keySet === rest, 'different object');
   const r = rest as KeySetAllExceptSome<number>;
   t.deepEqual(r.keys, keys);
@@ -94,7 +94,7 @@ test('#intersect(keySetAllExceptSomeSubSetKeys)', t => {
 
 test('#intersect(keySetAllExceptSomeMoreKeys)', t => {
   const rest = keySet.intersect(keySetAllExceptSomeMoreKeys);
-  t.assert(rest instanceof KeySetAllExceptSome);
+  t.truthy(rest instanceof KeySetAllExceptSome);
   t.false(keySet === rest, 'different object');
   const r = rest as KeySetAllExceptSome<number>;
   t.deepEqual(r.keys, moreKeys);
@@ -102,7 +102,7 @@ test('#intersect(keySetAllExceptSomeMoreKeys)', t => {
 
 test('#intersect(keySetAllExceptSomeDiffKeys)', t => {
   const rest = keySet.intersect(keySetAllExceptSomeDiffKeys);
-  t.assert(rest instanceof KeySetAllExceptSome);
+  t.truthy(rest instanceof KeySetAllExceptSome);
   t.false(keySet === rest, 'different object');
   const r = rest as KeySetAllExceptSome<number>;
   t.deepEqual(r.keys, [...keys, ...otherKeys].sort());

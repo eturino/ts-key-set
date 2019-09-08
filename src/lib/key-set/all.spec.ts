@@ -6,13 +6,13 @@ const keySet = new KeySetAll();
 
 test('#clone()', t => {
   const result = keySet.clone();
-  t.assert(result instanceof KeySetAll);
+  t.truthy(result instanceof KeySetAll);
   t.false(keySet === result, 'different object');
 });
 
 test('#invert()', t => {
   const result = keySet.invert();
-  t.assert(result instanceof KeySetNone);
+  t.truthy(result instanceof KeySetNone);
 });
 
 test('#representsAll()', t => {
