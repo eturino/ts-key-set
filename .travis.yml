@@ -7,6 +7,6 @@ node_js:
 cache:
   directories:
     - '$HOME/.npm'
-after_success:
-  - npm run cov:send
-  - npm run cov:check
+# after_success:
+#   - npm run cov:send
+#   - npm run cov:check
