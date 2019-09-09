@@ -70,7 +70,7 @@
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
-						<h4>T<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h4>
+						<h4>T<span class="tsd-signature-symbol">: </span><a href="../globals.html#key" class="tsd-signature-type">Key</a></h4>
 					</li>
 				</ul>
 			</section>
@@ -113,8 +113,10 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="keysetsome.html#clone" class="tsd-kind-icon">clone</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="keysetsome.html#excludekeys" class="tsd-kind-icon">exclude<wbr>Keys</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="keysetsome.html#hassamekeys" class="tsd-kind-icon">has<wbr>Same<wbr>Keys</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="keysetsome.html#intersect" class="tsd-kind-icon">intersect</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="keysetsome.html#intersectkeys" class="tsd-kind-icon">intersect<wbr>Keys</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="keysetsome.html#invert" class="tsd-kind-icon">invert</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="keysetsome.html#isequal" class="tsd-kind-icon">is<wbr>Equal</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="keysetsome.html#remove" class="tsd-kind-icon">remove</a></li>
@@ -140,7 +142,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="keysetbykeys.html">KeySetByKeys</a>.<a href="keysetbykeys.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/18f958d/src/lib/key-set/-by-keys.ts#L9">lib/key-set/-by-keys.ts:9</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/5a6c1f9/src/lib/key-set/-by-keys.ts#L8">lib/key-set/-by-keys.ts:8</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -167,7 +169,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="keysetbykeys.html">KeySetByKeys</a>.<a href="keysetbykeys.html#keys">keys</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/18f958d/src/lib/key-set/-by-keys.ts#L33">lib/key-set/-by-keys.ts:33</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/5a6c1f9/src/lib/key-set/-by-keys.ts#L32">lib/key-set/-by-keys.ts:32</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span></h4>
@@ -189,10 +191,33 @@
 								<p>Implementation of <a href="../interfaces/ikeysetclass.html">IKeySetClass</a>.<a href="../interfaces/ikeysetclass.html#clone">clone</a></p>
 								<p>Overrides <a href="keysetbykeys.html">KeySetByKeys</a>.<a href="keysetbykeys.html#clone">clone</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/18f958d/src/lib/key-set/some.ts#L24">lib/key-set/some.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/5a6c1f9/src/lib/key-set/some.ts#L24">lib/key-set/some.ts:24</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="keysetsome.html" class="tsd-signature-type">KeySetSome</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="excludekeys" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> exclude<wbr>Keys</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">exclude<wbr>Keys<span class="tsd-signature-symbol">(</span>otherKeys<span class="tsd-signature-symbol">: </span><a href="../globals.html#key" class="tsd-signature-type">Key</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/5a6c1f9/src/lib/key-set/some.ts#L70">lib/key-set/some.ts:70</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>otherKeys: <a href="../globals.html#key" class="tsd-signature-type">Key</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -200,20 +225,20 @@
 					<a name="hassamekeys" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> has<wbr>Same<wbr>Keys</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon">has<wbr>Same<wbr>Keys<span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><a href="keysetbykeys.html" class="tsd-signature-type">KeySetByKeys</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">has<wbr>Same<wbr>Keys<span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><a href="keysetbykeys.html" class="tsd-signature-type">KeySetByKeys</a><span class="tsd-signature-symbol">&lt;</span><a href="../globals.html#key" class="tsd-signature-type">Key</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="keysetbykeys.html">KeySetByKeys</a>.<a href="keysetbykeys.html#hassamekeys">hasSameKeys</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/18f958d/src/lib/key-set/-by-keys.ts#L37">lib/key-set/-by-keys.ts:37</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/5a6c1f9/src/lib/key-set/-by-keys.ts#L36">lib/key-set/-by-keys.ts:36</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>other: <a href="keysetbykeys.html" class="tsd-signature-type">KeySetByKeys</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>other: <a href="keysetbykeys.html" class="tsd-signature-type">KeySetByKeys</a><span class="tsd-signature-symbol">&lt;</span><a href="../globals.html#key" class="tsd-signature-type">Key</a><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -232,7 +257,7 @@
 								<p>Implementation of <a href="../interfaces/ikeysetclass.html">IKeySetClass</a>.<a href="../interfaces/ikeysetclass.html#intersect">intersect</a></p>
 								<p>Overrides <a href="keysetbykeys.html">KeySetByKeys</a>.<a href="keysetbykeys.html#intersect">intersect</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/18f958d/src/lib/key-set/some.ts#L56">lib/key-set/some.ts:56</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/5a6c1f9/src/lib/key-set/some.ts#L52">lib/key-set/some.ts:52</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -242,6 +267,29 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="../globals.html#keyset" class="tsd-signature-type">KeySet</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="intersectkeys" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> intersect<wbr>Keys</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">intersect<wbr>Keys<span class="tsd-signature-symbol">(</span>otherKeys<span class="tsd-signature-symbol">: </span><a href="../globals.html#key" class="tsd-signature-type">Key</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/5a6c1f9/src/lib/key-set/some.ts#L66">lib/key-set/some.ts:66</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>otherKeys: <a href="../globals.html#key" class="tsd-signature-type">Key</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -257,7 +305,7 @@
 								<p>Implementation of <a href="../interfaces/ikeysetclass.html">IKeySetClass</a>.<a href="../interfaces/ikeysetclass.html#invert">invert</a></p>
 								<p>Overrides <a href="keysetbykeys.html">KeySetByKeys</a>.<a href="keysetbykeys.html#invert">invert</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/18f958d/src/lib/key-set/some.ts#L28">lib/key-set/some.ts:28</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/5a6c1f9/src/lib/key-set/some.ts#L28">lib/key-set/some.ts:28</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="keysetallexceptsome.html" class="tsd-signature-type">KeySetAllExceptSome</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -276,7 +324,7 @@
 								<p>Implementation of <a href="../interfaces/ikeysetclass.html">IKeySetClass</a>.<a href="../interfaces/ikeysetclass.html#isequal">isEqual</a></p>
 								<p>Overrides <a href="keysetbykeys.html">KeySetByKeys</a>.<a href="keysetbykeys.html#isequal">isEqual</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/18f958d/src/lib/key-set/some.ts#L32">lib/key-set/some.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/5a6c1f9/src/lib/key-set/some.ts#L32">lib/key-set/some.ts:32</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -301,7 +349,7 @@
 								<p>Implementation of <a href="../interfaces/ikeysetclass.html">IKeySetClass</a>.<a href="../interfaces/ikeysetclass.html#remove">remove</a></p>
 								<p>Overrides <a href="keysetbykeys.html">KeySetByKeys</a>.<a href="keysetbykeys.html#remove">remove</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/18f958d/src/lib/key-set/some.ts#L36">lib/key-set/some.ts:36</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/5a6c1f9/src/lib/key-set/some.ts#L36">lib/key-set/some.ts:36</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -326,7 +374,7 @@
 								<p>Implementation of <a href="../interfaces/ikeysetclass.html">IKeySetClass</a>.<a href="../interfaces/ikeysetclass.html#representsall">representsAll</a></p>
 								<p>Overrides <a href="keysetbykeys.html">KeySetByKeys</a>.<a href="keysetbykeys.html#representsall">representsAll</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/18f958d/src/lib/key-set/some.ts#L8">lib/key-set/some.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/5a6c1f9/src/lib/key-set/some.ts#L8">lib/key-set/some.ts:8</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -345,7 +393,7 @@
 								<p>Implementation of <a href="../interfaces/ikeysetclass.html">IKeySetClass</a>.<a href="../interfaces/ikeysetclass.html#representsallexceptsome">representsAllExceptSome</a></p>
 								<p>Overrides <a href="keysetbykeys.html">KeySetByKeys</a>.<a href="keysetbykeys.html#representsallexceptsome">representsAllExceptSome</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/18f958d/src/lib/key-set/some.ts#L16">lib/key-set/some.ts:16</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/5a6c1f9/src/lib/key-set/some.ts#L16">lib/key-set/some.ts:16</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -364,7 +412,7 @@
 								<p>Implementation of <a href="../interfaces/ikeysetclass.html">IKeySetClass</a>.<a href="../interfaces/ikeysetclass.html#representsnone">representsNone</a></p>
 								<p>Overrides <a href="keysetbykeys.html">KeySetByKeys</a>.<a href="keysetbykeys.html#representsnone">representsNone</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/18f958d/src/lib/key-set/some.ts#L12">lib/key-set/some.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/5a6c1f9/src/lib/key-set/some.ts#L12">lib/key-set/some.ts:12</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -383,7 +431,7 @@
 								<p>Implementation of <a href="../interfaces/ikeysetclass.html">IKeySetClass</a>.<a href="../interfaces/ikeysetclass.html#representssome">representsSome</a></p>
 								<p>Overrides <a href="keysetbykeys.html">KeySetByKeys</a>.<a href="keysetbykeys.html#representssome">representsSome</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/18f958d/src/lib/key-set/some.ts#L20">lib/key-set/some.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/5a6c1f9/src/lib/key-set/some.ts#L20">lib/key-set/some.ts:20</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -428,11 +476,17 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 								<a href="keysetsome.html#clone" class="tsd-kind-icon">clone</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="keysetsome.html#excludekeys" class="tsd-kind-icon">exclude<wbr>Keys</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 								<a href="keysetsome.html#hassamekeys" class="tsd-kind-icon">has<wbr>Same<wbr>Keys</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 								<a href="keysetsome.html#intersect" class="tsd-kind-icon">intersect</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="keysetsome.html#intersectkeys" class="tsd-kind-icon">intersect<wbr>Keys</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 								<a href="keysetsome.html#invert" class="tsd-kind-icon">invert</a>
@@ -462,6 +516,9 @@
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/ikeysetclass.html" class="tsd-kind-icon">IKey<wbr>Set<wbr>Class</a>
 					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#key" class="tsd-kind-icon">Key</a>
+					</li>
 					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 						<a href="../globals.html#keyset" class="tsd-kind-icon">Key<wbr>Set</a>
 					</li>
@@ -476,6 +533,9 @@
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="../globals.html#none" class="tsd-kind-icon">none</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter tsd-is-not-exported">
+						<a href="../globals.html#sameelements" class="tsd-kind-icon">same<wbr>Elements</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="../globals.html#some" class="tsd-kind-icon">some</a>
