@@ -8,7 +8,7 @@ import {
   KeySetSome,
   none,
   some
-} from './key-set';
+} from '../key-set';
 
 test('all()', () => {
   const keySet = all();
