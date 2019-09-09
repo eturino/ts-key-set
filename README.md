@@ -5,6 +5,8 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/3b9c9332f98e9fdd30ac/maintainability)](https://codeclimate.com/github/eturino/ts-key-set/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/3b9c9332f98e9fdd30ac/test_coverage)](https://codeclimate.com/github/eturino/ts-key-set/test_coverage)
 
+[TypeDoc generated docs in here](https://eturino.github.io/ts-key-set/)
+
 KeySet with 4 classes to represent concepts of All, None, Some, and AllExceptSome, the last 2 with a sorted uniq list of keys, and all with intersection calculations.
 
 (TypeScript port of <https://github.com/eturino/ruby_key_set>)
