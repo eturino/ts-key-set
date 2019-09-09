@@ -1,7 +1,7 @@
-import { IKeySetClass, KeySet } from './-base';
-import { KeySetAllExceptSome } from './all-except-some';
-import { KeySetNone } from './none';
-import { KeySetSome } from './some';
+import { IKeySetClass, KeySet } from "./-base";
+import { KeySetAllExceptSome } from "./all-except-some";
+import { KeySetNone } from "./none";
+import { KeySetSome } from "./some";
 
 export class KeySetAll implements IKeySetClass {
   public representsAll() {

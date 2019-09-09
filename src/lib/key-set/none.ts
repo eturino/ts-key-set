@@ -1,5 +1,5 @@
-import { IKeySetClass, KeySet } from './-base';
-import { KeySetAll } from './all';
+import { IKeySetClass, KeySet } from "./-base";
+import { KeySetAll } from "./all";
 
 export class KeySetNone implements IKeySetClass {
   public representsAll() {

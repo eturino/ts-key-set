@@ -1,37 +1,37 @@
-import { KeySetAllExceptSome } from '../all-except-some';
-import { KeySetSome } from '../some';
+import { KeySetAllExceptSome } from "../all-except-some";
+import { KeySetSome } from "../some";
 
 const keySet = new KeySetAllExceptSome([3, 1, 2, 3, 2, 1]); // => keys 1, 2, 3
 
-test('removes duplicates and sorts', () => {
+test("removes duplicates and sorts", () => {
   expect(keySet.keys).toEqual([1, 2, 3]);
 });
 
-test('#clone()', () => {
+test("#clone()", () => {
   const result = keySet.clone();
   expect(result instanceof KeySetAllExceptSome).toBeTruthy();
   expect(keySet === result).toBe(false);
   expect(keySet.keys).toEqual(result.keys);
 });
 
-test('#invert()', () => {
+test("#invert()", () => {
   const result = keySet.invert();
   expect(result instanceof KeySetSome).toBeTruthy();
   expect(keySet.keys).toEqual(result.keys);
 });
 
-test('#representsAll()', () => {
+test("#representsAll()", () => {
   expect(keySet.representsAll()).toBe(false);
 });
 
-test('#representsNone()', () => {
+test("#representsNone()", () => {
   expect(keySet.representsNone()).toBe(false);
 });
 
-test('#representsSome()', () => {
+test("#representsSome()", () => {
   expect(keySet.representsSome()).toBe(false);
 });
 
-test('#representsAllExceptSome()', () => {
+test("#representsAllExceptSome()", () => {
   expect(keySet.representsAllExceptSome()).toBe(true);
 });

@@ -1,7 +1,7 @@
-import { KeySetAll } from '../../all';
-import { KeySetAllExceptSome } from '../../all-except-some';
-import { KeySetNone } from '../../none';
-import { KeySetSome } from '../../some';
+import { KeySetAll } from "../../all";
+import { KeySetAllExceptSome } from "../../all-except-some";
+import { KeySetNone } from "../../none";
+import { KeySetSome } from "../../some";
 
 const keySetAll = new KeySetAll();
 const keySetNone = new KeySetNone();
@@ -27,7 +27,7 @@ const keySet = new KeySetSome(keys); // => keys 1, 2, 3
 
 // ALL
 
-test('#intersect(keySetAll)', () => {
+test("#intersect(keySetAll)", () => {
   const rest = keySet.intersect(keySetAll);
   expect(rest instanceof KeySetSome).toBeTruthy();
   expect(keySet === rest).toBe(false);
@@ -37,7 +37,7 @@ test('#intersect(keySetAll)', () => {
 
 // NONE
 
-test('#intersect(keySetNone)', () => {
+test("#intersect(keySetNone)", () => {
   const rest = keySet.intersect(keySetNone);
   expect(rest instanceof KeySetNone).toBeTruthy();
   expect(keySet === rest).toBe(false);
@@ -45,7 +45,7 @@ test('#intersect(keySetNone)', () => {
 
 // SOME
 
-test('#intersect(keySetSomeSameKeys)', () => {
+test("#intersect(keySetSomeSameKeys)", () => {
   const rest = keySet.intersect(keySetSomeSameKeys);
   expect(rest instanceof KeySetSome).toBeTruthy();
   expect(keySet === rest).toBe(false);
@@ -53,7 +53,7 @@ test('#intersect(keySetSomeSameKeys)', () => {
   expect(r.keys).toEqual(keySet.keys);
 });
 
-test('#intersect(keySetSomeSubSetKeys)', () => {
+test("#intersect(keySetSomeSubSetKeys)", () => {
   const rest = keySet.intersect(keySetSomeSubSetKeys);
   expect(rest instanceof KeySetSome).toBeTruthy();
   expect(keySet === rest).toBe(false);
@@ -61,7 +61,7 @@ test('#intersect(keySetSomeSubSetKeys)', () => {
   expect(r.keys).toEqual(subSetKeys);
 });
 
-test('#intersect(keySetSomeMoreKeys)', () => {
+test("#intersect(keySetSomeMoreKeys)", () => {
   const rest = keySet.intersect(keySetSomeMoreKeys);
   expect(rest instanceof KeySetSome).toBeTruthy();
   expect(keySet === rest).toBe(false);
@@ -69,7 +69,7 @@ test('#intersect(keySetSomeMoreKeys)', () => {
   expect(r.keys).toEqual(keySet.keys);
 });
 
-test('#intersect(keySetSomeDiffKeys)', () => {
+test("#intersect(keySetSomeDiffKeys)", () => {
   const rest = keySet.intersect(keySetSomeDiffKeys);
   expect(rest instanceof KeySetNone).toBeTruthy();
   expect(keySet === rest).toBe(false);
@@ -77,13 +77,13 @@ test('#intersect(keySetSomeDiffKeys)', () => {
 
 // ALL EXCEPT SOME
 
-test('#intersect(keySetAllExceptSomeSameKeys)', () => {
+test("#intersect(keySetAllExceptSomeSameKeys)", () => {
   const rest = keySet.intersect(keySetAllExceptSomeSameKeys);
   expect(rest instanceof KeySetNone).toBeTruthy();
   expect(keySet === rest).toBe(false);
 });
 
-test('#intersect(keySetAllExceptSomeSubSetKeys)', () => {
+test("#intersect(keySetAllExceptSomeSubSetKeys)", () => {
   const rest = keySet.intersect(keySetAllExceptSomeSubSetKeys);
   expect(rest instanceof KeySetSome).toBeTruthy();
   expect(keySet === rest).toBe(false);
@@ -91,13 +91,13 @@ test('#intersect(keySetAllExceptSomeSubSetKeys)', () => {
   expect(r.keys).toEqual(restKeys);
 });
 
-test('#intersect(keySetAllExceptSomeMoreKeys)', () => {
+test("#intersect(keySetAllExceptSomeMoreKeys)", () => {
   const rest = keySet.intersect(keySetAllExceptSomeMoreKeys);
   expect(rest instanceof KeySetNone).toBeTruthy();
   expect(keySet === rest).toBe(false);
 });
 
-test('#intersect(keySetAllExceptSomeDiffKeys)', () => {
+test("#intersect(keySetAllExceptSomeDiffKeys)", () => {
   const rest = keySet.intersect(keySetAllExceptSomeDiffKeys);
   expect(rest instanceof KeySetSome).toBeTruthy();
   expect(keySet === rest).toBe(false);

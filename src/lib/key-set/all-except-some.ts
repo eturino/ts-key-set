@@ -1,8 +1,8 @@
-import { Key, KeySet } from './-base';
-import { KeySetByKeys } from './-by-keys';
-import { all, KeySetAll } from './all';
-import { KeySetNone } from './none';
-import { KeySetSome, some } from './some';
+import { Key, KeySet } from "./-base";
+import { KeySetByKeys } from "./-by-keys";
+import { all, KeySetAll } from "./all";
+import { KeySetNone } from "./none";
+import { KeySetSome, some } from "./some";
 
 export class KeySetAllExceptSome<T extends Key> extends KeySetByKeys<T> {
   public representsAll() {

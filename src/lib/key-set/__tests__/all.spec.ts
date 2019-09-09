@@ -1,31 +1,31 @@
-import { KeySetAll } from '../all';
-import { KeySetNone } from '../none';
+import { KeySetAll } from "../all";
+import { KeySetNone } from "../none";
 
 const keySet = new KeySetAll();
 
-test('#clone()', () => {
+test("#clone()", () => {
   const result = keySet.clone();
   expect(result instanceof KeySetAll).toBeTruthy();
   expect(keySet === result).toBe(false);
 });
 
-test('#invert()', () => {
+test("#invert()", () => {
   const result = keySet.invert();
   expect(result instanceof KeySetNone).toBeTruthy();
 });
 
-test('#representsAll()', () => {
+test("#representsAll()", () => {
   expect(keySet.representsAll()).toBe(true);
 });
 
-test('#representsNone()', () => {
+test("#representsNone()", () => {
   expect(keySet.representsNone()).toBe(false);
 });
 
-test('#representsSome()', () => {
+test("#representsSome()", () => {
   expect(keySet.representsSome()).toBe(false);
 });
 
-test('#representsAllExceptSome()', () => {
+test("#representsAllExceptSome()", () => {
   expect(keySet.representsAllExceptSome()).toBe(false);
 });

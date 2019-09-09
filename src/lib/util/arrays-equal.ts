@@ -1,4 +1,4 @@
-import { Key } from '../key-set/-base';
+import { Key } from "../key-set/-base";
 
 // copied from https://stackoverflow.com/questions/3115982/how-to-check-if-two-arrays-are-equal-with-javascript
 

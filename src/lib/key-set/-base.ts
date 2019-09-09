@@ -1,7 +1,7 @@
-import { KeySetAll } from './all';
-import { KeySetAllExceptSome } from './all-except-some';
-import { KeySetNone } from './none';
-import { KeySetSome } from './some';
+import { KeySetAll } from "./all";
+import { KeySetAllExceptSome } from "./all-except-some";
+import { KeySetNone } from "./none";
+import { KeySetSome } from "./some";
 
 export type Key = string | number;
 

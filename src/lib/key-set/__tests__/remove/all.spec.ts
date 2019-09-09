@@ -1,7 +1,7 @@
-import { KeySetAll } from '../../all';
-import { KeySetAllExceptSome } from '../../all-except-some';
-import { KeySetNone } from '../../none';
-import { KeySetSome } from '../../some';
+import { KeySetAll } from "../../all";
+import { KeySetAllExceptSome } from "../../all-except-some";
+import { KeySetNone } from "../../none";
+import { KeySetSome } from "../../some";
 
 const keySetAll = new KeySetAll();
 const keySetNone = new KeySetNone();
@@ -10,17 +10,17 @@ const keySetAllExceptSome = new KeySetAllExceptSome([1, 2, 3]);
 
 const keySet = new KeySetAll();
 
-test('#remove(keySetAll)', () => {
+test("#remove(keySetAll)", () => {
   expect(keySet.remove(keySetAll) instanceof KeySetNone).toBeTruthy();
 });
 
-test('#remove(keySetNone)', () => {
+test("#remove(keySetNone)", () => {
   const rest = keySet.remove(keySetNone);
   expect(rest instanceof KeySetAll).toBeTruthy();
   expect(keySet === rest).toBe(false);
 });
 
-test('#remove(keySetSome)', () => {
+test("#remove(keySetSome)", () => {
   const rest = keySet.remove(keySetSome);
   expect(rest instanceof KeySetAllExceptSome).toBeTruthy();
 
@@ -28,7 +28,7 @@ test('#remove(keySetSome)', () => {
   expect(r.keys).toEqual(keySetSome.keys);
 });
 
-test('#remove(keySetAllExceptSome)', () => {
+test("#remove(keySetAllExceptSome)", () => {
   const rest = keySet.remove(keySetAllExceptSome);
   expect(rest instanceof KeySetSome).toBeTruthy();
 

@@ -1,8 +1,8 @@
-import { arraysEqual } from '../util/arrays-equal';
-import { uniqueArray } from '../util/unique-array';
-import { IKeySetClass, Key, KeySet } from './-base';
-import { KeySetAllExceptSome } from './all-except-some';
-import { KeySetSome } from './some';
+import { arraysEqual } from "../util/arrays-equal";
+import { uniqueArray } from "../util/unique-array";
+import { IKeySetClass, Key, KeySet } from "./-base";
+import { KeySetAllExceptSome } from "./all-except-some";
+import { KeySetSome } from "./some";
 
 export abstract class KeySetByKeys<T extends Key> implements IKeySetClass {
   private readonly keySet: T[];
