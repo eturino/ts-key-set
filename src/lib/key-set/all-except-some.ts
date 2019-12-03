@@ -69,7 +69,7 @@ export class KeySetAllExceptSome<T extends Key> extends KeySetByKeys<T> {
 }
 
 export function allExceptSome<T extends Key>(
-  keys: T[]
+  keys: T[] | ReadonlyArray<T>
 ): KeySetAll | KeySetAllExceptSome<T> {
   if (!keys.length) return all();
 

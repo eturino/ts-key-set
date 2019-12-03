@@ -7,7 +7,7 @@ import { KeySetSome } from "./some";
 export abstract class KeySetByKeys<T extends Key> implements IKeySetClass {
   private readonly keySet: T[];
 
-  constructor(keys: T[]) {
+  constructor(keys: T[] | ReadonlyArray<T>) {
     this.keySet = uniqueArray(keys).sort();
   }
 

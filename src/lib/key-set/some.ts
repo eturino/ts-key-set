@@ -72,7 +72,9 @@ export class KeySetSome<T extends Key> extends KeySetByKeys<T> {
   }
 }
 
-export function some<T extends Key>(keys: T[]): KeySetNone | KeySetSome<T> {
+export function some<T extends Key>(
+  keys: T[] | ReadonlyArray<T>
+): KeySetNone | KeySetSome<T> {
   if (!keys.length) return none();
 
   return new KeySetSome(keys);
