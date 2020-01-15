@@ -72,7 +72,7 @@
     "tslint": "^5.18.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-immutable": "^6.0.1",
-    "typedoc": "^0.15.0",
+    "typedoc": "^0.16.4",
     "typedoc-themes-color": "^0.0.10",
     "typescript": "^3.5.3"
   },
