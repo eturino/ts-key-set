@@ -6,10 +6,10 @@ import {
   KeySetAllExceptSome,
   KeySetNone,
   KeySetSome,
+  KeySetTypes,
   none,
   some
 } from "../key-set";
-import { KeySetTypes } from "../key-set/-base";
 
 test("all()", () => {
   const keySet = all();

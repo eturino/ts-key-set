@@ -1,4 +1,4 @@
-import { Key, KeySet } from "./key-set/-base";
+import { Key, KeySet, KeySetTypes } from "./key-set/-base";
 import { all, KeySetAll } from "./key-set/all";
 import { allExceptSome, KeySetAllExceptSome } from "./key-set/all-except-some";
 import { KeySetNone, none } from "./key-set/none";
@@ -19,6 +19,8 @@ export {
   KeySetAllExceptSome,
   KeySetNone,
   KeySetSome,
+  // enums
+  KeySetTypes,
   // util functions
   uniqueArray,
   arraysEqual
