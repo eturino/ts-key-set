@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/eturino/ts-key-set/compare/v1.4.0...v1.5.0) (2020-02-13)
+
+
+### Features
+
+* add someForced() and allExceptSomeForced() ([f344f59](https://github.com/eturino/ts-key-set/commit/f344f593c21c893b4d49bb97e72e6544599fc7cf))
+
 ## [1.4.0](https://github.com/eturino/ts-key-set/compare/v1.3.0...v1.4.0) (2020-02-13)
 
 
