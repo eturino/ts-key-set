@@ -11,7 +11,22 @@ export type KeySet<T extends Key = Key> =
   | KeySetSome<T>
   | KeySetAllExceptSome<T>;
 
+/**
+ * one type for each of the 4 sets
+ */
+export enum KeySetTypes {
+  all = "all",
+  none = "none",
+  some = "some",
+  allExceptSome = "allExceptSome"
+}
+
 export interface IKeySetClass {
+  /**
+   * returns the KeySetType that defines this class
+   */
+  readonly type: KeySetTypes;
+
   /**
    * returns true if the KeySet represents ALL elements (KeySetAll) (U or universal set)
    */

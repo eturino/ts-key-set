@@ -45,9 +45,18 @@ allExceptSome([1, 3, 2, 3]); // returns a new instance of KeySetAllExceptSome wi
 allExceptSome([]); // returns a new instance of KeySetAll
 ```
 
+### `type`
+
+All KeySet expose a `type` property that will return a member of the `KeySetTypes` enum.
+
+- `KeySetAll` returns `all`
+- `KeySetNone` returns `none`
+- `KeySetSome` returns `some`
+- `KeySetAllExceptSome` returns `allExceptSome`
+
 ### `representsXXX()`
 
-all KeySet expose 4 methods `representXXX()`. Each class return false for all except their own.
+All KeySet expose 4 methods `representXXX()`. Each class return false for all except their own.
 
 - `representsAll()`: `KeySetAll` returns `true`
 - `representsNone()`: `KeySetNone` returns `true`
@@ -56,7 +65,7 @@ all KeySet expose 4 methods `representXXX()`. Each class return false for all ex
 
 ### `clone()`
 
-all KeySet has a `clone()` method, which will return a new instance of the same class that represents the same KeySet.
+All KeySet has a `clone()` method, which will return a new instance of the same class that represents the same KeySet.
 
 If the KeySet is `KeySetSome` or `KeySetAllExceptSome`, they will have an array with the same keys.
 
@@ -66,7 +75,7 @@ const newKeySet = keySet.clone();
 
 ### `isEqual(other)`
 
-all KeySet has an `isEqual(other)` method that returns true if the `other` keySet is of the same class and represents the same KeySet.
+All KeySet has an `isEqual(other)` method that returns true if the `other` keySet is of the same class and represents the same KeySet.
 
 If the KeySet is `KeySetSome` or `KeySetAllExceptSome`, they will have to have an array with the same keys.
 
@@ -76,7 +85,7 @@ if (keySet.isEqual(otherKeySet))
 
 ### `invert()`
 
-all KeySet has an `invert()` method that returns an instance of the opposite class, which represents the complementary KeySet. _(see [Complement in Wikipedia](https://en.wikipedia.org/wiki/Complement_\(set_theory\)))_
+All KeySet has an `invert()` method that returns an instance of the opposite class, which represents the complementary KeySet. _(see [Complement in Wikipedia](https://en.wikipedia.org/wiki/Complement_\(set_theory\)))_
 
 - `KeySetAll` ⟷ `KeySetNone`
 - `KeySetSome` ⟷ `KeySetAllExceptSome`
@@ -87,7 +96,7 @@ const complementaryKeySet = keySet.invert();
 
 ### `remove(other)`
 
-returns a new KeySet with the difference between ThisSet - OtherSet `(A - B)`
+Returns a new KeySet with the difference between ThisSet - OtherSet `(A - B)`
 
 ```ts
 const diffKeySet = keySet.remove(other);
@@ -95,7 +104,7 @@ const diffKeySet = keySet.remove(other);
 
 ### `intersect(other)`
 
-returns a new KeySet with the intersection of both Sets `(A ∩ B)`, representing the elements present in both sets
+Returns a new KeySet with the intersection of both Sets `(A ∩ B)`, representing the elements present in both sets
 
 ```ts
 const diffKeySet = keySet.intersect(other);

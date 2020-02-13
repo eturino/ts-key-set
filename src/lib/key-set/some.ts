@@ -1,10 +1,12 @@
-import { Key, KeySet } from "./-base";
+import { Key, KeySet, KeySetTypes } from "./-base";
 import { KeySetByKeys } from "./-by-keys";
 import { KeySetAll } from "./all";
 import { KeySetAllExceptSome } from "./all-except-some";
 import { KeySetNone, none } from "./none";
 
 export class KeySetSome<T extends Key> extends KeySetByKeys<T> {
+  public readonly type = KeySetTypes.some;
+
   public representsAll() {
     return false;
   }

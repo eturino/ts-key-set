@@ -1,7 +1,9 @@
-import { IKeySetClass, KeySet } from "./-base";
+import { IKeySetClass, KeySet, KeySetTypes } from "./-base";
 import { KeySetAll } from "./all";
 
 export class KeySetNone implements IKeySetClass {
+  public readonly type = KeySetTypes.none;
+
   public representsAll() {
     return false;
   }

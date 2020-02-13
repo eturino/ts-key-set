@@ -16,6 +16,8 @@
     "groups"
   ],
   "scripts": {
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "yarn run type-check --watch",
     "describe": "npm-scripts-info",
     "build": "run-s clean && run-p build:*",
     "build:main": "tsc -p tsconfig.json",

@@ -1,10 +1,12 @@
 import { arraysEqual } from "../util/arrays-equal";
 import { uniqueArray } from "../util/unique-array";
-import { IKeySetClass, Key, KeySet } from "./-base";
+import { IKeySetClass, Key, KeySet, KeySetTypes } from "./-base";
 import { KeySetAllExceptSome } from "./all-except-some";
 import { KeySetSome } from "./some";
 
 export abstract class KeySetByKeys<T extends Key> implements IKeySetClass {
+  public abstract readonly type: KeySetTypes.allExceptSome | KeySetTypes.some;
+
   private readonly keySet: T[];
 
   constructor(keys: T[] | ReadonlyArray<T>) {
