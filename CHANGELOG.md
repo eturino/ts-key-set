@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/eturino/ts-key-set/compare/v1.2.0...v1.3.0) (2020-02-13)
+
+
+### Features
+
+* add `type` property ([753e1a7](https://github.com/eturino/ts-key-set/commit/753e1a7dd7d27d73cc7de3e44d93553f4b5cc9c0))
+
 ## [1.2.0](https://github.com/eturino/ts-key-set/compare/v1.1.0...v1.2.0) (2019-12-03)
 
 
