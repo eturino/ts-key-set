@@ -2,6 +2,7 @@ import { Key, KeySet, KeySetTypes } from "./-base";
 import { KeySetByKeys } from "./-by-keys";
 import { KeySetAll } from "./all";
 import { KeySetAllExceptSome } from "./all-except-some";
+import { InvalidEmptySetError } from "./invalid-empty-set-error";
 import { KeySetNone, none } from "./none";
 
 export class KeySetSome<T extends Key> extends KeySetByKeys<T> {
@@ -74,10 +75,33 @@ export class KeySetSome<T extends Key> extends KeySetByKeys<T> {
   }
 }
 
+/**
+ * if the given list is empty, it will throw an error, otherwise it will build a KeySetSome with those keys
+ *
+ * @param keys list of keys for the KeySet
+ * @throws InvalidEmptySetError
+ */
+export function someForced<T extends Key>(
+  keys: T[] | ReadonlyArray<T>
+): KeySetSome<T> {
+  if (!keys.length) {
+    throw new InvalidEmptySetError(
+      "calling `someForced` with an empty list of keys"
+    );
+  }
+
+  return new KeySetSome(keys);
+}
+
+/**
+ * if the given list is empty, it will return a KeySetNone, otherwise it will build a KeySetSome with those keys
+ *
+ * @param keys list of keys for the KeySet
+ */
 export function some<T extends Key>(
   keys: T[] | ReadonlyArray<T>
 ): KeySetNone | KeySetSome<T> {
   if (!keys.length) return none();
 
-  return new KeySetSome(keys);
+  return someForced(keys);
 }

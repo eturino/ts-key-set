@@ -2,13 +2,16 @@
 import {
   all,
   allExceptSome,
+  allExceptSomeForced,
+  InvalidEmptySetError,
   KeySetAll,
   KeySetAllExceptSome,
   KeySetNone,
   KeySetSome,
   KeySetTypes,
   none,
-  some
+  some,
+  someForced
 } from "../key-set";
 
 test("all()", () => {
@@ -29,10 +32,22 @@ test("some([])", () => {
   expect(keySet.type).toEqual(KeySetTypes.none);
 });
 
+test("someForced([])", () => {
+  expect(() => {
+    someForced([]);
+  }).toThrowError(InvalidEmptySetError);
+});
+
 test("allExceptSome([])", () => {
   const keySet = allExceptSome([]);
   expect(keySet instanceof KeySetAll).toBeTruthy();
   expect(keySet.type).toEqual(KeySetTypes.all);
+});
+
+test("allExceptSomeForced([])", () => {
+  expect(() => {
+    allExceptSomeForced([]);
+  }).toThrowError(InvalidEmptySetError);
 });
 
 test("some([1, 2, 3])", () => {
@@ -44,6 +59,20 @@ test("some([1, 2, 3])", () => {
 
 test("allExceptSome([1, 2, 3])", () => {
   const keySet = allExceptSome([1, 2, 3]);
+  expect(keySet instanceof KeySetAllExceptSome).toBeTruthy();
+  expect((keySet as KeySetAllExceptSome<number>).keys).toEqual([1, 2, 3]);
+  expect(keySet.type).toEqual(KeySetTypes.allExceptSome);
+});
+
+test("someForced([1, 2, 3])", () => {
+  const keySet = someForced([1, 2, 3]);
+  expect(keySet instanceof KeySetSome).toBeTruthy();
+  expect((keySet as KeySetSome<number>).keys).toEqual([1, 2, 3]);
+  expect(keySet.type).toEqual(KeySetTypes.some);
+});
+
+test("allExceptSomeForced([1, 2, 3])", () => {
+  const keySet = allExceptSomeForced([1, 2, 3]);
   expect(keySet instanceof KeySetAllExceptSome).toBeTruthy();
   expect((keySet as KeySetAllExceptSome<number>).keys).toEqual([1, 2, 3]);
   expect(keySet.type).toEqual(KeySetTypes.allExceptSome);

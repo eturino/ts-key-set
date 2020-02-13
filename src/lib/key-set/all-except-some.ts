@@ -1,6 +1,7 @@
 import { Key, KeySet, KeySetTypes } from "./-base";
 import { KeySetByKeys } from "./-by-keys";
 import { all, KeySetAll } from "./all";
+import { InvalidEmptySetError } from "./invalid-empty-set-error";
 import { KeySetNone } from "./none";
 import { KeySetSome, some } from "./some";
 
@@ -72,10 +73,33 @@ export class KeySetAllExceptSome<T extends Key> extends KeySetByKeys<T> {
   }
 }
 
+/**
+ * if the given list is empty, it will throw an error, otherwise it will build a KeySetSome with those keys
+ *
+ * @param keys list of keys for the KeySet
+ * @throws InvalidEmptySetError
+ */
+export function allExceptSomeForced<T extends Key>(
+  keys: T[] | ReadonlyArray<T>
+): KeySetAllExceptSome<T> {
+  if (!keys.length) {
+    throw new InvalidEmptySetError(
+      "calling `someForced` with an empty list of keys"
+    );
+  }
+
+  return new KeySetAllExceptSome(keys);
+}
+
+/**
+ * if the given list is empty, it will return a KeySetAll, otherwise it will build a KeySetSome with those keys
+ *
+ * @param keys list of keys for the KeySet
+ */
 export function allExceptSome<T extends Key>(
   keys: T[] | ReadonlyArray<T>
 ): KeySetAll | KeySetAllExceptSome<T> {
   if (!keys.length) return all();
 
-  return new KeySetAllExceptSome(keys);
+  return allExceptSomeForced(keys);
 }

@@ -26,14 +26,21 @@ We have 4 classes:
 - `KeySetAll`: represents the entirety of possible keys (`𝕌`)
 - `KeySetNone`: represents an empty set (`∅`)
 - `KeySetSome`: represents a concrete set (`A ⊂ 𝕌`)
-- `KeySetAllExceptSome`: represents the complementary of a set, all the elements except the given ones (`A' = {x ∈ 𝕌 | x ∉ A}`) _(see [Complement in Wikipedia](https://en.wikipedia.org/wiki/Complement_\(set_theory\)))_
+- `KeySetAllExceptSome`: represents the complementary of a set, all the elements except the given ones (`A' = {x ∈ 𝕌 | x ∉ A}`) _(see [Complement in Wikipedia](https://en.wikipedia.org/wiki/Complement_\(set*theory\)))*
 
-### Creation: `all()`, `none()`, `some([...])` and `allExceptSome([...])`
+### Creation: `all()`, `none()`, `some([...])`, `allExceptSome([...])`, `someForced([...])`, `allExceptSomeForced([...])`
 
 Build your KeySets using the build functions
 
 ```ts
-import { all, none, some, allExceptSome } from "@eturino/key-set"
+import {
+  all,
+  none,
+  some,
+  allExceptSome,
+  someForced,
+  allExceptSomeForced
+} from "@eturino/key-set";
 
 all(); // => returns a new instance of KeySetAll
 none(); // => returns a new instance of KeySetNone
@@ -43,6 +50,12 @@ some([]); // returns a new instance of KeySetNone
 
 allExceptSome([1, 3, 2, 3]); // returns a new instance of KeySetAllExceptSome with keys [1, 2, 3] (sorted, unique)
 allExceptSome([]); // returns a new instance of KeySetAll
+
+someForced([1, 3, 2, 3]); // returns a new instance of KeySetSome with keys [1, 2, 3] (sorted, unique)
+someForced([]); // throws an InvalidEmptySetError
+
+allExceptSomeForced([1, 3, 2, 3]); // returns a new instance of KeySetAllExceptSome with keys [1, 2, 3] (sorted, unique)
+allExceptSomeForced([]); // throws an InvalidEmptySetError
 ```
 
 ### `type`
@@ -85,7 +98,7 @@ if (keySet.isEqual(otherKeySet))
 
 ### `invert()`
 
-All KeySet has an `invert()` method that returns an instance of the opposite class, which represents the complementary KeySet. _(see [Complement in Wikipedia](https://en.wikipedia.org/wiki/Complement_\(set_theory\)))_
+All KeySet has an `invert()` method that returns an instance of the opposite class, which represents the complementary KeySet. _(see [Complement in Wikipedia](https://en.wikipedia.org/wiki/Complement_\(set*theory\)))*
 
 - `KeySetAll` ⟷ `KeySetNone`
 - `KeySetSome` ⟷ `KeySetAllExceptSome`
@@ -115,6 +128,6 @@ const diffKeySet = keySet.intersect(other);
 The lib also exports the 2 util functions used in the code
 
 - `uniqueArray(list)`: returns another array with unique items
-  - __adapted from <https://medium.com/@jakubsynowiec/unique-array-values-in-javascript-7c932682766c> (credit to Jakub Synowiec)__
+  - **adapted from <https://medium.com/@jakubsynowiec/unique-array-values-in-javascript-7c932682766c> (credit to Jakub Synowiec)**
 - `arraysEqual(a, b)`: returns true if the 2 arrays have the same keys
-  - __adapted from <https://stackoverflow.com/questions/3115982/how-to-check-if-two-arrays-are-equal-with-javascript> (credit to [enyo](https://stackoverflow.com/users/170851/enyo))__
+  - **adapted from <https://stackoverflow.com/questions/3115982/how-to-check-if-two-arrays-are-equal-with-javascript> (credit to [enyo](https://stackoverflow.com/users/170851/enyo))**
