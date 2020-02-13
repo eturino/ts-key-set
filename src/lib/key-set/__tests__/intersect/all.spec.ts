@@ -1,5 +1,6 @@
 import { KeySetAll } from "../../all";
 import { KeySetAllExceptSome } from "../../all-except-some";
+import { InvalidKeySetError } from "../../invalid-key-set-error";
 import { KeySetNone } from "../../none";
 import { KeySetSome } from "../../some";
 
@@ -19,7 +20,7 @@ test("#intersect(keySetAll)", () => {
 test("#intersect(keySetNone)", () => {
   const rest = keySet.intersect(keySetNone);
   expect(rest instanceof KeySetNone).toBeTruthy();
-  expect(keySet === rest).toBe(false);
+  expect(keySet).not.toBe(rest);
 });
 
 test("#intersect(keySetSome)", () => {
@@ -36,4 +37,10 @@ test("#intersect(keySetAllExceptSome)", () => {
 
   const r = rest as KeySetAllExceptSome<number>;
   expect(r.keys).toEqual(keySetAllExceptSome.keys);
+});
+
+test("#intersect(somethingInvalid)", () => {
+  expect(() => {
+    keySet.intersect((null as unknown) as KeySetAll);
+  }).toThrowError(InvalidKeySetError);
 });

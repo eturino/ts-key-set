@@ -36,7 +36,9 @@ export class KeySetAllExceptSome<T extends Key> extends KeySetByKeys<T> {
     return other instanceof KeySetAllExceptSome && this.hasSameKeys(other);
   }
 
-  public remove(other: KeySet): KeySet {
+  public remove(
+    other: KeySet<T>
+  ): KeySetAllExceptSome<T> | KeySetSome<T> | KeySetNone {
     if (other instanceof KeySetSome) {
       const keys = [...this.keys, ...other.keys];
       return new KeySetAllExceptSome(keys);
@@ -51,7 +53,9 @@ export class KeySetAllExceptSome<T extends Key> extends KeySetByKeys<T> {
     return new KeySetAllExceptSome<T>(this.keys);
   }
 
-  public intersect(other: KeySet): KeySet<T> {
+  public intersect(
+    other: KeySet<T>
+  ): KeySetAllExceptSome<T> | KeySetNone | KeySetSome<T> | KeySetAll {
     if (other instanceof KeySetAll) {
       return new KeySetAllExceptSome([...this.keys]);
     }

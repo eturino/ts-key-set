@@ -1,5 +1,6 @@
-import { IKeySetClass, KeySet, KeySetTypes } from "./-base";
+import { IKeySetClass, Key, KeySet, KeySetTypes } from "./-base";
 import { KeySetAllExceptSome } from "./all-except-some";
+import { InvalidKeySetError } from "./invalid-key-set-error";
 import { KeySetNone } from "./none";
 import { KeySetSome } from "./some";
 
@@ -34,7 +35,7 @@ export class KeySetAll implements IKeySetClass {
     return other instanceof KeySetAll;
   }
 
-  public remove(other: KeySet): KeySet {
+  public remove<T extends Key>(other: KeySet<T>): KeySet<T> {
     if (other instanceof KeySetSome) return new KeySetAllExceptSome(other.keys);
     if (other instanceof KeySetAllExceptSome) return new KeySetSome(other.keys);
     if (other instanceof KeySetAll) return new KeySetNone();
@@ -42,11 +43,15 @@ export class KeySetAll implements IKeySetClass {
     return new KeySetAll();
   }
 
-  public intersect(other: KeySet): KeySet {
-    if (other instanceof KeySetAll) return new KeySetAll();
-    if (other instanceof KeySetNone) return new KeySetNone();
-    if (other instanceof KeySetSome) return new KeySetSome(other.keys);
-    return new KeySetAllExceptSome(other.keys);
+  public intersect<O extends KeySet>(other: O): O {
+    if (other instanceof KeySetAll) return new KeySetAll() as O;
+    if (other instanceof KeySetNone) return new KeySetNone() as O;
+    if (other instanceof KeySetSome) return new KeySetSome(other.keys) as O;
+    if (other instanceof KeySetAllExceptSome) {
+      return new KeySetAllExceptSome(other.keys) as O;
+    }
+
+    throw new InvalidKeySetError(`other key set not recognised ${other}`);
   }
 }
 
