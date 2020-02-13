@@ -57,7 +57,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> @eturino/key-set</h1>
+			<h1>@eturino/key-set</h1>
 		</div>
 	</div>
 </header>
@@ -105,10 +105,20 @@ some([]); <span class="hljs-comment">// returns a new instance of KeySetNone</sp
 
 allExceptSome([<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]); <span class="hljs-comment">// returns a new instance of KeySetAllExceptSome with keys [1, 2, 3] (sorted, unique)</span>
 allExceptSome([]); <span class="hljs-comment">// returns a new instance of KeySetAll</span></code></pre>
+				<a href="#codetypecode" id="codetypecode" style="color: inherit; text-decoration: none;">
+					<h3><code>type</code></h3>
+				</a>
+				<p>All KeySet expose a <code>type</code> property that will return a member of the <code>KeySetTypes</code> enum.</p>
+				<ul>
+					<li><code>KeySetAll</code> returns <code>all</code></li>
+					<li><code>KeySetNone</code> returns <code>none</code></li>
+					<li><code>KeySetSome</code> returns <code>some</code></li>
+					<li><code>KeySetAllExceptSome</code> returns <code>allExceptSome</code></li>
+				</ul>
 				<a href="#coderepresentsxxxcode" id="coderepresentsxxxcode" style="color: inherit; text-decoration: none;">
 					<h3><code>representsXXX()</code></h3>
 				</a>
-				<p>all KeySet expose 4 methods <code>representXXX()</code>. Each class return false for all except their own.</p>
+				<p>All KeySet expose 4 methods <code>representXXX()</code>. Each class return false for all except their own.</p>
 				<ul>
 					<li><code>representsAll()</code>: <code>KeySetAll</code> returns <code>true</code></li>
 					<li><code>representsNone()</code>: <code>KeySetNone</code> returns <code>true</code></li>
@@ -118,19 +128,19 @@ allExceptSome([]); <span class="hljs-comment">// returns a new instance of KeySe
 				<a href="#codeclonecode" id="codeclonecode" style="color: inherit; text-decoration: none;">
 					<h3><code>clone()</code></h3>
 				</a>
-				<p>all KeySet has a <code>clone()</code> method, which will return a new instance of the same class that represents the same KeySet.</p>
+				<p>All KeySet has a <code>clone()</code> method, which will return a new instance of the same class that represents the same KeySet.</p>
 				<p>If the KeySet is <code>KeySetSome</code> or <code>KeySetAllExceptSome</code>, they will have an array with the same keys.</p>
 				<pre><code class="language-ts"><span class="hljs-keyword">const</span> newKeySet = keySet.clone();</code></pre>
 				<a href="#codeisequalothercode" id="codeisequalothercode" style="color: inherit; text-decoration: none;">
 					<h3><code>isEqual(other)</code></h3>
 				</a>
-				<p>all KeySet has an <code>isEqual(other)</code> method that returns true if the <code>other</code> keySet is of the same class and represents the same KeySet.</p>
+				<p>All KeySet has an <code>isEqual(other)</code> method that returns true if the <code>other</code> keySet is of the same class and represents the same KeySet.</p>
 				<p>If the KeySet is <code>KeySetSome</code> or <code>KeySetAllExceptSome</code>, they will have to have an array with the same keys.</p>
 				<pre><code class="language-ts"><span class="hljs-keyword">if</span> (keySet.isEqual(otherKeySet))</code></pre>
 				<a href="#codeinvertcode" id="codeinvertcode" style="color: inherit; text-decoration: none;">
 					<h3><code>invert()</code></h3>
 				</a>
-				<p>all KeySet has an <code>invert()</code> method that returns an instance of the opposite class, which represents the complementary KeySet. <em>(see <a href="https://en.wikipedia.org/wiki/Complement_(set_theory)">Complement in Wikipedia</a>)</em></p>
+				<p>All KeySet has an <code>invert()</code> method that returns an instance of the opposite class, which represents the complementary KeySet. <em>(see <a href="https://en.wikipedia.org/wiki/Complement_(set_theory)">Complement in Wikipedia</a>)</em></p>
 				<ul>
 					<li><code>KeySetAll</code> ⟷ <code>KeySetNone</code></li>
 					<li><code>KeySetSome</code> ⟷ <code>KeySetAllExceptSome</code></li>
@@ -139,12 +149,12 @@ allExceptSome([]); <span class="hljs-comment">// returns a new instance of KeySe
 				<a href="#coderemoveothercode" id="coderemoveothercode" style="color: inherit; text-decoration: none;">
 					<h3><code>remove(other)</code></h3>
 				</a>
-				<p>returns a new KeySet with the difference between ThisSet - OtherSet <code>(A - B)</code></p>
+				<p>Returns a new KeySet with the difference between ThisSet - OtherSet <code>(A - B)</code></p>
 				<pre><code class="language-ts"><span class="hljs-keyword">const</span> diffKeySet = keySet.remove(other);</code></pre>
 				<a href="#codeintersectothercode" id="codeintersectothercode" style="color: inherit; text-decoration: none;">
 					<h3><code>intersect(other)</code></h3>
 				</a>
-				<p>returns a new KeySet with the intersection of both Sets <code>(A ∩ B)</code>, representing the elements present in both sets</p>
+				<p>Returns a new KeySet with the intersection of both Sets <code>(A ∩ B)</code>, representing the elements present in both sets</p>
 				<pre><code class="language-ts"><span class="hljs-keyword">const</span> diffKeySet = keySet.intersect(other);</code></pre>
 				<a href="#util-functions" id="util-functions" style="color: inherit; text-decoration: none;">
 					<h2>Util functions</h2>
@@ -173,6 +183,9 @@ allExceptSome([]); <span class="hljs-comment">// returns a new instance of KeySe
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="enums/keysettypes.html" class="tsd-kind-icon">Key<wbr>Set<wbr>Types</a>
+					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/keysetall.html" class="tsd-kind-icon">Key<wbr>Set<wbr>All</a>
 					</li>
@@ -209,7 +222,7 @@ allExceptSome([]); <span class="hljs-comment">// returns a new instance of KeySe
 					<li class=" tsd-kind-function">
 						<a href="globals.html#none" class="tsd-kind-icon">none</a>
 					</li>
-					<li class=" tsd-kind-function tsd-has-type-parameter tsd-is-not-exported">
+					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="globals.html#sameelements" class="tsd-kind-icon">same<wbr>Elements</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
