@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/eturino/ts-key-set/compare/v1.3.0...v1.4.0) (2020-02-13)
+
+
+### Features
+
+* exposing KeySetTypes enum ([e1642dc](https://github.com/eturino/ts-key-set/commit/e1642dc980aaea3f14c0586191b3991ab652609b))
+
 ## [1.3.0](https://github.com/eturino/ts-key-set/compare/v1.2.0...v1.3.0) (2020-02-13)
 
 
