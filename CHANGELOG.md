@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.1](https://github.com/eturino/ts-key-set/compare/v1.5.0...v1.5.1) (2020-02-13)
+
+
+### Bug Fixes
+
+* narrower types in the intersect and remove returns to avoid typing issues in clients ([d590fe2](https://github.com/eturino/ts-key-set/commit/d590fe2cdab4330cac4cf0e88445eded70754141))
+
 ## [1.5.0](https://github.com/eturino/ts-key-set/compare/v1.4.0...v1.5.0) (2020-02-13)
 
 
