@@ -15,10 +15,10 @@ export type KeySet<T extends Key = Key> =
  * one type for each of the 4 sets
  */
 export enum KeySetTypes {
-  all = "all",
-  none = "none",
-  some = "some",
-  allExceptSome = "allExceptSome"
+  all = "ALL",
+  allExceptSome = "ALL_EXCEPT_SOME",
+  none = "NONE",
+  some = "SOME"
 }
 
 export interface IKeySetClass {

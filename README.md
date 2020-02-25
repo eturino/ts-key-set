@@ -62,10 +62,16 @@ allExceptSomeForced([]); // throws an InvalidEmptySetError
 
 All KeySet expose a `type` property that will return a member of the `KeySetTypes` enum.
 
-- `KeySetAll` returns `all`
-- `KeySetNone` returns `none`
-- `KeySetSome` returns `some`
-- `KeySetAllExceptSome` returns `allExceptSome`
+- `KeySetAll` returns `ALL`
+- `KeySetAllExceptSome` returns `ALL_EXCEPT_SOME`
+- `KeySetNone` returns `NONE`
+- `KeySetSome` returns `SOME`
+
+#### `type` in v1.x vs v2.x
+
+`v2.0` changed the values returned by `type`, make them SCREAMING_SNAKE_CASE, which allows for easier integration with GraphQL enums.
+
+In v1.x, the values were `all`, `allExceptSome`, `none` and `some`.
 
 ### `representsXXX()`
 
