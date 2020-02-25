@@ -123,11 +123,16 @@ allExceptSomeForced([]); <span class="hljs-comment">// throws an InvalidEmptySet
 				</a>
 				<p>All KeySet expose a <code>type</code> property that will return a member of the <code>KeySetTypes</code> enum.</p>
 				<ul>
-					<li><code>KeySetAll</code> returns <code>all</code></li>
-					<li><code>KeySetNone</code> returns <code>none</code></li>
-					<li><code>KeySetSome</code> returns <code>some</code></li>
-					<li><code>KeySetAllExceptSome</code> returns <code>allExceptSome</code></li>
+					<li><code>KeySetAll</code> returns <code>ALL</code></li>
+					<li><code>KeySetAllExceptSome</code> returns <code>ALL_EXCEPT_SOME</code></li>
+					<li><code>KeySetNone</code> returns <code>NONE</code></li>
+					<li><code>KeySetSome</code> returns <code>SOME</code></li>
 				</ul>
+				<a href="#codetypecode-in-v1x-vs-v2x" id="codetypecode-in-v1x-vs-v2x" style="color: inherit; text-decoration: none;">
+					<h4><code>type</code> in v1.x vs v2.x</h4>
+				</a>
+				<p><code>v2.0</code> changed the values returned by <code>type</code>, make them SCREAMING_SNAKE_CASE, which allows for easier integration with GraphQL enums.</p>
+				<p>In v1.x, the values were <code>all</code>, <code>allExceptSome</code>, <code>none</code> and <code>some</code>.</p>
 				<a href="#coderepresentsxxxcode" id="coderepresentsxxxcode" style="color: inherit; text-decoration: none;">
 					<h3><code>representsXXX()</code></h3>
 				</a>
