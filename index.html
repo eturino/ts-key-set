@@ -174,6 +174,45 @@ allExceptSomeForced([]); <span class="hljs-comment">// throws an InvalidEmptySet
 				</a>
 				<p>Returns a new KeySet with the intersection of both Sets <code>(A ∩ B)</code>, representing the elements present in both sets</p>
 				<pre><code class="language-ts"><span class="hljs-keyword">const</span> diffKeySet = keySet.intersect(other);</code></pre>
+				<a href="#serialization" id="serialization" style="color: inherit; text-decoration: none;">
+					<h2>Serialization</h2>
+				</a>
+				<p>The Serialized representation of the KeySet (<code>KeySetSerialized</code>) is a plain object with <code>type</code> and optionally <code>elements</code>.</p>
+				<ul>
+					<li><code>{ type: &quot;ALL&quot; }</code></li>
+					<li><code>{ type: &quot;NONE&quot; }</code></li>
+					<li><code>{ type: &quot;SOME&quot;, elements: [1, 2, 3] }</code></li>
+					<li><code>{ type: &quot;ALL_EXCEPT_SOME&quot;, elements: [1, 2, 3] }</code></li>
+				</ul>
+				<p>There are 2 ways of getting the serialized representation of the keySet</p>
+				<ul>
+					<li><code>keySet.serialized()</code></li>
+					<li><code>serializeKeySet(keySet)</code></li>
+				</ul>
+				<a href="#parsing" id="parsing" style="color: inherit; text-decoration: none;">
+					<h2>Parsing</h2>
+				</a>
+				<p>We can create a KeySet from the serialized representation</p>
+				<ul>
+					<li><code>parseKeySet(serialized)</code></li>
+				</ul>
+				<p>we can also pass the actual KeySet to the <code>parseKeySet</code>, which will return the given KeySet without touching it.</p>
+				<a href="#type-predicates" id="type-predicates" style="color: inherit; text-decoration: none;">
+					<h2>Type Predicates</h2>
+				</a>
+				<p>There are type predicates exposed, one for each KeySet type and the other for each KeySetSerialized.</p>
+				<ul>
+					<li><code>isKeySet(x): x is KeySet</code></li>
+					<li><code>isKeySetAll(x): x is KeySetAll</code></li>
+					<li><code>isKeySetAllExceptSome(x): x is KeySetAllExceptSome</code></li>
+					<li><code>isKeySetNone(x): x is KeySetNone</code></li>
+					<li><code>isKeySetSome(x): x is KeySetSome</code></li>
+					<li><code>isKeySetSerialized(x): x is KeySetSerialized</code></li>
+					<li><code>isKeySetAllSerialized(x): x is KeySetAllSerialized</code></li>
+					<li><code>isKeySetAllExceptSomeSerialized(x): x is KeySetAllExceptSomeSerialized</code></li>
+					<li><code>isKeySetNoneSerialized(x): x is KeySetNoneSerialized</code></li>
+					<li><code>isKeySetSomeSerialized(x): x is KeySetSomeSerialized</code></li>
+				</ul>
 				<a href="#util-functions" id="util-functions" style="color: inherit; text-decoration: none;">
 					<h2>Util functions</h2>
 				</a>
@@ -188,6 +227,27 @@ allExceptSomeForced([]); <span class="hljs-comment">// throws an InvalidEmptySet
 						</ul>
 					</li>
 				</ul>
+				<a href="#util-array-types" id="util-array-types" style="color: inherit; text-decoration: none;">
+					<h2>Util array types</h2>
+				</a>
+				<p>The lib also exports 2 util array types <code>EmptyArray&lt;T&gt;</code> and <code>NonEmptyArray&lt;T&gt;</code>, with their corresponding type predicates <code>isEmptyArray()</code>, and <code>isNonEmptyArray()</code>.</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">const</span> lists: <span class="hljs-built_in">Array</span>&lt;NonEmptyArray&lt;<span class="hljs-built_in">any</span>&gt;&gt; = [
+  [<span class="hljs-number">1</span>], <span class="hljs-comment">// ok</span>
+  [] <span class="hljs-comment">// error</span>
+];
+
+<span class="hljs-keyword">const</span> lists2: <span class="hljs-built_in">Array</span>&lt;EmptyArray&lt;<span class="hljs-built_in">any</span>&gt;&gt; = [
+  [], <span class="hljs-comment">// ok</span>
+  [<span class="hljs-number">1</span>] <span class="hljs-comment">// error</span>
+];
+
+<span class="hljs-keyword">const</span> a: <span class="hljs-built_in">string</span>[] = [];
+isEmptyArray(a); <span class="hljs-comment">// =&gt; true (also sets that a is EmptyArray&lt;string&gt;)</span>
+isNonEmptyArray(a); <span class="hljs-comment">// =&gt; false</span>
+
+<span class="hljs-keyword">const</span> b: <span class="hljs-built_in">string</span>[] = [<span class="hljs-string">"something"</span>];
+isEmptyArray(b); <span class="hljs-comment">// =&gt; false</span>
+isNonEmptyArray(b); <span class="hljs-comment">// =&gt; true (also sets that a is NonEmptyArray&lt;string&gt;)</span></code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -228,11 +288,32 @@ allExceptSomeForced([]); <span class="hljs-comment">// throws an InvalidEmptySet
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/ikeysetclass.html" class="tsd-kind-icon">IKey<wbr>Set<wbr>Class</a>
 					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#emptyarray" class="tsd-kind-icon">Empty<wbr>Array</a>
+					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#key" class="tsd-kind-icon">Key</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 						<a href="globals.html#keyset" class="tsd-kind-icon">Key<wbr>Set</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#keysetallexceptsomeserialized" class="tsd-kind-icon">Key<wbr>Set<wbr>All<wbr>Except<wbr>Some<wbr>Serialized</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#keysetallserialized" class="tsd-kind-icon">Key<wbr>Set<wbr>All<wbr>Serialized</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#keysetnoneserialized" class="tsd-kind-icon">Key<wbr>Set<wbr>None<wbr>Serialized</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#keysetserialized" class="tsd-kind-icon">Key<wbr>Set<wbr>Serialized</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#keysetsomeserialized" class="tsd-kind-icon">Key<wbr>Set<wbr>Some<wbr>Serialized</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#nonemptyarray" class="tsd-kind-icon">Non<wbr>Empty<wbr>Array</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#all" class="tsd-kind-icon">all</a>
@@ -246,11 +327,56 @@ allExceptSomeForced([]); <span class="hljs-comment">// throws an InvalidEmptySet
 					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="globals.html#arraysequal" class="tsd-kind-icon">arrays<wbr>Equal</a>
 					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#isemptyarray" class="tsd-kind-icon">is<wbr>Empty<wbr>Array</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#iskeyset" class="tsd-kind-icon">is<wbr>Key<wbr>Set</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#iskeysetall" class="tsd-kind-icon">is<wbr>Key<wbr>Set<wbr>All</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#iskeysetallexceptsome" class="tsd-kind-icon">is<wbr>Key<wbr>Set<wbr>All<wbr>Except<wbr>Some</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#iskeysetallexceptsomeserialized" class="tsd-kind-icon">is<wbr>Key<wbr>Set<wbr>All<wbr>Except<wbr>Some<wbr>Serialized</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#iskeysetallserialized" class="tsd-kind-icon">is<wbr>Key<wbr>Set<wbr>All<wbr>Serialized</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#iskeysetnone" class="tsd-kind-icon">is<wbr>Key<wbr>Set<wbr>None</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#iskeysetnoneserialized" class="tsd-kind-icon">is<wbr>Key<wbr>Set<wbr>None<wbr>Serialized</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#iskeysetserialized" class="tsd-kind-icon">is<wbr>Key<wbr>Set<wbr>Serialized</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#iskeysetsome" class="tsd-kind-icon">is<wbr>Key<wbr>Set<wbr>Some</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#iskeysetsomeserialized" class="tsd-kind-icon">is<wbr>Key<wbr>Set<wbr>Some<wbr>Serialized</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#isnonemptyarray" class="tsd-kind-icon">is<wbr>Non<wbr>Empty<wbr>Array</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#isobject" class="tsd-kind-icon">is<wbr>Object</a>
+					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#none" class="tsd-kind-icon">none</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#parsekeyset" class="tsd-kind-icon">parse<wbr>Key<wbr>Set</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="globals.html#sameelements" class="tsd-kind-icon">same<wbr>Elements</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#serializekeyset" class="tsd-kind-icon">serialize<wbr>Key<wbr>Set</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="globals.html#some" class="tsd-kind-icon">some</a>
