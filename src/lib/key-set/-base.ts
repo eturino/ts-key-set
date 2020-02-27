@@ -1,3 +1,5 @@
+/* tslint:disable:interface-over-type-literal */
+import { EmptyArray, NonEmptyArray } from "../util/array-types";
 import { KeySetAll } from "./all";
 import { KeySetAllExceptSome } from "./all-except-some";
 import { KeySetNone } from "./none";
@@ -21,11 +23,38 @@ export enum KeySetTypes {
   some = "SOME"
 }
 
+export type KeySetAllSerialized<T extends Key = Key> =
+  | { type: KeySetTypes.all }
+  | { type: KeySetTypes.all; elements: EmptyArray<T> };
+
+export type KeySetNoneSerialized<T extends Key = Key> =
+  | { type: KeySetTypes.none }
+  | { type: KeySetTypes.none; elements: EmptyArray<T> };
+
+export type KeySetSomeSerialized<T extends Key = Key> = {
+  type: KeySetTypes.some;
+  elements: NonEmptyArray<T>;
+};
+
+export type KeySetAllExceptSomeSerialized<T extends Key = Key> = {
+  type: KeySetTypes.allExceptSome;
+  elements: NonEmptyArray<T>;
+};
+
+export type KeySetSerialized<T extends Key = Key> =
+  | { type: KeySetTypes }
+  | KeySetAllSerialized<T>
+  | KeySetNoneSerialized<T>
+  | KeySetSomeSerialized<T>
+  | KeySetAllExceptSomeSerialized<T>;
+
 export interface IKeySetClass {
   /**
    * returns the KeySetType that defines this class
    */
   readonly type: KeySetTypes;
+
+  serialized(): KeySetSerialized;
 
   /**
    * returns true if the KeySet represents ALL elements (KeySetAll) (U or universal set)
@@ -81,4 +110,29 @@ export interface IKeySetClass {
    * @param other
    */
   intersect(other: KeySet): KeySet;
+}
+
+export function isKeySetAll(x: any): x is KeySetAll {
+  return x instanceof KeySetAll;
+}
+
+export function isKeySetNone(x: any): x is KeySetNone {
+  return x instanceof KeySetNone;
+}
+
+export function isKeySetSome(x: any): x is KeySetSome<Key> {
+  return x instanceof KeySetSome;
+}
+
+export function isKeySetAllExceptSome(x: any): x is KeySetAllExceptSome<Key> {
+  return x instanceof KeySetAllExceptSome;
+}
+
+export function isKeySet(x: any): x is KeySet {
+  return (
+    isKeySetAll(x) ||
+    isKeySetNone(x) ||
+    isKeySetSome(x) ||
+    isKeySetAllExceptSome(x)
+  );
 }

@@ -1,4 +1,4 @@
-import { arraysEqual } from "../arrays-equal";
+import { arraysEqual } from "../../..";
 
 test("arraysEqual([], [])", () => {
   expect(arraysEqual([], [])).toBe(true);

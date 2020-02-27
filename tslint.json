@@ -1,13 +1,10 @@
 {
   "extends": ["tslint:latest", "tslint-config-prettier", "tslint-immutable"],
   "rules": {
+    "object-literal-sort-keys": [false],
     "interface-name": [true, "always-prefix"],
     "variable-name": {
-      "options": [
-        "ban-keywords",
-        "check-format",
-        "allow-leading-underscore"
-      ]
+      "options": ["ban-keywords", "check-format", "allow-leading-underscore"]
     },
     "curly": [true, "ignore-same-line"],
     // TODO: allow devDependencies only in **/*.spec.ts files:

@@ -1,4 +1,4 @@
-import { uniqueArray } from "../unique-array";
+import { uniqueArray } from "../../..";
 
 test("uniqueArray([])", () => {
   expect(uniqueArray([])).toEqual([]);

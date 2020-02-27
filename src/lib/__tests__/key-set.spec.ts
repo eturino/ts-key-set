@@ -77,3 +77,11 @@ test("allExceptSomeForced([1, 2, 3])", () => {
   expect((keySet as KeySetAllExceptSome<number>).keys).toEqual([1, 2, 3]);
   expect(keySet.type).toEqual(KeySetTypes.allExceptSome);
 });
+
+test("new KeySetSome([]) throws error", () => {
+  expect(() => new KeySetSome([])).toThrowError(InvalidEmptySetError);
+});
+
+test("new KeySetAllExceptSome([]) throws error", () => {
+  expect(() => new KeySetAllExceptSome([])).toThrowError(InvalidEmptySetError);
+});

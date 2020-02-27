@@ -1,4 +1,10 @@
-import { Key, KeySet, KeySetTypes } from "./-base";
+import { NonEmptyArray } from "../util/array-types";
+import {
+  Key,
+  KeySet,
+  KeySetAllExceptSomeSerialized,
+  KeySetTypes
+} from "./-base";
 import { KeySetByKeys } from "./-by-keys";
 import { all, KeySetAll } from "./all";
 import { InvalidEmptySetError } from "./invalid-empty-set-error";
@@ -7,6 +13,10 @@ import { KeySetSome, some } from "./some";
 
 export class KeySetAllExceptSome<T extends Key> extends KeySetByKeys<T> {
   public readonly type = KeySetTypes.allExceptSome;
+
+  public serialized(): KeySetAllExceptSomeSerialized<T> {
+    return { type: this.type, elements: [...this.keys] as NonEmptyArray };
+  }
 
   public representsAll() {
     return false;

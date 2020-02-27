@@ -1,4 +1,5 @@
-import { Key, KeySet, KeySetTypes } from "./-base";
+import { NonEmptyArray } from "../util/array-types";
+import { Key, KeySet, KeySetSomeSerialized, KeySetTypes } from "./-base";
 import { KeySetByKeys } from "./-by-keys";
 import { KeySetAll } from "./all";
 import { KeySetAllExceptSome } from "./all-except-some";
@@ -7,6 +8,10 @@ import { KeySetNone, none } from "./none";
 
 export class KeySetSome<T extends Key> extends KeySetByKeys<T> {
   public readonly type = KeySetTypes.some;
+
+  public serialized(): KeySetSomeSerialized<T> {
+    return { type: this.type, elements: [...this.keys] as NonEmptyArray };
+  }
 
   public representsAll() {
     return false;

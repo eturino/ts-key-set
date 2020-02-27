@@ -1,17 +1,34 @@
+import { NonEmptyArray } from "../util/array-types";
 import { arraysEqual } from "../util/arrays-equal";
 import { uniqueArray } from "../util/unique-array";
-import { IKeySetClass, Key, KeySet, KeySetTypes } from "./-base";
+import {
+  IKeySetClass,
+  Key,
+  KeySet,
+  KeySetAllExceptSomeSerialized,
+  KeySetSomeSerialized,
+  KeySetTypes
+} from "./-base";
 import { KeySetAllExceptSome } from "./all-except-some";
+import { InvalidEmptySetError } from "./invalid-empty-set-error";
 import { KeySetSome } from "./some";
 
 export abstract class KeySetByKeys<T extends Key> implements IKeySetClass {
   public abstract readonly type: KeySetTypes.allExceptSome | KeySetTypes.some;
 
-  private readonly keySet: T[];
+  private readonly keySet: NonEmptyArray<T>;
 
   constructor(keys: T[] | ReadonlyArray<T>) {
-    this.keySet = uniqueArray(keys).sort();
+    const keySet = uniqueArray(keys).sort();
+    if (keySet.length === 0) {
+      throw new InvalidEmptySetError();
+    }
+    this.keySet = keySet as NonEmptyArray<T>;
   }
+
+  public abstract serialized():
+    | KeySetAllExceptSomeSerialized<T>
+    | KeySetSomeSerialized<T>;
 
   public abstract representsAll(): boolean;
 

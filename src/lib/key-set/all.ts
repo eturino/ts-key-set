@@ -1,4 +1,10 @@
-import { IKeySetClass, Key, KeySet, KeySetTypes } from "./-base";
+import {
+  IKeySetClass,
+  Key,
+  KeySet,
+  KeySetAllSerialized,
+  KeySetTypes
+} from "./-base";
 import { KeySetAllExceptSome } from "./all-except-some";
 import { InvalidKeySetError } from "./invalid-key-set-error";
 import { KeySetNone } from "./none";
@@ -6,6 +12,10 @@ import { KeySetSome } from "./some";
 
 export class KeySetAll implements IKeySetClass {
   public readonly type = KeySetTypes.all;
+
+  public serialized(): KeySetAllSerialized {
+    return { type: this.type };
+  }
 
   public representsAll() {
     return true;

@@ -129,6 +129,43 @@ Returns a new KeySet with the intersection of both Sets `(A ∩ B)`, representin
 const diffKeySet = keySet.intersect(other);
 ```
 
+## Serialization
+
+The Serialized representation of the KeySet (`KeySetSerialized`) is a plain object with `type` and optionally `elements`.
+
+- `{ type: "ALL" }`
+- `{ type: "NONE" }`
+- `{ type: "SOME", elements: [1, 2, 3] }`
+- `{ type: "ALL_EXCEPT_SOME", elements: [1, 2, 3] }`
+
+There are 2 ways of getting the serialized representation of the keySet
+
+- `keySet.serialized()`
+- `serializeKeySet(keySet)`
+
+## Parsing
+
+We can create a KeySet from the serialized representation
+
+- `parseKeySet(serialized)`
+
+we can also pass the actual KeySet to the `parseKeySet`, which will return the given KeySet without touching it.
+
+## Type Predicates
+
+There are type predicates exposed, one for each KeySet type and the other for each KeySetSerialized.
+
+- `isKeySet(x): x is KeySet`
+- `isKeySetAll(x): x is KeySetAll`
+- `isKeySetAllExceptSome(x): x is KeySetAllExceptSome`
+- `isKeySetNone(x): x is KeySetNone`
+- `isKeySetSome(x): x is KeySetSome`
+- `isKeySetSerialized(x): x is KeySetSerialized`
+- `isKeySetAllSerialized(x): x is KeySetAllSerialized`
+- `isKeySetAllExceptSomeSerialized(x): x is KeySetAllExceptSomeSerialized`
+- `isKeySetNoneSerialized(x): x is KeySetNoneSerialized`
+- `isKeySetSomeSerialized(x): x is KeySetSomeSerialized`
+
 ## Util functions
 
 The lib also exports the 2 util functions used in the code
@@ -137,3 +174,27 @@ The lib also exports the 2 util functions used in the code
   - **adapted from <https://medium.com/@jakubsynowiec/unique-array-values-in-javascript-7c932682766c> (credit to Jakub Synowiec)**
 - `arraysEqual(a, b)`: returns true if the 2 arrays have the same keys
   - **adapted from <https://stackoverflow.com/questions/3115982/how-to-check-if-two-arrays-are-equal-with-javascript> (credit to [enyo](https://stackoverflow.com/users/170851/enyo))**
+
+## Util array types
+
+The lib also exports 2 util array types `EmptyArray<T>` and `NonEmptyArray<T>`, with their corresponding type predicates `isEmptyArray()`, and `isNonEmptyArray()`.
+
+```ts
+const lists: Array<NonEmptyArray<any>> = [
+  [1], // ok
+  [] // error
+];
+
+const lists2: Array<EmptyArray<any>> = [
+  [], // ok
+  [1] // error
+];
+
+const a: string[] = [];
+isEmptyArray(a); // => true (also sets that a is EmptyArray<string>)
+isNonEmptyArray(a); // => false
+
+const b: string[] = ["something"];
+isEmptyArray(b); // => false
+isNonEmptyArray(b); // => true (also sets that a is NonEmptyArray<string>)
+```
