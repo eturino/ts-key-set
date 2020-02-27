@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/eturino/ts-key-set/compare/v2.0.0...v2.1.0) (2020-02-27)
+
+
+### Features
+
+* type predicates + serialize and parsing functions ([03f769d](https://github.com/eturino/ts-key-set/commit/03f769d719ee3b4782f9d3dc4c4610a320f9c948))
+
 ## [2.0.0](https://github.com/eturino/ts-key-set/compare/v1.5.1...v2.0.0) (2020-02-25)
 
 
