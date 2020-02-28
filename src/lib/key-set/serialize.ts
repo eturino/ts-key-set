@@ -65,6 +65,21 @@ export function isKeySetAllExceptSomeSerialized(
 }
 
 export function serializeKeySet<T extends Key>(
+  x: KeySetAllSerialized | KeySetAll
+): KeySetAllSerialized;
+export function serializeKeySet<T extends Key>(
+  x: KeySetNoneSerialized | KeySetNone
+): KeySetNoneSerialized;
+export function serializeKeySet<T extends Key>(
+  x: KeySetSomeSerialized<T> | KeySetSome<T>
+): KeySetSomeSerialized<T>;
+export function serializeKeySet<T extends Key>(
+  x: KeySetAllExceptSomeSerialized<T> | KeySetAllExceptSome<T>
+): KeySetAllExceptSomeSerialized<T>;
+export function serializeKeySet<T extends Key>(
+  x: KeySetSerialized<T> | KeySet<T>
+): KeySetSerialized<T>;
+export function serializeKeySet<T extends Key>(
   keySet: KeySet<T> | KeySetSerialized<T>
 ): KeySetSerialized<T> {
   if (isKeySet(keySet)) {
