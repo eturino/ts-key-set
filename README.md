@@ -185,6 +185,17 @@ There are type predicates exposed, one for each KeySet type and the other for ea
 - `isKeySetNoneSerialized(x): x is KeySetNoneSerialized`
 - `isKeySetSomeSerialized(x): x is KeySetSomeSerialized`
 
+We also have type predicates based on the type of the elements, for serialized and KeySet.
+
+- `isKeySetOfNumbers`
+- `isKeySetOfStrings`
+- `isKeySetOfNumberKeyLabels`
+- `isKeySetOfStringKeyLabels`
+- `isKeySetSerializedOfNumbers`
+- `isKeySetSerializedOfStrings`
+- `isKeySetSerializedOfNumberKeyLabels`
+- `isKeySetSerializedOfStringKeyLabels`
+
 ## Util functions
 
 The lib also exports the 2 util functions used in the code

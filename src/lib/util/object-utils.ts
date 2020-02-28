@@ -16,7 +16,7 @@ export interface IKeyLabel<K extends string | number> {
  * @internal
  * @hidden
  */
-function isKeyLabelBase(x: any): boolean {
+export function isKeyLabelBase(x: any): boolean {
   if (!isObject(x)) return false;
   return typeof x.label === "string";
 }

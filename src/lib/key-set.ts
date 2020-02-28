@@ -20,6 +20,18 @@ import {
   allExceptSomeForced,
   KeySetAllExceptSome
 } from "./key-set/all-except-some";
+import {
+  isKeySetOfNumberKeyLabels,
+  isKeySetOfNumbers,
+  isKeySetOfStringKeyLabels,
+  isKeySetOfStrings
+} from "./key-set/check-element-type";
+import {
+  isKeySetSerializedOfNumberKeyLabels,
+  isKeySetSerializedOfNumbers,
+  isKeySetSerializedOfStringKeyLabels,
+  isKeySetSerializedOfStrings
+} from "./key-set/check-serialized-element-type";
 import { InvalidEmptySetError } from "./key-set/invalid-empty-set-error";
 import { InvalidKeySetError } from "./key-set/invalid-key-set-error";
 import { KeySetNone, none } from "./key-set/none";
@@ -94,5 +106,14 @@ export {
   // utils
   isValidKey,
   isKeyLabel,
-  isObject
+  isObject,
+  // check elements
+  isKeySetOfStrings,
+  isKeySetOfNumbers,
+  isKeySetOfStringKeyLabels,
+  isKeySetOfNumberKeyLabels,
+  isKeySetSerializedOfNumberKeyLabels,
+  isKeySetSerializedOfNumbers,
+  isKeySetSerializedOfStringKeyLabels,
+  isKeySetSerializedOfStrings
 };
