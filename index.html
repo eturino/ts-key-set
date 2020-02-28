@@ -91,6 +91,13 @@
 					<li><code>KeySetSome</code>: represents a concrete set (<code>A ⊂ 𝕌</code>)</li>
 					<li><code>KeySetAllExceptSome</code>: represents the complementary of a set, all the elements except the given ones (<code>A&#39; = {x ∈ 𝕌 | x ∉ A}</code>) _(see <a href="https://en.wikipedia.org/wiki/Complement_(set*theory)">Complement in Wikipedia</a>)*</li>
 				</ul>
+				<p>We can have a KeySet of:</p>
+				<ul>
+					<li><code>string</code>s</li>
+					<li><code>number</code>s</li>
+					<li>objects with <code>key</code> (<code>string</code> or <code>number</code>) and <code>label</code> (<code>string</code>)</li>
+				</ul>
+				<p>All elements have to have be of the same type.</p>
 				<a href="#creation-codeallcode-codenonecode-codesomecode-codeallexceptsomecode-codesomeforcedcode-codeallexceptsomeforcedcode" id="creation-codeallcode-codenonecode-codesomecode-codeallexceptsomecode-codesomeforcedcode-codeallexceptsomeforcedcode" style="color: inherit; text-decoration: none;">
 					<h3>Creation: <code>all()</code>, <code>none()</code>, <code>some([...])</code>, <code>allExceptSome([...])</code>, <code>someForced([...])</code>, <code>allExceptSomeForced([...])</code></h3>
 				</a>
@@ -118,6 +125,14 @@ someForced([]); <span class="hljs-comment">// throws an InvalidEmptySetError</sp
 
 allExceptSomeForced([<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]); <span class="hljs-comment">// returns a new instance of KeySetAllExceptSome with keys [1, 2, 3] (sorted, unique)</span>
 allExceptSomeForced([]); <span class="hljs-comment">// throws an InvalidEmptySetError</span></code></pre>
+				<a href="#codeelementscode-aliased-with-codekeyscode" id="codeelementscode-aliased-with-codekeyscode" style="color: inherit; text-decoration: none;">
+					<h3><code>.elements</code> (aliased with <code>.keys</code>)</h3>
+				</a>
+				<p>Both getters return a copy of the internal list of elements.</p>
+				<pre><code>some([<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]).elements; <span class="hljs-comment">// =&gt; [1, 2, 3]</span>
+some([<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]).keys; <span class="hljs-comment">// =&gt; [1, 2, 3]</span>
+allExceptSome([<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]).elements; <span class="hljs-comment">// =&gt; [1, 2, 3]</span>
+allExceptSome([<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]).keys; <span class="hljs-comment">// =&gt; [1, 2, 3]</span></code></pre>
 				<a href="#codetypecode" id="codetypecode" style="color: inherit; text-decoration: none;">
 					<h3><code>type</code></h3>
 				</a>
@@ -285,6 +300,9 @@ isNonEmptyArray(b); <span class="hljs-comment">// =&gt; true (also sets that a i
 					<li class=" tsd-kind-class tsd-has-type-parameter">
 						<a href="classes/keysetsome.html" class="tsd-kind-icon">Key<wbr>Set<wbr>Some</a>
 					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/ikeylabel.html" class="tsd-kind-icon">IKey<wbr>Label</a>
+					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/ikeysetclass.html" class="tsd-kind-icon">IKey<wbr>Set<wbr>Class</a>
 					</li>
@@ -331,6 +349,9 @@ isNonEmptyArray(b); <span class="hljs-comment">// =&gt; true (also sets that a i
 						<a href="globals.html#isemptyarray" class="tsd-kind-icon">is<wbr>Empty<wbr>Array</a>
 					</li>
 					<li class=" tsd-kind-function">
+						<a href="globals.html#iskeylabel" class="tsd-kind-icon">is<wbr>Key<wbr>Label</a>
+					</li>
+					<li class=" tsd-kind-function">
 						<a href="globals.html#iskeyset" class="tsd-kind-icon">is<wbr>Key<wbr>Set</a>
 					</li>
 					<li class=" tsd-kind-function">
@@ -364,7 +385,7 @@ isNonEmptyArray(b); <span class="hljs-comment">// =&gt; true (also sets that a i
 						<a href="globals.html#isnonemptyarray" class="tsd-kind-icon">is<wbr>Non<wbr>Empty<wbr>Array</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#isobject" class="tsd-kind-icon">is<wbr>Object</a>
+						<a href="globals.html#isvalidkey" class="tsd-kind-icon">is<wbr>Valid<wbr>Key</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#none" class="tsd-kind-icon">none</a>
@@ -386,6 +407,12 @@ isNonEmptyArray(b); <span class="hljs-comment">// =&gt; true (also sets that a i
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="globals.html#uniquearray" class="tsd-kind-icon">unique<wbr>Array</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#uniquekeylabelarray" class="tsd-kind-icon">unique<wbr>Key<wbr>Label<wbr>Array</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#uniquekeys" class="tsd-kind-icon">unique<wbr>Keys</a>
 					</li>
 				</ul>
 			</nav>

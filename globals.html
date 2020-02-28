@@ -89,6 +89,7 @@
 						<section class="tsd-index-section ">
 							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/ikeylabel.html" class="tsd-kind-icon">IKey<wbr>Label</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/ikeysetclass.html" class="tsd-kind-icon">IKey<wbr>Set<wbr>Class</a></li>
 							</ul>
 						</section>
@@ -114,6 +115,7 @@
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#allexceptsomeforced" class="tsd-kind-icon">all<wbr>Except<wbr>Some<wbr>Forced</a></li>
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#arraysequal" class="tsd-kind-icon">arrays<wbr>Equal</a></li>
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#isemptyarray" class="tsd-kind-icon">is<wbr>Empty<wbr>Array</a></li>
+								<li class="tsd-kind-function"><a href="globals.html#iskeylabel" class="tsd-kind-icon">is<wbr>Key<wbr>Label</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#iskeyset" class="tsd-kind-icon">is<wbr>Key<wbr>Set</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#iskeysetall" class="tsd-kind-icon">is<wbr>Key<wbr>Set<wbr>All</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#iskeysetallexceptsome" class="tsd-kind-icon">is<wbr>Key<wbr>Set<wbr>All<wbr>Except<wbr>Some</a></li>
@@ -125,7 +127,7 @@
 								<li class="tsd-kind-function"><a href="globals.html#iskeysetsome" class="tsd-kind-icon">is<wbr>Key<wbr>Set<wbr>Some</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#iskeysetsomeserialized" class="tsd-kind-icon">is<wbr>Key<wbr>Set<wbr>Some<wbr>Serialized</a></li>
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#isnonemptyarray" class="tsd-kind-icon">is<wbr>Non<wbr>Empty<wbr>Array</a></li>
-								<li class="tsd-kind-function"><a href="globals.html#isobject" class="tsd-kind-icon">is<wbr>Object</a></li>
+								<li class="tsd-kind-function"><a href="globals.html#isvalidkey" class="tsd-kind-icon">is<wbr>Valid<wbr>Key</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#none" class="tsd-kind-icon">none</a></li>
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#parsekeyset" class="tsd-kind-icon">parse<wbr>Key<wbr>Set</a></li>
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#sameelements" class="tsd-kind-icon">same<wbr>Elements</a></li>
@@ -133,6 +135,8 @@
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#some" class="tsd-kind-icon">some</a></li>
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#someforced" class="tsd-kind-icon">some<wbr>Forced</a></li>
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#uniquearray" class="tsd-kind-icon">unique<wbr>Array</a></li>
+								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#uniquekeylabelarray" class="tsd-kind-icon">unique<wbr>Key<wbr>Label<wbr>Array</a></li>
+								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#uniquekeys" class="tsd-kind-icon">unique<wbr>Keys</a></li>
 							</ul>
 						</section>
 					</div>
@@ -146,7 +150,7 @@
 					<div class="tsd-signature tsd-kind-icon">Empty<wbr>Array&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>length<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/util/array-types.ts#L2">src/lib/util/array-types.ts:2</a></li>
+							<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/util/array-types.ts#L2">src/lib/util/array-types.ts:2</a></li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -159,10 +163,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias">
 					<a name="key" class="tsd-anchor"></a>
 					<h3>Key</h3>
-					<div class="tsd-signature tsd-kind-icon">Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<div class="tsd-signature tsd-kind-icon">Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><a href="interfaces/ikeylabel.html" class="tsd-signature-type">IKeyLabel</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><a href="interfaces/ikeylabel.html" class="tsd-signature-type">IKeyLabel</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/-base.ts#L8">src/lib/key-set/-base.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/-base.ts#L9">src/lib/key-set/-base.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -172,7 +176,7 @@
 					<div class="tsd-signature tsd-kind-icon">Key<wbr>Set&lt;T&gt;<span class="tsd-signature-symbol">:</span> <a href="classes/keysetall.html" class="tsd-signature-type">KeySetAll</a><span class="tsd-signature-symbol"> | </span><a href="classes/keysetnone.html" class="tsd-signature-type">KeySetNone</a><span class="tsd-signature-symbol"> | </span><a href="classes/keysetsome.html" class="tsd-signature-type">KeySetSome</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><a href="classes/keysetallexceptsome.html" class="tsd-signature-type">KeySetAllExceptSome</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/-base.ts#L10">src/lib/key-set/-base.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/-base.ts#L16">src/lib/key-set/-base.ts:16</a></li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -188,7 +192,7 @@
 					<div class="tsd-signature tsd-kind-icon">Key<wbr>Set<wbr>All<wbr>Except<wbr>Some<wbr>Serialized&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>elements<span class="tsd-signature-symbol">: </span><a href="globals.html#nonemptyarray" class="tsd-signature-type">NonEmptyArray</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><a href="enums/keysettypes.html#allexceptsome" class="tsd-signature-type">allExceptSome</a><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/-base.ts#L39">src/lib/key-set/-base.ts:39</a></li>
+							<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/-base.ts#L45">src/lib/key-set/-base.ts:45</a></li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -215,7 +219,7 @@
 					<div class="tsd-signature tsd-kind-icon">Key<wbr>Set<wbr>All<wbr>Serialized&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>type<span class="tsd-signature-symbol">: </span><a href="enums/keysettypes.html#all" class="tsd-signature-type">all</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>elements<span class="tsd-signature-symbol">: </span><a href="globals.html#emptyarray" class="tsd-signature-type">EmptyArray</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><a href="enums/keysettypes.html#all" class="tsd-signature-type">all</a><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/-base.ts#L26">src/lib/key-set/-base.ts:26</a></li>
+							<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/-base.ts#L32">src/lib/key-set/-base.ts:32</a></li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -231,7 +235,7 @@
 					<div class="tsd-signature tsd-kind-icon">Key<wbr>Set<wbr>None<wbr>Serialized&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>type<span class="tsd-signature-symbol">: </span><a href="enums/keysettypes.html#none" class="tsd-signature-type">none</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>elements<span class="tsd-signature-symbol">: </span><a href="globals.html#emptyarray" class="tsd-signature-type">EmptyArray</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><a href="enums/keysettypes.html#none" class="tsd-signature-type">none</a><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/-base.ts#L30">src/lib/key-set/-base.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/-base.ts#L36">src/lib/key-set/-base.ts:36</a></li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -247,7 +251,7 @@
 					<div class="tsd-signature tsd-kind-icon">Key<wbr>Set<wbr>Serialized&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>type<span class="tsd-signature-symbol">: </span><a href="enums/keysettypes.html" class="tsd-signature-type">KeySetTypes</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><a href="globals.html#keysetallserialized" class="tsd-signature-type">KeySetAllSerialized</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><a href="globals.html#keysetnoneserialized" class="tsd-signature-type">KeySetNoneSerialized</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><a href="globals.html#keysetsomeserialized" class="tsd-signature-type">KeySetSomeSerialized</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><a href="globals.html#keysetallexceptsomeserialized" class="tsd-signature-type">KeySetAllExceptSomeSerialized</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/-base.ts#L44">src/lib/key-set/-base.ts:44</a></li>
+							<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/-base.ts#L50">src/lib/key-set/-base.ts:50</a></li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -263,7 +267,7 @@
 					<div class="tsd-signature tsd-kind-icon">Key<wbr>Set<wbr>Some<wbr>Serialized&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>elements<span class="tsd-signature-symbol">: </span><a href="globals.html#nonemptyarray" class="tsd-signature-type">NonEmptyArray</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><a href="enums/keysettypes.html#some" class="tsd-signature-type">some</a><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/-base.ts#L34">src/lib/key-set/-base.ts:34</a></li>
+							<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/-base.ts#L40">src/lib/key-set/-base.ts:40</a></li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -290,7 +294,7 @@
 					<div class="tsd-signature tsd-kind-icon">Non<wbr>Empty<wbr>Array&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/util/array-types.ts#L1">src/lib/util/array-types.ts:1</a></li>
+							<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/util/array-types.ts#L1">src/lib/util/array-types.ts:1</a></li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -313,7 +317,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/all.ts#L68">src/lib/key-set/all.ts:68</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/all.ts#L68">src/lib/key-set/all.ts:68</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="classes/keysetall.html" class="tsd-signature-type">KeySetAll</a></h4>
@@ -330,7 +334,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/all-except-some.ts#L113">src/lib/key-set/all-except-some.ts:113</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/all-except-some.ts#L113">src/lib/key-set/all-except-some.ts:113</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -367,7 +371,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/all-except-some.ts#L96">src/lib/key-set/all-except-some.ts:96</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/all-except-some.ts#L96">src/lib/key-set/all-except-some.ts:96</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -409,7 +413,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/util/arrays-equal.ts#L14">src/lib/util/arrays-equal.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/util/arrays-equal.ts#L14">src/lib/util/arrays-equal.ts:14</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -441,7 +445,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/util/array-types.ts#L4">src/lib/util/array-types.ts:4</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/util/array-types.ts#L4">src/lib/util/array-types.ts:4</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -461,6 +465,29 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="iskeylabel" class="tsd-anchor"></a>
+					<h3>is<wbr>Key<wbr>Label</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Key<wbr>Label<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">IKeyLabel</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">IKeyLabel</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/util/object-utils.ts#L24">src/lib/util/object-utils.ts:24</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>x: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">IKeyLabel</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">IKeyLabel</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
 					<a name="iskeyset" class="tsd-anchor"></a>
 					<h3>is<wbr>Key<wbr>Set</h3>
 					<ul class="tsd-signatures tsd-kind-function">
@@ -470,7 +497,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/-base.ts#L131">src/lib/key-set/-base.ts:131</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/-base.ts#L137">src/lib/key-set/-base.ts:137</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -493,7 +520,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/-base.ts#L115">src/lib/key-set/-base.ts:115</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/-base.ts#L121">src/lib/key-set/-base.ts:121</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -516,7 +543,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/-base.ts#L127">src/lib/key-set/-base.ts:127</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/-base.ts#L133">src/lib/key-set/-base.ts:133</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -539,7 +566,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/serialize.ts#L61">src/lib/key-set/serialize.ts:61</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/serialize.ts#L70">src/lib/key-set/serialize.ts:70</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -562,7 +589,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/serialize.ts#L43">src/lib/key-set/serialize.ts:43</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/serialize.ts#L52">src/lib/key-set/serialize.ts:52</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -585,7 +612,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/-base.ts#L119">src/lib/key-set/-base.ts:119</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/-base.ts#L125">src/lib/key-set/-base.ts:125</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -608,7 +635,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/serialize.ts#L49">src/lib/key-set/serialize.ts:49</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/serialize.ts#L58">src/lib/key-set/serialize.ts:58</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -631,7 +658,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/serialize.ts#L23">src/lib/key-set/serialize.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/serialize.ts#L41">src/lib/key-set/serialize.ts:41</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -654,7 +681,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/-base.ts#L123">src/lib/key-set/-base.ts:123</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/-base.ts#L129">src/lib/key-set/-base.ts:129</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -677,7 +704,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/serialize.ts#L55">src/lib/key-set/serialize.ts:55</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/serialize.ts#L64">src/lib/key-set/serialize.ts:64</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -700,7 +727,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/util/array-types.ts#L8">src/lib/util/array-types.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/util/array-types.ts#L8">src/lib/util/array-types.ts:8</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -720,25 +747,25 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function">
-					<a name="isobject" class="tsd-anchor"></a>
-					<h3>is<wbr>Object</h3>
+					<a name="isvalidkey" class="tsd-anchor"></a>
+					<h3>is<wbr>Valid<wbr>Key</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">is<wbr>Object<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Valid<wbr>Key<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">Key</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/serialize.ts#L18">src/lib/key-set/serialize.ts:18</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/-base.ts#L11">src/lib/key-set/-base.ts:11</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>value: <span class="tsd-signature-type">any</span></h5>
+									<h5>x: <span class="tsd-signature-type">any</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">Key</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -752,7 +779,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/none.ts#L53">src/lib/key-set/none.ts:53</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/none.ts#L53">src/lib/key-set/none.ts:53</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="classes/keysetnone.html" class="tsd-signature-type">KeySetNone</a></h4>
@@ -773,7 +800,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/serialize.ts#L96">src/lib/key-set/serialize.ts:96</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/serialize.ts#L105">src/lib/key-set/serialize.ts:105</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -793,7 +820,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/serialize.ts#L99">src/lib/key-set/serialize.ts:99</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/serialize.ts#L108">src/lib/key-set/serialize.ts:108</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -813,7 +840,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/serialize.ts#L102">src/lib/key-set/serialize.ts:102</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/serialize.ts#L111">src/lib/key-set/serialize.ts:111</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -833,7 +860,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/serialize.ts#L105">src/lib/key-set/serialize.ts:105</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/serialize.ts#L114">src/lib/key-set/serialize.ts:114</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -853,7 +880,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/serialize.ts#L108">src/lib/key-set/serialize.ts:108</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/serialize.ts#L117">src/lib/key-set/serialize.ts:117</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -882,7 +909,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/util/arrays-equal.ts#L5">src/lib/util/arrays-equal.ts:5</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/util/arrays-equal.ts#L5">src/lib/util/arrays-equal.ts:5</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -918,7 +945,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/serialize.ts#L67">src/lib/key-set/serialize.ts:67</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/serialize.ts#L76">src/lib/key-set/serialize.ts:76</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -938,7 +965,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/serialize.ts#L70">src/lib/key-set/serialize.ts:70</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/serialize.ts#L79">src/lib/key-set/serialize.ts:79</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -958,7 +985,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/serialize.ts#L73">src/lib/key-set/serialize.ts:73</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/serialize.ts#L82">src/lib/key-set/serialize.ts:82</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -978,7 +1005,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/serialize.ts#L76">src/lib/key-set/serialize.ts:76</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/serialize.ts#L85">src/lib/key-set/serialize.ts:85</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -998,7 +1025,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/serialize.ts#L79">src/lib/key-set/serialize.ts:79</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/serialize.ts#L88">src/lib/key-set/serialize.ts:88</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1027,7 +1054,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/some.ts#L106">src/lib/key-set/some.ts:106</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/some.ts#L106">src/lib/key-set/some.ts:106</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1064,7 +1091,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/key-set/some.ts#L89">src/lib/key-set/some.ts:89</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/key-set/some.ts#L89">src/lib/key-set/some.ts:89</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1106,13 +1133,71 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/28ee65f/src/lib/util/unique-array.ts#L3">src/lib/util/unique-array.ts:3</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/util/unique-array.ts#L5">src/lib/util/unique-array.ts:5</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
 									<h4>T</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>source: <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ReadonlyArray</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter">
+					<a name="uniquekeylabelarray" class="tsd-anchor"></a>
+					<h3>unique<wbr>Key<wbr>Label<wbr>Array</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">unique<wbr>Key<wbr>Label<wbr>Array&lt;K&gt;<span class="tsd-signature-symbol">(</span>source<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/ikeylabel.html" class="tsd-signature-type">IKeyLabel</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ReadonlyArray</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/ikeylabel.html" class="tsd-signature-type">IKeyLabel</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/ikeylabel.html" class="tsd-signature-type">IKeyLabel</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/util/unique-array.ts#L18">src/lib/util/unique-array.ts:18</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>K<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>source: <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/ikeylabel.html" class="tsd-signature-type">IKeyLabel</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ReadonlyArray</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/ikeylabel.html" class="tsd-signature-type">IKeyLabel</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/ikeylabel.html" class="tsd-signature-type">IKeyLabel</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter">
+					<a name="uniquekeys" class="tsd-anchor"></a>
+					<h3>unique<wbr>Keys</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">unique<wbr>Keys&lt;T&gt;<span class="tsd-signature-symbol">(</span>source<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ReadonlyArray</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/22e7a5d/src/lib/util/unique-array.ts#L34">src/lib/util/unique-array.ts:34</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T<span class="tsd-signature-symbol">: </span><a href="globals.html#key" class="tsd-signature-type">Key</a></h4>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1162,6 +1247,9 @@
 					<li class=" tsd-kind-class tsd-has-type-parameter">
 						<a href="classes/keysetsome.html" class="tsd-kind-icon">Key<wbr>Set<wbr>Some</a>
 					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/ikeylabel.html" class="tsd-kind-icon">IKey<wbr>Label</a>
+					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/ikeysetclass.html" class="tsd-kind-icon">IKey<wbr>Set<wbr>Class</a>
 					</li>
@@ -1208,6 +1296,9 @@
 						<a href="globals.html#isemptyarray" class="tsd-kind-icon">is<wbr>Empty<wbr>Array</a>
 					</li>
 					<li class=" tsd-kind-function">
+						<a href="globals.html#iskeylabel" class="tsd-kind-icon">is<wbr>Key<wbr>Label</a>
+					</li>
+					<li class=" tsd-kind-function">
 						<a href="globals.html#iskeyset" class="tsd-kind-icon">is<wbr>Key<wbr>Set</a>
 					</li>
 					<li class=" tsd-kind-function">
@@ -1241,7 +1332,7 @@
 						<a href="globals.html#isnonemptyarray" class="tsd-kind-icon">is<wbr>Non<wbr>Empty<wbr>Array</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#isobject" class="tsd-kind-icon">is<wbr>Object</a>
+						<a href="globals.html#isvalidkey" class="tsd-kind-icon">is<wbr>Valid<wbr>Key</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#none" class="tsd-kind-icon">none</a>
@@ -1263,6 +1354,12 @@
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="globals.html#uniquearray" class="tsd-kind-icon">unique<wbr>Array</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#uniquekeylabelarray" class="tsd-kind-icon">unique<wbr>Key<wbr>Label<wbr>Array</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#uniquekeys" class="tsd-kind-icon">unique<wbr>Keys</a>
 					</li>
 				</ul>
 			</nav>
