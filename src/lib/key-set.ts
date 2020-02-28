@@ -4,6 +4,7 @@ import {
   isKeySetAllExceptSome,
   isKeySetNone,
   isKeySetSome,
+  isValidKey,
   Key,
   KeySet,
   KeySetAllExceptSomeSerialized,
@@ -39,7 +40,8 @@ import {
   NonEmptyArray
 } from "./util/array-types";
 import { arraysEqual } from "./util/arrays-equal";
-import { uniqueArray } from "./util/unique-array";
+import { IKeyLabel, isKeyLabel, isObject } from "./util/object-utils";
+import { uniqueArray, uniqueKeyLabelArray } from "./util/unique-array";
 
 export {
   // builders
@@ -61,6 +63,7 @@ export {
   KeySetAllSerialized,
   KeySetNoneSerialized,
   KeySetSomeSerialized,
+  IKeyLabel,
   InvalidKeySetError,
   InvalidEmptySetError,
   // enums
@@ -70,6 +73,7 @@ export {
   parseKeySet,
   // util functions
   uniqueArray,
+  uniqueKeyLabelArray,
   arraysEqual,
   // util types
   EmptyArray,
@@ -86,5 +90,9 @@ export {
   isKeySetAllSerialized,
   isKeySetNoneSerialized,
   isKeySetSomeSerialized,
-  isKeySetAllExceptSomeSerialized
+  isKeySetAllExceptSomeSerialized,
+  // utils
+  isValidKey,
+  isKeyLabel,
+  isObject
 };

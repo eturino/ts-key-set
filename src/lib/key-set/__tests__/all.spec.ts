@@ -1,5 +1,4 @@
-import { KeySetAll } from "../all";
-import { KeySetNone } from "../none";
+import { KeySetAll, KeySetNone } from "../../..";
 
 const keySet = new KeySetAll();
 

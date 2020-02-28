@@ -1,6 +1,6 @@
 import { NonEmptyArray } from "../util/array-types";
 import { arraysEqual } from "../util/arrays-equal";
-import { uniqueArray } from "../util/unique-array";
+import { uniqueKeys } from "../util/unique-array";
 import {
   IKeySetClass,
   Key,
@@ -16,14 +16,14 @@ import { KeySetSome } from "./some";
 export abstract class KeySetByKeys<T extends Key> implements IKeySetClass {
   public abstract readonly type: KeySetTypes.allExceptSome | KeySetTypes.some;
 
-  private readonly keySet: NonEmptyArray<T>;
+  private readonly _elements: NonEmptyArray<T>;
 
   constructor(keys: T[] | ReadonlyArray<T>) {
-    const keySet = uniqueArray(keys).sort();
-    if (keySet.length === 0) {
+    const elements = uniqueKeys(keys).sort();
+    if (elements.length === 0) {
       throw new InvalidEmptySetError();
     }
-    this.keySet = keySet as NonEmptyArray<T>;
+    this._elements = elements as NonEmptyArray<T>;
   }
 
   public abstract serialized():
@@ -49,7 +49,11 @@ export abstract class KeySetByKeys<T extends Key> implements IKeySetClass {
   public abstract intersect(other: KeySet): KeySet;
 
   public get keys(): T[] {
-    return [...this.keySet];
+    return this.elements;
+  }
+
+  public get elements(): T[] {
+    return [...this._elements];
   }
 
   protected hasSameKeys(other: KeySetByKeys<Key>): boolean {

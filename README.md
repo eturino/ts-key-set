@@ -28,6 +28,14 @@ We have 4 classes:
 - `KeySetSome`: represents a concrete set (`A ⊂ 𝕌`)
 - `KeySetAllExceptSome`: represents the complementary of a set, all the elements except the given ones (`A' = {x ∈ 𝕌 | x ∉ A}`) _(see [Complement in Wikipedia](https://en.wikipedia.org/wiki/Complement_\(set*theory\)))*
 
+We can have a KeySet of:
+
+- `string`s
+- `number`s
+- objects with `key` (`string` or `number`) and `label` (`string`)
+
+All elements have to have be of the same type.
+
 ### Creation: `all()`, `none()`, `some([...])`, `allExceptSome([...])`, `someForced([...])`, `allExceptSomeForced([...])`
 
 Build your KeySets using the build functions
@@ -56,6 +64,17 @@ someForced([]); // throws an InvalidEmptySetError
 
 allExceptSomeForced([1, 3, 2, 3]); // returns a new instance of KeySetAllExceptSome with keys [1, 2, 3] (sorted, unique)
 allExceptSomeForced([]); // throws an InvalidEmptySetError
+```
+
+### `.elements` (aliased with `.keys`)
+
+Both getters return a copy of the internal list of elements.
+
+```
+some([1, 3, 2, 3]).elements; // => [1, 2, 3]
+some([1, 3, 2, 3]).keys; // => [1, 2, 3]
+allExceptSome([1, 3, 2, 3]).elements; // => [1, 2, 3]
+allExceptSome([1, 3, 2, 3]).keys; // => [1, 2, 3]
 ```
 
 ### `type`

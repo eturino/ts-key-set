@@ -1,11 +1,17 @@
 /* tslint:disable:interface-over-type-literal */
+import { IKeyLabel, isKeyLabel } from "../key-set";
 import { EmptyArray, NonEmptyArray } from "../util/array-types";
 import { KeySetAll } from "./all";
 import { KeySetAllExceptSome } from "./all-except-some";
 import { KeySetNone } from "./none";
 import { KeySetSome } from "./some";
 
-export type Key = string | number;
+export type Key = string | number | IKeyLabel<string> | IKeyLabel<number>;
+
+export function isValidKey(x: any): x is Key {
+  if (typeof x === "string" || typeof x === "number") return true;
+  return isKeyLabel(x);
+}
 
 export type KeySet<T extends Key = Key> =
   | KeySetAll

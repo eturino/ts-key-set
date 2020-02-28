@@ -1,5 +1,4 @@
-import { KeySetAllExceptSome } from "../all-except-some";
-import { KeySetSome } from "../some";
+import { KeySetAllExceptSome, KeySetSome } from "../../..";
 
 const keySet = new KeySetAllExceptSome([3, 1, 2, 3, 2, 1]); // => keys 1, 2, 3
 

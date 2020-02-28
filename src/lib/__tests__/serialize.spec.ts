@@ -345,6 +345,28 @@ describe("serialize KeySet", () => {
     });
   });
 
+  describe("some([{ key: 'a', label: 'A' }, { key: 'b', label: 'B' }])", () => {
+    const keySet = some([
+      { key: "a", label: "A" },
+      { key: "b", label: "B" }
+    ]);
+    const expected = {
+      type: KeySetTypes.some,
+      elements: [
+        { key: "a", label: "A" },
+        { key: "b", label: "B" }
+      ]
+    };
+
+    it("keySet.serialized()", () => {
+      expect(keySet.serialized()).toEqual(expected);
+    });
+
+    it("serializeKeySet(keySet)", () => {
+      expect(serializeKeySet(keySet)).toEqual(expected);
+    });
+  });
+
   describe("allExceptSome(['1', '2'])", () => {
     const keySet = allExceptSome(["1", "2"]);
     const expected = {
@@ -366,6 +388,28 @@ describe("serialize KeySet", () => {
     const expected = {
       type: KeySetTypes.allExceptSome,
       elements: [1, 2]
+    };
+
+    it("keySet.serialized()", () => {
+      expect(keySet.serialized()).toEqual(expected);
+    });
+
+    it("serializeKeySet(keySet)", () => {
+      expect(serializeKeySet(keySet)).toEqual(expected);
+    });
+  });
+
+  describe("allExceptSome([{ key: 'a', label: 'A' }, { key: 'b', label: 'B' }])", () => {
+    const keySet = allExceptSome([
+      { key: "a", label: "A" },
+      { key: "b", label: "B" }
+    ]);
+    const expected = {
+      type: KeySetTypes.allExceptSome,
+      elements: [
+        { key: "a", label: "A" },
+        { key: "b", label: "B" }
+      ]
     };
 
     it("keySet.serialized()", () => {

@@ -1,3 +1,4 @@
+import { isObject } from "../util/object-utils";
 import {
   isKeySet,
   Key,
@@ -15,29 +16,37 @@ import { InvalidKeySetError } from "./invalid-key-set-error";
 import { KeySetNone, none } from "./none";
 import { KeySetSome, some } from "./some";
 
-function isObject(value: any) {
-  const type = typeof value;
-  return !!value && type === "object";
+/**
+ * @hidden
+ * @internal
+ */
+function isValidKeySetAllNone(type: any, elements: any): boolean {
+  if (type !== KeySetTypes.all && type !== KeySetTypes.none) return false;
+
+  return !elements || (Array.isArray(elements) && elements.length === 0);
+}
+
+/**
+ * @hidden
+ * @internal
+ */
+function isValidKeySetElements(type: any, elements: any): boolean {
+  if (type !== KeySetTypes.some && type !== KeySetTypes.allExceptSome) {
+    return false;
+  }
+
+  return elements && Array.isArray(elements) && elements.length > 0;
 }
 
 export function isKeySetSerialized(given: any): given is KeySetSerialized {
   if (!isObject(given)) return false;
 
   const { type, elements } = given;
-  if (!type) return false;
 
-  if (type === KeySetTypes.all || type === KeySetTypes.none) {
-    if (!elements) return true;
-    if (!Array.isArray(elements)) return false;
-    return elements.length === 0;
-  }
-
-  if (type === KeySetTypes.some || type === KeySetTypes.allExceptSome) {
-    if (!elements || !Array.isArray(elements)) return false;
-    return elements.length > 0;
-  }
-
-  return false;
+  return (
+    isValidKeySetAllNone(type, elements) ||
+    isValidKeySetElements(type, elements)
+  );
 }
 
 export function isKeySetAllSerialized(
