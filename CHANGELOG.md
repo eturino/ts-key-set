@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/eturino/ts-key-set/compare/v2.1.0...v2.2.0) (2020-02-28)
+
+
+### Features
+
+* better types serializeKeySet ([28ee65f](https://github.com/eturino/ts-key-set/commit/28ee65f0ebab40e8cf6a6dee775e844742573583))
+
 ## [2.1.0](https://github.com/eturino/ts-key-set/compare/v2.0.0...v2.1.0) (2020-02-27)
 
 
