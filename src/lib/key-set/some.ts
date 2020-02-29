@@ -1,6 +1,7 @@
 import { NonEmptyArray } from "../util/array-types";
 import { Key, KeySet, KeySetSomeSerialized, KeySetTypes } from "./-base";
 import { KeySetByKeys } from "./-by-keys";
+import { KeySetGlobal } from "./-global";
 import { KeySetAll } from "./all";
 import { KeySetAllExceptSome } from "./all-except-some";
 import { InvalidEmptySetError } from "./invalid-empty-set-error";
@@ -41,12 +42,10 @@ export class KeySetSome<T extends Key> extends KeySetByKeys<T> {
     return other instanceof KeySetSome && this.hasSameKeys(other);
   }
 
-  public remove(other: KeySetNone): KeySetSome<T>;
-  public remove(other: KeySetAll): KeySetNone;
-  public remove(
-    other: KeySetAllExceptSome<T> | KeySetSome<T>
-  ): KeySetSome<T> | KeySetNone;
-  public remove(other: KeySet<T>): KeySetSome<T> | KeySetNone {
+  public remove(other: KeySetNone<T> | KeySetNone<Key>): KeySetSome<T>;
+  public remove(other: KeySetAll<T> | KeySetAll<Key>): KeySetNone<T>;
+  public remove(other: KeySetAllExceptSome<T> | KeySetSome<T>): KeySetSome<T> | KeySetNone<T>;
+  public remove(other: KeySet<T> | KeySetGlobal<Key>): KeySetSome<T> | KeySetNone {
     if (other instanceof KeySetSome) {
       return some(this.excludeKeys(other.keys));
     }
@@ -62,12 +61,10 @@ export class KeySetSome<T extends Key> extends KeySetByKeys<T> {
     return new KeySetNone();
   }
 
-  public intersect(other: KeySetAll): KeySetSome<T>;
-  public intersect(other: KeySetNone): KeySetNone;
-  public intersect(
-    other: KeySetSome<T> | KeySetAllExceptSome<T>
-  ): KeySetSome<T> | KeySetNone;
-  public intersect(other: KeySet<T>): KeySetSome<T> | KeySetNone {
+  public intersect(other: KeySetAll<T> | KeySetAll<Key>): KeySetSome<T>;
+  public intersect(other: KeySetNone<T> | KeySetNone<Key>): KeySetNone<T>;
+  public intersect(other: KeySetSome<T> | KeySetAllExceptSome<T>): KeySetSome<T> | KeySetNone<T>;
+  public intersect(other: KeySet<T> | KeySetGlobal<Key>): KeySetSome<T> | KeySetNone<T> {
     if (other instanceof KeySetAll) return new KeySetSome(this.keys);
 
     if (other instanceof KeySetSome) {
@@ -81,11 +78,11 @@ export class KeySetSome<T extends Key> extends KeySetByKeys<T> {
     return new KeySetNone();
   }
 
-  private intersectKeys(otherKeys: Key[]) {
+  private intersectKeys(otherKeys: T[]) {
     return [...this.keys].filter(key => otherKeys.includes(key));
   }
 
-  private excludeKeys(otherKeys: Key[]) {
+  private excludeKeys(otherKeys: T[]) {
     return [...this.keys].filter(key => !otherKeys.includes(key));
   }
 }
@@ -96,13 +93,9 @@ export class KeySetSome<T extends Key> extends KeySetByKeys<T> {
  * @param keys list of keys for the KeySet
  * @throws InvalidEmptySetError
  */
-export function someForced<T extends Key>(
-  keys: T[] | ReadonlyArray<T>
-): KeySetSome<T> {
+export function someForced<T extends Key>(keys: T[] | ReadonlyArray<T>): KeySetSome<T> {
   if (!keys.length) {
-    throw new InvalidEmptySetError(
-      "calling `someForced` with an empty list of keys"
-    );
+    throw new InvalidEmptySetError("calling `someForced` with an empty list of keys");
   }
 
   return new KeySetSome(keys);
@@ -113,10 +106,8 @@ export function someForced<T extends Key>(
  *
  * @param keys list of keys for the KeySet
  */
-export function some<T extends Key>(
-  keys: T[] | ReadonlyArray<T>
-): KeySetNone | KeySetSome<T> {
-  if (!keys.length) return none();
+export function some<T extends Key>(keys: T[] | ReadonlyArray<T>): KeySetNone<T> | KeySetSome<T> {
+  if (!keys.length) return none<T>();
 
   return someForced(keys);
 }

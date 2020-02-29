@@ -19,14 +19,14 @@ export function isValidKey(x: any): x is Key {
 }
 
 export type KeySet<T extends Key = Key> =
-  | KeySetAll
-  | KeySetNone
+  | KeySetAll<T>
+  | KeySetNone<T>
   | KeySetSome<T>
   | KeySetAllExceptSome<T>;
 
 export type KeyLabelSet<T extends string | number = string | number> =
-  | KeySetAll
-  | KeySetNone
+  | KeySetAll<IKeyLabel<T>>
+  | KeySetNone<IKeyLabel<T>>
   | KeySetSome<IKeyLabel<T>>
   | KeySetAllExceptSome<IKeyLabel<T>>;
 
@@ -146,10 +146,5 @@ export function isKeySetAllExceptSome(x: any): x is KeySetAllExceptSome<Key> {
 }
 
 export function isKeySet(x: any): x is KeySet {
-  return (
-    isKeySetAll(x) ||
-    isKeySetNone(x) ||
-    isKeySetSome(x) ||
-    isKeySetAllExceptSome(x)
-  );
+  return isKeySetAll(x) || isKeySetNone(x) || isKeySetSome(x) || isKeySetAllExceptSome(x);
 }

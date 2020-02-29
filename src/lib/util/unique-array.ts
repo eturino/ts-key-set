@@ -35,9 +35,7 @@ export function uniqueKeys<T extends Key>(source: T[] | ReadonlyArray<T>): T[] {
   if (!source || !source.length) return [];
 
   if (isKeyLabel(source[0])) {
-    return uniqueKeyLabelArray(
-      source as Array<IKeyLabel<string | number>>
-    ) as T[];
+    return uniqueKeyLabelArray(source as Array<IKeyLabel<string | number>>) as T[];
   }
 
   return uniqueArray(source);

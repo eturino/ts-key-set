@@ -10,12 +10,7 @@ describe("uniqueArray()", () => {
   });
 
   it('uniqueArray(["a", "c", "d", "c", "a", "b"])', () => {
-    expect(uniqueArray(["a", "c", "d", "c", "a", "b"])).toEqual([
-      "a",
-      "c",
-      "d",
-      "b"
-    ]);
+    expect(uniqueArray(["a", "c", "d", "c", "a", "b"])).toEqual(["a", "c", "d", "b"]);
   });
 });
 

@@ -9,6 +9,7 @@ import {
   KeySetSomeSerialized,
   KeySetTypes
 } from "./-base";
+import { KeySetGlobal } from "./-global";
 import { KeySetAllExceptSome } from "./all-except-some";
 import { InvalidEmptySetError } from "./invalid-empty-set-error";
 import { KeySetSome } from "./some";
@@ -26,9 +27,7 @@ export abstract class KeySetByKeys<T extends Key> implements IKeySetClass {
     this._elements = elements as NonEmptyArray<T>;
   }
 
-  public abstract serialized():
-    | KeySetAllExceptSomeSerialized<T>
-    | KeySetSomeSerialized<T>;
+  public abstract serialized(): KeySetAllExceptSomeSerialized<T> | KeySetSomeSerialized<T>;
 
   public abstract representsAll(): boolean;
 
@@ -44,9 +43,9 @@ export abstract class KeySetByKeys<T extends Key> implements IKeySetClass {
 
   public abstract isEqual(other: KeySet): boolean;
 
-  public abstract remove(other: KeySet): KeySet;
+  public abstract remove(other: KeySet | KeySetGlobal<Key>): KeySet;
 
-  public abstract intersect(other: KeySet): KeySet;
+  public abstract intersect(other: KeySet | KeySetGlobal<Key>): KeySet;
 
   public get keys(): T[] {
     return this.elements;

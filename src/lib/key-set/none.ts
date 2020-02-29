@@ -2,10 +2,10 @@ import { Key, KeySet, KeySetNoneSerialized, KeySetTypes } from "./-base";
 import { KeySetGlobal } from "./-global";
 import { KeySetAll } from "./all";
 
-export class KeySetNone<K extends Key = Key> extends KeySetGlobal<K> {
+export class KeySetNone<T extends Key = Key> extends KeySetGlobal<T> {
   public readonly type = KeySetTypes.none;
 
-  public serialized(): KeySetNoneSerialized {
+  public serialized(): KeySetNoneSerialized<T> {
     return { type: this.type };
   }
 
@@ -25,27 +25,27 @@ export class KeySetNone<K extends Key = Key> extends KeySetGlobal<K> {
     return false;
   }
 
-  public clone(): KeySetNone {
-    return new KeySetNone();
+  public clone(): KeySetNone<T> {
+    return new KeySetNone<T>();
   }
 
-  public invert(): KeySetAll {
-    return new KeySetAll();
+  public invert(): KeySetAll<T> {
+    return new KeySetAll<T>();
   }
 
   public isEqual(other: KeySet): boolean {
     return other.representsNone();
   }
 
-  public remove(_other: KeySet): KeySetNone {
-    return new KeySetNone();
+  public remove(_other: KeySet<T> | KeySetGlobal<Key>): KeySetNone<T> {
+    return new KeySetNone<T>();
   }
 
-  public intersect(_other: KeySet): KeySetNone {
-    return new KeySetNone();
+  public intersect(_other: KeySet | KeySetGlobal<Key>): KeySetNone<T> {
+    return new KeySetNone<T>();
   }
 }
 
-export function none(): KeySetNone {
-  return new KeySetNone();
+export function none<T extends Key = Key>(): KeySetNone<T> {
+  return new KeySetNone<T>();
 }

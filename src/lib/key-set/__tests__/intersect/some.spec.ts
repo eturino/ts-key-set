@@ -1,12 +1,7 @@
-import {
-  KeySetAll,
-  KeySetAllExceptSome,
-  KeySetNone,
-  KeySetSome
-} from "../../../..";
+import { KeySetAll, KeySetAllExceptSome, KeySetNone, KeySetSome } from "../../../..";
 
-const keySetAll = new KeySetAll();
-const keySetNone = new KeySetNone();
+const keySetAll = new KeySetAll<number>();
+const keySetNone = new KeySetNone<number>();
 
 const subSetKeys = [1, 2];
 const restKeys = [3];

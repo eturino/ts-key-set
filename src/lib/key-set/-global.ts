@@ -21,9 +21,7 @@ export abstract class KeySetGlobal<T extends Key> implements IKeySetClass {
     return [] as EmptyArray<T>;
   }
 
-  public abstract serialized():
-    | KeySetAllSerialized<T>
-    | KeySetNoneSerialized<T>;
+  public abstract serialized(): KeySetAllSerialized<T> | KeySetNoneSerialized<T>;
 
   public abstract representsAll(): boolean;
 
@@ -39,7 +37,7 @@ export abstract class KeySetGlobal<T extends Key> implements IKeySetClass {
 
   public abstract isEqual(other: KeySet): boolean;
 
-  public abstract remove(other: KeySet): KeySet;
+  public abstract remove(other: KeySet | KeySetGlobal<Key>): KeySet;
 
-  public abstract intersect(other: KeySet): KeySet;
+  public abstract intersect(other: KeySet | KeySetGlobal<Key>): KeySet;
 }

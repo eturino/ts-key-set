@@ -1,9 +1,4 @@
-import {
-  KeySetAll,
-  KeySetAllExceptSome,
-  KeySetNone,
-  KeySetSome
-} from "../../../..";
+import { KeySetAll, KeySetAllExceptSome, KeySetNone, KeySetSome } from "../../../..";
 
 const keySetAll = new KeySetAll();
 const keySetNone = new KeySetNone();

@@ -185,21 +185,15 @@ describe("serialize KeySet", () => {
     });
 
     it("isKeySetAllExceptSomeSerialized(allExceptSomeNumberSerialized): true", () => {
-      expect(
-        isKeySetAllExceptSomeSerialized(allExceptSomeNumberSerialized)
-      ).toBeTruthy();
+      expect(isKeySetAllExceptSomeSerialized(allExceptSomeNumberSerialized)).toBeTruthy();
     });
 
     it("isKeySetAllExceptSomeSerialized(allExceptSomeStringSerialized): true", () => {
-      expect(
-        isKeySetAllExceptSomeSerialized(allExceptSomeStringSerialized)
-      ).toBeTruthy();
+      expect(isKeySetAllExceptSomeSerialized(allExceptSomeStringSerialized)).toBeTruthy();
     });
 
     invalidSerialized.forEach(x => {
-      it(`isKeySetAllExceptSomeSerialized(${JSON.stringify(
-        x
-      )}) returns false`, () => {
+      it(`isKeySetAllExceptSomeSerialized(${JSON.stringify(x)}) returns false`, () => {
         expect(isKeySetAllExceptSomeSerialized(x)).toBeFalsy();
       });
     });
@@ -207,9 +201,7 @@ describe("serialize KeySet", () => {
 
   describe("isKeySetSerialized()", () => {
     validSerialized.forEach(x => {
-      it(`isKeySetSerialized(${JSON.stringify(
-        x
-      )}) returns true (and is a type predicate)`, () => {
+      it(`isKeySetSerialized(${JSON.stringify(x)}) returns true (and is a type predicate)`, () => {
         expect(isKeySetSerialized(x)).toBeTruthy();
       });
     });
@@ -224,9 +216,9 @@ describe("serialize KeySet", () => {
   describe("parseKeySet(invalidKeySetSerialized) throws error", () => {
     invalidSerialized.forEach(x => {
       it(`${JSON.stringify(x)}`, () => {
-        expect(() =>
-          parseKeySet((x as unknown) as KeySetSerialized)
-        ).toThrowError(InvalidKeySetError);
+        expect(() => parseKeySet((x as unknown) as KeySetSerialized)).toThrowError(
+          InvalidKeySetError
+        );
       });
     });
   });
@@ -271,9 +263,7 @@ describe("serialize KeySet", () => {
   describe("serializeKeySet(nonKeySetAndNotValidKeySetSerialized) throws error", () => {
     invalidSerialized.forEach(x => {
       it(`${JSON.stringify(x)}`, () => {
-        expect(() => serializeKeySet((x as unknown) as KeySet)).toThrowError(
-          InvalidKeySetError
-        );
+        expect(() => serializeKeySet((x as unknown) as KeySet)).toThrowError(InvalidKeySetError);
       });
     });
   });

@@ -16,11 +16,7 @@ import {
   KeySetTypes
 } from "./key-set/-base";
 import { all, KeySetAll } from "./key-set/all";
-import {
-  allExceptSome,
-  allExceptSomeForced,
-  KeySetAllExceptSome
-} from "./key-set/all-except-some";
+import { allExceptSome, allExceptSomeForced, KeySetAllExceptSome } from "./key-set/all-except-some";
 import {
   isKeySetOfNumberKeyLabels,
   isKeySetOfNumbers,
@@ -46,12 +42,7 @@ import {
   serializeKeySet
 } from "./key-set/serialize";
 import { KeySetSome, some, someForced } from "./key-set/some";
-import {
-  EmptyArray,
-  isEmptyArray,
-  isNonEmptyArray,
-  NonEmptyArray
-} from "./util/array-types";
+import { EmptyArray, isEmptyArray, isNonEmptyArray, NonEmptyArray } from "./util/array-types";
 import { arraysEqual } from "./util/arrays-equal";
 import { IKeyLabel, isKeyLabel, isObject } from "./util/object-utils";
 import { uniqueArray, uniqueKeyLabelArray } from "./util/unique-array";
