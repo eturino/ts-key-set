@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/eturino/ts-key-set/compare/v3.1.0...v4.0.0) (2020-02-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* While KeySetAll and KeySetNone were before non typed, now they are. Most of the
+time no adaptation is needed but in some cases when using TypeScript it may be needed to specify the
+type of the universe when creating a desired All or None key sets.
+
+### Features
+
+* keySetAll and KeySetNone with key type ([bb5b1c9](https://github.com/eturino/ts-key-set/commit/bb5b1c9cba1028d8ba2a63fc16ba920d6c029b7e))
+
 ## [3.1.0](https://github.com/eturino/ts-key-set/compare/v3.0.0...v3.1.0) (2020-02-29)
 
 
