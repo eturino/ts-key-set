@@ -6,6 +6,7 @@ import {
   isKeySetSome,
   isValidKey,
   Key,
+  KeyLabelSet,
   KeySet,
   KeySetAllExceptSomeSerialized,
   KeySetAllSerialized,
@@ -66,6 +67,7 @@ export {
   // types and classes
   Key,
   KeySet,
+  KeyLabelSet,
   KeySetAll,
   KeySetAllExceptSome,
   KeySetNone,

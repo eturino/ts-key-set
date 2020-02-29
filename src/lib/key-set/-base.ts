@@ -6,7 +6,12 @@ import { KeySetAllExceptSome } from "./all-except-some";
 import { KeySetNone } from "./none";
 import { KeySetSome } from "./some";
 
-export type Key = string | number | IKeyLabel<string> | IKeyLabel<number>;
+export type Key =
+  | string
+  | number
+  | IKeyLabel<string | number>
+  | IKeyLabel<string>
+  | IKeyLabel<number>;
 
 export function isValidKey(x: any): x is Key {
   if (typeof x === "string" || typeof x === "number") return true;
@@ -18,6 +23,12 @@ export type KeySet<T extends Key = Key> =
   | KeySetNone
   | KeySetSome<T>
   | KeySetAllExceptSome<T>;
+
+export type KeyLabelSet<T extends string | number = string | number> =
+  | KeySetAll
+  | KeySetNone
+  | KeySetSome<IKeyLabel<T>>
+  | KeySetAllExceptSome<IKeyLabel<T>>;
 
 /**
  * one type for each of the 4 sets
