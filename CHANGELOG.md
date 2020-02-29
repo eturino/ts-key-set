@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/eturino/ts-key-set/compare/v2.4.0...v3.0.0) (2020-02-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* KeySetAll and KeySetNone will have now `keys` and `elements` methods (both the
+same) which return an EmptyArray of the type (Key by default). This is a different behaviour more
+than an addition, since before keyset type could be relied upon having or not those getters.
+
+### Features
+
+* methods keys and elements in all KeySet, typings, and allow for typed KeySetAll and KeySetNone ([53265b9](https://github.com/eturino/ts-key-set/commit/53265b9b3e352322dd5fd40978333681a1e2eaab))
+
 ## [2.4.0](https://github.com/eturino/ts-key-set/compare/v2.3.0...v2.4.0) (2020-02-28)
 
 
