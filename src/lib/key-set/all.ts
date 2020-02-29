@@ -44,7 +44,7 @@ export class KeySetAll<T extends Key = Key> extends KeySetGlobal<T> {
   public remove(other: KeySetNone<T> | KeySetNone<Key>): KeySetAll<T>;
   public remove(other: KeySetSome<T>): KeySetAllExceptSome<T>;
   public remove(other: KeySetAllExceptSome<T>): KeySetSome<T>;
-  public remove(other: KeySet<T>): KeySet<T>;
+  public remove(other: KeySet<T> | KeySetGlobal<Key>): KeySet<T>;
   public remove(other: KeySet<T> | KeySetGlobal<Key>): KeySet<T> {
     if (other instanceof KeySetSome) return new KeySetAllExceptSome(other.keys);
     if (other instanceof KeySetAllExceptSome) return new KeySetSome(other.keys);

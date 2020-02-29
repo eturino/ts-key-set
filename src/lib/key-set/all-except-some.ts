@@ -47,6 +47,9 @@ export class KeySetAllExceptSome<T extends Key> extends KeySetByKeys<T> {
   public remove(other: KeySetAllExceptSome<T>): KeySetNone<T> | KeySetSome<T>;
   public remove(
     other: KeySet<T> | KeySetGlobal<Key>
+  ): KeySetAllExceptSome<T> | KeySetSome<T> | KeySetNone<T>;
+  public remove(
+    other: KeySet<T> | KeySetGlobal<Key>
   ): KeySetAllExceptSome<T> | KeySetSome<T> | KeySetNone<T> {
     if (other instanceof KeySetSome) {
       const keys = [...this.keys, ...other.keys];
@@ -66,9 +69,8 @@ export class KeySetAllExceptSome<T extends Key> extends KeySetByKeys<T> {
   public intersect(other: KeySetNone<T> | KeySetNone<Key>): KeySetNone<T>;
   public intersect(other: KeySetSome<T>): KeySetNone<T> | KeySetSome<T>;
   public intersect(other: KeySetAllExceptSome<T>): KeySetAll<T> | KeySetAllExceptSome<T>;
-  public intersect(
-    other: KeySet<T> | KeySetGlobal<Key>
-  ): KeySetAllExceptSome<T> | KeySetNone<T> | KeySetSome<T> | KeySetAll<T> {
+  public intersect(other: KeySet<T> | KeySetGlobal<Key>): KeySet<T>;
+  public intersect(other: KeySet<T> | KeySetGlobal<Key>): KeySet<T> {
     if (other instanceof KeySetAll) {
       return new KeySetAllExceptSome([...this.keys]);
     }
