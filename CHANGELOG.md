@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.1.1](https://github.com/eturino/ts-key-set/compare/v4.1.0...v4.1.1) (2020-02-29)
+
+
+### Bug Fixes
+
+* fixing overloads on remove() and intersect() (TypeScript) ([7ea0ff1](https://github.com/eturino/ts-key-set/commit/7ea0ff1aeeb0593153eb40f1eb0f5d7b74bd95ff))
+
 ## [4.1.0](https://github.com/eturino/ts-key-set/compare/v4.0.0...v4.1.0) (2020-02-29)
 
 
