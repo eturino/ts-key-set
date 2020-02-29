@@ -32,9 +32,7 @@ const keySet = new KeySetSome(keys); // => keys 1, 2, 3
 test("#intersect(keySetAll)", () => {
   const rest = keySet.intersect(keySetAll);
   expect(rest instanceof KeySetSome).toBeTruthy();
-  expect(keySet === rest).toBe(false);
-  const r = rest as KeySetSome<number>;
-  expect(r.keys).toEqual(keySet.keys);
+  expect(rest.keys).toEqual(keySet.keys);
 });
 
 // NONE
@@ -42,7 +40,6 @@ test("#intersect(keySetAll)", () => {
 test("#intersect(keySetNone)", () => {
   const rest = keySet.intersect(keySetNone);
   expect(rest instanceof KeySetNone).toBeTruthy();
-  expect(keySet === rest).toBe(false);
 });
 
 // SOME

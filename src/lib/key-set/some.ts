@@ -41,6 +41,11 @@ export class KeySetSome<T extends Key> extends KeySetByKeys<T> {
     return other instanceof KeySetSome && this.hasSameKeys(other);
   }
 
+  public remove(other: KeySetNone): KeySetSome<T>;
+  public remove(other: KeySetAll): KeySetNone;
+  public remove(
+    other: KeySetAllExceptSome<T> | KeySetSome<T>
+  ): KeySetSome<T> | KeySetNone;
   public remove(other: KeySet<T>): KeySetSome<T> | KeySetNone {
     if (other instanceof KeySetSome) {
       return some(this.excludeKeys(other.keys));
@@ -57,6 +62,11 @@ export class KeySetSome<T extends Key> extends KeySetByKeys<T> {
     return new KeySetNone();
   }
 
+  public intersect(other: KeySetAll): KeySetSome<T>;
+  public intersect(other: KeySetNone): KeySetNone;
+  public intersect(
+    other: KeySetSome<T> | KeySetAllExceptSome<T>
+  ): KeySetSome<T> | KeySetNone;
   public intersect(other: KeySet<T>): KeySetSome<T> | KeySetNone {
     if (other instanceof KeySetAll) return new KeySetSome(this.keys);
 

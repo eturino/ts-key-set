@@ -41,18 +41,24 @@ test("all()", () => {
   const keySet = all();
   expect(keySet instanceof KeySetAll).toBeTruthy();
   expect(keySet.type).toEqual(KeySetTypes.all);
+  expect(keySet.keys).toEqual([]);
+  expect(keySet.elements).toEqual([]);
 });
 
 test("none()", () => {
   const keySet = none();
   expect(keySet instanceof KeySetNone).toBeTruthy();
   expect(keySet.type).toEqual(KeySetTypes.none);
+  expect(keySet.keys).toEqual([]);
+  expect(keySet.elements).toEqual([]);
 });
 
 test("some([])", () => {
   const keySet = some([]);
   expect(keySet instanceof KeySetNone).toBeTruthy();
   expect(keySet.type).toEqual(KeySetTypes.none);
+  expect(keySet.keys).toEqual([]);
+  expect(keySet.elements).toEqual([]);
 });
 
 test("someForced([])", () => {
@@ -65,6 +71,8 @@ test("allExceptSome([])", () => {
   const keySet = allExceptSome([]);
   expect(keySet instanceof KeySetAll).toBeTruthy();
   expect(keySet.type).toEqual(KeySetTypes.all);
+  expect(keySet.keys).toEqual([]);
+  expect(keySet.elements).toEqual([]);
 });
 
 test("allExceptSomeForced([])", () => {

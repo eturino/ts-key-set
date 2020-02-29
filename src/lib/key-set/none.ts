@@ -1,12 +1,8 @@
-import {
-  IKeySetClass,
-  KeySet,
-  KeySetNoneSerialized,
-  KeySetTypes
-} from "./-base";
+import { Key, KeySet, KeySetNoneSerialized, KeySetTypes } from "./-base";
+import { KeySetGlobal } from "./-global";
 import { KeySetAll } from "./all";
 
-export class KeySetNone implements IKeySetClass {
+export class KeySetNone<K extends Key = Key> extends KeySetGlobal<K> {
   public readonly type = KeySetTypes.none;
 
   public serialized(): KeySetNoneSerialized {
@@ -41,7 +37,7 @@ export class KeySetNone implements IKeySetClass {
     return other.representsNone();
   }
 
-  public remove(_other: KeySet) {
+  public remove(_other: KeySet): KeySetNone {
     return new KeySetNone();
   }
 
