@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.1.0](https://github.com/eturino/ts-key-set/compare/v4.0.0...v4.1.0) (2020-02-29)
+
+
+### Features
+
+* toJSON() to be used in JSON.stringify(), stringify using the same as serialized() ([0183f4a](https://github.com/eturino/ts-key-set/commit/0183f4a1056f843f77b0969337027c63ed597f08))
+
 ## [4.0.0](https://github.com/eturino/ts-key-set/compare/v3.1.0...v4.0.0) (2020-02-29)
 
 
