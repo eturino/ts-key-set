@@ -283,8 +283,16 @@ describe("serialize KeySet", () => {
       expect(keySet.serialized()).toEqual(expected);
     });
 
+    it("keySet.toJSON()", () => {
+      expect(keySet.toJSON()).toEqual(expected);
+    });
+
     it("serializeKeySet(keySet)", () => {
       expect(serializeKeySet(keySet)).toEqual(expected);
+    });
+
+    it("JSON.stringify(keySet) === JSON.stringify(keySetSerialized)", () => {
+      expect(JSON.stringify(keySet)).toEqual(JSON.stringify(expected));
     });
   });
 
@@ -298,8 +306,16 @@ describe("serialize KeySet", () => {
       expect(keySet.serialized()).toEqual(expected);
     });
 
+    it("keySet.toJSON()", () => {
+      expect(keySet.toJSON()).toEqual(expected);
+    });
+
     it("serializeKeySet(keySet)", () => {
       expect(serializeKeySet(keySet)).toEqual(expected);
+    });
+
+    it("JSON.stringify(keySet) === JSON.stringify(keySetSerialized)", () => {
+      expect(JSON.stringify(keySet)).toEqual(JSON.stringify(expected));
     });
   });
 
@@ -314,8 +330,16 @@ describe("serialize KeySet", () => {
       expect(keySet.serialized()).toEqual(expected);
     });
 
+    it("keySet.toJSON()", () => {
+      expect(keySet.toJSON()).toEqual(expected);
+    });
+
     it("serializeKeySet(keySet)", () => {
       expect(serializeKeySet(keySet)).toEqual(expected);
+    });
+
+    it("JSON.stringify(keySet) === JSON.stringify(keySetSerialized)", () => {
+      expect(JSON.stringify(keySet)).toEqual(JSON.stringify(expected));
     });
   });
 
@@ -330,8 +354,16 @@ describe("serialize KeySet", () => {
       expect(keySet.serialized()).toEqual(expected);
     });
 
+    it("keySet.toJSON()", () => {
+      expect(keySet.toJSON()).toEqual(expected);
+    });
+
     it("serializeKeySet(keySet)", () => {
       expect(serializeKeySet(keySet)).toEqual(expected);
+    });
+
+    it("JSON.stringify(keySet) === JSON.stringify(keySetSerialized)", () => {
+      expect(JSON.stringify(keySet)).toEqual(JSON.stringify(expected));
     });
   });
 
@@ -352,8 +384,16 @@ describe("serialize KeySet", () => {
       expect(keySet.serialized()).toEqual(expected);
     });
 
+    it("keySet.toJSON()", () => {
+      expect(keySet.toJSON()).toEqual(expected);
+    });
+
     it("serializeKeySet(keySet)", () => {
       expect(serializeKeySet(keySet)).toEqual(expected);
+    });
+
+    it("JSON.stringify(keySet) === JSON.stringify(keySetSerialized)", () => {
+      expect(JSON.stringify(keySet)).toEqual(JSON.stringify(expected));
     });
   });
 
@@ -368,8 +408,16 @@ describe("serialize KeySet", () => {
       expect(keySet.serialized()).toEqual(expected);
     });
 
+    it("keySet.toJSON()", () => {
+      expect(keySet.toJSON()).toEqual(expected);
+    });
+
     it("serializeKeySet(keySet)", () => {
       expect(serializeKeySet(keySet)).toEqual(expected);
+    });
+
+    it("JSON.stringify(keySet) === JSON.stringify(keySetSerialized)", () => {
+      expect(JSON.stringify(keySet)).toEqual(JSON.stringify(expected));
     });
   });
 
@@ -384,8 +432,16 @@ describe("serialize KeySet", () => {
       expect(keySet.serialized()).toEqual(expected);
     });
 
+    it("keySet.toJSON()", () => {
+      expect(keySet.toJSON()).toEqual(expected);
+    });
+
     it("serializeKeySet(keySet)", () => {
       expect(serializeKeySet(keySet)).toEqual(expected);
+    });
+
+    it("JSON.stringify(keySet) === JSON.stringify(keySetSerialized)", () => {
+      expect(JSON.stringify(keySet)).toEqual(JSON.stringify(expected));
     });
   });
 
@@ -406,8 +462,16 @@ describe("serialize KeySet", () => {
       expect(keySet.serialized()).toEqual(expected);
     });
 
+    it("keySet.toJSON()", () => {
+      expect(keySet.toJSON()).toEqual(expected);
+    });
+
     it("serializeKeySet(keySet)", () => {
       expect(serializeKeySet(keySet)).toEqual(expected);
+    });
+
+    it("JSON.stringify(keySet) === JSON.stringify(keySetSerialized)", () => {
+      expect(JSON.stringify(keySet)).toEqual(JSON.stringify(expected));
     });
   });
 });

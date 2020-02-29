@@ -27,6 +27,10 @@ export abstract class KeySetByKeys<T extends Key> implements IKeySetClass {
     this._elements = elements as NonEmptyArray<T>;
   }
 
+  public toJSON(_key?: string): KeySetAllExceptSomeSerialized<T> | KeySetSomeSerialized<T> {
+    return this.serialized();
+  }
+
   public abstract serialized(): KeySetAllExceptSomeSerialized<T> | KeySetSomeSerialized<T>;
 
   public abstract representsAll(): boolean;

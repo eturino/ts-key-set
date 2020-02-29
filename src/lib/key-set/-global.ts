@@ -21,6 +21,10 @@ export abstract class KeySetGlobal<T extends Key> implements IKeySetClass {
     return [] as EmptyArray<T>;
   }
 
+  public toJSON(_key?: string): KeySetAllSerialized<T> | KeySetNoneSerialized<T> {
+    return this.serialized();
+  }
+
   public abstract serialized(): KeySetAllSerialized<T> | KeySetNoneSerialized<T>;
 
   public abstract representsAll(): boolean;
