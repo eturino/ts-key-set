@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/eturino/ts-key-set/compare/v3.0.0...v3.1.0) (2020-02-29)
+
+
+### Features
+
+* keyLabelSet type ([c1e5a4d](https://github.com/eturino/ts-key-set/commit/c1e5a4d45b11cc344784d1edf4597cde140b6bf7))
+
 ## [3.0.0](https://github.com/eturino/ts-key-set/compare/v2.4.0...v3.0.0) (2020-02-29)
 
 
