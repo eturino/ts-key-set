@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.2.0](https://github.com/eturino/ts-key-set/compare/v4.1.1...v4.2.0) (2020-03-11)
+
+
+### Features
+
+* exporting types for KeyLabelSetSerialized and all individual types ([861e071](https://github.com/eturino/ts-key-set/commit/861e07136e601d45ba26d596cbb71e9e85874770))
+
 ### [4.1.1](https://github.com/eturino/ts-key-set/compare/v4.1.0...v4.1.1) (2020-02-29)
 
 
