@@ -65,6 +65,31 @@ export type KeySetSerialized<T extends Key = Key> =
   | KeySetSomeSerialized<T>
   | KeySetAllExceptSomeSerialized<T>;
 
+export type KeyLabelSetAllSerialized<T extends string | number = string | number> =
+  | { type: KeySetTypes.all }
+  | { type: KeySetTypes.all; elements: EmptyArray<T> };
+
+export type KeyLabelSetNoneSerialized<T extends string | number = string | number> =
+  | { type: KeySetTypes.none }
+  | { type: KeySetTypes.none; elements: EmptyArray<T> };
+
+export type KeyLabelSetSomeSerialized<T extends string | number = string | number> = {
+  type: KeySetTypes.some;
+  elements: NonEmptyArray<IKeyLabel<T>>;
+};
+
+export type KeyLabelSetAllExceptSomeSerialized<T extends string | number = string | number> = {
+  type: KeySetTypes.allExceptSome;
+  elements: NonEmptyArray<IKeyLabel<T>>;
+};
+
+export type KeyLabelSetSerialized<T extends string | number = string | number> =
+  | { type: KeySetTypes }
+  | KeyLabelSetAllSerialized<T>
+  | KeyLabelSetNoneSerialized<T>
+  | KeyLabelSetSomeSerialized<T>
+  | KeyLabelSetAllExceptSomeSerialized<T>;
+
 export interface IKeySetClass {
   /**
    * returns the KeySetType that defines this class
