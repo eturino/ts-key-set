@@ -30,9 +30,7 @@ export function isKeySetOfNumbers(x: KeySet): x is KeySet<number> {
 export function isKeySetOfStringKeyLabels(x: KeySetAll): x is KeySetAll;
 export function isKeySetOfStringKeyLabels(x: KeySetNone): x is KeySetNone;
 export function isKeySetOfStringKeyLabels(x: KeySetSome<any>): x is KeySetSome<IKeyLabel<string>>;
-export function isKeySetOfStringKeyLabels(
-  x: KeySetAllExceptSome<any>
-): x is KeySetAllExceptSome<IKeyLabel<string>>;
+export function isKeySetOfStringKeyLabels(x: KeySetAllExceptSome<any>): x is KeySetAllExceptSome<IKeyLabel<string>>;
 export function isKeySetOfStringKeyLabels(x: KeySet): x is KeySet<IKeyLabel<string>>;
 export function isKeySetOfStringKeyLabels(x: KeySet): x is KeySet<IKeyLabel<string>> {
   if (!isKeySet(x)) return false;
@@ -44,9 +42,7 @@ export function isKeySetOfStringKeyLabels(x: KeySet): x is KeySet<IKeyLabel<stri
 export function isKeySetOfNumberKeyLabels(x: KeySetAll): x is KeySetAll;
 export function isKeySetOfNumberKeyLabels(x: KeySetNone): x is KeySetNone;
 export function isKeySetOfNumberKeyLabels(x: KeySetSome<any>): x is KeySetSome<IKeyLabel<number>>;
-export function isKeySetOfNumberKeyLabels(
-  x: KeySetAllExceptSome<any>
-): x is KeySetAllExceptSome<IKeyLabel<number>>;
+export function isKeySetOfNumberKeyLabels(x: KeySetAllExceptSome<any>): x is KeySetAllExceptSome<IKeyLabel<number>>;
 export function isKeySetOfNumberKeyLabels(x: KeySet): x is KeySet<IKeyLabel<number>>;
 export function isKeySetOfNumberKeyLabels(x: KeySet): x is KeySet<IKeyLabel<number>> {
   if (!isKeySet(x)) return false;

@@ -1,14 +1,7 @@
 import { NonEmptyArray } from "../util/array-types";
 import { arraysEqual } from "../util/arrays-equal";
 import { uniqueKeys } from "../util/unique-array";
-import {
-  IKeySetClass,
-  Key,
-  KeySet,
-  KeySetAllExceptSomeSerialized,
-  KeySetSomeSerialized,
-  KeySetTypes
-} from "./-base";
+import { IKeySetClass, Key, KeySet, KeySetAllExceptSomeSerialized, KeySetSomeSerialized, KeySetTypes } from "./-base";
 import { KeySetGlobal } from "./-global";
 import { KeySetAllExceptSome } from "./all-except-some";
 import { InvalidEmptySetError } from "./invalid-empty-set-error";

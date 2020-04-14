@@ -21,26 +21,26 @@ import {
   none,
   parseKeySet,
   serializeKeySet,
-  some
+  some,
 } from "../..";
 
 const allSerialized: KeySetAllSerialized = { type: KeySetTypes.all };
 const noneSerialized: KeySetNoneSerialized = { type: KeySetTypes.none };
 const someNumberSerialized: KeySetSomeSerialized = {
   type: KeySetTypes.some,
-  elements: [1, 2]
+  elements: [1, 2],
 };
 const someStringSerialized: KeySetSomeSerialized = {
   type: KeySetTypes.some,
-  elements: ["a", "b"]
+  elements: ["a", "b"],
 };
 const allExceptSomeNumberSerialized: KeySetAllExceptSomeSerialized = {
   type: KeySetTypes.allExceptSome,
-  elements: [1, 2]
+  elements: [1, 2],
 };
 const allExceptSomeStringSerialized: KeySetAllExceptSomeSerialized = {
   type: KeySetTypes.allExceptSome,
-  elements: ["a", "b"]
+  elements: ["a", "b"],
 };
 
 const validSerialized: KeySetSerialized[] = [
@@ -49,7 +49,7 @@ const validSerialized: KeySetSerialized[] = [
   someNumberSerialized,
   someStringSerialized,
   allExceptSomeNumberSerialized,
-  allExceptSomeStringSerialized
+  allExceptSomeStringSerialized,
 ];
 
 const invalidSerialized: any[] = [
@@ -68,7 +68,7 @@ const invalidSerialized: any[] = [
   { type: KeySetTypes.some, elements: [] },
   { type: KeySetTypes.allExceptSome, elements: [] },
   { type: KeySetTypes.some },
-  { type: KeySetTypes.allExceptSome }
+  { type: KeySetTypes.allExceptSome },
 ];
 
 describe("serialize KeySet", () => {
@@ -97,7 +97,7 @@ describe("serialize KeySet", () => {
       expect(isKeySetAllSerialized(allExceptSomeStringSerialized)).toBeFalsy();
     });
 
-    invalidSerialized.forEach(x => {
+    invalidSerialized.forEach((x) => {
       it(`isKeySetAllSerialized(${JSON.stringify(x)}) returns false`, () => {
         expect(isKeySetAllSerialized(x)).toBeFalsy();
       });
@@ -129,7 +129,7 @@ describe("serialize KeySet", () => {
       expect(isKeySetNoneSerialized(allExceptSomeStringSerialized)).toBeFalsy();
     });
 
-    invalidSerialized.forEach(x => {
+    invalidSerialized.forEach((x) => {
       it(`isKeySetNoneSerialized(${JSON.stringify(x)}) returns false`, () => {
         expect(isKeySetNoneSerialized(x)).toBeFalsy();
       });
@@ -160,7 +160,7 @@ describe("serialize KeySet", () => {
     it("isKeySetSomeSerialized(allExceptSomeStringSerialized): false", () => {
       expect(isKeySetSomeSerialized(allExceptSomeStringSerialized)).toBeFalsy();
     });
-    invalidSerialized.forEach(x => {
+    invalidSerialized.forEach((x) => {
       it(`isKeySetSomeSerialized(${JSON.stringify(x)}) returns false`, () => {
         expect(isKeySetSomeSerialized(x)).toBeFalsy();
       });
@@ -192,7 +192,7 @@ describe("serialize KeySet", () => {
       expect(isKeySetAllExceptSomeSerialized(allExceptSomeStringSerialized)).toBeTruthy();
     });
 
-    invalidSerialized.forEach(x => {
+    invalidSerialized.forEach((x) => {
       it(`isKeySetAllExceptSomeSerialized(${JSON.stringify(x)}) returns false`, () => {
         expect(isKeySetAllExceptSomeSerialized(x)).toBeFalsy();
       });
@@ -200,13 +200,13 @@ describe("serialize KeySet", () => {
   });
 
   describe("isKeySetSerialized()", () => {
-    validSerialized.forEach(x => {
+    validSerialized.forEach((x) => {
       it(`isKeySetSerialized(${JSON.stringify(x)}) returns true (and is a type predicate)`, () => {
         expect(isKeySetSerialized(x)).toBeTruthy();
       });
     });
 
-    invalidSerialized.forEach(x => {
+    invalidSerialized.forEach((x) => {
       it(`isKeySetSerialized(${JSON.stringify(x)}) returns false`, () => {
         expect(isKeySetSerialized(x)).toBeFalsy();
       });
@@ -214,11 +214,9 @@ describe("serialize KeySet", () => {
   });
 
   describe("parseKeySet(invalidKeySetSerialized) throws error", () => {
-    invalidSerialized.forEach(x => {
+    invalidSerialized.forEach((x) => {
       it(`${JSON.stringify(x)}`, () => {
-        expect(() => parseKeySet((x as unknown) as KeySetSerialized)).toThrowError(
-          InvalidKeySetError
-        );
+        expect(() => parseKeySet((x as unknown) as KeySetSerialized)).toThrowError(InvalidKeySetError);
       });
     });
   });
@@ -261,7 +259,7 @@ describe("serialize KeySet", () => {
   });
 
   describe("serializeKeySet(nonKeySetAndNotValidKeySetSerialized) throws error", () => {
-    invalidSerialized.forEach(x => {
+    invalidSerialized.forEach((x) => {
       it(`${JSON.stringify(x)}`, () => {
         expect(() => serializeKeySet((x as unknown) as KeySet)).toThrowError(InvalidKeySetError);
       });
@@ -276,7 +274,7 @@ describe("serialize KeySet", () => {
   describe("all", () => {
     const keySet = all();
     const expected = {
-      type: KeySetTypes.all
+      type: KeySetTypes.all,
     };
 
     it("keySet.serialized()", () => {
@@ -299,7 +297,7 @@ describe("serialize KeySet", () => {
   describe("none", () => {
     const keySet = none();
     const expected = {
-      type: KeySetTypes.none
+      type: KeySetTypes.none,
     };
 
     it("keySet.serialized()", () => {
@@ -323,7 +321,7 @@ describe("serialize KeySet", () => {
     const keySet = some(["1", "2"]);
     const expected = {
       type: KeySetTypes.some,
-      elements: ["1", "2"]
+      elements: ["1", "2"],
     };
 
     it("keySet.serialized()", () => {
@@ -347,7 +345,7 @@ describe("serialize KeySet", () => {
     const keySet = some([1, 2]);
     const expected = {
       type: KeySetTypes.some,
-      elements: [1, 2]
+      elements: [1, 2],
     };
 
     it("keySet.serialized()", () => {
@@ -370,14 +368,14 @@ describe("serialize KeySet", () => {
   describe("some([{ key: 'a', label: 'A' }, { key: 'b', label: 'B' }])", () => {
     const keySet = some([
       { key: "a", label: "A" },
-      { key: "b", label: "B" }
+      { key: "b", label: "B" },
     ]);
     const expected = {
       type: KeySetTypes.some,
       elements: [
         { key: "a", label: "A" },
-        { key: "b", label: "B" }
-      ]
+        { key: "b", label: "B" },
+      ],
     };
 
     it("keySet.serialized()", () => {
@@ -401,7 +399,7 @@ describe("serialize KeySet", () => {
     const keySet = allExceptSome(["1", "2"]);
     const expected = {
       type: KeySetTypes.allExceptSome,
-      elements: ["1", "2"]
+      elements: ["1", "2"],
     };
 
     it("keySet.serialized()", () => {
@@ -425,7 +423,7 @@ describe("serialize KeySet", () => {
     const keySet = allExceptSome([1, 2]);
     const expected = {
       type: KeySetTypes.allExceptSome,
-      elements: [1, 2]
+      elements: [1, 2],
     };
 
     it("keySet.serialized()", () => {
@@ -448,14 +446,14 @@ describe("serialize KeySet", () => {
   describe("allExceptSome([{ key: 'a', label: 'A' }, { key: 'b', label: 'B' }])", () => {
     const keySet = allExceptSome([
       { key: "a", label: "A" },
-      { key: "b", label: "B" }
+      { key: "b", label: "B" },
     ]);
     const expected = {
       type: KeySetTypes.allExceptSome,
       elements: [
         { key: "a", label: "A" },
-        { key: "b", label: "B" }
-      ]
+        { key: "b", label: "B" },
+      ],
     };
 
     it("keySet.serialized()", () => {

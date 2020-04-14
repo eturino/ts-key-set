@@ -1,12 +1,5 @@
 import { EmptyArray } from "../util/array-types";
-import {
-  IKeySetClass,
-  Key,
-  KeySet,
-  KeySetAllSerialized,
-  KeySetNoneSerialized,
-  KeySetTypes
-} from "./-base";
+import { IKeySetClass, Key, KeySet, KeySetAllSerialized, KeySetNoneSerialized, KeySetTypes } from "./-base";
 import { KeySetAll } from "./all";
 import { KeySetNone } from "./none";
 

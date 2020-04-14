@@ -13,7 +13,7 @@ import {
   KeySetTypes,
   none,
   some,
-  someForced
+  someForced,
 } from "../..";
 
 describe("isValidKey()", () => {
@@ -103,18 +103,18 @@ test("allExceptSome([{ key: 1, label: 'wa' }, { key: 1, label: 'B' }, { key: 1, 
     { key: 1, label: "B" },
     { key: 1, label: "wa" },
     { key: 2, label: "wa" },
-    { key: 3, label: "other" }
+    { key: 3, label: "other" },
   ]);
   expect(keySet instanceof KeySetAllExceptSome).toBeTruthy();
   expect((keySet as KeySetAllExceptSome<IKeyLabel<number>>).keys).toEqual([
     { key: 1, label: "wa" },
     { key: 2, label: "wa" },
-    { key: 3, label: "other" }
+    { key: 3, label: "other" },
   ]);
   expect((keySet as KeySetAllExceptSome<IKeyLabel<number>>).elements).toEqual([
     { key: 1, label: "wa" },
     { key: 2, label: "wa" },
-    { key: 3, label: "other" }
+    { key: 3, label: "other" },
   ]);
   expect(keySet.type).toEqual(KeySetTypes.allExceptSome);
 });
@@ -125,18 +125,18 @@ test("some([{ key: 1, label: 'wa' }, { key: 1, label: 'B' }, { key: 1, label: 'w
     { key: 1, label: "B" },
     { key: 1, label: "wa" },
     { key: 2, label: "wa" },
-    { key: 3, label: "other" }
+    { key: 3, label: "other" },
   ]);
   expect(keySet instanceof KeySetSome).toBeTruthy();
   expect((keySet as KeySetSome<IKeyLabel<number>>).keys).toEqual([
     { key: 1, label: "wa" },
     { key: 2, label: "wa" },
-    { key: 3, label: "other" }
+    { key: 3, label: "other" },
   ]);
   expect((keySet as KeySetSome<IKeyLabel<number>>).elements).toEqual([
     { key: 1, label: "wa" },
     { key: 2, label: "wa" },
-    { key: 3, label: "other" }
+    { key: 3, label: "other" },
   ]);
   expect(keySet.type).toEqual(KeySetTypes.some);
 });

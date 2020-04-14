@@ -45,12 +45,8 @@ export class KeySetAllExceptSome<T extends Key> extends KeySetByKeys<T> {
   public remove(other: KeySetAll<T> | KeySetAll<Key>): KeySetNone<T>;
   public remove(other: KeySetNone<T> | KeySetNone<Key> | KeySetSome<T>): KeySetAllExceptSome<T>;
   public remove(other: KeySetAllExceptSome<T>): KeySetNone<T> | KeySetSome<T>;
-  public remove(
-    other: KeySet<T> | KeySetGlobal<Key>
-  ): KeySetAllExceptSome<T> | KeySetSome<T> | KeySetNone<T>;
-  public remove(
-    other: KeySet<T> | KeySetGlobal<Key>
-  ): KeySetAllExceptSome<T> | KeySetSome<T> | KeySetNone<T> {
+  public remove(other: KeySet<T> | KeySetGlobal<Key>): KeySetAllExceptSome<T> | KeySetSome<T> | KeySetNone<T>;
+  public remove(other: KeySet<T> | KeySetGlobal<Key>): KeySetAllExceptSome<T> | KeySetSome<T> | KeySetNone<T> {
     if (other instanceof KeySetSome) {
       const keys = [...this.keys, ...other.keys];
       return new KeySetAllExceptSome(keys);
@@ -88,7 +84,7 @@ export class KeySetAllExceptSome<T extends Key> extends KeySetByKeys<T> {
   }
 
   private excludeMyKeys(keys: T[]) {
-    return [...keys].filter(key => !this.keys.includes(key as T));
+    return [...keys].filter((key) => !this.keys.includes(key as T));
   }
 }
 
@@ -98,9 +94,7 @@ export class KeySetAllExceptSome<T extends Key> extends KeySetByKeys<T> {
  * @param keys list of keys for the KeySet
  * @throws InvalidEmptySetError
  */
-export function allExceptSomeForced<T extends Key>(
-  keys: T[] | ReadonlyArray<T>
-): KeySetAllExceptSome<T> {
+export function allExceptSomeForced<T extends Key>(keys: T[] | ReadonlyArray<T>): KeySetAllExceptSome<T> {
   if (!keys.length) {
     throw new InvalidEmptySetError("calling `someForced` with an empty list of keys");
   }
@@ -113,9 +107,7 @@ export function allExceptSomeForced<T extends Key>(
  *
  * @param keys list of keys for the KeySet
  */
-export function allExceptSome<T extends Key>(
-  keys: T[] | ReadonlyArray<T>
-): KeySetAll<T> | KeySetAllExceptSome<T> {
+export function allExceptSome<T extends Key>(keys: T[] | ReadonlyArray<T>): KeySetAll<T> | KeySetAllExceptSome<T> {
   if (!keys.length) return all<T>();
 
   return allExceptSomeForced(keys);

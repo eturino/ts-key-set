@@ -18,7 +18,7 @@ import {
   KeySetNoneSerialized,
   KeySetSerialized,
   KeySetSomeSerialized,
-  KeySetTypes
+  KeySetTypes,
 } from "./key-set/-base";
 import { all, KeySetAll } from "./key-set/all";
 import { allExceptSome, allExceptSomeForced, KeySetAllExceptSome } from "./key-set/all-except-some";
@@ -26,13 +26,13 @@ import {
   isKeySetOfNumberKeyLabels,
   isKeySetOfNumbers,
   isKeySetOfStringKeyLabels,
-  isKeySetOfStrings
+  isKeySetOfStrings,
 } from "./key-set/check-element-type";
 import {
   isKeySetSerializedOfNumberKeyLabels,
   isKeySetSerializedOfNumbers,
   isKeySetSerializedOfStringKeyLabels,
-  isKeySetSerializedOfStrings
+  isKeySetSerializedOfStrings,
 } from "./key-set/check-serialized-element-type";
 import { InvalidEmptySetError } from "./key-set/invalid-empty-set-error";
 import { InvalidKeySetError } from "./key-set/invalid-key-set-error";
@@ -44,7 +44,7 @@ import {
   isKeySetSerialized,
   isKeySetSomeSerialized,
   parseKeySet,
-  serializeKeySet
+  serializeKeySet,
 } from "./key-set/serialize";
 import { KeySetSome, some, someForced } from "./key-set/some";
 import { EmptyArray, isEmptyArray, isNonEmptyArray, NonEmptyArray } from "./util/array-types";
@@ -118,5 +118,5 @@ export {
   isKeySetSerializedOfNumberKeyLabels,
   isKeySetSerializedOfNumbers,
   isKeySetSerializedOfStringKeyLabels,
-  isKeySetSerializedOfStrings
+  isKeySetSerializedOfStrings,
 };

@@ -16,8 +16,8 @@ export function uniqueArray<T>(source: T[] | ReadonlyArray<T>): T[] {
 }
 
 export function uniqueKeyLabelArray<K extends string | number>(
-  source: Array<IKeyLabel<K>> | ReadonlyArray<IKeyLabel<K>>
-): Array<IKeyLabel<K>> {
+  source: IKeyLabel<K>[] | ReadonlyArray<IKeyLabel<K>>
+): IKeyLabel<K>[] {
   const length = source.length;
   const result = [];
   const seen = new Set<K>();
@@ -35,7 +35,7 @@ export function uniqueKeys<T extends Key>(source: T[] | ReadonlyArray<T>): T[] {
   if (!source || !source.length) return [];
 
   if (isKeyLabel(source[0])) {
-    return uniqueKeyLabelArray(source as Array<IKeyLabel<string | number>>) as T[];
+    return uniqueKeyLabelArray(source as IKeyLabel<string | number>[]) as T[];
   }
 
   return uniqueArray(source);

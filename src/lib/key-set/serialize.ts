@@ -8,7 +8,7 @@ import {
   KeySetNoneSerialized,
   KeySetSerialized,
   KeySetSomeSerialized,
-  KeySetTypes
+  KeySetTypes,
 } from "./-base";
 import { all, KeySetAll } from "./all";
 import { allExceptSome, KeySetAllExceptSome } from "./all-except-some";
@@ -53,21 +53,14 @@ function isValidKeySetElements(type: any, elements: any): boolean {
 export function isKeySetSerialized(given: any): given is KeySetSerialized {
   if (!hasShapeOfSerialized(given)) return false;
 
-  return (
-    isValidKeySetAllNone(given.type, given.elements) ||
-    isValidKeySetElements(given.type, given.elements)
-  );
+  return isValidKeySetAllNone(given.type, given.elements) || isValidKeySetElements(given.type, given.elements);
 }
 
-export function isKeySetAllNoneSerialized(
-  given: any
-): given is KeySetAllSerialized | KeySetNoneSerialized {
+export function isKeySetAllNoneSerialized(given: any): given is KeySetAllSerialized | KeySetNoneSerialized {
   return hasShapeOfSerialized(given) && isValidKeySetAllNone(given.type, given.elements);
 }
 
-export function isKeySetElementsSerialized(
-  given: any
-): given is KeySetSomeSerialized | KeySetAllExceptSomeSerialized {
+export function isKeySetElementsSerialized(given: any): given is KeySetSomeSerialized | KeySetAllExceptSomeSerialized {
   return hasShapeOfSerialized(given) && isValidKeySetElements(given.type, given.elements);
 }
 
@@ -83,30 +76,18 @@ export function isKeySetSomeSerialized(given: any): given is KeySetSomeSerialize
   return isKeySetElementsSerialized(given) && given.type === KeySetTypes.some;
 }
 
-export function isKeySetAllExceptSomeSerialized(
-  given: any
-): given is KeySetAllExceptSomeSerialized {
+export function isKeySetAllExceptSomeSerialized(given: any): given is KeySetAllExceptSomeSerialized {
   return isKeySetElementsSerialized(given) && given.type === KeySetTypes.allExceptSome;
 }
 
-export function serializeKeySet<T extends Key>(
-  x: KeySetAllSerialized | KeySetAll
-): KeySetAllSerialized;
-export function serializeKeySet<T extends Key>(
-  x: KeySetNoneSerialized | KeySetNone
-): KeySetNoneSerialized;
-export function serializeKeySet<T extends Key>(
-  x: KeySetSomeSerialized<T> | KeySetSome<T>
-): KeySetSomeSerialized<T>;
+export function serializeKeySet<T extends Key>(x: KeySetAllSerialized | KeySetAll): KeySetAllSerialized;
+export function serializeKeySet<T extends Key>(x: KeySetNoneSerialized | KeySetNone): KeySetNoneSerialized;
+export function serializeKeySet<T extends Key>(x: KeySetSomeSerialized<T> | KeySetSome<T>): KeySetSomeSerialized<T>;
 export function serializeKeySet<T extends Key>(
   x: KeySetAllExceptSomeSerialized<T> | KeySetAllExceptSome<T>
 ): KeySetAllExceptSomeSerialized<T>;
-export function serializeKeySet<T extends Key>(
-  x: KeySetSerialized<T> | KeySet<T>
-): KeySetSerialized<T>;
-export function serializeKeySet<T extends Key>(
-  keySet: KeySet<T> | KeySetSerialized<T>
-): KeySetSerialized<T> {
+export function serializeKeySet<T extends Key>(x: KeySetSerialized<T> | KeySet<T>): KeySetSerialized<T>;
+export function serializeKeySet<T extends Key>(keySet: KeySet<T> | KeySetSerialized<T>): KeySetSerialized<T> {
   if (isKeySet(keySet)) {
     return keySet.serialized();
   }
@@ -118,9 +99,7 @@ export function serializeKeySet<T extends Key>(
 
 export function parseKeySet<T extends Key>(x: KeySetAllSerialized | KeySetAll): KeySetAll;
 export function parseKeySet<T extends Key>(x: KeySetNoneSerialized | KeySetNone): KeySetNone;
-export function parseKeySet<T extends Key>(
-  x: KeySetSomeSerialized<T> | KeySetSome<T>
-): KeySetSome<T>;
+export function parseKeySet<T extends Key>(x: KeySetSomeSerialized<T> | KeySetSome<T>): KeySetSome<T>;
 export function parseKeySet<T extends Key>(
   x: KeySetAllExceptSomeSerialized<T> | KeySetAllExceptSome<T>
 ): KeySetAllExceptSome<T>;

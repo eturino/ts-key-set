@@ -6,7 +6,7 @@ import {
   isKeySetSerializedOfStrings,
   KeySetSerialized,
   none,
-  some
+  some,
 } from "../..";
 
 const invalidKeySetSerialized = ("blah" as unknown) as KeySetSerialized;
@@ -93,15 +93,11 @@ describe("isKeySetSerializedOfStringKeyLabels()", () => {
   });
 
   it("isKeySetSerializedOfStringKeyLabels(some([{ key: 1, label: 'A' }]).serialized()): false", () => {
-    expect(
-      isKeySetSerializedOfStringKeyLabels(some([{ key: 1, label: "A" }]).serialized())
-    ).toBeFalsy();
+    expect(isKeySetSerializedOfStringKeyLabels(some([{ key: 1, label: "A" }]).serialized())).toBeFalsy();
   });
 
   it("isKeySetSerializedOfStringKeyLabels(some([{ key: '1', label: 'A' }]).serialized()): true", () => {
-    expect(
-      isKeySetSerializedOfStringKeyLabels(some([{ key: "1", label: "A" }]).serialized())
-    ).toBeTruthy();
+    expect(isKeySetSerializedOfStringKeyLabels(some([{ key: "1", label: "A" }]).serialized())).toBeTruthy();
   });
 });
 
@@ -127,14 +123,10 @@ describe("isKeySetSerializedOfNumberKeyLabels()", () => {
   });
 
   it("isKeySetSerializedOfNumberKeyLabels(some([{ key: 1, label: 'A' }]).serialized()): true", () => {
-    expect(
-      isKeySetSerializedOfNumberKeyLabels(some([{ key: 1, label: "A" }]).serialized())
-    ).toBeTruthy();
+    expect(isKeySetSerializedOfNumberKeyLabels(some([{ key: 1, label: "A" }]).serialized())).toBeTruthy();
   });
 
   it("isKeySetSerializedOfNumberKeyLabels(some([{ key: '1', label: 'A' }]).serialized()): false", () => {
-    expect(
-      isKeySetSerializedOfNumberKeyLabels(some([{ key: "1", label: "A" }]).serialized())
-    ).toBeFalsy();
+    expect(isKeySetSerializedOfNumberKeyLabels(some([{ key: "1", label: "A" }]).serialized())).toBeFalsy();
   });
 });

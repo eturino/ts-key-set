@@ -6,23 +6,14 @@ import { KeySetAllExceptSome } from "./all-except-some";
 import { KeySetNone } from "./none";
 import { KeySetSome } from "./some";
 
-export type Key =
-  | string
-  | number
-  | IKeyLabel<string | number>
-  | IKeyLabel<string>
-  | IKeyLabel<number>;
+export type Key = string | number | IKeyLabel<string | number> | IKeyLabel<string> | IKeyLabel<number>;
 
 export function isValidKey(x: any): x is Key {
   if (typeof x === "string" || typeof x === "number") return true;
   return isKeyLabel(x);
 }
 
-export type KeySet<T extends Key = Key> =
-  | KeySetAll<T>
-  | KeySetNone<T>
-  | KeySetSome<T>
-  | KeySetAllExceptSome<T>;
+export type KeySet<T extends Key = Key> = KeySetAll<T> | KeySetNone<T> | KeySetSome<T> | KeySetAllExceptSome<T>;
 
 export type KeyLabelSet<T extends string | number = string | number> =
   | KeySetAll<IKeyLabel<T>>
@@ -37,7 +28,7 @@ export enum KeySetTypes {
   all = "ALL",
   allExceptSome = "ALL_EXCEPT_SOME",
   none = "NONE",
-  some = "SOME"
+  some = "SOME",
 }
 
 export type KeySetAllSerialized<T extends Key = Key> =

@@ -6,7 +6,7 @@ import {
   isKeySetOfStrings,
   KeySet,
   none,
-  some
+  some,
 } from "../..";
 
 describe("isKeySetOfStrings()", () => {

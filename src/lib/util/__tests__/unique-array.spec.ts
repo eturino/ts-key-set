@@ -24,11 +24,11 @@ describe("uniqueKeyLabelArray()", () => {
       uniqueKeyLabelArray([
         { key: 1, label: "a" },
         { key: 1, label: "b" },
-        { key: 2, label: "a" }
+        { key: 2, label: "a" },
       ])
     ).toEqual([
       { key: 1, label: "a" },
-      { key: 2, label: "a" }
+      { key: 2, label: "a" },
     ]);
   });
 
@@ -37,11 +37,11 @@ describe("uniqueKeyLabelArray()", () => {
       uniqueKeyLabelArray([
         { key: "1", label: "a" },
         { key: "1", label: "b" },
-        { key: "2", label: "a" }
+        { key: "2", label: "a" },
       ])
     ).toEqual([
       { key: "1", label: "a" },
-      { key: "2", label: "a" }
+      { key: "2", label: "a" },
     ]);
   });
 });

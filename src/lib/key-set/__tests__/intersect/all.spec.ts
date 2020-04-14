@@ -1,10 +1,4 @@
-import {
-  InvalidKeySetError,
-  KeySetAll,
-  KeySetAllExceptSome,
-  KeySetNone,
-  KeySetSome
-} from "../../../..";
+import { InvalidKeySetError, KeySetAll, KeySetAllExceptSome, KeySetNone, KeySetSome } from "../../../..";
 
 const keySetAll = new KeySetAll();
 const keySetNone = new KeySetNone();

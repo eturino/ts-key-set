@@ -79,11 +79,11 @@ export class KeySetSome<T extends Key> extends KeySetByKeys<T> {
   }
 
   private intersectKeys(otherKeys: T[]) {
-    return [...this.keys].filter(key => otherKeys.includes(key));
+    return [...this.keys].filter((key) => otherKeys.includes(key));
   }
 
   private excludeKeys(otherKeys: T[]) {
-    return [...this.keys].filter(key => !otherKeys.includes(key));
+    return [...this.keys].filter((key) => !otherKeys.includes(key));
   }
 }
 
