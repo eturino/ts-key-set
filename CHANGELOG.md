@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.2.1](https://github.com/eturino/ts-key-set/compare/v4.2.0...v4.2.1) (2020-04-14)
+
+
+### Bug Fixes
+
+* **deps:** [security] bump acorn from 6.4.0 to 6.4.1 ([#57](https://github.com/eturino/ts-key-set/issues/57)) ([df4f2fd](https://github.com/eturino/ts-key-set/commit/df4f2fd88b3fe6055fcf059e67b5657e0ff7125a))
+
 ## [4.2.0](https://github.com/eturino/ts-key-set/compare/v4.1.1...v4.2.0) (2020-03-11)
 
 
