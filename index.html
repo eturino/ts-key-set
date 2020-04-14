@@ -14,7 +14,7 @@
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -98,7 +98,7 @@
 					<li>objects with <code>key</code> (<code>string</code> or <code>number</code>) and <code>label</code> (<code>string</code>)</li>
 				</ul>
 				<p>All elements have to have be of the same type.</p>
-				<a href="#creation-codeallcode-codenonecode-codesomecode-codeallexceptsomecode-codesomeforcedcode-codeallexceptsomeforcedcode" id="creation-codeallcode-codenonecode-codesomecode-codeallexceptsomecode-codesomeforcedcode-codeallexceptsomeforcedcode" style="color: inherit; text-decoration: none;">
+				<a href="#creation-all-none-some-allexceptsome-someforced-allexceptsomeforced" id="creation-all-none-some-allexceptsome-someforced-allexceptsomeforced" style="color: inherit; text-decoration: none;">
 					<h3>Creation: <code>all()</code>, <code>none()</code>, <code>some([...])</code>, <code>allExceptSome([...])</code>, <code>someForced([...])</code>, <code>allExceptSomeForced([...])</code></h3>
 				</a>
 				<p>Build your KeySets using the build functions</p>
@@ -125,7 +125,7 @@ someForced([]); <span class="hljs-comment">// throws an InvalidEmptySetError</sp
 
 allExceptSomeForced([<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]); <span class="hljs-comment">// returns a new instance of KeySetAllExceptSome with keys [1, 2, 3] (sorted, unique)</span>
 allExceptSomeForced([]); <span class="hljs-comment">// throws an InvalidEmptySetError</span></code></pre>
-				<a href="#codeelementscode-aliased-with-codekeyscode" id="codeelementscode-aliased-with-codekeyscode" style="color: inherit; text-decoration: none;">
+				<a href="#elements-aliased-with-keys" id="elements-aliased-with-keys" style="color: inherit; text-decoration: none;">
 					<h3><code>.elements</code> (aliased with <code>.keys</code>)</h3>
 				</a>
 				<p>Both getters return a copy of the internal list of elements.</p>
@@ -133,7 +133,7 @@ allExceptSomeForced([]); <span class="hljs-comment">// throws an InvalidEmptySet
 some([<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]).keys; <span class="hljs-comment">// =&gt; [1, 2, 3]</span>
 allExceptSome([<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]).elements; <span class="hljs-comment">// =&gt; [1, 2, 3]</span>
 allExceptSome([<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]).keys; <span class="hljs-comment">// =&gt; [1, 2, 3]</span></code></pre>
-				<a href="#codetypecode" id="codetypecode" style="color: inherit; text-decoration: none;">
+				<a href="#type" id="type" style="color: inherit; text-decoration: none;">
 					<h3><code>type</code></h3>
 				</a>
 				<p>All KeySet expose a <code>type</code> property that will return a member of the <code>KeySetTypes</code> enum.</p>
@@ -143,12 +143,12 @@ allExceptSome([<span class="hljs-number">1</span>, <span class="hljs-number">3</
 					<li><code>KeySetNone</code> returns <code>NONE</code></li>
 					<li><code>KeySetSome</code> returns <code>SOME</code></li>
 				</ul>
-				<a href="#codetypecode-in-v1x-vs-v2x" id="codetypecode-in-v1x-vs-v2x" style="color: inherit; text-decoration: none;">
+				<a href="#type-in-v1x-vs-v2x" id="type-in-v1x-vs-v2x" style="color: inherit; text-decoration: none;">
 					<h4><code>type</code> in v1.x vs v2.x</h4>
 				</a>
 				<p><code>v2.0</code> changed the values returned by <code>type</code>, make them SCREAMING_SNAKE_CASE, which allows for easier integration with GraphQL enums.</p>
 				<p>In v1.x, the values were <code>all</code>, <code>allExceptSome</code>, <code>none</code> and <code>some</code>.</p>
-				<a href="#coderepresentsxxxcode" id="coderepresentsxxxcode" style="color: inherit; text-decoration: none;">
+				<a href="#representsxxx" id="representsxxx" style="color: inherit; text-decoration: none;">
 					<h3><code>representsXXX()</code></h3>
 				</a>
 				<p>All KeySet expose 4 methods <code>representXXX()</code>. Each class return false for all except their own.</p>
@@ -158,19 +158,19 @@ allExceptSome([<span class="hljs-number">1</span>, <span class="hljs-number">3</
 					<li><code>representsSome()</code>: <code>KeySetSome</code> returns <code>true</code></li>
 					<li><code>representsAllExceptSome()</code>: <code>KeySetAllExceptSome</code> returns <code>true</code></li>
 				</ul>
-				<a href="#codeclonecode" id="codeclonecode" style="color: inherit; text-decoration: none;">
+				<a href="#clone" id="clone" style="color: inherit; text-decoration: none;">
 					<h3><code>clone()</code></h3>
 				</a>
 				<p>All KeySet has a <code>clone()</code> method, which will return a new instance of the same class that represents the same KeySet.</p>
 				<p>If the KeySet is <code>KeySetSome</code> or <code>KeySetAllExceptSome</code>, they will have an array with the same keys.</p>
 				<pre><code class="language-ts"><span class="hljs-keyword">const</span> newKeySet = keySet.clone();</code></pre>
-				<a href="#codeisequalothercode" id="codeisequalothercode" style="color: inherit; text-decoration: none;">
+				<a href="#isequalother" id="isequalother" style="color: inherit; text-decoration: none;">
 					<h3><code>isEqual(other)</code></h3>
 				</a>
 				<p>All KeySet has an <code>isEqual(other)</code> method that returns true if the <code>other</code> keySet is of the same class and represents the same KeySet.</p>
 				<p>If the KeySet is <code>KeySetSome</code> or <code>KeySetAllExceptSome</code>, they will have to have an array with the same keys.</p>
 				<pre><code class="language-ts"><span class="hljs-keyword">if</span> (keySet.isEqual(otherKeySet))</code></pre>
-				<a href="#codeinvertcode" id="codeinvertcode" style="color: inherit; text-decoration: none;">
+				<a href="#invert" id="invert" style="color: inherit; text-decoration: none;">
 					<h3><code>invert()</code></h3>
 				</a>
 				<p>All KeySet has an <code>invert()</code> method that returns an instance of the opposite class, which represents the complementary KeySet. _(see <a href="https://en.wikipedia.org/wiki/Complement_(set*theory)">Complement in Wikipedia</a>)*</p>
@@ -179,12 +179,12 @@ allExceptSome([<span class="hljs-number">1</span>, <span class="hljs-number">3</
 					<li><code>KeySetSome</code> ⟷ <code>KeySetAllExceptSome</code></li>
 				</ul>
 				<pre><code class="language-ts"><span class="hljs-keyword">const</span> complementaryKeySet = keySet.invert();</code></pre>
-				<a href="#coderemoveothercode" id="coderemoveothercode" style="color: inherit; text-decoration: none;">
+				<a href="#removeother" id="removeother" style="color: inherit; text-decoration: none;">
 					<h3><code>remove(other)</code></h3>
 				</a>
 				<p>Returns a new KeySet with the difference between ThisSet - OtherSet <code>(A - B)</code></p>
 				<pre><code class="language-ts"><span class="hljs-keyword">const</span> diffKeySet = keySet.remove(other);</code></pre>
-				<a href="#codeintersectothercode" id="codeintersectothercode" style="color: inherit; text-decoration: none;">
+				<a href="#intersectother" id="intersectother" style="color: inherit; text-decoration: none;">
 					<h3><code>intersect(other)</code></h3>
 				</a>
 				<p>Returns a new KeySet with the intersection of both Sets <code>(A ∩ B)</code>, representing the elements present in both sets</p>
@@ -486,57 +486,28 @@ isNonEmptyArray(b); <span class="hljs-comment">// =&gt; true (also sets that a i
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
-				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
-				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
-				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
-				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
-				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 		</div>
 	</div>
