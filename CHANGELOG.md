@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.2.2](https://github.com/eturino/ts-key-set/compare/v4.2.1...v4.2.2) (2020-05-12)
+
+
+### Bug Fixes
+
+* target ES2017 instead of esnext for module, and ES2015 for main ([8660d10](https://github.com/eturino/ts-key-set/commit/8660d10dd7cdeddd80ea1d0e43fd6e8eb2e2b1c6))
+
 ### [4.2.1](https://github.com/eturino/ts-key-set/compare/v4.2.0...v4.2.1) (2020-04-14)
 
 
