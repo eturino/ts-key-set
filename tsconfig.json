@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2017",
+    "target": "ES2015",
     "outDir": "build/main",
     "rootDir": "src",
     "moduleResolution": "node",
