@@ -41,14 +41,7 @@ All elements have to have be of the same type.
 Build your KeySets using the build functions
 
 ```ts
-import {
-  all,
-  none,
-  some,
-  allExceptSome,
-  someForced,
-  allExceptSomeForced
-} from "@eturino/key-set";
+import { all, none, some, allExceptSome, someForced, allExceptSomeForced } from "@eturino/key-set";
 
 all(); // => returns a new instance of KeySetAll
 none(); // => returns a new instance of KeySetNone
@@ -148,6 +141,40 @@ Returns a new KeySet with the intersection of both Sets `(A ∩ B)`, representin
 const diffKeySet = keySet.intersect(other);
 ```
 
+### `includes(element)`
+
+alias `contains(element)`.
+
+Returns a boolean defining if the KeySet includes the given element. a new KeySet with the intersection of both Sets `(A ∩ B)`, representing the elements present in both sets
+
+```ts
+const element = "A";
+
+const ksAll: KeySetAll<string> = all<string>();
+ksAll.includes(element); // => true
+ksAll.contains(element); // => true
+
+const ksNone: KeySetNone<string> = none<string>();
+ksNone.includes(element); // => false
+ksNone.contains(element); // => false
+
+const ksSome: KeySetSome<string> = some(["A", "B", "C"]);
+ksSome.includes(element); // => true
+ksSome.contains(element); // => true
+
+const ksSome2: KeySetSome<string> = some(["X", "Y", "Z"]);
+ksSome2.includes(element); // => false
+ksSome2.contains(element); // => false
+
+const ksAllExceptSome: KeySetAllExceptSome<string> = allExceptSome(["A", "B", "C"]);
+ksAllExceptSome.includes(element); // => false
+ksAllExceptSome.contains(element); // => false
+
+const ksAllExceptSome2: KeySetAllExceptSome<string> = allExceptSome(["X", "Y", "Z"]);
+ksAllExceptSome2.includes(element); // => true
+ksAllExceptSome2.contains(element); // => true
+```
+
 ## Serialization
 
 The Serialized representation of the KeySet (`KeySetSerialized`) is a plain object with `type` and optionally `elements`.
@@ -212,12 +239,12 @@ The lib also exports 2 util array types `EmptyArray<T>` and `NonEmptyArray<T>`, 
 ```ts
 const lists: Array<NonEmptyArray<any>> = [
   [1], // ok
-  [] // error
+  [], // error
 ];
 
 const lists2: Array<EmptyArray<any>> = [
   [], // ok
-  [1] // error
+  [1], // error
 ];
 
 const a: string[] = [];

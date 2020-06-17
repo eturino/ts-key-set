@@ -25,6 +25,10 @@ export class KeySetNone<T extends Key = Key> extends KeySetGlobal<T> {
     return false;
   }
 
+  public includes(_element: T) {
+    return false;
+  }
+
   public clone(): KeySetNone<T> {
     return new KeySetNone<T>();
   }

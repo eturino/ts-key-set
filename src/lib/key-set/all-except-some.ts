@@ -1,4 +1,4 @@
-import { NonEmptyArray } from "../util/array-types";
+import { EmptyArray, NonEmptyArray } from "../util/array-types";
 import { Key, KeySet, KeySetAllExceptSomeSerialized, KeySetTypes } from "./-base";
 import { KeySetByKeys } from "./-by-keys";
 import { KeySetGlobal } from "./-global";
@@ -28,6 +28,10 @@ export class KeySetAllExceptSome<T extends Key> extends KeySetByKeys<T> {
 
   public representsSome(): boolean {
     return false;
+  }
+
+  public includes(element: T) {
+    return !this.keys.includes(element);
   }
 
   public clone(): KeySetAllExceptSome<T> {
@@ -107,6 +111,9 @@ export function allExceptSomeForced<T extends Key>(keys: T[] | ReadonlyArray<T>)
  *
  * @param keys list of keys for the KeySet
  */
+export function allExceptSome<T extends Key>(keys: EmptyArray<T>): KeySetAll<T>;
+export function allExceptSome<T extends Key>(keys: NonEmptyArray<T>): KeySetAllExceptSome<T>;
+export function allExceptSome<T extends Key>(keys: T[] | ReadonlyArray<T>): KeySetAll<T> | KeySetAllExceptSome<T>;
 export function allExceptSome<T extends Key>(keys: T[] | ReadonlyArray<T>): KeySetAll<T> | KeySetAllExceptSome<T> {
   if (!keys.length) return all<T>();
 

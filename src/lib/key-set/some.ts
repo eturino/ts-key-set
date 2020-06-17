@@ -1,4 +1,4 @@
-import { NonEmptyArray } from "../util/array-types";
+import { EmptyArray, NonEmptyArray } from "../util/array-types";
 import { Key, KeySet, KeySetSomeSerialized, KeySetTypes } from "./-base";
 import { KeySetByKeys } from "./-by-keys";
 import { KeySetGlobal } from "./-global";
@@ -28,6 +28,10 @@ export class KeySetSome<T extends Key> extends KeySetByKeys<T> {
 
   public representsSome(): boolean {
     return true;
+  }
+
+  public includes(element: T) {
+    return this.keys.includes(element);
   }
 
   public clone(): KeySetSome<T> {
@@ -106,6 +110,9 @@ export function someForced<T extends Key>(keys: T[] | ReadonlyArray<T>): KeySetS
  *
  * @param keys list of keys for the KeySet
  */
+export function some<T extends Key>(keys: EmptyArray<T>): KeySetNone<T>;
+export function some<T extends Key>(keys: NonEmptyArray<T>): KeySetSome<T>;
+export function some<T extends Key>(keys: T[] | ReadonlyArray<T>): KeySetNone<T> | KeySetSome<T>;
 export function some<T extends Key>(keys: T[] | ReadonlyArray<T>): KeySetNone<T> | KeySetSome<T> {
   if (!keys.length) return none<T>();
 

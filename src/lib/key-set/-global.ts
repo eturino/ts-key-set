@@ -3,7 +3,7 @@ import { IKeySetClass, Key, KeySet, KeySetAllSerialized, KeySetNoneSerialized, K
 import { KeySetAll } from "./all";
 import { KeySetNone } from "./none";
 
-export abstract class KeySetGlobal<T extends Key> implements IKeySetClass {
+export abstract class KeySetGlobal<T extends Key> implements IKeySetClass<T> {
   public abstract readonly type: KeySetTypes.all | KeySetTypes.none;
 
   public get keys(): EmptyArray<T> {
@@ -37,4 +37,10 @@ export abstract class KeySetGlobal<T extends Key> implements IKeySetClass {
   public abstract remove(other: KeySet | KeySetGlobal<Key>): KeySet;
 
   public abstract intersect(other: KeySet | KeySetGlobal<Key>): KeySet;
+
+  public abstract includes(element: T): boolean;
+
+  public contains(element: T): boolean {
+    return this.includes(element);
+  }
 }

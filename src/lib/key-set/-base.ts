@@ -81,7 +81,7 @@ export type KeyLabelSetSerialized<T extends string | number = string | number> =
   | KeyLabelSetSomeSerialized<T>
   | KeyLabelSetAllExceptSomeSerialized<T>;
 
-export interface IKeySetClass {
+export interface IKeySetClass<T extends Key> {
   /**
    * returns the KeySetType that defines this class
    */
@@ -143,6 +143,22 @@ export interface IKeySetClass {
    * @param other
    */
   intersect(other: KeySet): KeySet;
+
+  /**
+   * returns a boolean if the KeySet includes the given element
+   *
+   * @param element
+   * @alias includes
+   */
+  contains(element: T): boolean;
+
+  /**
+   * returns a boolean if the KeySet includes the given element
+   *
+   * @param element
+   * @alias contains
+   */
+  includes(element: T): boolean;
 }
 
 export function isKeySetAll(x: any): x is KeySetAll {

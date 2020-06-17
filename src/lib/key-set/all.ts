@@ -28,6 +28,10 @@ export class KeySetAll<T extends Key = Key> extends KeySetGlobal<T> {
     return false;
   }
 
+  public includes(_element: T) {
+    return true;
+  }
+
   public clone(): KeySetAll<T> {
     return new KeySetAll<T>();
   }

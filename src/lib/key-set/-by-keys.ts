@@ -7,7 +7,7 @@ import { KeySetAllExceptSome } from "./all-except-some";
 import { InvalidEmptySetError } from "./invalid-empty-set-error";
 import { KeySetSome } from "./some";
 
-export abstract class KeySetByKeys<T extends Key> implements IKeySetClass {
+export abstract class KeySetByKeys<T extends Key> implements IKeySetClass<T> {
   public abstract readonly type: KeySetTypes.allExceptSome | KeySetTypes.some;
 
   private readonly _elements: NonEmptyArray<T>;
@@ -43,6 +43,12 @@ export abstract class KeySetByKeys<T extends Key> implements IKeySetClass {
   public abstract remove(other: KeySet | KeySetGlobal<Key>): KeySet;
 
   public abstract intersect(other: KeySet | KeySetGlobal<Key>): KeySet;
+
+  public abstract includes(element: T): boolean;
+
+  public contains(element: T): boolean {
+    return this.includes(element);
+  }
 
   public get keys(): T[] {
     return this.elements;
