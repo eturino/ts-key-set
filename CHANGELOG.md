@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.3.0](https://github.com/eturino/ts-key-set/compare/v4.2.2...v4.3.0) (2020-06-17)
+
+
+### Features
+
+* add `.includes(element)` and alias `.contains(element)` (+ updated dependencies) ([233117d](https://github.com/eturino/ts-key-set/commit/233117db7c91c284d7109ace743dde2bf72bed6a))
+
 ### [4.2.2](https://github.com/eturino/ts-key-set/compare/v4.2.1...v4.2.2) (2020-05-12)
 
 
