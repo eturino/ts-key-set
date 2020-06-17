@@ -94,7 +94,7 @@
 			<section class="tsd-panel">
 				<h3>Implements</h3>
 				<ul class="tsd-hierarchy">
-					<li><a href="../interfaces/ikeysetclass.html" class="tsd-signature-type">IKeySetClass</a></li>
+					<li><a href="../interfaces/ikeysetclass.html" class="tsd-signature-type">IKeySetClass</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -118,6 +118,8 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="keysetglobal.html#clone" class="tsd-kind-icon">clone</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="keysetglobal.html#contains" class="tsd-kind-icon">contains</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="keysetglobal.html#includes" class="tsd-kind-icon">includes</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="keysetglobal.html#intersect" class="tsd-kind-icon">intersect</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="keysetglobal.html#invert" class="tsd-kind-icon">invert</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="keysetglobal.html#isequal" class="tsd-kind-icon">is<wbr>Equal</a></li>
@@ -142,7 +144,7 @@
 					<aside class="tsd-sources">
 						<p>Implementation of <a href="../interfaces/ikeysetclass.html">IKeySetClass</a>.<a href="../interfaces/ikeysetclass.html#type">type</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/ee9aa1e/src/lib/key-set/-global.ts#L7">src/lib/key-set/-global.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/233117d/src/lib/key-set/-global.ts#L7">src/lib/key-set/-global.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -159,7 +161,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/ee9aa1e/src/lib/key-set/-global.ts#L13">src/lib/key-set/-global.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/233117d/src/lib/key-set/-global.ts#L13">src/lib/key-set/-global.ts:13</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="../globals.html#emptyarray" class="tsd-signature-type">EmptyArray</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -176,7 +178,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/ee9aa1e/src/lib/key-set/-global.ts#L9">src/lib/key-set/-global.ts:9</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/233117d/src/lib/key-set/-global.ts#L9">src/lib/key-set/-global.ts:9</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="../globals.html#emptyarray" class="tsd-signature-type">EmptyArray</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -197,10 +199,58 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/ikeysetclass.html">IKeySetClass</a>.<a href="../interfaces/ikeysetclass.html#clone">clone</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/ee9aa1e/src/lib/key-set/-global.ts#L31">src/lib/key-set/-global.ts:31</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/233117d/src/lib/key-set/-global.ts#L31">src/lib/key-set/-global.ts:31</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="keysetall.html" class="tsd-signature-type">KeySetAll</a><span class="tsd-signature-symbol"> | </span><a href="keysetnone.html" class="tsd-signature-type">KeySetNone</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="contains" class="tsd-anchor"></a>
+					<h3>contains</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">contains<span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/ikeysetclass.html">IKeySetClass</a>.<a href="../interfaces/ikeysetclass.html#contains">contains</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/233117d/src/lib/key-set/-global.ts#L43">src/lib/key-set/-global.ts:43</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>element: <span class="tsd-signature-type">T</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="includes" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> includes</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">includes<span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/ikeysetclass.html">IKeySetClass</a>.<a href="../interfaces/ikeysetclass.html#includes">includes</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/233117d/src/lib/key-set/-global.ts#L41">src/lib/key-set/-global.ts:41</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>element: <span class="tsd-signature-type">T</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -214,7 +264,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/ee9aa1e/src/lib/key-set/-global.ts#L39">src/lib/key-set/-global.ts:39</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/233117d/src/lib/key-set/-global.ts#L39">src/lib/key-set/-global.ts:39</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -238,7 +288,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/ikeysetclass.html">IKeySetClass</a>.<a href="../interfaces/ikeysetclass.html#invert">invert</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/ee9aa1e/src/lib/key-set/-global.ts#L33">src/lib/key-set/-global.ts:33</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/233117d/src/lib/key-set/-global.ts#L33">src/lib/key-set/-global.ts:33</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="keysetall.html" class="tsd-signature-type">KeySetAll</a><span class="tsd-signature-symbol"> | </span><a href="keysetnone.html" class="tsd-signature-type">KeySetNone</a></h4>
@@ -256,7 +306,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/ikeysetclass.html">IKeySetClass</a>.<a href="../interfaces/ikeysetclass.html#isequal">isEqual</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/ee9aa1e/src/lib/key-set/-global.ts#L35">src/lib/key-set/-global.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/233117d/src/lib/key-set/-global.ts#L35">src/lib/key-set/-global.ts:35</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -279,7 +329,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/ee9aa1e/src/lib/key-set/-global.ts#L37">src/lib/key-set/-global.ts:37</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/233117d/src/lib/key-set/-global.ts#L37">src/lib/key-set/-global.ts:37</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -303,7 +353,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/ikeysetclass.html">IKeySetClass</a>.<a href="../interfaces/ikeysetclass.html#representsall">representsAll</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/ee9aa1e/src/lib/key-set/-global.ts#L23">src/lib/key-set/-global.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/233117d/src/lib/key-set/-global.ts#L23">src/lib/key-set/-global.ts:23</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -321,7 +371,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/ikeysetclass.html">IKeySetClass</a>.<a href="../interfaces/ikeysetclass.html#representsallexceptsome">representsAllExceptSome</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/ee9aa1e/src/lib/key-set/-global.ts#L29">src/lib/key-set/-global.ts:29</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/233117d/src/lib/key-set/-global.ts#L29">src/lib/key-set/-global.ts:29</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -339,7 +389,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/ikeysetclass.html">IKeySetClass</a>.<a href="../interfaces/ikeysetclass.html#representsnone">representsNone</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/ee9aa1e/src/lib/key-set/-global.ts#L25">src/lib/key-set/-global.ts:25</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/233117d/src/lib/key-set/-global.ts#L25">src/lib/key-set/-global.ts:25</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -357,7 +407,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/ikeysetclass.html">IKeySetClass</a>.<a href="../interfaces/ikeysetclass.html#representssome">representsSome</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/ee9aa1e/src/lib/key-set/-global.ts#L27">src/lib/key-set/-global.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/233117d/src/lib/key-set/-global.ts#L27">src/lib/key-set/-global.ts:27</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -375,7 +425,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/ikeysetclass.html">IKeySetClass</a>.<a href="../interfaces/ikeysetclass.html#serialized">serialized</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/ee9aa1e/src/lib/key-set/-global.ts#L21">src/lib/key-set/-global.ts:21</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/233117d/src/lib/key-set/-global.ts#L21">src/lib/key-set/-global.ts:21</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="../globals.html#keysetallserialized" class="tsd-signature-type">KeySetAllSerialized</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><a href="../globals.html#keysetnoneserialized" class="tsd-signature-type">KeySetNoneSerialized</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -392,7 +442,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/ee9aa1e/src/lib/key-set/-global.ts#L17">src/lib/key-set/-global.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/eturino/ts-key-set/blob/233117d/src/lib/key-set/-global.ts#L17">src/lib/key-set/-global.ts:17</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -434,6 +484,12 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="keysetglobal.html#clone" class="tsd-kind-icon">clone</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="keysetglobal.html#contains" class="tsd-kind-icon">contains</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="keysetglobal.html#includes" class="tsd-kind-icon">includes</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="keysetglobal.html#intersect" class="tsd-kind-icon">intersect</a>
