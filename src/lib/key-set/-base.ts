@@ -31,6 +31,8 @@ export enum KeySetTypes {
   some = "SOME",
 }
 
+export type KeySetTypesEnumValues = "ALL" | "ALL_EXCEPT_SOME" | "NONE" | "SOME";
+
 export type KeySetAllSerialized<T extends Key = Key> =
   | { type: KeySetTypes.all }
   | { type: KeySetTypes.all; elements: EmptyArray<T> };

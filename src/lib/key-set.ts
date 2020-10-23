@@ -19,6 +19,7 @@ import {
   KeySetSerialized,
   KeySetSomeSerialized,
   KeySetTypes,
+  KeySetTypesEnumValues,
 } from "./key-set/-base";
 import { all, KeySetAll } from "./key-set/all";
 import { allExceptSome, allExceptSomeForced, KeySetAllExceptSome } from "./key-set/all-except-some";
@@ -83,6 +84,7 @@ export {
   InvalidEmptySetError,
   // enums
   KeySetTypes,
+  KeySetTypesEnumValues,
   // serialize functions
   serializeKeySet,
   parseKeySet,

@@ -79,6 +79,8 @@ All KeySet expose a `type` property that will return a member of the `KeySetType
 - `KeySetNone` returns `NONE`
 - `KeySetSome` returns `SOME`
 
+The types are also exposed as a union of strings TypeScript type `KeySetTypesEnumValues`.
+
 #### `type` in v1.x vs v2.x
 
 `v2.0` changed the values returned by `type`, make them SCREAMING_SNAKE_CASE, which allows for easier integration with GraphQL enums.
