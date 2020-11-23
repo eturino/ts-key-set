@@ -67,7 +67,7 @@
     "prettier": "^2.0.4",
     "standard-version": "^9.0.0",
     "strip-json-comments": "^3.0.1",
-    "trash-cli": "^3.0.0",
+    "trash-cli": "^4.0.0",
     "ts-enum-util": "^4.0.2",
     "ts-jest": "^26.1.0",
     "ts-loader": "^8.0.6",
