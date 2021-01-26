@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.4.1](https://github.com/eturino/ts-key-set/compare/v4.4.0...v4.4.1) (2021-01-26)
+
+
+### Bug Fixes
+
+* **deps:** [security] bump highlight.js from 10.3.1 to 10.4.1 ([#176](https://github.com/eturino/ts-key-set/issues/176)) ([a889746](https://github.com/eturino/ts-key-set/commit/a88974689fd3e34efacc25fb4f4c65f947fd58b5))
+* **deps:** [security] bump ini from 1.3.5 to 1.3.8 ([#182](https://github.com/eturino/ts-key-set/issues/182)) ([e1dabfd](https://github.com/eturino/ts-key-set/commit/e1dabfddfc180e7c0f0dd14a6d9a8afef682db6f))
+
 ## [4.4.0](https://github.com/eturino/ts-key-set/compare/v4.3.1...v4.4.0) (2020-10-23)
 
 
