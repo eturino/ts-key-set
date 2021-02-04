@@ -44,6 +44,8 @@ export abstract class KeySetByKeys<T extends Key> implements IKeySetClass<T> {
 
   public abstract intersect(other: KeySet | KeySetGlobal<Key>): KeySet;
 
+  public abstract union(other: KeySet | KeySetGlobal<Key>): KeySet;
+
   public abstract includes(element: T): boolean;
 
   public contains(element: T): boolean {

@@ -1,6 +1,9 @@
 import { Key, KeySet, KeySetNoneSerialized, KeySetTypes } from "./-base";
 import { KeySetGlobal } from "./-global";
 import { KeySetAll } from "./all";
+import { KeySetAllExceptSome } from "./all-except-some";
+import { InvalidKeySetError } from "./invalid-key-set-error";
+import { KeySetSome } from "./some";
 
 export class KeySetNone<T extends Key = Key> extends KeySetGlobal<T> {
   public readonly type = KeySetTypes.none;
@@ -47,6 +50,20 @@ export class KeySetNone<T extends Key = Key> extends KeySetGlobal<T> {
 
   public intersect(_other: KeySet | KeySetGlobal<Key>): KeySetNone<T> {
     return new KeySetNone<T>();
+  }
+
+  public union(other: KeySetAll<T> | KeySetAll<Key>): KeySetAll<T>;
+  public union(other: KeySetNone<T> | KeySetNone<Key>): KeySetNone<T>;
+  public union(other: KeySetSome<T>): KeySetSome<T>;
+  public union(other: KeySetAllExceptSome<T>): KeySetAllExceptSome<T>;
+  public union(other: KeySet<T> | KeySetGlobal<Key>): KeySet<T>;
+  public union(other: KeySet<T> | KeySetGlobal<Key>): KeySet<T> {
+    if (other instanceof KeySetAll) return new KeySetAll();
+    if (other instanceof KeySetNone) return new KeySetNone();
+    if (other instanceof KeySetSome) return new KeySetSome([...other.elements]);
+    if (other instanceof KeySetAllExceptSome) return new KeySetAllExceptSome([...other.elements]);
+
+    throw new InvalidKeySetError(`other key set not recognised ${other}`);
   }
 }
 

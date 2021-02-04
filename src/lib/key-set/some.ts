@@ -1,9 +1,10 @@
 import { EmptyArray, NonEmptyArray } from "../util/array-types";
+import { uniqueKeys } from "../util/unique-array";
 import { Key, KeySet, KeySetSomeSerialized, KeySetTypes } from "./-base";
 import { KeySetByKeys } from "./-by-keys";
 import { KeySetGlobal } from "./-global";
 import { KeySetAll } from "./all";
-import { KeySetAllExceptSome } from "./all-except-some";
+import { allExceptSome, KeySetAllExceptSome } from "./all-except-some";
 import { InvalidEmptySetError } from "./invalid-empty-set-error";
 import { KeySetNone, none } from "./none";
 
@@ -82,6 +83,27 @@ export class KeySetSome<T extends Key> extends KeySetByKeys<T> {
     return new KeySetNone();
   }
 
+  public union(other: KeySetAll<T> | KeySetAll<Key>): KeySetAll<T>;
+  public union(other: KeySetNone<T> | KeySetNone<Key> | KeySetSome<T>): KeySetSome<T>;
+  public union(other: KeySetAllExceptSome<T>): KeySetAllExceptSome<T> | KeySetAll<T>;
+  public union(other: KeySet<T> | KeySetGlobal<Key>): KeySetSome<T> | KeySetAllExceptSome<T> | KeySetAll<T>;
+  public union(other: KeySet<T> | KeySetGlobal<Key>): KeySetSome<T> | KeySetAllExceptSome<T> | KeySetAll<T> {
+    if (other instanceof KeySetSome) {
+      return new KeySetSome(uniqueKeys([...this.keys, ...other.keys].sort()));
+    }
+
+    if (other instanceof KeySetAllExceptSome) {
+      return allExceptSome(this.excludeMyKeys(other.keys));
+    }
+
+    if (other instanceof KeySetNone) return new KeySetSome([...this.keys]);
+
+    return new KeySetAll();
+  }
+
+  private excludeMyKeys(keys: T[]) {
+    return [...keys].filter((key) => !this.keys.includes(key));
+  }
   private intersectKeys(otherKeys: T[]) {
     return [...this.keys].filter((key) => otherKeys.includes(key));
   }

@@ -147,6 +147,12 @@ export interface IKeySetClass<T extends Key> {
   intersect(other: KeySet): KeySet;
 
   /**
+   * returns a new KeySet with the union of both Sets (A U B), representing the elements present in either A or B
+   * @param other
+   */
+  union(other: KeySet): KeySet;
+
+  /**
    * returns a boolean if the KeySet includes the given element
    *
    * @param element

@@ -87,8 +87,32 @@ export class KeySetAllExceptSome<T extends Key> extends KeySetByKeys<T> {
     return allExceptSome([...this.keys, ...otherKeys]);
   }
 
+  public union(other: KeySetAll<T> | KeySetAll<Key>): KeySetAll<T>;
+  public union(other: KeySetNone<T> | KeySetNone<Key>): KeySetAllExceptSome<T>;
+  public union(other: KeySet<T> | KeySetGlobal<Key>): KeySetAll<T> | KeySetAllExceptSome<T>;
+  public union(other: KeySet<T> | KeySetGlobal<Key>): KeySetAll<T> | KeySetAllExceptSome<T> {
+    if (other instanceof KeySetAll) return new KeySetAll();
+    if (other instanceof KeySetNone) return new KeySetAllExceptSome([...this.keys]);
+
+    const otherKeys = other.keys as T[];
+
+    if (other instanceof KeySetSome) {
+      return allExceptSome(this.excludeKeys(otherKeys));
+    }
+
+    return allExceptSome(this.intersectKeys(otherKeys));
+  }
+
+  private intersectKeys(otherKeys: T[]) {
+    return [...this.keys].filter((key) => otherKeys.includes(key));
+  }
+
   private excludeMyKeys(keys: T[]) {
     return [...keys].filter((key) => !this.keys.includes(key as T));
+  }
+
+  private excludeKeys(otherKeys: T[]) {
+    return [...this.keys].filter((key) => !otherKeys.includes(key));
   }
 }
 

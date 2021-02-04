@@ -143,6 +143,14 @@ Returns a new KeySet with the intersection of both Sets `(A ∩ B)`, representin
 const diffKeySet = keySet.intersect(other);
 ```
 
+### `union(other)`
+
+Returns a new KeySet with the union of both Sets `(A U B)`, representing the elements present in either A or B
+
+```ts
+const diffKeySet = keySet.intersect(other);
+```
+
 ### `includes(element)`
 
 alias `contains(element)`.

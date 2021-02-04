@@ -72,6 +72,15 @@ export class KeySetAll<T extends Key = Key> extends KeySetGlobal<T> {
 
     throw new InvalidKeySetError(`other key set not recognised ${other}`);
   }
+
+  public union(other: KeySet<T> | KeySetGlobal<Key>): KeySetAll<T> {
+    if (other instanceof KeySetAll) return new KeySetAll();
+    if (other instanceof KeySetNone) return new KeySetAll();
+    if (other instanceof KeySetSome) return new KeySetAll();
+    if (other instanceof KeySetAllExceptSome) return new KeySetAll();
+
+    throw new InvalidKeySetError(`other key set not recognised ${other}`);
+  }
 }
 
 export function all<T extends Key = Key>(): KeySetAll<T> {
