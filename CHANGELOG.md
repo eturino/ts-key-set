@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.5.0](https://github.com/eturino/ts-key-set/compare/v4.4.2...v4.5.0) (2021-02-04)
+
+
+### Features
+
+* added `ks.union(other)` ([cde30b5](https://github.com/eturino/ts-key-set/commit/cde30b512a91a21e199c743bcac4a04132743bae))
+
 ### [4.4.2](https://github.com/eturino/ts-key-set/compare/v4.4.1...v4.4.2) (2021-02-04)
 
 ### [4.4.1](https://github.com/eturino/ts-key-set/compare/v4.4.0...v4.4.1) (2021-01-26)
