@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.7.0](https://github.com/eturino/ts-key-set/compare/v4.6.0...v4.7.0) (2021-04-29)
+
+
+### Features
+
+* `ComposedKeySet.compactUnion` and `ComposedKeySet.compactIntersect` ([85f6c4b](https://github.com/eturino/ts-key-set/commit/85f6c4ba2d83d1d98e367a627d08c783d47bea57))
+
 ## [4.6.0](https://github.com/eturino/ts-key-set/compare/v4.5.1...v4.6.0) (2021-04-29)
 
 
