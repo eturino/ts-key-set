@@ -1,7 +1,11 @@
+import { KeySetAllExceptSome } from "./all-except-some";
 import { IKeyLabel } from "../util/object-utils";
 import { Key, KeySet } from "./-base";
 import { all, KeySetAll } from "./all";
 import { KeySetNone } from "./none";
+import { KeySetSome } from "./some";
+import uniqWith from "lodash.uniqwith";
+import sortBy from "lodash.sortby";
 
 /**
  * Composition of a list of KeySets.
@@ -150,6 +154,32 @@ export class ComposedKeySet<T extends Key = Key> {
   includes(element: T): boolean {
     return this.contains(element);
   }
+
+  /**
+   * returns a new one with all the elements of the same type as union
+   *
+   * eg
+   *
+   * Compacted(ALL, ALL, SOME(1, 2), ALL, ALL_EXCEPT_SOME(3, 4), NONE, SOME(3), ALL_EXCEPT_SOME(3, 4, 5))
+   * =>
+   * Compacted(ALL, SOME(1, 2, 3), ALL_EXCEPT_SOME(3, 4), NONE)
+   */
+  compactUnion(): ComposedKeySet<T> {
+    return compactWith(this.list, (list) => list.reduce((acc, x) => acc.union(x), new KeySetNone<T>()));
+  }
+
+  /**
+   * returns a new one with all the elements of the same type as union
+   *
+   * eg
+   *
+   * Compacted(ALL, ALL, SOME(1, 2), ALL, ALL_EXCEPT_SOME(3, 4), NONE, SOME(3), ALL_EXCEPT_SOME(3, 4, 5))
+   * =>
+   * Compacted(ALL, ALL_EXCEPT_SOME(3, 4, 5), NONE)
+   */
+  compactIntersect(): ComposedKeySet<T> {
+    return compactWith(this.list, (list) => list.reduce((acc, x) => acc.intersect(x), new KeySetAll<T>()));
+  }
 }
 
 export type ComposedKeyLabelSet<T extends string | number> = ComposedKeySet<IKeyLabel<T>>;
@@ -164,5 +194,24 @@ export type ComposedKeyLabelSet<T extends string | number> = ComposedKeySet<IKey
 export function composedKeySetFrom<T extends Key>(list: KeySet<T>[]): ComposedKeySet<T> {
   if (!list.length) return new ComposedKeySet<T>([all<T>()]);
 
-  return new ComposedKeySet<T>(list);
+  const sorted = sortBy(list, (x) => [x.type, x.elements]);
+  return new ComposedKeySet<T>(sorted);
+}
+
+function compactWith<T extends Key>(
+  list: KeySet<T>[],
+  reducerFn: (sublist: KeySet<T>[]) => KeySet<T>
+): ComposedKeySet<T> {
+  const somes = list.filter((x) => x instanceof KeySetSome);
+  const aesms = list.filter((x) => x instanceof KeySetAllExceptSome);
+
+  const compacted = [...list.filter((x) => x instanceof KeySetNone || x instanceof KeySetAll)];
+  if (somes.length > 0) {
+    compacted.push(reducerFn(somes));
+  }
+  if (aesms.length > 0) {
+    compacted.push(reducerFn(aesms));
+  }
+
+  return composedKeySetFrom(uniqWith(compacted, (a, b) => a.isEqual(b)));
 }

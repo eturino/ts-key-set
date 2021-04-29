@@ -1,3 +1,4 @@
+import sortBy from "lodash.sortby";
 import { KeySet } from "../-base";
 import { all, KeySetAll } from "../all";
 import { allExceptSome, KeySetAllExceptSome } from "../all-except-some";
@@ -14,13 +15,16 @@ describe("ComposedKeySet", () => {
       expect(actual.isEqual(expected)).toBeTruthy();
     });
 
-    it("a list => returns Composed(list)", () => {
+    it("a list => returns Composed(sort(list))", () => {
       const ks1 = new KeySetAll();
       const ks2 = new KeySetSome([1, 2, 3]);
       const ks3 = new KeySetAllExceptSome([4]);
 
       const actual = composedKeySetFrom([ks1, ks2, ks3]);
-      const expected = new ComposedKeySet([ks1.clone(), ks2.clone(), ks3.clone()]);
+
+      const list = [ks1.clone(), ks2.clone(), ks3.clone()];
+      const sorted = sortBy(list, (x) => [x.type, x.elements]);
+      const expected = new ComposedKeySet(sorted);
       expect(actual).toEqual(expected);
       expect(actual.isEqual(expected)).toBeTruthy();
     });
@@ -289,6 +293,68 @@ describe("ComposedKeySet", () => {
 
       const ks3 = composedKeySetFrom([all()]);
       expect(ks3.representsNone()).toBeFalsy();
+    });
+  });
+
+  describe("#compactUnion", () => {
+    const a = some([1, 2, 3]);
+    const b = some([3, 4]);
+    const c = none();
+    const d = all();
+    const e = allExceptSome([1, 2, 3]);
+    const f = allExceptSome([3, 4]);
+    const g = allExceptSome([5]);
+
+    it("removes duplicates", () => {
+      const original = composedKeySetFrom([some([1, 2, 3]), some([1, 2, 3])]);
+      const expected = composedKeySetFrom([some([1, 2, 3])]);
+      expect(original.compactUnion()).toEqual(expected);
+      expect(original.compactUnion().isEqual(expected)).toBeTruthy();
+    });
+
+    it("applies union of the elements of the same type", () => {
+      const original = composedKeySetFrom([a, a, b, c, d]);
+      const expected = composedKeySetFrom([some([1, 2, 3, 4]), c, d]);
+      expect(original.compactUnion()).toEqual(expected);
+      expect(original.compactUnion().isEqual(expected)).toBeTruthy();
+    });
+
+    it("union of AllExceptSome can end up removing them", () => {
+      const original = composedKeySetFrom([a, b, c, d, e, f, g]);
+      const expected = composedKeySetFrom([some([1, 2, 3, 4]), c, d]);
+      expect(original.compactUnion()).toEqual(expected);
+      expect(original.compactUnion().isEqual(expected)).toBeTruthy();
+    });
+  });
+
+  describe("#compactIntersect", () => {
+    const a = allExceptSome([1, 2, 3]);
+    const b = allExceptSome([3, 4]);
+    const c = none();
+    const d = all();
+    const e = some([1, 2, 3]);
+    const f = some([3, 4]);
+    const g = some([5]);
+
+    it("removes duplicates", () => {
+      const original = composedKeySetFrom([allExceptSome([1, 2, 3]), allExceptSome([1, 2, 3])]);
+      const expected = composedKeySetFrom([allExceptSome([1, 2, 3])]);
+      expect(original.compactIntersect()).toEqual(expected);
+      expect(original.compactIntersect().isEqual(expected)).toBeTruthy();
+    });
+
+    it("applies intersect of the elements of the same type", () => {
+      const original = composedKeySetFrom([a, a, b, c, d]);
+      const expected = composedKeySetFrom([allExceptSome([1, 2, 3, 4]), c, d]);
+      expect(original.compactIntersect()).toEqual(expected);
+      expect(original.compactIntersect().isEqual(expected)).toBeTruthy();
+    });
+
+    it("intersect of some can end up removing them", () => {
+      const original = composedKeySetFrom([a, b, c, d, e, f, g]);
+      const expected = composedKeySetFrom([allExceptSome([1, 2, 3, 4]), c, d]);
+      expect(original.compactIntersect()).toEqual(expected);
+      expect(original.compactIntersect().isEqual(expected)).toBeTruthy();
     });
   });
 });
