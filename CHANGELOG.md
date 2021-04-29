@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.6.0](https://github.com/eturino/ts-key-set/compare/v4.5.1...v4.6.0) (2021-04-29)
+
+
+### Features
+
+* composedKeySet that encompass a list of KeySets ([#220](https://github.com/eturino/ts-key-set/issues/220)) ([73de6f8](https://github.com/eturino/ts-key-set/commit/73de6f8e976322b4f7c4a914c013cd21f69fd0eb))
+
 ### [4.5.1](https://github.com/eturino/ts-key-set/compare/v4.5.0...v4.5.1) (2021-04-29)
 
 
