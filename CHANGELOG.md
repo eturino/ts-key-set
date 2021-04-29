@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.5.1](https://github.com/eturino/ts-key-set/compare/v4.5.0...v4.5.1) (2021-04-29)
+
+
+### Bug Fixes
+
+* upgrading dependencies and fixing types for them ([5ce2be0](https://github.com/eturino/ts-key-set/commit/5ce2be0f07a3f1b266bad4379514c32f9acaf68c))
+
 ## [4.5.0](https://github.com/eturino/ts-key-set/compare/v4.4.2...v4.5.0) (2021-02-04)
 
 
