@@ -111,8 +111,8 @@ export function parseKeySet<T extends Key>(x: KeySetSerialized<T> | KeySet<T>): 
     throw new InvalidKeySetError(`keySetSerialized expected, given ${JSON.stringify(x)}`);
   }
 
-  if (x.type === KeySetTypes.all) return all();
-  if (x.type === KeySetTypes.none) return none();
+  if (x.type === KeySetTypes.all) return all<T>();
+  if (x.type === KeySetTypes.none) return none<T>();
   if (x.type === KeySetTypes.some) {
     return some((x as KeySetSomeSerialized<T>).elements);
   }

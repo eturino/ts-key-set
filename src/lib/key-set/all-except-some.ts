@@ -75,7 +75,7 @@ export class KeySetAllExceptSome<T extends Key> extends KeySetByKeys<T> {
       return new KeySetAllExceptSome([...this.keys]);
     }
 
-    if (other instanceof KeySetNone) return new KeySetNone();
+    if (other instanceof KeySetNone) return new KeySetNone<T>();
 
     const otherKeys = other.keys as T[];
 

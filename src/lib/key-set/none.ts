@@ -58,8 +58,8 @@ export class KeySetNone<T extends Key = Key> extends KeySetGlobal<T> {
   public union(other: KeySetAllExceptSome<T>): KeySetAllExceptSome<T>;
   public union(other: KeySet<T> | KeySetGlobal<Key>): KeySet<T>;
   public union(other: KeySet<T> | KeySetGlobal<Key>): KeySet<T> {
-    if (other instanceof KeySetAll) return new KeySetAll();
-    if (other instanceof KeySetNone) return new KeySetNone();
+    if (other instanceof KeySetAll) return new KeySetAll<T>();
+    if (other instanceof KeySetNone) return new KeySetNone<T>();
     if (other instanceof KeySetSome) return new KeySetSome([...other.elements]);
     if (other instanceof KeySetAllExceptSome) return new KeySetAllExceptSome([...other.elements]);
 
