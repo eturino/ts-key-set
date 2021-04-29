@@ -67,8 +67,9 @@
 				<a href="https://codeclimate.com/github/eturino/ts-key-set/test_coverage"><img src="https://api.codeclimate.com/v1/badges/3b9c9332f98e9fdd30ac/test_coverage" alt="Test Coverage"></a></p>
 				<p><a href="https://eturino.github.io/ts-key-set">TypeDoc generated docs in here</a></p>
 				<p><a href="https://github.com/eturino/ts-key-set">Github repo here</a></p>
-				<p>KeySet with 4 classes to represent concepts of All, None, Some, and AllExceptSome, the last 2 with a sorted uniq list of keys, and all with intersection calculations.</p>
-				<p>(TypeScript port of <a href="https://github.com/eturino/ruby_key_set">https://github.com/eturino/ruby_key_set</a>)</p>
+				<p>KeySet with 4 classes to represent concepts of <code>All</code>, <code>None</code>, <code>Some</code>, and <code>AllExceptSome</code>, the last 2 with a sorted uniq list of keys, and all with intersection calculations.</p>
+				<p>It also has the concept of a <code>ComposedKeySet</code> which encapsulates a list of KeySets that can be act upon, and finally collapse using <code>union</code> or <code>intersect</code></p>
+				<p>(Originally, a TypeScript port of <a href="https://github.com/eturino/ruby_key_set">https://github.com/eturino/ruby_key_set</a>)</p>
 				<p>Library bootstrapped using <a href="https://github.com/bitjson/typescript-starter">typescript-starter</a>.</p>
 				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
 					<h2>Installation</h2>
@@ -159,8 +160,6 @@
 				</a>
 				<p>All KeySet has an <code>isEqual(other)</code> method that returns true if the <code>other</code> keySet is of the same class and represents the same KeySet.</p>
 				<p>If the KeySet is <code>KeySetSome</code> or <code>KeySetAllExceptSome</code>, they will have to have an array with the same keys.</p>
-				<pre><code class="language-ts"><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #001080">keySet</span><span style="color: #000000">.</span><span style="color: #795E26">isEqual</span><span style="color: #000000">(</span><span style="color: #001080">otherKeySet</span><span style="color: #000000">))</span>
-</code></pre>
 				<a href="#invert" id="invert" style="color: inherit; text-decoration: none;">
 					<h3><code>invert()</code></h3>
 				</a>
@@ -306,6 +305,30 @@
 <span style="color: #795E26">isEmptyArray</span><span style="color: #000000">(</span><span style="color: #001080">b</span><span style="color: #000000">); </span><span style="color: #008000">// =&gt; false</span>
 <span style="color: #795E26">isNonEmptyArray</span><span style="color: #000000">(</span><span style="color: #001080">b</span><span style="color: #000000">); </span><span style="color: #008000">// =&gt; true (also sets that a is NonEmptyArray&lt;string&gt;)</span>
 </code></pre>
+				<a href="#composedkeyset" id="composedkeyset" style="color: inherit; text-decoration: none;">
+					<h2><code>ComposedKeySet</code></h2>
+				</a>
+				<p>Composition of a list of KeySets.</p>
+				<p>On a normal use case, this is not needed and it can be solved with <code>first.intersect(second)</code> or <code>first.union(second)</code>.</p>
+				<p>But there are other cases where we have to be explicit about the 2 sets that we are intersecting.</p>
+				<p>e.g.
+					We have a list of items with labels, where an item can have multiple labels.
+				We need to filter the items with labels A, B and C but that do not have labels D.</p>
+				<p>We cannot use <code>some(A, B, C).intersect(allExceptSome(D))</code> since that would end up with just <code>some(A, B, C)</code>.
+				So we use <code>composedKeySet([some(A, B, C), allExceptSome(D)])</code>.</p>
+				<p>This way, if we have a search engine that translates key sets like this:</p>
+				<ul>
+					<li><code>All</code> =&gt; <code>WHERE 1=1</code></li>
+					<li><code>None</code> =&gt; <code>WHERE 1=0</code></li>
+					<li><code>Some</code> =&gt; <code>WHERE list.contains(elements)</code></li>
+					<li><code>AllExceptSome</code> =&gt; <code>WHERE not list.contains(elements)</code></li>
+				</ul>
+				<p>then the composed key set above will end up with
+				<code>WHERE items.labels.contains(A, B, or C) AND NOT items.labels.contains(D)</code></p>
+				<p>For this case, we have the <code>ComposedKeySet</code></p>
+				<pre><code class="language-ts"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">comp</span><span style="color: #000000"> = </span><span style="color: #795E26">composedKeySet</span><span style="color: #000000">([</span><span style="color: #795E26">some</span><span style="color: #000000">(</span><span style="color: #0070C1">A</span><span style="color: #000000">, </span><span style="color: #0070C1">B</span><span style="color: #000000">, </span><span style="color: #0070C1">C</span><span style="color: #000000">), </span><span style="color: #795E26">allExceptSome</span><span style="color: #000000">(</span><span style="color: #0070C1">D</span><span style="color: #000000">)]);</span>
+</code></pre>
+				<p>It can be serialized and parsed as the internal list (array) of KeySets.</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -320,6 +343,9 @@
 				<ul class="before-current">
 					<li class=" tsd-kind-enum">
 						<a href="enums/keysettypes.html" class="tsd-kind-icon">Key<wbr>Set<wbr>Types</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/composedkeyset.html" class="tsd-kind-icon">Composed<wbr>Key<wbr>Set</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/invalidemptyseterror.html" class="tsd-kind-icon">Invalid<wbr>Empty<wbr>Set<wbr>Error</a>
@@ -341,6 +367,9 @@
 					</li>
 					<li class=" tsd-kind-interface tsd-has-type-parameter">
 						<a href="interfaces/ikeylabel.html" class="tsd-kind-icon">IKey<wbr>Label</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="modules.html#composedkeylabelset" class="tsd-kind-icon">Composed<wbr>Key<wbr>Label<wbr>Set</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 						<a href="modules.html#emptyarray" class="tsd-kind-icon">Empty<wbr>Array</a>
@@ -401,6 +430,9 @@
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="modules.html#arraysequal" class="tsd-kind-icon">arrays<wbr>Equal</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#composedkeysetfrom" class="tsd-kind-icon">composed<wbr>Key<wbr>Set<wbr>From</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="modules.html#isemptyarray" class="tsd-kind-icon">is<wbr>Empty<wbr>Array</a>
