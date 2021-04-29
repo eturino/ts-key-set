@@ -48,6 +48,8 @@ import {
   serializeKeySet,
 } from "./key-set/serialize";
 import { KeySetSome, some, someForced } from "./key-set/some";
+import { ComposedKeySet, ComposedKeyLabelSet, composedKeySetFrom } from "./key-set/composed";
+
 import { EmptyArray, isEmptyArray, isNonEmptyArray, NonEmptyArray } from "./util/array-types";
 import { arraysEqual } from "./util/arrays-equal";
 import { IKeyLabel, isKeyLabel, isObject } from "./util/object-utils";
@@ -61,7 +63,11 @@ export {
   none,
   some,
   someForced,
+  // composed
+  composedKeySetFrom,
   // types and classes
+  ComposedKeySet,
+  ComposedKeyLabelSet,
   Key,
   KeySet,
   KeyLabelSet,

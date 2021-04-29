@@ -9,9 +9,11 @@
 
 [Github repo here](https://github.com/eturino/ts-key-set)
 
-KeySet with 4 classes to represent concepts of All, None, Some, and AllExceptSome, the last 2 with a sorted uniq list of keys, and all with intersection calculations.
+KeySet with 4 classes to represent concepts of `All`, `None`, `Some`, and `AllExceptSome`, the last 2 with a sorted uniq list of keys, and all with intersection calculations.
 
-(TypeScript port of <https://github.com/eturino/ruby_key_set>)
+It also has the concept of a `ComposedKeySet` which encapsulates a list of KeySets that can be act upon, and finally collapse using `union` or `intersect`
+
+(Originally, a TypeScript port of <https://github.com/eturino/ruby_key_set>)
 
 Library bootstrapped using [typescript-starter](https://github.com/bitjson/typescript-starter).
 
@@ -112,9 +114,6 @@ All KeySet has an `isEqual(other)` method that returns true if the `other` keySe
 
 If the KeySet is `KeySetSome` or `KeySetAllExceptSome`, they will have to have an array with the same keys.
 
-```ts
-if (keySet.isEqual(otherKeySet))
-```
 
 ### `invert()`
 
@@ -265,3 +264,36 @@ const b: string[] = ["something"];
 isEmptyArray(b); // => false
 isNonEmptyArray(b); // => true (also sets that a is NonEmptyArray<string>)
 ```
+
+
+## `ComposedKeySet`
+
+Composition of a list of KeySets.
+
+On a normal use case, this is not needed and it can be solved with `first.intersect(second)` or `first.union(second)`.
+
+But there are other cases where we have to be explicit about the 2 sets that we are intersecting.
+
+e.g.
+We have a list of items with labels, where an item can have multiple labels.
+We need to filter the items with labels A, B and C but that do not have labels D.
+
+We cannot use `some(A, B, C).intersect(allExceptSome(D))` since that would end up with just `some(A, B, C)`.
+So we use `composedKeySet([some(A, B, C), allExceptSome(D)])`.
+
+This way, if we have a search engine that translates key sets like this:
+  - `All` => `WHERE 1=1`
+  - `None` => `WHERE 1=0`
+  - `Some` => `WHERE list.contains(elements)`
+  - `AllExceptSome` => `WHERE not list.contains(elements)`
+
+then the composed key set above will end up with
+  `WHERE items.labels.contains(A, B, or C) AND NOT items.labels.contains(D)`
+
+For this case, we have the `ComposedKeySet`
+
+```ts
+const comp = composedKeySet([some(A, B, C), allExceptSome(D)]);
+```
+
+It can be serialized and parsed as the internal list (array) of KeySets.
