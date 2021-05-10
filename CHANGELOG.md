@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.8.0](https://github.com/eturino/ts-key-set/compare/v4.7.0...v4.8.0) (2021-05-10)
+
+
+### Features
+
+* composedKeySet.map() support ([4635e43](https://github.com/eturino/ts-key-set/commit/4635e43566272186368e821e8c1a334cdfddda43))
+
 ## [4.7.0](https://github.com/eturino/ts-key-set/compare/v4.6.0...v4.7.0) (2021-04-29)
 
 
