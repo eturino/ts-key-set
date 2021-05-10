@@ -139,6 +139,16 @@ export class ComposedKeySet<T extends Key = Key> {
   }
 
   /**
+   * returns a ComposedKeySet with the result of mapping each current set of the list with the given function
+   *
+   * @param mapFn
+   */
+  map<TNew extends Key>(mapFn: (x: KeySet<T>) => KeySet<TNew>): ComposedKeySet<TNew> {
+    const list = this.list.map(mapFn);
+    return composedKeySetFrom(list);
+  }
+
+  /**
    * true if ALL sets contain the element
    * @param element
    */

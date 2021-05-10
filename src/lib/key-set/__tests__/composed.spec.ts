@@ -205,6 +205,28 @@ describe("ComposedKeySet", () => {
     });
   });
 
+  describe("#map", () => {
+    it("returns a new composed with the mapped elements", () => {
+      const ks1 = new KeySetSome([1, 2, 3]);
+      const ks2 = new KeySetSome([1, 3, 9]);
+      const ks3 = new KeySetSome([1, 2]);
+      const ks4 = new KeySetAllExceptSome([1, 2]);
+
+      const fn = (ks: KeySet<number>) => (ks instanceof KeySetSome ? some([...ks.elements, 99]) : ks);
+
+      const eks1 = new KeySetSome([1, 2, 3, 99]);
+      const eks2 = new KeySetSome([1, 3, 9, 99]);
+      const eks3 = new KeySetSome([1, 2, 99]);
+      const eks4 = new KeySetAllExceptSome([1, 2]);
+
+      const original = composedKeySetFrom([ks1, ks2, ks3, ks4]);
+      const expected = composedKeySetFrom([eks1, eks2, eks3, eks4]);
+
+      const actual = original.map(fn);
+      expect(actual).toEqual(expected);
+    });
+  });
+
   describe("#contains and #includes", () => {
     it("if every list member contains the element, returns true", () => {
       const ks1: KeySetSome<number> = new KeySetSome([1, 2, 3]);
