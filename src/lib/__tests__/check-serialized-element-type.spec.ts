@@ -9,7 +9,7 @@ import {
   some,
 } from "../..";
 
-const invalidKeySetSerialized = ("blah" as unknown) as KeySetSerialized;
+const invalidKeySetSerialized = "blah" as unknown as KeySetSerialized;
 
 describe("isKeySetSerializedOfStrings()", () => {
   it("isKeySetSerializedOfStrings(invalidKeySetSerialized): false", () => {

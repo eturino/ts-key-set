@@ -216,7 +216,7 @@ describe("serialize KeySet", () => {
   describe("parseKeySet(invalidKeySetSerialized) throws error", () => {
     invalidSerialized.forEach((x) => {
       it(`${JSON.stringify(x)}`, () => {
-        expect(() => parseKeySet((x as unknown) as KeySetSerialized)).toThrowError(InvalidKeySetError);
+        expect(() => parseKeySet(x as unknown as KeySetSerialized)).toThrowError(InvalidKeySetError);
       });
     });
   });
@@ -261,7 +261,7 @@ describe("serialize KeySet", () => {
   describe("serializeKeySet(nonKeySetAndNotValidKeySetSerialized) throws error", () => {
     invalidSerialized.forEach((x) => {
       it(`${JSON.stringify(x)}`, () => {
-        expect(() => serializeKeySet((x as unknown) as KeySet)).toThrowError(InvalidKeySetError);
+        expect(() => serializeKeySet(x as unknown as KeySet)).toThrowError(InvalidKeySetError);
       });
     });
   });

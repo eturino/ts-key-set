@@ -11,7 +11,7 @@ import {
 
 describe("isKeySetOfStrings()", () => {
   it("isKeySetOfStrings(invalidKeySet): false", () => {
-    expect(isKeySetOfStrings(("blah" as unknown) as KeySet)).toBeFalsy();
+    expect(isKeySetOfStrings("blah" as unknown as KeySet)).toBeFalsy();
   });
 
   it("isKeySetOfStrings(all()): true", () => {
@@ -41,7 +41,7 @@ describe("isKeySetOfStrings()", () => {
 
 describe("isKeySetOfNumbers()", () => {
   it("isKeySetOfNumbers(invalidKeySet): false", () => {
-    expect(isKeySetOfNumbers(("blah" as unknown) as KeySet)).toBeFalsy();
+    expect(isKeySetOfNumbers("blah" as unknown as KeySet)).toBeFalsy();
   });
 
   it("isKeySetOfNumbers(all()): true", () => {
@@ -71,7 +71,7 @@ describe("isKeySetOfNumbers()", () => {
 
 describe("isKeySetOfStringKeyLabels()", () => {
   it("isKeySetOfStringKeyLabels(invalidKeySet): false", () => {
-    expect(isKeySetOfStringKeyLabels(("blah" as unknown) as KeySet)).toBeFalsy();
+    expect(isKeySetOfStringKeyLabels("blah" as unknown as KeySet)).toBeFalsy();
   });
 
   it("isKeySetOfStringKeyLabels(all()): true", () => {
@@ -101,7 +101,7 @@ describe("isKeySetOfStringKeyLabels()", () => {
 
 describe("isKeySetOfNumberKeyLabels()", () => {
   it("isKeySetOfNumberKeyLabels(invalidKeySet): false", () => {
-    expect(isKeySetOfNumberKeyLabels(("blah" as unknown) as KeySet)).toBeFalsy();
+    expect(isKeySetOfNumberKeyLabels("blah" as unknown as KeySet)).toBeFalsy();
   });
 
   it("isKeySetOfNumberKeyLabels(all()): true", () => {

@@ -33,6 +33,6 @@ test("#union(keySetAllExceptSome)", () => {
 
 test("#union(somethingInvalid)", () => {
   expect(() => {
-    keySet.union((null as unknown) as KeySetAll);
+    keySet.union(null as unknown as KeySetAll);
   }).toThrowError(InvalidKeySetError);
 });

@@ -37,6 +37,6 @@ test("#intersect(keySetAllExceptSome)", () => {
 
 test("#intersect(somethingInvalid)", () => {
   expect(() => {
-    keySet.intersect((null as unknown) as KeySetAll);
+    keySet.intersect(null as unknown as KeySetAll);
   }).toThrowError(InvalidKeySetError);
 });
