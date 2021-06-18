@@ -80,8 +80,8 @@ export function isKeySetAllExceptSomeSerialized(given: any): given is KeySetAllE
   return isKeySetElementsSerialized(given) && given.type === KeySetTypes.allExceptSome;
 }
 
-export function serializeKeySet<T extends Key>(x: KeySetAllSerialized | KeySetAll): KeySetAllSerialized;
-export function serializeKeySet<T extends Key>(x: KeySetNoneSerialized | KeySetNone): KeySetNoneSerialized;
+export function serializeKeySet<T extends Key>(x: KeySetAllSerialized<T> | KeySetAll<T>): KeySetAllSerialized<T>;
+export function serializeKeySet<T extends Key>(x: KeySetNoneSerialized<T> | KeySetNone<T>): KeySetNoneSerialized<T>;
 export function serializeKeySet<T extends Key>(x: KeySetSomeSerialized<T> | KeySetSome<T>): KeySetSomeSerialized<T>;
 export function serializeKeySet<T extends Key>(
   x: KeySetAllExceptSomeSerialized<T> | KeySetAllExceptSome<T>
@@ -97,8 +97,8 @@ export function serializeKeySet<T extends Key>(keySet: KeySet<T> | KeySetSeriali
   throw new InvalidKeySetError(`keySet expected, given ${JSON.stringify(keySet)}`);
 }
 
-export function parseKeySet<T extends Key>(x: KeySetAllSerialized | KeySetAll): KeySetAll;
-export function parseKeySet<T extends Key>(x: KeySetNoneSerialized | KeySetNone): KeySetNone;
+export function parseKeySet<T extends Key>(x: KeySetAllSerialized<T> | KeySetAll<T>): KeySetAll<T>;
+export function parseKeySet<T extends Key>(x: KeySetNoneSerialized<T> | KeySetNone<T>): KeySetNone<T>;
 export function parseKeySet<T extends Key>(x: KeySetSomeSerialized<T> | KeySetSome<T>): KeySetSome<T>;
 export function parseKeySet<T extends Key>(
   x: KeySetAllExceptSomeSerialized<T> | KeySetAllExceptSome<T>
