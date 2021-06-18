@@ -1,4 +1,3 @@
-/* tslint:disable:interface-over-type-literal */
 import { IKeyLabel, isKeyLabel } from "../key-set";
 import { EmptyArray, NonEmptyArray } from "../util/array-types";
 import { KeySetAll } from "./all";
