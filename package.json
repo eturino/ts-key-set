@@ -71,7 +71,7 @@
   "devDependencies": {
     "@bitjson/npm-scripts-info": "^1.0.0",
     "@commitlint/cli": "^16.0.0",
-    "@commitlint/config-conventional": "^15.0.0",
+    "@commitlint/config-conventional": "^16.0.0",
     "@types/jest": "^27.0.0",
     "@types/lodash.sortby": "^4.7.6",
     "@types/lodash.uniqwith": "^4.5.6",
