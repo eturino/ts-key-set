@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0](https://github.com/eturino/ts-key-set/compare/v4.8.0...v5.0.0) (2022-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* `.keys` is removed. `.elements` is now the frozen Set. And the old utils
+`uniqueArray`, `uniqueKeyLabelArray` and `arraysEqual` are dropped.
+
+### Features
+
+* elements as a public readonly frozen Set instead of internal array ([c5d492b](https://github.com/eturino/ts-key-set/commit/c5d492b9c4ba51255c764b44e0b59c8ba6bcaf90))
+
+
+### Bug Fixes
+
+* **deps:** bump tmpl from 1.0.4 to 1.0.5 ([#315](https://github.com/eturino/ts-key-set/issues/315)) ([1210cdf](https://github.com/eturino/ts-key-set/commit/1210cdfc159533565dacf990bab766d4d057de13))
+* **deps:** bump trim-off-newlines from 1.0.1 to 1.0.3 ([#390](https://github.com/eturino/ts-key-set/issues/390)) ([46d00ca](https://github.com/eturino/ts-key-set/commit/46d00ca3639418873eaafcf35d4f1f83930d96bd))
+
 ## [4.8.0](https://github.com/eturino/ts-key-set/compare/v4.7.0...v4.8.0) (2021-05-10)
 
 
