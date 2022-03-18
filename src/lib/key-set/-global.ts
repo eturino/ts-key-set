@@ -1,17 +1,22 @@
-import { EmptyArray } from "../util/array-types";
 import { IKeySetClass, Key, KeySet, KeySetAllSerialized, KeySetNoneSerialized, KeySetTypes } from "./-base";
 import { KeySetAll } from "./all";
 import { KeySetNone } from "./none";
 
+/**
+ * @internal
+ * @hidden
+ */
 export abstract class KeySetGlobal<T extends Key> implements IKeySetClass<T> {
   public abstract readonly type: KeySetTypes.all | KeySetTypes.none;
 
-  public get keys(): EmptyArray<T> {
-    return [] as EmptyArray<T>;
+  public readonly elements: Set<T> = Object.freeze(new Set<T>());
+
+  public get elementsList(): T[] {
+    return [...this.elements];
   }
 
-  public get elements(): EmptyArray<T> {
-    return [] as EmptyArray<T>;
+  public get elementsSorted(): T[] {
+    return [...this.elements].sort();
   }
 
   public toJSON(_key?: string): KeySetAllSerialized<T> | KeySetNoneSerialized<T> {
@@ -34,11 +39,11 @@ export abstract class KeySetGlobal<T extends Key> implements IKeySetClass<T> {
 
   public abstract isEqual(other: KeySet): boolean;
 
-  public abstract remove(other: KeySet | KeySetGlobal<Key>): KeySet;
+  public abstract remove(other: KeySet | KeySetAll<Key> | KeySetNone<Key>): KeySet;
 
-  public abstract intersect(other: KeySet | KeySetGlobal<Key>): KeySet;
+  public abstract intersect(other: KeySet | KeySetAll<Key> | KeySetNone<Key>): KeySet;
 
-  public abstract union(other: KeySet | KeySetGlobal<Key>): KeySet;
+  public abstract union(other: KeySet | KeySetAll<Key> | KeySetNone<Key>): KeySet;
 
   public abstract includes(element: T): boolean;
 

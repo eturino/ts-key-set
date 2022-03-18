@@ -9,13 +9,22 @@
 
 [Github repo here](https://github.com/eturino/ts-key-set)
 
-KeySet with 4 classes to represent concepts of `All`, `None`, `Some`, and `AllExceptSome`, the last 2 with a sorted uniq list of keys, and all with intersection calculations.
+KeySet with 4 classes to represent concepts of `All`, `None`, `Some`, and `AllExceptSome`, the last 2 with an internal `Set` of keys, and all with intersection calculations.
 
 It also has the concept of a `ComposedKeySet` which encapsulates a list of KeySets that can be act upon, and finally collapse using `union` or `intersect`
 
 (Originally, a TypeScript port of <https://github.com/eturino/ruby_key_set>)
 
 Library bootstrapped using [typescript-starter](https://github.com/bitjson/typescript-starter).
+
+## Breaking changes in v5
+
+Since v5, the `KeySet` elements are encoded in a frozen `Set` instead of an array. It is exposed as `keySet.elements`. 
+The `keySet.keys` alias has been dropped.
+
+For a list of elements as an array use `keySet.elementsList`, and for a sorted version of that use `keySet.elementsSorted`.
+
+You can have more [info in the elements section of the readme](#elements-elementslist-and-elementssorted).
 
 ## Installation
 
@@ -48,28 +57,33 @@ import { all, none, some, allExceptSome, someForced, allExceptSomeForced } from 
 all(); // => returns a new instance of KeySetAll
 none(); // => returns a new instance of KeySetNone
 
-some([1, 3, 2, 3]); // returns a new instance of KeySetSome with keys [1, 2, 3] (sorted, unique)
+some([1, 3, 2, 3]); // returns a new instance of KeySetSome with keys Set<1, 3, 2>
 some([]); // returns a new instance of KeySetNone
 
-allExceptSome([1, 3, 2, 3]); // returns a new instance of KeySetAllExceptSome with keys [1, 2, 3] (sorted, unique)
+allExceptSome([1, 3, 2, 3]); // returns a new instance of KeySetAllExceptSome with keys Set<1, 3, 2>
 allExceptSome([]); // returns a new instance of KeySetAll
 
-someForced([1, 3, 2, 3]); // returns a new instance of KeySetSome with keys [1, 2, 3] (sorted, unique)
+someForced([1, 3, 2, 3]); // returns a new instance of KeySetSome with keys Set<1, 3, 2>
 someForced([]); // throws an InvalidEmptySetError
 
-allExceptSomeForced([1, 3, 2, 3]); // returns a new instance of KeySetAllExceptSome with keys [1, 2, 3] (sorted, unique)
+allExceptSomeForced([1, 3, 2, 3]); // returns a new instance of KeySetAllExceptSome with keys Set<1, 3, 2>
 allExceptSomeForced([]); // throws an InvalidEmptySetError
 ```
 
-### `.elements` (aliased with `.keys`)
+### `.elements`, `.elementsList` and `elementsSorted`
 
-Both getters return a copy of the internal list of elements.
+- `.elements` returns the internal `Set` with the keys. It is frozen (`Object.freeze()`)
+- `.elementsList` returns a new array with the elements of the internal set, as is.
+- `.elementsSorted` returns a new array with the elements of the internal set, sorted.
 
 ```
-some([1, 3, 2, 3]).elements; // => [1, 2, 3]
-some([1, 3, 2, 3]).keys; // => [1, 2, 3]
-allExceptSome([1, 3, 2, 3]).elements; // => [1, 2, 3]
-allExceptSome([1, 3, 2, 3]).keys; // => [1, 2, 3]
+some([1, 3, 2, 3]).elements; // => Set<1, 3, 2>
+some([1, 3, 2, 3]).elementsList; // => [1, 3, 2]
+some([1, 3, 2, 3]).elementsSorted; // => [1, 2, 3]
+
+allExceptSome([1, 3, 2, 3]).elements; // => Set<1, 3, 2>
+allExceptSome([1, 3, 2, 3]).elementsList; // => [1, 3, 2]
+allExceptSome([1, 3, 2, 3]).elementsSorted; // => [1, 2, 3]
 ```
 
 ### `type`
@@ -113,7 +127,6 @@ const newKeySet = keySet.clone();
 All KeySet has an `isEqual(other)` method that returns true if the `other` keySet is of the same class and represents the same KeySet.
 
 If the KeySet is `KeySetSome` or `KeySetAllExceptSome`, they will have to have an array with the same keys.
-
 
 ### `invert()`
 
@@ -236,10 +249,8 @@ We also have type predicates based on the type of the elements, for serialized a
 
 The lib also exports the 2 util functions used in the code
 
-- `uniqueArray(list)`: returns another array with unique items
-  - **adapted from <https://medium.com/@jakubsynowiec/unique-array-values-in-javascript-7c932682766c> (credit to Jakub Synowiec)**
-- `arraysEqual(a, b)`: returns true if the 2 arrays have the same keys
-  - **adapted from <https://stackoverflow.com/questions/3115982/how-to-check-if-two-arrays-are-equal-with-javascript> (credit to [enyo](https://stackoverflow.com/users/170851/enyo))**
+- `setByKeys(listOrSet)`: Returns a new Set containing the unique elements of the source list. If the elements given are KeyLabel, they are compared by key.
+- `sortKeys(iterableOfKeys)`: Sorts a list of keys. If the keys are actually KeyLabel objects, they are sorted by key. Otherwise, they are naturally sorted. Returns a new array with the sorted keys.
 
 ## Util array types
 
@@ -265,7 +276,6 @@ isEmptyArray(b); // => false
 isNonEmptyArray(b); // => true (also sets that a is NonEmptyArray<string>)
 ```
 
-
 ## `ComposedKeySet`
 
 Composition of a list of KeySets.
@@ -282,13 +292,14 @@ We cannot use `some(A, B, C).intersect(allExceptSome(D))` since that would end u
 So we use `composedKeySet([some(A, B, C), allExceptSome(D)])`.
 
 This way, if we have a search engine that translates key sets like this:
-  - `All` => `WHERE 1=1`
-  - `None` => `WHERE 1=0`
-  - `Some` => `WHERE list.contains(elements)`
-  - `AllExceptSome` => `WHERE not list.contains(elements)`
+
+- `All` => `WHERE 1=1`
+- `None` => `WHERE 1=0`
+- `Some` => `WHERE list.contains(elements)`
+- `AllExceptSome` => `WHERE not list.contains(elements)`
 
 then the composed key set above will end up with
-  `WHERE items.labels.contains(A, B, or C) AND NOT items.labels.contains(D)`
+`WHERE items.labels.contains(A, B, or C) AND NOT items.labels.contains(D)`
 
 For this case, we have the `ComposedKeySet`
 

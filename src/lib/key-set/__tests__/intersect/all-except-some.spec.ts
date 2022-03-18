@@ -29,7 +29,7 @@ test("#intersect(keySetAll)", () => {
   expect(rest instanceof KeySetAllExceptSome).toBeTruthy();
   expect(keySet === rest).toBe(false);
   const r = rest as KeySetAllExceptSome<number>;
-  expect(r.keys).toEqual(keySet.keys);
+  expect(r.elementsSorted).toEqual(keySet.elementsSorted);
 });
 
 // NONE
@@ -54,13 +54,13 @@ test("#intersect(keySetSomeSubSetKeys)", () => {
 test("#intersect(keySetSomeMoreKeys)", () => {
   const rest = keySet.intersect(keySetSomeMoreKeys);
   expect(rest instanceof KeySetSome).toBeTruthy();
-  expect(rest.keys).toEqual(extraKeys);
+  expect(rest.elementsSorted).toEqual(extraKeys);
 });
 
 test("#intersect(keySetSomeDiffKeys)", () => {
   const rest = keySet.intersect(keySetSomeDiffKeys);
   expect(rest instanceof KeySetSome).toBeTruthy();
-  expect(rest.keys).toEqual(otherKeys);
+  expect(rest.elementsSorted).toEqual(otherKeys);
 });
 
 // ALL EXCEPT SOME
@@ -69,7 +69,7 @@ test("#intersect(keySetAllExceptSomeSameKeys)", () => {
   const rest = keySet.intersect(keySetAllExceptSomeSameKeys);
   expect(rest instanceof KeySetAllExceptSome).toBeTruthy();
   expect(keySet === rest).toBe(false);
-  expect(rest.keys).toEqual(keys);
+  expect(rest.elementsSorted).toEqual(keys);
 });
 
 test("#intersect(keySetAllExceptSomeSubSetKeys)", () => {
@@ -77,7 +77,7 @@ test("#intersect(keySetAllExceptSomeSubSetKeys)", () => {
   expect(rest instanceof KeySetAllExceptSome).toBeTruthy();
   expect(keySet === rest).toBe(false);
   const r = rest as KeySetAllExceptSome<number>;
-  expect(r.keys).toEqual(keys);
+  expect(r.elementsSorted).toEqual(keys);
 });
 
 test("#intersect(keySetAllExceptSomeMoreKeys)", () => {
@@ -85,7 +85,7 @@ test("#intersect(keySetAllExceptSomeMoreKeys)", () => {
   expect(rest instanceof KeySetAllExceptSome).toBeTruthy();
   expect(keySet === rest).toBe(false);
   const r = rest as KeySetAllExceptSome<number>;
-  expect(r.keys).toEqual(moreKeys);
+  expect(r.elementsSorted).toEqual(moreKeys);
 });
 
 test("#intersect(keySetAllExceptSomeDiffKeys)", () => {
@@ -93,5 +93,5 @@ test("#intersect(keySetAllExceptSomeDiffKeys)", () => {
   expect(rest instanceof KeySetAllExceptSome).toBeTruthy();
   expect(keySet === rest).toBe(false);
   const r = rest as KeySetAllExceptSome<number>;
-  expect(r.keys).toEqual([...keys, ...otherKeys].sort());
+  expect(r.elementsSorted).toEqual([...keys, ...otherKeys].sort());
 });

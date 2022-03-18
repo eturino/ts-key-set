@@ -34,7 +34,7 @@ test("#union(keySetAll)", () => {
 test("#union(keySetNone)", () => {
   const rest = keySet.union(keySetNone);
   expect(rest instanceof KeySetSome).toBeTruthy();
-  expect(rest.keys).toEqual(keySet.keys);
+  expect(rest.elementsSorted).toEqual(keySet.elementsSorted);
 });
 
 // SOME
@@ -44,7 +44,7 @@ test("#union(keySetSomeSameKeys)", () => {
   expect(rest instanceof KeySetSome).toBeTruthy();
   expect(keySet === rest).toBe(false);
   const r = rest as KeySetSome<number>;
-  expect(r.keys).toEqual(keySet.keys);
+  expect(r.elementsSorted).toEqual(keySet.elementsSorted);
 });
 
 test("#union(keySetSomeSubSetKeys)", () => {
@@ -52,7 +52,7 @@ test("#union(keySetSomeSubSetKeys)", () => {
   expect(rest instanceof KeySetSome).toBeTruthy();
   expect(keySet === rest).toBe(false);
   const r = rest as KeySetSome<number>;
-  expect(r.keys).toEqual(keySet.keys);
+  expect(r.elementsSorted).toEqual(keySet.elementsSorted);
 });
 
 test("#union(keySetSomeMoreKeys)", () => {
@@ -60,7 +60,7 @@ test("#union(keySetSomeMoreKeys)", () => {
   expect(rest instanceof KeySetSome).toBeTruthy();
   expect(keySet === rest).toBe(false);
   const r = rest as KeySetSome<number>;
-  expect(r.keys).toEqual(moreKeys);
+  expect(r.elementsSorted).toEqual(moreKeys);
 });
 
 test("#union(keySetSomeDiffKeys)", () => {
@@ -68,7 +68,7 @@ test("#union(keySetSomeDiffKeys)", () => {
   expect(rest instanceof KeySetSome).toBeTruthy();
   expect(keySet === rest).toBe(false);
   const r = rest as KeySetSome<number>;
-  expect(r.keys).toEqual([...keys, ...otherKeys].sort());
+  expect(r.elementsSorted).toEqual([...keys, ...otherKeys].sort());
 });
 
 // ALL EXCEPT SOME
@@ -87,12 +87,12 @@ test("#union(keySetAllExceptSomeMoreKeys)", () => {
   const rest = keySet.union(keySetAllExceptSomeMoreKeys);
   expect(rest instanceof KeySetAllExceptSome).toBeTruthy();
   const r = rest as KeySetAllExceptSome<number>;
-  expect(r.keys).toEqual(extraKeys);
+  expect(r.elementsSorted).toEqual(extraKeys);
 });
 
 test("#union(keySetAllExceptSomeDiffKeys)", () => {
   const rest = keySet.union(keySetAllExceptSomeDiffKeys);
   expect(rest instanceof KeySetAllExceptSome).toBeTruthy();
   const r = rest as KeySetAllExceptSome<number>;
-  expect(r.keys).toEqual(otherKeys);
+  expect(r.elementsSorted).toEqual(otherKeys);
 });

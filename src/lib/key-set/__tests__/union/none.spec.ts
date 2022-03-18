@@ -24,7 +24,7 @@ test("#union(keySetSome)", () => {
   expect(rest instanceof KeySetSome).toBeTruthy();
 
   const r = rest as KeySetSome<number>;
-  expect(r.keys).toEqual(keySetSome.keys);
+  expect(r.elementsSorted).toEqual(keySetSome.elementsSorted);
 });
 
 test("#union(keySetAllExceptSome)", () => {
@@ -32,7 +32,7 @@ test("#union(keySetAllExceptSome)", () => {
   expect(rest instanceof KeySetAllExceptSome).toBeTruthy();
 
   const r = rest as KeySetAllExceptSome<number>;
-  expect(r.keys).toEqual(keySetAllExceptSome.keys);
+  expect(r.elementsSorted).toEqual(keySetAllExceptSome.elementsSorted);
 });
 
 test("#union(somethingInvalid)", () => {

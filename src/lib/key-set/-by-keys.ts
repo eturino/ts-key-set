@@ -1,23 +1,38 @@
-import { NonEmptyArray } from "../util/array-types";
-import { arraysEqual } from "../util/arrays-equal";
-import { uniqueKeys } from "../util/unique-array";
+import isEqual from "lodash.isequal";
+import { setByKeys } from "../util/set-by-keys";
+import { sortKeys } from "../util/sort-keys";
 import { IKeySetClass, Key, KeySet, KeySetAllExceptSomeSerialized, KeySetSomeSerialized, KeySetTypes } from "./-base";
-import { KeySetGlobal } from "./-global";
+import { KeySetAll } from "./all";
 import { KeySetAllExceptSome } from "./all-except-some";
 import { InvalidEmptySetError } from "./invalid-empty-set-error";
+import { KeySetNone } from "./none";
 import { KeySetSome } from "./some";
 
+/**
+ * @internal
+ * @hidden
+ */
 export abstract class KeySetByKeys<T extends Key> implements IKeySetClass<T> {
   public abstract readonly type: KeySetTypes.allExceptSome | KeySetTypes.some;
 
-  private readonly _elements: NonEmptyArray<T>;
+  public readonly elements: Set<T>;
 
-  constructor(keys: T[] | ReadonlyArray<T>) {
-    const elements = uniqueKeys(keys).sort();
-    if (elements.length === 0) {
+  public get elementsList(): T[] {
+    return [...this.elements];
+  }
+
+  public get elementsSorted(): T[] {
+    return sortKeys(this.elements);
+  }
+
+  constructor(keys: T[] | ReadonlyArray<T> | Set<T>) {
+    const elements = setByKeys(keys);
+    Object.freeze(elements);
+
+    if (elements.size === 0) {
       throw new InvalidEmptySetError();
     }
-    this._elements = elements as NonEmptyArray<T>;
+    this.elements = elements;
   }
 
   public toJSON(_key?: string): KeySetAllExceptSomeSerialized<T> | KeySetSomeSerialized<T> {
@@ -40,11 +55,11 @@ export abstract class KeySetByKeys<T extends Key> implements IKeySetClass<T> {
 
   public abstract isEqual(other: KeySet): boolean;
 
-  public abstract remove(other: KeySet | KeySetGlobal<Key>): KeySet;
+  public abstract remove(other: KeySet | KeySetAll<Key> | KeySetNone<Key>): KeySet;
 
-  public abstract intersect(other: KeySet | KeySetGlobal<Key>): KeySet;
+  public abstract intersect(other: KeySet | KeySetAll<Key> | KeySetNone<Key>): KeySet;
 
-  public abstract union(other: KeySet | KeySetGlobal<Key>): KeySet;
+  public abstract union(other: KeySet | KeySetAll<Key> | KeySetNone<Key>): KeySet;
 
   public abstract includes(element: T): boolean;
 
@@ -52,15 +67,7 @@ export abstract class KeySetByKeys<T extends Key> implements IKeySetClass<T> {
     return this.includes(element);
   }
 
-  public get keys(): T[] {
-    return this.elements;
-  }
-
-  public get elements(): T[] {
-    return [...this._elements];
-  }
-
-  protected hasSameKeys(other: KeySetByKeys<Key>): boolean {
-    return arraysEqual(this.keys, other.keys);
+  protected hasSameKeys(other: KeySet<T>): boolean {
+    return isEqual(this.elements, other.elements);
   }
 }

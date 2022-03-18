@@ -27,7 +27,7 @@ const keySet = new KeySetSome(keys); // => keys 1, 2, 3
 test("#intersect(keySetAll)", () => {
   const rest = keySet.intersect(keySetAll);
   expect(rest instanceof KeySetSome).toBeTruthy();
-  expect(rest.keys).toEqual(keySet.keys);
+  expect(rest.elementsSorted).toEqual(keySet.elementsSorted);
 });
 
 // NONE
@@ -44,7 +44,7 @@ test("#intersect(keySetSomeSameKeys)", () => {
   expect(rest instanceof KeySetSome).toBeTruthy();
   expect(keySet === rest).toBe(false);
   const r = rest as KeySetSome<number>;
-  expect(r.keys).toEqual(keySet.keys);
+  expect(r.elementsSorted).toEqual(keySet.elementsSorted);
 });
 
 test("#intersect(keySetSomeSubSetKeys)", () => {
@@ -52,7 +52,7 @@ test("#intersect(keySetSomeSubSetKeys)", () => {
   expect(rest instanceof KeySetSome).toBeTruthy();
   expect(keySet === rest).toBe(false);
   const r = rest as KeySetSome<number>;
-  expect(r.keys).toEqual(subSetKeys);
+  expect(r.elementsSorted).toEqual(subSetKeys);
 });
 
 test("#intersect(keySetSomeMoreKeys)", () => {
@@ -60,7 +60,7 @@ test("#intersect(keySetSomeMoreKeys)", () => {
   expect(rest instanceof KeySetSome).toBeTruthy();
   expect(keySet === rest).toBe(false);
   const r = rest as KeySetSome<number>;
-  expect(r.keys).toEqual(keySet.keys);
+  expect(r.elementsSorted).toEqual(keySet.elementsSorted);
 });
 
 test("#intersect(keySetSomeDiffKeys)", () => {
@@ -82,7 +82,7 @@ test("#intersect(keySetAllExceptSomeSubSetKeys)", () => {
   expect(rest instanceof KeySetSome).toBeTruthy();
   expect(keySet === rest).toBe(false);
   const r = rest as KeySetSome<number>;
-  expect(r.keys).toEqual(restKeys);
+  expect(r.elementsSorted).toEqual(restKeys);
 });
 
 test("#intersect(keySetAllExceptSomeMoreKeys)", () => {
@@ -96,5 +96,5 @@ test("#intersect(keySetAllExceptSomeDiffKeys)", () => {
   expect(rest instanceof KeySetSome).toBeTruthy();
   expect(keySet === rest).toBe(false);
   const r = rest as KeySetSome<number>;
-  expect(r.keys).toEqual(keys);
+  expect(r.elementsSorted).toEqual(keys);
 });

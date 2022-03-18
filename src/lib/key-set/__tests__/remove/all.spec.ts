@@ -22,7 +22,7 @@ test("#remove(keySetSome)", () => {
   expect(rest instanceof KeySetAllExceptSome).toBeTruthy();
 
   const r = rest as KeySetAllExceptSome<number>;
-  expect(r.keys).toEqual(keySetSome.keys);
+  expect(r.elementsSorted).toEqual(keySetSome.elementsSorted);
 });
 
 test("#remove(keySetAllExceptSome)", () => {
@@ -30,5 +30,5 @@ test("#remove(keySetAllExceptSome)", () => {
   expect(rest instanceof KeySetSome).toBeTruthy();
 
   const r = rest as KeySetSome<number>;
-  expect(r.keys).toEqual(keySetAllExceptSome.keys);
+  expect(r.elementsSorted).toEqual(keySetAllExceptSome.elementsSorted);
 });

@@ -44,11 +44,11 @@ export class KeySetNone<T extends Key = Key> extends KeySetGlobal<T> {
     return other.representsNone();
   }
 
-  public remove(_other: KeySet<T> | KeySetGlobal<Key>): KeySetNone<T> {
+  public remove(_other: KeySet<T> | KeySetAll<Key> | KeySetNone<Key>): KeySetNone<T> {
     return new KeySetNone<T>();
   }
 
-  public intersect(_other: KeySet | KeySetGlobal<Key>): KeySetNone<T> {
+  public intersect(_other: KeySet | KeySetAll<Key> | KeySetNone<Key>): KeySetNone<T> {
     return new KeySetNone<T>();
   }
 
@@ -56,8 +56,8 @@ export class KeySetNone<T extends Key = Key> extends KeySetGlobal<T> {
   public union(other: KeySetNone<T> | KeySetNone<Key>): KeySetNone<T>;
   public union(other: KeySetSome<T>): KeySetSome<T>;
   public union(other: KeySetAllExceptSome<T>): KeySetAllExceptSome<T>;
-  public union(other: KeySet<T> | KeySetGlobal<Key>): KeySet<T>;
-  public union(other: KeySet<T> | KeySetGlobal<Key>): KeySet<T> {
+  public union(other: KeySet<T> | KeySetAll<Key> | KeySetNone<Key>): KeySet<T>;
+  public union(other: KeySet<T> | KeySetAll<Key> | KeySetNone<Key>): KeySet<T> {
     if (other instanceof KeySetAll) return new KeySetAll<T>();
     if (other instanceof KeySetNone) return new KeySetNone<T>();
     if (other instanceof KeySetSome) return new KeySetSome([...other.elements]);

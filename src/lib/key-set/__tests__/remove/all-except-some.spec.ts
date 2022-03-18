@@ -34,7 +34,7 @@ test("#remove(keySetAll)", () => {
 test("#remove(keySetNone)", () => {
   const rest = keySet.remove(keySetNone);
   expect(rest instanceof KeySetAllExceptSome).toBeTruthy();
-  expect(rest.keys).toEqual(keySet.keys);
+  expect(rest.elementsSorted).toEqual(keySet.elementsSorted);
 });
 
 // SAME
@@ -43,14 +43,14 @@ test("#remove(keySetSomeSameKeys)", () => {
   const rest = keySet.remove(keySetSomeSameKeys);
   expect(rest instanceof KeySetAllExceptSome).toBeTruthy();
   expect(keySet === rest).toBe(false);
-  expect(rest.keys).toEqual(keySet.keys);
+  expect(rest.elementsSorted).toEqual(keySet.elementsSorted);
 });
 
 test("#remove(keySetSomeSubSetKeys)", () => {
   const rest = keySet.remove(keySetSomeSubSetKeys);
   expect(rest instanceof KeySetAllExceptSome).toBeTruthy();
   expect(keySet === rest).toBe(false);
-  expect(rest.keys).toEqual(keySet.keys);
+  expect(rest.elementsSorted).toEqual(keySet.elementsSorted);
 });
 
 test("#remove(keySetSomeMoreKeys)", () => {
@@ -58,14 +58,14 @@ test("#remove(keySetSomeMoreKeys)", () => {
   expect(rest instanceof KeySetAllExceptSome).toBeTruthy();
   expect(keySet === rest).toBe(false);
   const r = rest as KeySetAllExceptSome<number>;
-  expect(r.keys).toEqual(moreKeys);
+  expect(r.elementsSorted).toEqual(moreKeys);
 });
 
 test("#remove(keySetSomeDiffKeys)", () => {
   const rest = keySet.remove(keySetSomeDiffKeys);
   expect(rest instanceof KeySetAllExceptSome).toBeTruthy();
   expect(keySet === rest).toBe(false);
-  expect(rest.keys).toEqual([...keySet.keys, ...otherKeys]);
+  expect(rest.elementsSorted).toEqual([...keySet.elementsSorted, ...otherKeys]);
 });
 
 // ALL EXCEPT SOME
@@ -83,11 +83,11 @@ test("#remove(keySetAllExceptSomeSubSetKeys)", () => {
 test("#remove(keySetAllExceptSomeMoreKeys)", () => {
   const rest = keySet.remove(keySetAllExceptSomeMoreKeys);
   expect(rest instanceof KeySetSome).toBeTruthy();
-  expect(rest.keys).toEqual(extraKeys);
+  expect(rest.elementsSorted).toEqual(extraKeys);
 });
 
 test("#remove(keySetAllExceptSomeDiffKeys)", () => {
   const rest = keySet.remove(keySetAllExceptSomeDiffKeys);
   expect(rest instanceof KeySetSome).toBeTruthy();
-  expect(rest.keys).toEqual(otherKeys);
+  expect(rest.elementsSorted).toEqual(otherKeys);
 });

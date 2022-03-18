@@ -1,11 +1,11 @@
-import { KeySetAllExceptSome } from "./all-except-some";
+import sortBy from "lodash.sortby";
+import uniqWith from "lodash.uniqwith";
 import { IKeyLabel } from "../util/object-utils";
 import { Key, KeySet } from "./-base";
 import { all, KeySetAll } from "./all";
+import { KeySetAllExceptSome } from "./all-except-some";
 import { KeySetNone } from "./none";
 import { KeySetSome } from "./some";
-import uniqWith from "lodash.uniqwith";
-import sortBy from "lodash.sortby";
 
 /**
  * Composition of a list of KeySets.
@@ -204,7 +204,7 @@ export type ComposedKeyLabelSet<T extends string | number> = ComposedKeySet<IKey
 export function composedKeySetFrom<T extends Key>(list: KeySet<T>[]): ComposedKeySet<T> {
   if (!list.length) return new ComposedKeySet<T>([all<T>()]);
 
-  const sorted = sortBy(list, (x) => [x.type, x.elements]);
+  const sorted = sortBy(list, (x) => [x.type, x.elementsSorted]);
   return new ComposedKeySet<T>(sorted);
 }
 

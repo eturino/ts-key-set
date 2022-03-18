@@ -47,7 +47,8 @@
     "version": "standard-version",
     "reset": "git clean -dfx -e .idea && git reset --hard && yarn",
     "clean": "trash build test",
-    "prepare-release": "run-s reset test doc:html version doc:publish"
+    "prepare-pr": "run-s fix test:unit doc:html",
+    "prepare-release": "run-s reset test doc:html doc:publish version"
   },
   "scripts-info": {
     "info": "Display information about the package scripts",
@@ -65,6 +66,7 @@
     "node": ">=10.0"
   },
   "dependencies": {
+    "lodash.isequal": "^4.5.0",
     "lodash.sortby": "^4.7.0",
     "lodash.uniqwith": "^4.5.0"
   },
@@ -73,6 +75,7 @@
     "@commitlint/cli": "^16.0.0",
     "@commitlint/config-conventional": "^16.0.0",
     "@types/jest": "^27.0.0",
+    "@types/lodash.isequal": "^4.5.5",
     "@types/lodash.sortby": "^4.7.6",
     "@types/lodash.uniqwith": "^4.5.6",
     "@typescript-eslint/eslint-plugin": "^5.12.0",

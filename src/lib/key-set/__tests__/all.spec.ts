@@ -8,6 +8,18 @@ test("#clone()", () => {
   expect(keySet === result).toBe(false);
 });
 
+test("#elements", () => {
+  expect(keySet.elements).toEqual(new Set([]));
+});
+
+test("#elementsList", () => {
+  expect(keySet.elementsList).toEqual([]);
+});
+
+test("#elementsSorted", () => {
+  expect(keySet.elementsSorted).toEqual([]);
+});
+
 test("#invert()", () => {
   const result = keySet.invert();
   expect(result instanceof KeySetNone).toBeTruthy();

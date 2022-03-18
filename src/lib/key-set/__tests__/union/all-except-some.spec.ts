@@ -34,7 +34,7 @@ test("#union(keySetAll)", () => {
 test("#union(keySetNone)", () => {
   const rest = keySet.union(keySetNone);
   expect(rest instanceof KeySetAllExceptSome).toBeTruthy();
-  expect(rest.keys).toEqual(keys);
+  expect(rest.elementsSorted).toEqual(keys);
 });
 
 // SOME
@@ -47,7 +47,7 @@ test("#union(keySetSomeSameKeys)", () => {
 test("#union(keySetSomeSubSetKeys)", () => {
   const rest = keySet.union(keySetSomeSubSetKeys);
   expect(rest instanceof KeySetAllExceptSome).toBeTruthy();
-  expect(rest.keys).toEqual(restKeys);
+  expect(rest.elementsSorted).toEqual(restKeys);
 });
 
 test("#union(keySetSomeMoreKeys)", () => {
@@ -58,7 +58,7 @@ test("#union(keySetSomeMoreKeys)", () => {
 test("#union(keySetSomeDiffKeys)", () => {
   const rest = keySet.union(keySetSomeDiffKeys);
   expect(rest instanceof KeySetAllExceptSome).toBeTruthy();
-  expect(rest.keys).toEqual(keys);
+  expect(rest.elementsSorted).toEqual(keys);
 });
 
 // ALL EXCEPT SOME
@@ -67,7 +67,7 @@ test("#union(keySetAllExceptSomeSameKeys)", () => {
   const rest = keySet.union(keySetAllExceptSomeSameKeys);
   expect(rest instanceof KeySetAllExceptSome).toBeTruthy();
   expect(keySet === rest).toBe(false);
-  expect(rest.keys).toEqual(keys);
+  expect(rest.elementsSorted).toEqual(keys);
 });
 
 test("#union(keySetAllExceptSomeSubSetKeys)", () => {
@@ -75,7 +75,7 @@ test("#union(keySetAllExceptSomeSubSetKeys)", () => {
   expect(rest instanceof KeySetAllExceptSome).toBeTruthy();
   expect(keySet === rest).toBe(false);
   const r = rest as KeySetAllExceptSome<number>;
-  expect(r.keys).toEqual(subSetKeys);
+  expect(r.elementsSorted).toEqual(subSetKeys);
 });
 
 test("#union(keySetAllExceptSomeMoreKeys)", () => {
@@ -83,7 +83,7 @@ test("#union(keySetAllExceptSomeMoreKeys)", () => {
   expect(rest instanceof KeySetAllExceptSome).toBeTruthy();
   expect(keySet === rest).toBe(false);
   const r = rest as KeySetAllExceptSome<number>;
-  expect(r.keys).toEqual(keys);
+  expect(r.elementsSorted).toEqual(keys);
 });
 
 test("#union(keySetAllExceptSomeDiffKeys)", () => {

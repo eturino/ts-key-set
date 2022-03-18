@@ -2,21 +2,33 @@ import { KeySetAllExceptSome, KeySetSome } from "../../..";
 
 const keySet = new KeySetSome([3, 1, 2, 3, 2, 1]); // => keys 1, 2, 3
 
-test("removes duplicates and sorts", () => {
-  expect(keySet.keys).toEqual([1, 2, 3]);
+test("removes duplicates", () => {
+  expect(keySet.elements).toEqual(new Set([1, 2, 3]));
+});
+
+test("#elements", () => {
+  expect(keySet.elements).toEqual(new Set([3, 1, 2]));
+});
+
+test("#elementsList", () => {
+  expect(keySet.elementsList).toEqual([3, 1, 2]);
+});
+
+test("#elementsSorted", () => {
+  expect(keySet.elementsSorted).toEqual([1, 2, 3]);
 });
 
 test("#clone()", () => {
   const result = keySet.clone();
   expect(result instanceof KeySetSome).toBeTruthy();
   expect(keySet === result).toBe(false);
-  expect(keySet.keys).toEqual(result.keys);
+  expect(keySet.elements).toEqual(new Set(result.elements));
 });
 
 test("#invert()", () => {
   const result = keySet.invert();
   expect(result instanceof KeySetAllExceptSome).toBeTruthy();
-  expect(keySet.keys).toEqual(result.keys);
+  expect(keySet.elements).toEqual(new Set(result.elements));
 });
 
 test("#representsAll()", () => {

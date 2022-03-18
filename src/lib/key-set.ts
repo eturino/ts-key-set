@@ -35,6 +35,7 @@ import {
   isKeySetSerializedOfStringKeyLabels,
   isKeySetSerializedOfStrings,
 } from "./key-set/check-serialized-element-type";
+import { ComposedKeyLabelSet, ComposedKeySet, composedKeySetFrom } from "./key-set/composed";
 import { InvalidEmptySetError } from "./key-set/invalid-empty-set-error";
 import { InvalidKeySetError } from "./key-set/invalid-key-set-error";
 import { KeySetNone, none } from "./key-set/none";
@@ -48,15 +49,12 @@ import {
   serializeKeySet,
 } from "./key-set/serialize";
 import { KeySetSome, some, someForced } from "./key-set/some";
-import { ComposedKeySet, ComposedKeyLabelSet, composedKeySetFrom } from "./key-set/composed";
-
 import { EmptyArray, isEmptyArray, isNonEmptyArray, NonEmptyArray } from "./util/array-types";
-import { arraysEqual } from "./util/arrays-equal";
 import { IKeyLabel, isKeyLabel, isObject } from "./util/object-utils";
-import { uniqueArray, uniqueKeyLabelArray } from "./util/unique-array";
+import { setByKeys } from "./util/set-by-keys";
+import { sortKeys } from "./util/sort-keys";
 
 export {
-  // builders
   all,
   allExceptSome,
   allExceptSomeForced,
@@ -94,10 +92,9 @@ export {
   // serialize functions
   serializeKeySet,
   parseKeySet,
-  // util functions
-  uniqueArray,
-  uniqueKeyLabelArray,
-  arraysEqual,
+  // set utils
+  setByKeys,
+  sortKeys,
   // util types
   EmptyArray,
   NonEmptyArray,

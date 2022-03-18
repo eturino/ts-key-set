@@ -88,6 +88,8 @@ export interface IKeySetClass<T extends Key> {
    */
   readonly type: KeySetTypes;
 
+  readonly elements: Set<T>;
+
   serialized(): KeySetSerialized;
 
   /**

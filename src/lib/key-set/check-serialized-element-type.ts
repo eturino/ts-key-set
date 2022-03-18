@@ -1,4 +1,5 @@
 import { IKeyLabel, isKeyLabel } from "../util/object-utils";
+import { firstOf } from "../util/set-by-keys";
 import {
   KeySetAllExceptSomeSerialized,
   KeySetAllSerialized,
@@ -17,7 +18,7 @@ export function isKeySetSerializedOfStrings(
 export function isKeySetSerializedOfStrings(x: KeySetSerialized): x is KeySetSerialized<string>;
 export function isKeySetSerializedOfStrings(x: KeySetSerialized): x is KeySetSerialized<string> {
   if (isKeySetAllNoneSerialized(x)) return true;
-  return isKeySetElementsSerialized(x) && typeof x.elements[0] === "string";
+  return isKeySetElementsSerialized(x) && typeof firstOf(x.elements) === "string";
 }
 
 export function isKeySetSerializedOfNumbers(x: KeySetAllSerialized): x is KeySetAllSerialized;
@@ -29,7 +30,7 @@ export function isKeySetSerializedOfNumbers(
 export function isKeySetSerializedOfNumbers(x: KeySetSerialized): x is KeySetSerialized<number>;
 export function isKeySetSerializedOfNumbers(x: KeySetSerialized): x is KeySetSerialized<number> {
   if (isKeySetAllNoneSerialized(x)) return true;
-  return isKeySetElementsSerialized(x) && typeof x.elements[0] === "number";
+  return isKeySetElementsSerialized(x) && typeof firstOf(x.elements) === "number";
 }
 
 export function isKeySetSerializedOfStringKeyLabels(x: KeySetAllSerialized): x is KeySetAllSerialized;
@@ -45,7 +46,7 @@ export function isKeySetSerializedOfStringKeyLabels(x: KeySetSerialized): x is K
   if (isKeySetAllNoneSerialized(x)) return true;
   if (!isKeySetElementsSerialized(x)) return false;
 
-  const e = x.elements[0];
+  const e = firstOf(x.elements);
   return isKeyLabel(e) && typeof e.key === "string";
 }
 
@@ -62,6 +63,6 @@ export function isKeySetSerializedOfNumberKeyLabels(x: KeySetSerialized): x is K
   if (isKeySetAllNoneSerialized(x)) return true;
   if (!isKeySetElementsSerialized(x)) return false;
 
-  const e = x.elements[0];
+  const e = firstOf(x.elements);
   return isKeyLabel(e) && typeof e.key === "number";
 }

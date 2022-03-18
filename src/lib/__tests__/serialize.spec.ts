@@ -240,21 +240,21 @@ describe("serialize KeySet", () => {
     it("parseKeySet(someSerialized) => KeySetSome", () => {
       const x = parseKeySet(someNumberSerialized);
       expect(x).toBeInstanceOf(KeySetSome);
-      expect(x.keys).toEqual(someNumberSerialized.elements);
+      expect(x.elementsSorted).toEqual(someNumberSerialized.elements);
 
       const y = parseKeySet(someStringSerialized);
       expect(y).toBeInstanceOf(KeySetSome);
-      expect(y.keys).toEqual(someStringSerialized.elements);
+      expect(y.elementsSorted).toEqual(someStringSerialized.elements);
     });
 
     it("parseKeySet(allExceptSomeSerialized) => KeySetSome", () => {
       const x = parseKeySet(allExceptSomeNumberSerialized);
       expect(x).toBeInstanceOf(KeySetAllExceptSome);
-      expect(x.keys).toEqual(allExceptSomeNumberSerialized.elements);
+      expect(x.elementsSorted).toEqual(allExceptSomeNumberSerialized.elements);
 
       const y = parseKeySet(allExceptSomeStringSerialized);
       expect(y).toBeInstanceOf(KeySetAllExceptSome);
-      expect(y.keys).toEqual(allExceptSomeStringSerialized.elements);
+      expect(y.elementsSorted).toEqual(allExceptSomeStringSerialized.elements);
     });
   });
 
