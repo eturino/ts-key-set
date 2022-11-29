@@ -7,7 +7,7 @@ import { KeySetSome } from "./some";
 
 export type Key = string | number | IKeyLabel<string | number> | IKeyLabel<string> | IKeyLabel<number>;
 
-export function isValidKey(x: any): x is Key {
+export function isValidKey(x: unknown): x is Key {
   if (typeof x === "string" || typeof x === "number") return true;
   return isKeyLabel(x);
 }
@@ -170,22 +170,32 @@ export interface IKeySetClass<T extends Key> {
   includes(element: T): boolean;
 }
 
-export function isKeySetAll(x: any): x is KeySetAll {
+export function isKeySetAll<T extends Key>(x: KeySet<T> | KeySetSerialized<T>): x is KeySetAll<T>;
+export function isKeySetAll(x: unknown): x is KeySetAll;
+export function isKeySetAll(x: unknown): x is KeySetAll {
   return x instanceof KeySetAll;
 }
 
-export function isKeySetNone(x: any): x is KeySetNone {
+export function isKeySetNone<T extends Key>(x: KeySet<T> | KeySetSerialized<T>): x is KeySetNone<T>;
+export function isKeySetNone(x: unknown): x is KeySetNone;
+export function isKeySetNone(x: unknown): x is KeySetNone {
   return x instanceof KeySetNone;
 }
 
-export function isKeySetSome(x: any): x is KeySetSome<Key> {
+export function isKeySetSome<T extends Key>(x: KeySet<T> | KeySetSerialized<T>): x is KeySetSome<T>;
+export function isKeySetSome(x: unknown): x is KeySetSome<Key>;
+export function isKeySetSome(x: unknown): x is KeySetSome<Key> {
   return x instanceof KeySetSome;
 }
 
-export function isKeySetAllExceptSome(x: any): x is KeySetAllExceptSome<Key> {
+export function isKeySetAllExceptSome<T extends Key>(x: KeySet<T> | KeySetSerialized<T>): x is KeySetAllExceptSome<T>;
+export function isKeySetAllExceptSome(x: unknown): x is KeySetAllExceptSome<Key>;
+export function isKeySetAllExceptSome(x: unknown): x is KeySetAllExceptSome<Key> {
   return x instanceof KeySetAllExceptSome;
 }
 
-export function isKeySet(x: any): x is KeySet {
+export function isKeySet<T extends Key>(x: KeySet<T> | KeySetSerialized<T>): x is KeySet<T>;
+export function isKeySet(x: unknown): x is KeySet;
+export function isKeySet(x: unknown): x is KeySet {
   return isKeySetAll(x) || isKeySetNone(x) || isKeySetSome(x) || isKeySetAllExceptSome(x);
 }
