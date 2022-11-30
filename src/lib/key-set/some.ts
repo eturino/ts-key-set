@@ -143,3 +143,9 @@ export function some<T extends Key>(keys: T[] | ReadonlyArray<T>): KeySetNone<T>
 
   return someForced(keys);
 }
+
+/**
+ * alias of `some`
+ * @see some
+ */
+export const someKeySet = some;

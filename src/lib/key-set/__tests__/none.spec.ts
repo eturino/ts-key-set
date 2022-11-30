@@ -1,6 +1,13 @@
-import { KeySetAll, KeySetNone } from "../../..";
+import { KeySetAll, KeySetNone, none, noneKeySet } from "../../..";
 
 const keySet = new KeySetNone();
+
+test("none()", () => {
+  expect(none()).toBeInstanceOf(KeySetNone);
+});
+test("noneKeySet()", () => {
+  expect(noneKeySet()).toBeInstanceOf(KeySetNone);
+});
 
 test("#clone()", () => {
   const result = keySet.clone();

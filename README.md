@@ -47,21 +47,27 @@ We can have a KeySet of:
 
 All elements have to have be of the same type.
 
-### Creation: `all()`, `none()`, `some([...])`, `allExceptSome([...])`, `someForced([...])`, `allExceptSomeForced([...])`
+### Creation: `all()`, `none()`, `some([...])`, `allExceptSome([...])`, `allKeySet()`, `noneKeySet()`, `someKeySet([...])`, `allExceptSomeKeySet([...])`, `someForced([...])`, `allExceptSomeForced([...])`
 
 Build your KeySets using the build functions
 
 ```ts
-import { all, none, some, allExceptSome, someForced, allExceptSomeForced } from "@eturino/key-set";
+import { all, allKeySet, none, noneKeySet, some, someKeySet, allExceptSome, allExceptSomeKeySet, someForced, allExceptSomeForced } from "@eturino/key-set";
 
 all(); // => returns a new instance of KeySetAll
+allKeySet(); // => returns a new instance of KeySetAll
 none(); // => returns a new instance of KeySetNone
+noneKeySet(); // => returns a new instance of KeySetNone
 
 some([1, 3, 2, 3]); // returns a new instance of KeySetSome with keys Set<1, 3, 2>
+someKeySet([1, 3, 2, 3]); // returns a new instance of KeySetSome with keys Set<1, 3, 2>
 some([]); // returns a new instance of KeySetNone
+someKeySet([]); // returns a new instance of KeySetNone
 
 allExceptSome([1, 3, 2, 3]); // returns a new instance of KeySetAllExceptSome with keys Set<1, 3, 2>
+allExceptSomeKeySet([1, 3, 2, 3]); // returns a new instance of KeySetAllExceptSome with keys Set<1, 3, 2>
 allExceptSome([]); // returns a new instance of KeySetAll
+allExceptSomeKeySet([]); // returns a new instance of KeySetAll
 
 someForced([1, 3, 2, 3]); // returns a new instance of KeySetSome with keys Set<1, 3, 2>
 someForced([]); // throws an InvalidEmptySetError

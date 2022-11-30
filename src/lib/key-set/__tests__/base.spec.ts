@@ -1,5 +1,5 @@
-import { KeySetTypesEnumValues, KeySetTypes } from "../../..";
 import { $enum } from "ts-enum-util";
+import { KeySetTypes, KeySetTypesEnumValues } from "../../..";
 
 function acceptEnumValue(_x: KeySetTypesEnumValues): boolean {
   return true;

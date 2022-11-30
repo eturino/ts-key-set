@@ -1,6 +1,13 @@
-import { KeySetAllExceptSome, KeySetSome } from "../../..";
+import { KeySetAllExceptSome, KeySetSome, some, someKeySet } from "../../..";
 
 const keySet = new KeySetSome([3, 1, 2, 3, 2, 1]); // => keys 1, 2, 3
+
+test("some()", () => {
+  expect(some([1])).toBeInstanceOf(KeySetSome);
+});
+test("someKeySet()", () => {
+  expect(someKeySet([1])).toBeInstanceOf(KeySetSome);
+});
 
 test("removes duplicates", () => {
   expect(keySet.elements).toEqual(new Set([1, 2, 3]));

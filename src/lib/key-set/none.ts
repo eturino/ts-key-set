@@ -70,3 +70,9 @@ export class KeySetNone<T extends Key = Key> extends KeySetGlobal<T> {
 export function none<T extends Key = Key>(): KeySetNone<T> {
   return new KeySetNone<T>();
 }
+
+/**
+ * alias of `none`
+ * @see none
+ */
+export const noneKeySet = none;

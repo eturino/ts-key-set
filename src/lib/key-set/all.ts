@@ -86,3 +86,9 @@ export class KeySetAll<T extends Key = Key> extends KeySetGlobal<T> {
 export function all<T extends Key = Key>(): KeySetAll<T> {
   return new KeySetAll<T>();
 }
+
+/**
+ * alias of `all`
+ * @see all
+ */
+export const allKeySet = all;

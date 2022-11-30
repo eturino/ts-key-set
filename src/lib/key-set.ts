@@ -21,8 +21,13 @@ import {
   KeySetTypes,
   KeySetTypesEnumValues,
 } from "./key-set/-base";
-import { all, KeySetAll } from "./key-set/all";
-import { allExceptSome, allExceptSomeForced, KeySetAllExceptSome } from "./key-set/all-except-some";
+import { all, allKeySet, KeySetAll } from "./key-set/all";
+import {
+  allExceptSome,
+  allExceptSomeForced,
+  allExceptSomeKeySet,
+  KeySetAllExceptSome,
+} from "./key-set/all-except-some";
 import {
   isKeySetOfNumberKeyLabels,
   isKeySetOfNumbers,
@@ -38,7 +43,7 @@ import {
 import { ComposedKeyLabelSet, ComposedKeySet, composedKeySetFrom } from "./key-set/composed";
 import { InvalidEmptySetError } from "./key-set/invalid-empty-set-error";
 import { InvalidKeySetError } from "./key-set/invalid-key-set-error";
-import { KeySetNone, none } from "./key-set/none";
+import { KeySetNone, none, noneKeySet } from "./key-set/none";
 import {
   isKeySetAllExceptSomeSerialized,
   isKeySetAllSerialized,
@@ -48,7 +53,7 @@ import {
   parseKeySet,
   serializeKeySet,
 } from "./key-set/serialize";
-import { KeySetSome, some, someForced } from "./key-set/some";
+import { KeySetSome, some, someForced, someKeySet } from "./key-set/some";
 import { EmptyArray, isEmptyArray, isNonEmptyArray, NonEmptyArray } from "./util/array-types";
 import { IKeyLabel, isKeyLabel, isObject } from "./util/object-utils";
 import { setByKeys } from "./util/set-by-keys";
@@ -56,10 +61,14 @@ import { sortKeys } from "./util/sort-keys";
 
 export {
   all,
+  allKeySet,
   allExceptSome,
+  allExceptSomeKeySet,
   allExceptSomeForced,
   none,
+  noneKeySet,
   some,
+  someKeySet,
   someForced,
   // composed
   composedKeySetFrom,

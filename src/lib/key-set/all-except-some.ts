@@ -148,3 +148,9 @@ export function allExceptSome<T extends Key>(keys: Iterable<T>): KeySetAll<T> | 
 
   return allExceptSomeForced(keysList);
 }
+
+/**
+ * alias of `allExceptSome`
+ * @see allExceptSome
+ */
+export const allExceptSomeKeySet = allExceptSome;
