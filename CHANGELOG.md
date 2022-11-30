@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.1.0](https://github.com/eturino/ts-key-set/compare/v5.0.0...v5.1.0) (2022-11-30)
+
+
+### Features
+
+* add alias to build functions someKeySet() allExceptSomeKeySet() noneKeySet() and someKeySet() ([264fc34](https://github.com/eturino/ts-key-set/commit/264fc34d338e65dd724b71961eeb4fdbc86d64b5))
+
+
+### Bug Fixes
+
+* adds better types for the `isKeySet` `isKeySetXXX` functions ([1903e82](https://github.com/eturino/ts-key-set/commit/1903e820c0152cb82496b5ecb772fb5b5d129986))
+* **deps:** bump ansi-regex from 3.0.0 to 3.0.1 ([#437](https://github.com/eturino/ts-key-set/issues/437)) ([1dbe7b8](https://github.com/eturino/ts-key-set/commit/1dbe7b81ad4b86f9fa1d20188eea270719e6a79b))
+* **deps:** bump async from 2.6.3 to 2.6.4 ([#449](https://github.com/eturino/ts-key-set/issues/449)) ([f921d47](https://github.com/eturino/ts-key-set/commit/f921d47259b216b516615a7d4211749267837f38))
+
 ## [5.0.0](https://github.com/eturino/ts-key-set/compare/v4.8.0...v5.0.0) (2022-03-18)
 
 
