@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.3.0](https://github.com/eturino/ts-key-set/compare/v5.2.0...v5.3.0) (2023-05-16)
+
+
+### Features
+
+* composedKeySet new methods addList and withoutList ([b4b2993](https://github.com/eturino/ts-key-set/commit/b4b29930ff4b979d73485895ca0cd45dca8161f2))
+
 ## [5.2.0](https://github.com/eturino/ts-key-set/compare/v5.1.0...v5.2.0) (2023-05-16)
 
 
