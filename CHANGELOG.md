@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.2.0](https://github.com/eturino/ts-key-set/compare/v5.1.0...v5.2.0) (2023-05-16)
+
+
+### Features
+
+* adding isComposedKeySet() function. Also upgrade dependencies ([b543221](https://github.com/eturino/ts-key-set/commit/b5432219c8719809e71bdcd05afbe0dac52d8c85))
+
 ## [5.1.0](https://github.com/eturino/ts-key-set/compare/v5.0.0...v5.1.0) (2022-11-30)
 
 
