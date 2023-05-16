@@ -115,6 +115,15 @@ export class ComposedKeySet<T extends Key = Key> {
   }
 
   /**
+   * returns a new ComposedKeySet with the list of KeySets of the current one, plus the extra ones given
+   *
+   * @param others
+   */
+  addList(others: KeySet<T>[]): ComposedKeySet<T> {
+    return composedKeySetFrom([...this.list, ...others]);
+  }
+
+  /**
    * removes the given key set from the list, if it exists (using isEqual)
    *
    * it returns a ComposedKeySet with a single ALL if the resulting list is empty
@@ -123,6 +132,17 @@ export class ComposedKeySet<T extends Key = Key> {
    */
   without(other: KeySet<T>): ComposedKeySet<T> {
     return composedKeySetFrom(this.list.filter((x) => !x.isEqual(other)));
+  }
+
+  /**
+   * removes all the given key sets from the list, if any exists (using isEqual)
+   *
+   * it returns a ComposedKeySet with a single ALL if the resulting list is empty
+   *
+   * @param others
+   */
+  withoutList(others: KeySet<T>[]): ComposedKeySet<T> {
+    return composedKeySetFrom(this.list.filter((x) => !others.some((y) => x.isEqual(y))));
   }
 
   /**

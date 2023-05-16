@@ -168,6 +168,22 @@ describe("ComposedKeySet", () => {
     });
   });
 
+  describe("#addList", () => {
+    it("returns a new composed an extra members", () => {
+      const ks1: KeySetSome<number> = new KeySetSome([1, 2, 3]);
+      const ks2: KeySetSome<number> = new KeySetSome([1, 3, 9]);
+      const ks3: KeySetSome<number> = new KeySetSome([1, 4]);
+      const extra1: KeySetSome<number> = new KeySetSome([1, 4, 10]);
+      const extra2: KeySetSome<number> = new KeySetSome([1, 23]);
+
+      const original = composedKeySetFrom([ks1, ks2, ks3]);
+      const expected = composedKeySetFrom([ks1, ks2, ks3, extra1, extra2]);
+
+      const actual = original.addList([extra1, extra2]);
+      expect(actual).toEqual(expected);
+    });
+  });
+
   describe("#without", () => {
     it("returns a new composed with the list of members that are not equivalent with the given one", () => {
       const ks1: KeySetSome<number> = new KeySetSome([1, 2, 3]);
@@ -190,6 +206,32 @@ describe("ComposedKeySet", () => {
       const expected = composedKeySetFrom([all()]);
 
       const actual = original.without(new KeySetSome([1, 2, 3]));
+      expect(actual).toEqual(expected);
+    });
+  });
+
+  describe("#withoutList", () => {
+    it("returns a new composed with the list of members that are not equivalent with the given one", () => {
+      const ks1: KeySetSome<number> = new KeySetSome([1, 2, 3]);
+      const ks2: KeySetSome<number> = new KeySetSome([1, 3, 9]);
+      const ks3: KeySetSome<number> = new KeySetSome([1, 4]);
+      const cln: KeySetSome<number> = new KeySetSome([1, 4]);
+
+      const original = composedKeySetFrom([ks1, ks2, ks3, cln]);
+      const expected = composedKeySetFrom([ks1, ks2]);
+
+      const actual = original.withoutList([new KeySetSome([1, 4]), new KeySetSome([19191])]);
+      expect(actual).toEqual(expected);
+    });
+
+    it("if nothing survives, it will have a single ALL", () => {
+      const ks1: KeySetSome<number> = new KeySetSome([1, 2, 3]);
+      const ks2: KeySetSome<number> = new KeySetSome([1, 2, 3]);
+
+      const original = composedKeySetFrom([ks1, ks2]);
+      const expected = composedKeySetFrom([all()]);
+
+      const actual = original.withoutList([new KeySetSome([1, 2, 3])]);
       expect(actual).toEqual(expected);
     });
   });
