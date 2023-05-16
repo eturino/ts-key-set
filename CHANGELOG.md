@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.4.0](https://github.com/eturino/ts-key-set/compare/v5.3.0...v5.4.0) (2023-05-16)
+
+
+### Features
+
+* composedKeySet to avoid duplicate key set (using ks.isEqual()) ([c03dd00](https://github.com/eturino/ts-key-set/commit/c03dd00b591ab1a88c75f0426b6fc2c9b7545630))
+
 ## [5.3.0](https://github.com/eturino/ts-key-set/compare/v5.2.0...v5.3.0) (2023-05-16)
 
 
