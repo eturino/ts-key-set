@@ -1,8 +1,7 @@
-import sortBy from "lodash.sortby";
-import uniqWith from "lodash.uniqwith";
+import { sortBy, uniqWith } from "lodash";
 import { IKeyLabel } from "../util/object-utils";
 import { Key, KeySet } from "./-base";
-import { all, KeySetAll } from "./all";
+import { KeySetAll, all } from "./all";
 import { KeySetAllExceptSome } from "./all-except-some";
 import { KeySetNone } from "./none";
 import { KeySetSome } from "./some";
@@ -190,6 +189,12 @@ export class ComposedKeySet<T extends Key = Key> {
   compactIntersect(): ComposedKeySet<T> {
     return compactWith(this.list, (list) => list.reduce((acc, x) => acc.intersect(x), new KeySetAll<T>()));
   }
+}
+
+export function isComposedKeySet<T extends Key>(x: ComposedKeySet<T>): x is ComposedKeySet<T>;
+export function isComposedKeySet(x: unknown): x is ComposedKeySet;
+export function isComposedKeySet(x: unknown): x is ComposedKeySet {
+  return x instanceof ComposedKeySet;
 }
 
 export type ComposedKeyLabelSet<T extends string | number> = ComposedKeySet<IKeyLabel<T>>;

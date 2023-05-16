@@ -1,12 +1,31 @@
-import sortBy from "lodash.sortby";
+import { sortBy } from "lodash";
 import { KeySet } from "../-base";
 import { all, KeySetAll } from "../all";
 import { allExceptSome, KeySetAllExceptSome } from "../all-except-some";
-import { ComposedKeySet, composedKeySetFrom } from "../composed";
+import { ComposedKeySet, composedKeySetFrom, isComposedKeySet } from "../composed";
 import { KeySetNone, none } from "../none";
+import { serializeKeySet } from "../serialize";
 import { KeySetSome, some } from "../some";
 
 describe("ComposedKeySet", () => {
+  describe("isComposedKeySet", () => {
+    it("returns true if the object is a ComposedKeySet", () => {
+      const ks = new ComposedKeySet([]);
+      expect(isComposedKeySet(ks)).toBeTruthy();
+    });
+    it("returns false with a keySet", () => {
+      const ks = all<string>();
+      expect(isComposedKeySet(ks)).toBeFalsy();
+    });
+    it("returns false with a serialized keySet", () => {
+      const ks = serializeKeySet(all<string>());
+      expect(isComposedKeySet(ks)).toBeFalsy();
+    });
+    it("returns false with null", () => {
+      expect(isComposedKeySet(null)).toBeFalsy();
+    });
+  });
+
   describe("construction", () => {
     it("with an empty list => returns Composed([All])", () => {
       const actual = composedKeySetFrom([]);

@@ -1,6 +1,6 @@
 import { IKeyLabel, isKeyLabel } from "../util/object-utils";
 import { firstOf } from "../util/set-by-keys";
-import { isKeySet, KeySet } from "./-base";
+import { KeySet, isKeySet } from "./-base";
 import { KeySetAll } from "./all";
 import { KeySetAllExceptSome } from "./all-except-some";
 import { KeySetNone } from "./none";

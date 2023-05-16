@@ -19,7 +19,7 @@ Library bootstrapped using [typescript-starter](https://github.com/bitjson/types
 
 ## Breaking changes in v5
 
-Since v5, the `KeySet` elements are encoded in a frozen `Set` instead of an array. It is exposed as `keySet.elements`. 
+Since v5, the `KeySet` elements are encoded in a frozen `Set` instead of an array. It is exposed as `keySet.elements`.
 The `keySet.keys` alias has been dropped.
 
 For a list of elements as an array use `keySet.elementsList`, and for a sorted version of that use `keySet.elementsSorted`.
@@ -314,3 +314,7 @@ const comp = composedKeySet([some(A, B, C), allExceptSome(D)]);
 ```
 
 It can be serialized and parsed as the internal list (array) of KeySets.
+
+We have also a function to check type:
+
+- `isComposedKeySet(x): x is ComposedKeySet`

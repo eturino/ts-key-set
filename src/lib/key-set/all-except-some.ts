@@ -1,7 +1,7 @@
 import { EmptyArray, NonEmptyArray } from "../util/array-types";
 import { Key, KeySet, KeySetAllExceptSomeSerialized, KeySetTypes } from "./-base";
 import { KeySetByKeys } from "./-by-keys";
-import { all, KeySetAll } from "./all";
+import { KeySetAll, all } from "./all";
 import { InvalidEmptySetError } from "./invalid-empty-set-error";
 import { KeySetNone } from "./none";
 import { KeySetSome, some } from "./some";

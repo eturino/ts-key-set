@@ -1,4 +1,4 @@
-import isEqual from "lodash.isequal";
+import { isEqual } from "lodash";
 import { setByKeys } from "../util/set-by-keys";
 import { sortKeys } from "../util/sort-keys";
 import { IKeySetClass, Key, KeySet, KeySetAllExceptSomeSerialized, KeySetSomeSerialized, KeySetTypes } from "./-base";

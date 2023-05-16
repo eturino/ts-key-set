@@ -1,4 +1,4 @@
-import sortBy from "lodash.sortby";
+import { sortBy } from "lodash";
 import { Key } from "../key-set/-base";
 import { IKeyLabel, isKeyLabel } from "./object-utils";
 import { firstOf } from "./set-by-keys";

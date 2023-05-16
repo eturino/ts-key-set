@@ -40,7 +40,7 @@ import {
   isKeySetSerializedOfStringKeyLabels,
   isKeySetSerializedOfStrings,
 } from "./key-set/check-serialized-element-type";
-import { ComposedKeyLabelSet, ComposedKeySet, composedKeySetFrom } from "./key-set/composed";
+import { ComposedKeyLabelSet, ComposedKeySet, composedKeySetFrom, isComposedKeySet } from "./key-set/composed";
 import { InvalidEmptySetError } from "./key-set/invalid-empty-set-error";
 import { InvalidKeySetError } from "./key-set/invalid-key-set-error";
 import { KeySetNone, none, noneKeySet } from "./key-set/none";
@@ -110,6 +110,7 @@ export {
   // predicates
   isEmptyArray,
   isNonEmptyArray,
+  isComposedKeySet,
   isKeySet,
   isKeySetAll,
   isKeySetNone,
