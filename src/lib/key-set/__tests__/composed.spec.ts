@@ -34,12 +34,13 @@ describe("ComposedKeySet", () => {
       expect(actual.isEqual(expected)).toBeTruthy();
     });
 
-    it("a list => returns Composed(sort(list))", () => {
+    it("a list => returns Composed(uniq(sort(list)))", () => {
       const ks1 = new KeySetAll();
       const ks2 = new KeySetSome([1, 2, 3]);
+      const ks2Dupe = new KeySetSome([1, 2, 3]);
       const ks3 = new KeySetAllExceptSome([4]);
 
-      const actual = composedKeySetFrom([ks1, ks2, ks3]);
+      const actual = composedKeySetFrom([ks1, ks2, ks3, ks2Dupe]);
 
       const list = [ks1.clone(), ks2.clone(), ks3.clone()];
       const sorted = sortBy(list, (x) => [x.type, x.elements]);

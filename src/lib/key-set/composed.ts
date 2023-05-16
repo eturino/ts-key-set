@@ -229,7 +229,8 @@ export type ComposedKeyLabelSet<T extends string | number> = ComposedKeySet<IKey
 export function composedKeySetFrom<T extends Key>(list: KeySet<T>[]): ComposedKeySet<T> {
   if (!list.length) return new ComposedKeySet<T>([all<T>()]);
 
-  const sorted = sortBy(list, (x) => [x.type, x.elementsSorted]);
+  const uniqList = uniqWith(list, (a, b) => a.isEqual(b));
+  const sorted = sortBy(uniqList, (x) => [x.type, x.elementsSorted]);
   return new ComposedKeySet<T>(sorted);
 }
 
