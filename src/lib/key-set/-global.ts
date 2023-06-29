@@ -1,6 +1,8 @@
 import { IKeySetClass, Key, KeySet, KeySetAllSerialized, KeySetNoneSerialized, KeySetTypes } from "./-base";
 import { KeySetAll } from "./all";
+import { KeySetAllExceptSome } from "./all-except-some";
 import { KeySetNone } from "./none";
+import { KeySetSome } from "./some";
 
 /**
  * @internal
@@ -25,13 +27,13 @@ export abstract class KeySetGlobal<T extends Key> implements IKeySetClass<T> {
 
   public abstract serialized(): KeySetAllSerialized<T> | KeySetNoneSerialized<T>;
 
-  public abstract representsAll(): boolean;
+  public abstract representsAll(): this is KeySetAll<T>;
 
-  public abstract representsNone(): boolean;
+  public abstract representsNone(): this is KeySetNone<T>;
 
-  public abstract representsSome(): boolean;
+  public abstract representsSome(): this is KeySetSome<T>;
 
-  public abstract representsAllExceptSome(): boolean;
+  public abstract representsAllExceptSome(): this is KeySetAllExceptSome<T>;
 
   public abstract clone(): KeySetAll | KeySetNone;
 

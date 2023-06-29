@@ -34,16 +34,32 @@ test("#invert()", () => {
 
 test("#representsAll()", () => {
   expect(keySet.representsAll()).toBe(false);
+  if (keySet.representsAll()) {
+    const _never: never = keySet;
+    throw new Error(`Expected keySet type, but it was ${_never}`);
+  }
 });
 
 test("#representsNone()", () => {
   expect(keySet.representsNone()).toBe(true);
+  if (!keySet.representsNone()) {
+    const _never: never = keySet;
+    throw new Error(`Expected keySet type, but it was ${_never}`);
+  }
 });
 
 test("#representsSome()", () => {
   expect(keySet.representsSome()).toBe(false);
+  if (keySet.representsSome()) {
+    const _never: never = keySet;
+    throw new Error(`Expected keySet type, but it was ${_never}`);
+  }
 });
 
 test("#representsAllExceptSome()", () => {
   expect(keySet.representsAllExceptSome()).toBe(false);
+  if (keySet.representsAllExceptSome()) {
+    const _never: never = keySet;
+    throw new Error(`Expected keySet type, but it was ${_never}`);
+  }
 });

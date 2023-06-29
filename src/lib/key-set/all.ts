@@ -12,19 +12,19 @@ export class KeySetAll<T extends Key = Key> extends KeySetGlobal<T> {
     return { type: this.type };
   }
 
-  public representsAll() {
+  public representsAll(): this is KeySetAll<T> {
     return true;
   }
 
-  public representsNone() {
+  public representsNone(): this is KeySetNone<T> {
     return false;
   }
 
-  public representsSome() {
+  public representsSome(): this is KeySetSome<T> {
     return false;
   }
 
-  public representsAllExceptSome() {
+  public representsAllExceptSome(): this is KeySetAllExceptSome<T> {
     return false;
   }
 

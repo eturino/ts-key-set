@@ -95,22 +95,22 @@ export interface IKeySetClass<T extends Key> {
   /**
    * returns true if the KeySet represents ALL elements (KeySetAll) (U or universal set)
    */
-  representsAll(): boolean;
+  representsAll(): this is KeySetAll<T>;
 
   /**
    * returns true if the KeySet represents NO elements (KeySetNone) (∅ or empty set {})
    */
-  representsNone(): boolean;
+  representsNone(): this is KeySetNone<T>;
 
   /**
    * returns true if the KeySet represents only some elements (KeySetSome) (Set of A {1,2,3})
    */
-  representsSome(): boolean;
+  representsSome(): this is KeySetSome<T>;
 
   /**
    * returns true if the KeySet represents all except a specific list of elements (KeySetAllExceptSome) (Complement set of A {1,2,3})
    */
-  representsAllExceptSome(): boolean;
+  representsAllExceptSome(): this is KeySetAllExceptSome<T>;
 
   /**
    * returns another KeySet of the same type that represents the same Set

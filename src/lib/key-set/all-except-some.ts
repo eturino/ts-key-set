@@ -13,20 +13,20 @@ export class KeySetAllExceptSome<T extends Key> extends KeySetByKeys<T> {
     return { type: this.type, elements: this.elementsSorted as NonEmptyArray };
   }
 
-  public representsAll() {
+  public representsAll(): this is KeySetAll<T> {
     return false;
   }
 
-  public representsNone() {
+  public representsNone(): this is KeySetNone<T> {
     return false;
   }
 
-  public representsAllExceptSome(): boolean {
+  public representsSome(): this is KeySetSome<T> {
+    return false;
+  }
+
+  public representsAllExceptSome(): this is KeySetAllExceptSome<T> {
     return true;
-  }
-
-  public representsSome(): boolean {
-    return false;
   }
 
   public includes(element: T) {

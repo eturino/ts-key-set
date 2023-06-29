@@ -41,13 +41,13 @@ export abstract class KeySetByKeys<T extends Key> implements IKeySetClass<T> {
 
   public abstract serialized(): KeySetAllExceptSomeSerialized<T> | KeySetSomeSerialized<T>;
 
-  public abstract representsAll(): boolean;
+  public abstract representsAll(): this is KeySetAll<T>;
 
-  public abstract representsNone(): boolean;
+  public abstract representsNone(): this is KeySetNone<T>;
 
-  public abstract representsSome(): boolean;
+  public abstract representsSome(): this is KeySetSome<T>;
 
-  public abstract representsAllExceptSome(): boolean;
+  public abstract representsAllExceptSome(): this is KeySetAllExceptSome<T>;
 
   public abstract clone(): KeySetSome<T> | KeySetAllExceptSome<T>;
 
