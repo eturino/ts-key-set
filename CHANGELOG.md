@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.5.0](https://github.com/eturino/ts-key-set/compare/v5.4.0...v5.5.0) (2023-06-29)
+
+
+### Features
+
+* add better types to `representsXXX()` functions ([6087634](https://github.com/eturino/ts-key-set/commit/6087634b6568c4d702b5c05ec2ae0e7f44cc4c38))
+
 ## [5.4.0](https://github.com/eturino/ts-key-set/compare/v5.3.0...v5.4.0) (2023-05-16)
 
 
