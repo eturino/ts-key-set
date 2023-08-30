@@ -1,6 +1,6 @@
 {
   "name": "@eturino/key-set",
-  "version": "5.5.0",
+  "version": "5.6.0",
   "author": "Eduardo Turiño <eturino@eturino.com>",
   "description": "KeySet with 4 classes to represent concepts of All, None, Some, and AllExceptSome, the last 2 with a sorted uniq list of keys, and all with intersection calculations (TypeScript port of https://github.com/eturino/ruby_key_set)",
   "main": "build/main/index.js",

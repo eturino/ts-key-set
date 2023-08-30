@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.6.0](https://github.com/eturino/ts-key-set/compare/v5.5.0...v5.6.0) (2023-08-30)
+
+
+### Features
+
+* added toString() and, only for node environments, also custom inspect for console.log() ([d8719b3](https://github.com/eturino/ts-key-set/commit/d8719b32795037fd573f8cf80a3efb99e36674ec))
+
 ## [5.5.0](https://github.com/eturino/ts-key-set/compare/v5.4.0...v5.5.0) (2023-06-29)
 
 
