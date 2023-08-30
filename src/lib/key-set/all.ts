@@ -1,5 +1,6 @@
 import { Key, KeySet, KeySetAllSerialized, KeySetTypes } from "./-base";
 import { KeySetGlobal } from "./-global";
+import { INSPECT } from "./-is-node-env";
 import { KeySetAllExceptSome } from "./all-except-some";
 import { InvalidKeySetError } from "./invalid-key-set-error";
 import { KeySetNone } from "./none";
@@ -7,6 +8,14 @@ import { KeySetSome } from "./some";
 
 export class KeySetAll<T extends Key = Key> extends KeySetGlobal<T> {
   public readonly type = KeySetTypes.all;
+
+  public toString(): string {
+    return "KeySet<ALL>";
+  }
+
+  public [INSPECT]() {
+    return this.toString();
+  }
 
   public serialized(): KeySetAllSerialized<T> {
     return { type: this.type };

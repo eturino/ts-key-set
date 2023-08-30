@@ -1,6 +1,7 @@
 import { EmptyArray, NonEmptyArray } from "../util/array-types";
 import { Key, KeySet, KeySetSomeSerialized, KeySetTypes } from "./-base";
 import { KeySetByKeys } from "./-by-keys";
+import { INSPECT } from "./-is-node-env";
 import { KeySetAll } from "./all";
 import { KeySetAllExceptSome, allExceptSome } from "./all-except-some";
 import { InvalidEmptySetError } from "./invalid-empty-set-error";
@@ -8,6 +9,14 @@ import { KeySetNone, none } from "./none";
 
 export class KeySetSome<T extends Key> extends KeySetByKeys<T> {
   public readonly type = KeySetTypes.some;
+
+  public toString(): string {
+    return `KeySet<SOME[${this.elementsSorted.map((x) => x.toString())}]>`;
+  }
+
+  public [INSPECT]() {
+    return this.toString();
+  }
 
   public serialized(): KeySetSomeSerialized<T> {
     return { type: this.type, elements: this.elementsSorted as NonEmptyArray };
@@ -149,3 +158,9 @@ export function some<T extends Key>(keys: T[] | ReadonlyArray<T>): KeySetNone<T>
  * @see some
  */
 export const someKeySet = some;
+
+/**
+ * alias of `someForced`
+ * @see someForced
+ */
+export const someKeySetForced = someForced;

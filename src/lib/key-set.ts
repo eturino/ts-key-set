@@ -26,6 +26,7 @@ import {
   allExceptSome,
   allExceptSomeForced,
   allExceptSomeKeySet,
+  allExceptSomeKeySetForced,
   KeySetAllExceptSome,
 } from "./key-set/all-except-some";
 import {
@@ -53,7 +54,7 @@ import {
   parseKeySet,
   serializeKeySet,
 } from "./key-set/serialize";
-import { KeySetSome, some, someForced, someKeySet } from "./key-set/some";
+import { KeySetSome, some, someForced, someKeySetForced, someKeySet } from "./key-set/some";
 import { EmptyArray, isEmptyArray, isNonEmptyArray, NonEmptyArray } from "./util/array-types";
 import { IKeyLabel, isKeyLabel, isObject } from "./util/object-utils";
 import { setByKeys } from "./util/set-by-keys";
@@ -64,12 +65,14 @@ export {
   allKeySet,
   allExceptSome,
   allExceptSomeKeySet,
+  allExceptSomeKeySetForced,
   allExceptSomeForced,
   none,
   noneKeySet,
   some,
   someKeySet,
   someForced,
+  someKeySetForced,
   // composed
   composedKeySetFrom,
   // types and classes

@@ -1,6 +1,7 @@
 import { EmptyArray, NonEmptyArray } from "../util/array-types";
 import { Key, KeySet, KeySetAllExceptSomeSerialized, KeySetTypes } from "./-base";
 import { KeySetByKeys } from "./-by-keys";
+import { INSPECT } from "./-is-node-env";
 import { KeySetAll, all } from "./all";
 import { InvalidEmptySetError } from "./invalid-empty-set-error";
 import { KeySetNone } from "./none";
@@ -8,6 +9,14 @@ import { KeySetSome, some } from "./some";
 
 export class KeySetAllExceptSome<T extends Key> extends KeySetByKeys<T> {
   public readonly type = KeySetTypes.allExceptSome;
+
+  public toString(): string {
+    return `KeySet<ALL_EXCEPT_SOME[${this.elementsSorted.map((x) => x.toString())}]>`;
+  }
+
+  public [INSPECT]() {
+    return this.toString();
+  }
 
   public serialized(): KeySetAllExceptSomeSerialized<T> {
     return { type: this.type, elements: this.elementsSorted as NonEmptyArray };
@@ -154,3 +163,9 @@ export function allExceptSome<T extends Key>(keys: Iterable<T>): KeySetAll<T> | 
  * @see allExceptSome
  */
 export const allExceptSomeKeySet = allExceptSome;
+
+/**
+ * alias of `allExceptSomeForced`
+ * @see allExceptSomeForced
+ */
+export const allExceptSomeKeySetForced = allExceptSomeForced;

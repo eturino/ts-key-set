@@ -1,6 +1,7 @@
 import { sortBy, uniqWith } from "lodash";
 import { IKeyLabel } from "../util/object-utils";
 import { Key, KeySet } from "./-base";
+import { INSPECT } from "./-is-node-env";
 import { KeySetAll, all } from "./all";
 import { KeySetAllExceptSome } from "./all-except-some";
 import { KeySetNone } from "./none";
@@ -30,6 +31,14 @@ import { KeySetSome } from "./some";
  */
 export class ComposedKeySet<T extends Key = Key> {
   constructor(readonly list: KeySet<T>[]) {}
+
+  public toString(): string {
+    return `ComposedKeySet<${this.list.map((x) => x.toString())}>`;
+  }
+
+  public [INSPECT]() {
+    return this.toString();
+  }
 
   clone(): ComposedKeySet<T> {
     return composedKeySetFrom(this.list.map((x) => x.clone()));
