@@ -31,7 +31,7 @@ function isArrayOfKeyLabels(source: any[] | ReadonlyArray<any>): source is IKeyL
  * @internal
  * @hidden
  */
-export function firstOf<T>(source: T[] | ReadonlyArray<T> | Set<T>): T {
+export function firstOf<T>(source: T[] | ReadonlyArray<T> | Set<T>): T | undefined {
   if (source instanceof Set) {
     return source.values().next().value;
   }

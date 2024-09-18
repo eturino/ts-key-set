@@ -250,7 +250,7 @@ function compactWith<T extends Key>(
   const somes = list.filter((x) => x instanceof KeySetSome);
   const aesms = list.filter((x) => x instanceof KeySetAllExceptSome);
 
-  const compacted = [...list.filter((x) => x instanceof KeySetNone || x instanceof KeySetAll)];
+  const compacted: KeySet<T>[] = [...list.filter((x) => x instanceof KeySetNone || x instanceof KeySetAll)];
   if (somes.length > 0) {
     compacted.push(reducerFn(somes));
   }
