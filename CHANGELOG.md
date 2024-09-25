@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.6.3](https://github.com/eturino/ts-key-set/compare/v5.6.2...v5.6.3) (2024-09-25)
+
+
+### Bug Fixes
+
+* remove 'type module'. It broke the usage of this library as commonJS ([94a5965](https://github.com/eturino/ts-key-set/commit/94a5965f7efd73f8e0c29a07990c9ff4eb01f9e3))
+
 ### [5.6.2](https://github.com/eturino/ts-key-set/compare/v5.6.1...v5.6.2) (2024-09-18)
 
 ### [5.6.1](https://github.com/eturino/ts-key-set/compare/v5.6.0...v5.6.1) (2024-09-16)
