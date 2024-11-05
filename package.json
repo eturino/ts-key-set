@@ -17,7 +17,7 @@
     "test:watch": "vitest",
     "reset": "git clean -dfx -e .idea && git reset --hard && npm install",
     "version": "standard-version",
-    "prepare-release": "npm run reset && npm run test && npm run version",
+    "prepare-release": "npm run reset && npm run test && npm run version && npm run build",
     "prepare": "husky || true"
   },
   "author": "Eduardo Turiño <eturino@eturino.com>",
