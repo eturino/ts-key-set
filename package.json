@@ -15,6 +15,9 @@
     "check": "biome check --write src",
     "test": "vitest run",
     "test:watch": "vitest",
+    "reset": "git clean -dfx -e .idea && git reset --hard && npm install",
+    "version": "standard-version",
+    "prepare-release": "npm run reset && npm run test && npm run version",
     "prepare": "husky || true"
   },
   "author": "Eduardo Turiño <eturino@eturino.com>",
@@ -40,6 +43,7 @@
     "commitizen": "^4.3.1",
     "husky": "^9.1.6",
     "inquirer": "^9.3.7",
+    "standard-version": "^9.5.0",
     "ts-enum-util": "^4.1.0",
     "tsup": "^8.3.5",
     "typescript": "^5.6.3",
