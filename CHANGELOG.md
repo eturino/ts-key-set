@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.7.0](https://github.com/eturino/ts-key-set/compare/v5.6.3...v5.7.0) (2024-11-05)
+
+
+### Features
+
+* Replace lodash with es-toolkit. Also moving to new project structure and tooling, vitest, and CI ([66c1b43](https://github.com/eturino/ts-key-set/commit/66c1b4354c1e77fadd024678e87dd89d73e42861))
+
 ### [5.6.3](https://github.com/eturino/ts-key-set/compare/v5.6.2...v5.6.3) (2024-09-25)
 
 

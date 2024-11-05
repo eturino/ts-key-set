@@ -1,6 +1,6 @@
 {
   "name": "@eturino/key-set",
-  "version": "5.6.3",
+  "version": "5.7.0",
   "description": "Claim, ClaimSet and Ability for permissions (Typescript port of https://github.com/eturino/claims)",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
