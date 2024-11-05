@@ -1,8 +1,8 @@
-import { IKeySetClass, Key, KeySet, KeySetAllSerialized, KeySetNoneSerialized, KeySetTypes } from "./-base";
-import { KeySetAll } from "./all";
-import { KeySetAllExceptSome } from "./all-except-some";
-import { KeySetNone } from "./none";
-import { KeySetSome } from "./some";
+import type { IKeySetClass, Key, KeySet, KeySetAllSerialized, KeySetNoneSerialized, KeySetTypes } from "./-base";
+import type { KeySetAll } from "./all";
+import type { KeySetAllExceptSome } from "./all-except-some";
+import type { KeySetNone } from "./none";
+import type { KeySetSome } from "./some";
 
 /**
  * @internal

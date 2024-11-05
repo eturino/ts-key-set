@@ -1,5 +1,5 @@
-import { EmptyArray, NonEmptyArray } from "../util/array-types";
-import { IKeyLabel, isKeyLabel } from "../util/object-utils";
+import type { EmptyArray, NonEmptyArray } from "../util/array-types";
+import { type IKeyLabel, isKeyLabel } from "../util/object-utils";
 import { KeySetAll } from "./all";
 import { KeySetAllExceptSome } from "./all-except-some";
 import { KeySetNone } from "./none";

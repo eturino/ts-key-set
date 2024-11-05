@@ -1,10 +1,4 @@
 import {
-  isKeySet,
-  isKeySetAll,
-  isKeySetAllExceptSome,
-  isKeySetNone,
-  isKeySetSome,
-  isValidKey,
   Key,
   KeyLabelSet,
   KeyLabelSetAllExceptSomeSerialized,
@@ -20,14 +14,20 @@ import {
   KeySetSomeSerialized,
   KeySetTypes,
   KeySetTypesEnumValues,
+  isKeySet,
+  isKeySetAll,
+  isKeySetAllExceptSome,
+  isKeySetNone,
+  isKeySetSome,
+  isValidKey,
 } from "./key-set/-base";
-import { all, allKeySet, KeySetAll } from "./key-set/all";
+import { KeySetAll, all, allKeySet } from "./key-set/all";
 import {
+  KeySetAllExceptSome,
   allExceptSome,
   allExceptSomeForced,
   allExceptSomeKeySet,
   allExceptSomeKeySetForced,
-  KeySetAllExceptSome,
 } from "./key-set/all-except-some";
 import {
   isKeySetOfNumberKeyLabels,
@@ -54,8 +54,8 @@ import {
   parseKeySet,
   serializeKeySet,
 } from "./key-set/serialize";
-import { KeySetSome, some, someForced, someKeySetForced, someKeySet } from "./key-set/some";
-import { EmptyArray, isEmptyArray, isNonEmptyArray, NonEmptyArray } from "./util/array-types";
+import { KeySetSome, some, someForced, someKeySet, someKeySetForced } from "./key-set/some";
+import { EmptyArray, NonEmptyArray, isEmptyArray, isNonEmptyArray } from "./util/array-types";
 import { IKeyLabel, isKeyLabel, isObject } from "./util/object-utils";
 import { setByKeys } from "./util/set-by-keys";
 import { sortKeys } from "./util/sort-keys";

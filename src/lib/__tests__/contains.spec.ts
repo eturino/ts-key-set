@@ -1,4 +1,6 @@
-import { all, allExceptSome, KeySetAllExceptSome, KeySetSome, none, some } from "../..";
+import { describe, expect, it } from "vitest";
+
+import { type KeySetAllExceptSome, type KeySetSome, all, allExceptSome, none, some } from "../..";
 
 const element = "A";
 

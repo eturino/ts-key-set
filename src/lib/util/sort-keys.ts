@@ -1,6 +1,6 @@
-import { sortBy } from "lodash";
-import { Key } from "../key-set/-base";
-import { IKeyLabel, isKeyLabel } from "./object-utils";
+import { sortBy } from "es-toolkit/compat";
+import type { Key } from "../key-set/-base";
+import { type IKeyLabel, isKeyLabel } from "./object-utils";
 import { firstOf } from "./set-by-keys";
 
 /**
@@ -26,6 +26,6 @@ export function sortKeys<T extends Key>(keys: Iterable<T>): T[] {
  * @internal
  * @hidden
  */
-function isArrayOfKeyLabels(keys: Key[]): keys is IKeyLabel<any>[] {
+function isArrayOfKeyLabels(keys: Key[]): keys is IKeyLabel<string | number>[] {
   return isKeyLabel(firstOf(keys)); // we can check only one because all the keys should be the same type
 }

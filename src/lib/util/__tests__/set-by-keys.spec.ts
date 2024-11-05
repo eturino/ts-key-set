@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { setByKeys } from "../../..";
 
 describe("setByKeys()", () => {
@@ -27,12 +28,12 @@ describe("setByKeys()", () => {
         { key: 1, label: "a" },
         { key: 1, label: "b" },
         { key: 2, label: "a" },
-      ])
+      ]),
     ).toEqual(
       new Set([
         { key: 1, label: "a" },
         { key: 2, label: "a" },
-      ])
+      ]),
     );
   });
 
@@ -42,12 +43,12 @@ describe("setByKeys()", () => {
         { key: "1", label: "a" },
         { key: "1", label: "b" },
         { key: "2", label: "a" },
-      ])
+      ]),
     ).toEqual(
       new Set([
         { key: "1", label: "a" },
         { key: "2", label: "a" },
-      ])
+      ]),
     );
   });
 
@@ -58,13 +59,13 @@ describe("setByKeys()", () => {
           { key: 1, label: "a" },
           { key: 1, label: "b" },
           { key: 2, label: "a" },
-        ])
-      )
+        ]),
+      ),
     ).toEqual(
       new Set([
         { key: 1, label: "a" },
         { key: 2, label: "a" },
-      ])
+      ]),
     );
   });
 
@@ -75,13 +76,13 @@ describe("setByKeys()", () => {
           { key: "1", label: "a" },
           { key: "1", label: "b" },
           { key: "2", label: "a" },
-        ])
-      )
+        ]),
+      ),
     ).toEqual(
       new Set([
         { key: "1", label: "a" },
         { key: "2", label: "a" },
-      ])
+      ]),
     );
   });
 });

@@ -1,6 +1,7 @@
 .history
 node_modules
 build
+dist
 test
 src/**.js
 .idea/*
@@ -9,8 +10,6 @@ yarn-error.log
 coverage
 .nyc_output
 *.log
-
-package-lock.json
 
 .DS_Store
 README.pdf

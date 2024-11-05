@@ -1,1 +1,3 @@
-yarn lint-staged
+npm run check
+npm run test
+git update-index --again

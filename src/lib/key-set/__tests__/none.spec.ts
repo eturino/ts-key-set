@@ -1,3 +1,4 @@
+import { expect, test } from "vitest";
 import { KeySetAll, KeySetNone, none, noneKeySet } from "../../..";
 
 const keySet = new KeySetNone();

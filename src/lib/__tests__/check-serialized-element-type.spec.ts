@@ -1,10 +1,12 @@
+import { describe, expect, it } from "vitest";
+
 import {
+  type KeySetSerialized,
   all,
   isKeySetSerializedOfNumberKeyLabels,
   isKeySetSerializedOfNumbers,
   isKeySetSerializedOfStringKeyLabels,
   isKeySetSerializedOfStrings,
-  KeySetSerialized,
   none,
   some,
 } from "../..";

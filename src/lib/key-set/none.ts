@@ -1,4 +1,4 @@
-import { Key, KeySet, KeySetNoneSerialized, KeySetTypes } from "./-base";
+import { type Key, type KeySet, type KeySetNoneSerialized, KeySetTypes } from "./-base";
 import { KeySetGlobal } from "./-global";
 import { INSPECT } from "./-is-node-env";
 import { KeySetAll } from "./all";

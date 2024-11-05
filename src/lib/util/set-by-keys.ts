@@ -1,5 +1,5 @@
-import { Key } from "../key-set/-base";
-import { IKeyLabel, isKeyLabel } from "./object-utils";
+import type { Key } from "../key-set/-base";
+import { type IKeyLabel, isKeyLabel } from "./object-utils";
 import { sizeOf } from "./size-of";
 
 /**
@@ -22,7 +22,7 @@ export function setByKeys<T extends Key>(source: T[] | ReadonlyArray<T> | Set<T>
  * @internal
  * @hidden
  */
-function isArrayOfKeyLabels(source: any[] | ReadonlyArray<any>): source is IKeyLabel<string | number>[] {
+function isArrayOfKeyLabels(source: unknown[] | ReadonlyArray<unknown>): source is IKeyLabel<string | number>[] {
   const firstElement = firstOf(source);
   return isKeyLabel(firstElement);
 }
@@ -40,14 +40,15 @@ export function firstOf<T>(source: T[] | ReadonlyArray<T> | Set<T>): T | undefin
 }
 
 function uniqueKeyLabelSet<K extends string | number>(
-  source: IKeyLabel<K>[] | ReadonlyArray<IKeyLabel<K>>
+  source: IKeyLabel<K>[] | ReadonlyArray<IKeyLabel<K>>,
 ): Set<IKeyLabel<K>> {
   const result = new Set<IKeyLabel<K>>();
   const seen = new Set<K>();
-  source.forEach((value) => {
-    if (seen.has(value.key)) return;
-    seen.add(value.key);
-    result.add(value);
-  });
+  for (const value of source) {
+    if (!seen.has(value.key)) {
+      seen.add(value.key);
+      result.add(value);
+    }
+  }
   return result;
 }

@@ -1,5 +1,5 @@
-export type NonEmptyArray<T = any> = [T, ...T[]];
-export type EmptyArray<T = any> = T[] & { length: 0 };
+export type NonEmptyArray<T = unknown> = [T, ...T[]];
+export type EmptyArray<T = unknown> = T[] & { length: 0 };
 
 export function isEmptyArray<T>(x: T[]): x is EmptyArray<T> {
   return x.length === 0;

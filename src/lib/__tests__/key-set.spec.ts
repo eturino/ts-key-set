@@ -1,15 +1,17 @@
+import { describe, expect, it } from "vitest";
+
 import {
-  all,
-  allExceptSome,
-  allExceptSomeForced,
-  IKeyLabel,
+  type IKeyLabel,
   InvalidEmptySetError,
-  isValidKey,
   KeySetAll,
   KeySetAllExceptSome,
   KeySetNone,
   KeySetSome,
   KeySetTypes,
+  all,
+  allExceptSome,
+  allExceptSomeForced,
+  isValidKey,
   none,
   some,
   someForced,
@@ -126,7 +128,7 @@ test("allExceptSome([{ key: 1, label: 'wa' }, { key: 1, label: 'B' }, { key: 1, 
       { key: 1, label: "wa" },
       { key: 2, label: "wa" },
       { key: 3, label: "other" },
-    ])
+    ]),
   );
   expect(keySet.type).toEqual(KeySetTypes.allExceptSome);
 });
@@ -155,7 +157,7 @@ test("some([{ key: 1, label: 'wa' }, { key: 1, label: 'B' }, { key: 1, label: 'w
       { key: 1, label: "wa" },
       { key: 2, label: "wa" },
       { key: 3, label: "other" },
-    ])
+    ]),
   );
   expect(keySet.type).toEqual(KeySetTypes.some);
 });

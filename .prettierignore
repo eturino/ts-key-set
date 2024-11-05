@@ -1,4 +1,0 @@
-# package.json is formatted by package managers, so we ignore it here
-package.json
-CHANGELOG.md
-src/lib/key-set.ts

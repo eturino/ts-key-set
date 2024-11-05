@@ -1,7 +1,8 @@
-import { sortBy } from "lodash";
-import { KeySet } from "../-base";
-import { all, KeySetAll } from "../all";
-import { allExceptSome, KeySetAllExceptSome } from "../all-except-some";
+import { sortBy } from "es-toolkit/compat";
+import { describe, expect, it } from "vitest";
+import type { KeySet } from "../-base";
+import { KeySetAll, all } from "../all";
+import { KeySetAllExceptSome, allExceptSome } from "../all-except-some";
 import { ComposedKeySet, composedKeySetFrom, isComposedKeySet } from "../composed";
 import { KeySetNone, none } from "../none";
 import { serializeKeySet } from "../serialize";

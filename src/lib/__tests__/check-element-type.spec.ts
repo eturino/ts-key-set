@@ -1,10 +1,12 @@
+import { describe, expect, it } from "vitest";
+
 import {
+  type KeySet,
   all,
   isKeySetOfNumberKeyLabels,
   isKeySetOfNumbers,
   isKeySetOfStringKeyLabels,
   isKeySetOfStrings,
-  KeySet,
   none,
   some,
 } from "../..";

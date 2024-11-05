@@ -1,5 +1,5 @@
-import { EmptyArray, NonEmptyArray } from "../util/array-types";
-import { Key, KeySet, KeySetAllExceptSomeSerialized, KeySetTypes } from "./-base";
+import type { EmptyArray, NonEmptyArray } from "../util/array-types";
+import { type Key, type KeySet, type KeySetAllExceptSomeSerialized, KeySetTypes } from "./-base";
 import { KeySetByKeys } from "./-by-keys";
 import { INSPECT } from "./-is-node-env";
 import { KeySetAll, all } from "./all";
@@ -19,7 +19,7 @@ export class KeySetAllExceptSome<T extends Key> extends KeySetByKeys<T> {
   }
 
   public serialized(): KeySetAllExceptSomeSerialized<T> {
-    return { type: this.type, elements: this.elementsSorted as NonEmptyArray };
+    return { type: this.type, elements: this.elementsSorted as NonEmptyArray<T> };
   }
 
   public representsAll(): this is KeySetAll<T> {
@@ -58,10 +58,10 @@ export class KeySetAllExceptSome<T extends Key> extends KeySetByKeys<T> {
   public remove(other: KeySetNone<T> | KeySetNone<Key> | KeySetSome<T>): KeySetAllExceptSome<T>;
   public remove(other: KeySetAllExceptSome<T>): KeySetNone<T> | KeySetSome<T>;
   public remove(
-    other: KeySet<T> | KeySetAll<Key> | KeySetNone<Key>
+    other: KeySet<T> | KeySetAll<Key> | KeySetNone<Key>,
   ): KeySetAllExceptSome<T> | KeySetSome<T> | KeySetNone<T>;
   public remove(
-    other: KeySet<T> | KeySetAll<Key> | KeySetNone<Key>
+    other: KeySet<T> | KeySetAll<Key> | KeySetNone<Key>,
   ): KeySetAllExceptSome<T> | KeySetSome<T> | KeySetNone<T> {
     if (other instanceof KeySetSome) {
       const keys = [...this.elements, ...other.elements];

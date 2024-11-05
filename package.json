@@ -1,112 +1,56 @@
 {
   "name": "@eturino/key-set",
   "version": "5.6.3",
+  "description": "Claim, ClaimSet and Ability for permissions (Typescript port of https://github.com/eturino/claims)",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "commit": "git-cz",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "check": "biome check --write src",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepare": "husky || true"
+  },
   "author": "Eduardo Turiño <eturino@eturino.com>",
-  "description": "KeySet with 4 classes to represent concepts of All, None, Some, and AllExceptSome, the last 2 with a sorted uniq list of keys, and all with intersection calculations (TypeScript port of https://github.com/eturino/ruby_key_set)",
-  "main": "build/main/index.js",
-  "typings": "build/main/index.d.ts",
-  "module": "build/module/index.js",
-  "repository": "https://github.com/eturino/ts-key-set",
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/eturino/ts-key-set"
+  },
+  "bugs": {
+    "url": "https://github.com/eturino/ts-key-set/issues"
+  },
   "homepage": "https://github.com/eturino/ts-key-set",
-  "bugs": "https://github.com/eturino/ts-key-set/issues",
   "license": "MIT",
   "keywords": [
-    "key-set",
-    "sets",
-    "groups"
+    "claims",
+    "parmissions"
   ],
-  "lint-staged": {
-    "src/**/*.ts": [
-      "eslint --fix",
-      "prettier --write"
-    ]
-  },
-  "scripts": {
-    "lint-staged": "lint-staged",
-    "prepare": "husky",
-    "type-check": "tsc --noEmit",
-    "type-check:watch": "yarn run type-check --watch",
-    "describe": "npm-scripts-info",
-    "build": "run-s clean && run-p build:*",
-    "build:main": "tsc -p tsconfig.json",
-    "build:module": "tsc -p tsconfig.module.json",
-    "fix": "run-s fix:*",
-    "fix:prettier": "prettier \"src/**/*.ts\" --write",
-    "fix:eslint": "eslint \"src/**/*.ts\" --fix",
-    "test": "run-s build test:* type-check",
-    "test:eslint": "eslint \"src/**/*.ts\"",
-    "test:prettier": "prettier \"src/**/*.ts\" --list-different",
-    "test:unit": "jest --coverage --config=\"jest.config.cjs\"",
-    "cov": "run-s build cov:html && open-cli coverage/index.html",
-    "cov:html": "jest --coverage --config=\"jest.html.config.js\"",
-    "watch": "run-s clean build:main && run-p \"build:main -- -w\" \"test:unit -- --watch\"",
-    "doc": "run-s doc:html && open-cli build/docs/index.html",
-    "doc:html": "typedoc --theme default --exclude **/__tests__/**/* --out build/docs src/index.ts",
-    "doc:json": "typedoc --exclude **/__tests__/**/* --json build/docs/typedoc.json src/index.ts",
-    "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d build/docs",
-    "version": "standard-version",
-    "reset": "git clean -dfx -e .idea && git reset --hard && yarn",
-    "clean": "trash build test",
-    "prepare-pr": "run-s fix test:unit doc:html",
-    "prepare-release": "run-s reset test doc:html doc:publish version"
-  },
-  "scripts-info": {
-    "info": "Display information about the package scripts",
-    "build": "Clean and rebuild the project",
-    "fix": "Try to automatically fix any linting problems",
-    "test": "Lint and unit test the project",
-    "watch": "Watch and rebuild the project on save, then rerun relevant tests",
-    "doc": "Generate HTML API documentation and open it in a browser",
-    "doc:json": "Generate API documentation in typedoc JSON format",
-    "version": "Bump package.json version, update CHANGELOG.md, tag release",
-    "reset": "Delete all untracked files (except `.idea`) and reset the repo to the last commit",
-    "prepare-release": "One-step: clean, build, test, publish docs, and prep a release"
-  },
-  "engines": {
-    "node": ">=10.0"
-  },
-  "dependencies": {
-    "lodash": "^4.17.21"
-  },
   "devDependencies": {
-    "@bitjson/npm-scripts-info": "^1.0.0",
+    "@biomejs/biome": "1.9.4",
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
-    "@types/jest": "^29.5.13",
-    "@types/lodash": "^4.17.7",
-    "@typescript-eslint/eslint-plugin": "^8.6.0",
-    "@typescript-eslint/parser": "^8.6.0",
-    "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^9.10.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-define-config": "^2.1.0",
-    "eslint-import-resolver-typescript": "^3.6.3",
-    "eslint-plugin-import": "^2.30.0",
-    "gh-pages": "^6.1.1",
+    "@commitlint/cz-commitlint": "^19.5.0",
+    "@types/node": "^22.9.0",
+    "commitizen": "^4.3.1",
     "husky": "^9.1.6",
-    "jest": "^29.7.0",
-    "lint-staged": "^15.2.10",
-    "npm-run-all": "^4.1.5",
-    "open-cli": "^8.0.0",
-    "prettier": "^3.3.3",
-    "prettier-plugin-organize-imports": "^4.0.0",
-    "standard-version": "^9.5.0",
-    "trash-cli": "^6.0.0",
+    "inquirer": "^9.3.7",
     "ts-enum-util": "^4.1.0",
-    "ts-jest": "^29.2.5",
-    "ts-loader": "^9.5.1",
-    "ts-node": "^10.9.2",
-    "typedoc": "^0.26.7",
-    "typedoc-themes-color": "^0.0.10",
-    "typescript": "5.5.4"
+    "tsup": "^8.3.5",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.4"
+  },
+  "dependencies": {
+    "es-toolkit": "^1.26.1"
   },
   "config": {
     "commitizen": {
-      "path": "cz-conventional-changelog"
+      "path": "@commitlint/cz-commitlint"
     }
-  },
-  "volta": {
-    "node": "20.15.0",
-    "yarn": "1.22.19"
   }
 }

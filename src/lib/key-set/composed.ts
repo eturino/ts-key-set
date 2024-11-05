@@ -1,6 +1,7 @@
-import { sortBy, uniqWith } from "lodash";
-import { IKeyLabel } from "../util/object-utils";
-import { Key, KeySet } from "./-base";
+import { uniqWith } from "es-toolkit";
+import { sortBy } from "es-toolkit/compat";
+import type { IKeyLabel } from "../util/object-utils";
+import type { Key, KeySet } from "./-base";
 import { INSPECT } from "./-is-node-env";
 import { KeySetAll, all } from "./all";
 import { KeySetAllExceptSome } from "./all-except-some";
@@ -245,7 +246,7 @@ export function composedKeySetFrom<T extends Key>(list: KeySet<T>[]): ComposedKe
 
 function compactWith<T extends Key>(
   list: KeySet<T>[],
-  reducerFn: (sublist: KeySet<T>[]) => KeySet<T>
+  reducerFn: (sublist: KeySet<T>[]) => KeySet<T>,
 ): ComposedKeySet<T> {
   const somes = list.filter((x) => x instanceof KeySetSome);
   const aesms = list.filter((x) => x instanceof KeySetAllExceptSome);

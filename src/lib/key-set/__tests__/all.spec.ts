@@ -1,4 +1,5 @@
-import { all, allKeySet, KeySetAll, KeySetNone } from "../../..";
+import { expect, test } from "vitest";
+import { KeySetAll, KeySetNone, all, allKeySet } from "../../..";
 
 const keySet = new KeySetAll();
 

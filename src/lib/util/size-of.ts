@@ -2,7 +2,7 @@
  * @internal
  * @hidden
  */
-export function sizeOf(source: Set<any> | ReadonlyArray<any> | any[]): number {
+export function sizeOf(source: Set<unknown> | ReadonlyArray<unknown> | unknown[]): number {
   if (source instanceof Set) {
     return source.size;
   }
