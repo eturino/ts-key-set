@@ -1,23 +1,21 @@
 {
   "name": "@eturino/key-set",
   "version": "5.7.0",
-  "description": "Claim, ClaimSet and Ability for permissions (Typescript port of https://github.com/eturino/claims)",
+  "description": " (TypeScript port of https://github.com/eturino/ruby_key_set) KeySet with 4 classes to represent concepts of All, None, Some, and AllExceptSome, the last 2 with a sorted uniq list of keys, and all with intersection calculations",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "commit": "git-cz",
     "build": "tsup",
     "dev": "tsup --watch",
     "check": "biome check --write src",
-    "test": "vitest run",
+    "test": "vitest run --coverage",
     "test:watch": "vitest",
     "reset": "git clean -dfx -e .idea && git reset --hard && npm install",
     "version": "standard-version",
-    "prepare-release": "npm run reset && npm run test && npm run version && npm run build",
+    "prepare-release": "npm run reset && npm run check && npm run test && npm run version && npm run build",
     "prepare": "husky || true"
   },
   "author": "Eduardo Turiño <eturino@eturino.com>",
@@ -30,16 +28,14 @@
   },
   "homepage": "https://github.com/eturino/ts-key-set",
   "license": "MIT",
-  "keywords": [
-    "claims",
-    "parmissions"
-  ],
+  "keywords": ["key-set", "sets", "groups"],
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
     "@commitlint/cz-commitlint": "^19.5.0",
     "@types/node": "^22.9.0",
+    "@vitest/coverage-v8": "^2.1.4",
     "commitizen": "^4.3.1",
     "husky": "^9.1.6",
     "inquirer": "^9.3.7",
