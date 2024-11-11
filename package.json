@@ -46,7 +46,7 @@
     "vitest": "^2.1.4"
   },
   "dependencies": {
-    "es-toolkit": "^1.26.1"
+    "es-toolkit": "^1.27.0"
   },
   "config": {
     "commitizen": {
