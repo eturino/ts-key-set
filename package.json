@@ -37,7 +37,7 @@
     "@types/node": "^22.9.0",
     "@vitest/coverage-v8": "^2.1.5",
     "commitizen": "^4.3.1",
-    "husky": "^9.1.6",
+    "husky": "^9.1.7",
     "inquirer": "^9.3.7",
     "standard-version": "^9.5.0",
     "ts-enum-util": "^4.1.0",
