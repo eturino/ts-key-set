@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.8.0](https://github.com/eturino/ts-key-set/compare/v5.7.0...v5.8.0) (2025-01-08)
+
+
+### Features
+
+* Composed KeyLabelSet parse and serialization ([8091558](https://github.com/eturino/ts-key-set/commit/809155817ed8a6ac766a2f1cd9ed767b9797aab2))
+
+
+### Bug Fixes
+
+* **deps:** bump es-toolkit from 1.26.1 to 1.27.0 ([#679](https://github.com/eturino/ts-key-set/issues/679)) ([338f7f7](https://github.com/eturino/ts-key-set/commit/338f7f7c4e8a3b984f1befe3373de4aa55a907c7))
+* **deps:** bump es-toolkit from 1.27.0 to 1.29.0 ([#692](https://github.com/eturino/ts-key-set/issues/692)) ([5eca0a6](https://github.com/eturino/ts-key-set/commit/5eca0a6523ea584a4b342efbd444119f1a73b629))
+* **deps:** bump es-toolkit from 1.29.0 to 1.30.1 ([#698](https://github.com/eturino/ts-key-set/issues/698)) ([70a57c1](https://github.com/eturino/ts-key-set/commit/70a57c152614dd40670053f39c37f447f8f1f209))
+* **deps:** bump es-toolkit from 1.30.1 to 1.31.0 ([#700](https://github.com/eturino/ts-key-set/issues/700)) ([90e0ecf](https://github.com/eturino/ts-key-set/commit/90e0ecf3b4851186fe255f44b3288ad96a467835))
+
 ## [5.7.0](https://github.com/eturino/ts-key-set/compare/v5.6.3...v5.7.0) (2024-11-05)
 
 
