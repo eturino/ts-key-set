@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.9.1](https://github.com/eturino/ts-key-set/compare/v5.9.0...v5.9.1) (2025-01-08)
+
+
+### Bug Fixes
+
+* serializeComposedKeyLabelSet types ([2032b95](https://github.com/eturino/ts-key-set/commit/2032b95676aca3702da83284acf263451d5b2853))
+
 ## [5.9.0](https://github.com/eturino/ts-key-set/compare/v5.8.1...v5.9.0) (2025-01-08)
 
 
