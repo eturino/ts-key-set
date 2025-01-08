@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [5.8.0](https://github.com/eturino/ts-key-set/compare/v5.7.0...v5.8.0) (2025-01-08)
+## [5.8.1](https://github.com/eturino/ts-key-set/compare/v5.7.0...v5.8.1) (2025-01-08)
 
 
 ### Features
@@ -16,6 +16,11 @@ All notable changes to this project will be documented in this file. See [standa
 * **deps:** bump es-toolkit from 1.27.0 to 1.29.0 ([#692](https://github.com/eturino/ts-key-set/issues/692)) ([5eca0a6](https://github.com/eturino/ts-key-set/commit/5eca0a6523ea584a4b342efbd444119f1a73b629))
 * **deps:** bump es-toolkit from 1.29.0 to 1.30.1 ([#698](https://github.com/eturino/ts-key-set/issues/698)) ([70a57c1](https://github.com/eturino/ts-key-set/commit/70a57c152614dd40670053f39c37f447f8f1f209))
 * **deps:** bump es-toolkit from 1.30.1 to 1.31.0 ([#700](https://github.com/eturino/ts-key-set/issues/700)) ([90e0ecf](https://github.com/eturino/ts-key-set/commit/90e0ecf3b4851186fe255f44b3288ad96a467835))
+
+## ~[5.8.0](https://github.com/eturino/ts-key-set/compare/v5.7.0...v5.8.0) (2025-01-08)~ YANKED!!
+
+Version 5.8.0 was yanked because it was released with the old 5.7.0 compiled code.
+
 
 ## [5.7.0](https://github.com/eturino/ts-key-set/compare/v5.6.3...v5.7.0) (2024-11-05)
 
