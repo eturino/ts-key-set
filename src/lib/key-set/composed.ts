@@ -1,7 +1,7 @@
 import { uniqWith } from "es-toolkit";
 import { sortBy } from "es-toolkit/compat";
 import type { IKeyLabel } from "../util/object-utils";
-import type { Key, KeySet } from "./-base";
+import type { ComposedKeySetSerialized, Key, KeySet } from "./-base";
 import { INSPECT } from "./-is-node-env";
 import { KeySetAll, all } from "./all";
 import { KeySetAllExceptSome } from "./all-except-some";
@@ -218,6 +218,14 @@ export class ComposedKeySet<T extends Key = Key> {
    */
   compactIntersect(): ComposedKeySet<T> {
     return compactWith(this.list, (list) => list.reduce((acc, x) => acc.intersect(x), new KeySetAll<T>()));
+  }
+
+  /**
+   * returns an array with the serialized version of each of the key sets of this composed key set
+   * @returns the serialized version of the composed key set
+   */
+  serialized(): ComposedKeySetSerialized<T> {
+    return this.list.map((x) => x.serialized());
   }
 }
 

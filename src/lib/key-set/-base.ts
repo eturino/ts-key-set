@@ -14,11 +14,16 @@ export function isValidKey(x: unknown): x is Key {
 
 export type KeySet<T extends Key = Key> = KeySetAll<T> | KeySetNone<T> | KeySetSome<T> | KeySetAllExceptSome<T>;
 
+export type KeyLabelSetAll<T extends string | number = string | number> = KeySetAll<IKeyLabel<T>>;
+export type KeyLabelSetNone<T extends string | number = string | number> = KeySetNone<IKeyLabel<T>>;
+export type KeyLabelSetSome<T extends string | number = string | number> = KeySetSome<IKeyLabel<T>>;
+export type KeyLabelSetAllExceptSome<T extends string | number = string | number> = KeySetAllExceptSome<IKeyLabel<T>>;
+
 export type KeyLabelSet<T extends string | number = string | number> =
-  | KeySetAll<IKeyLabel<T>>
-  | KeySetNone<IKeyLabel<T>>
-  | KeySetSome<IKeyLabel<T>>
-  | KeySetAllExceptSome<IKeyLabel<T>>;
+  | KeyLabelSetAll<T>
+  | KeyLabelSetNone<T>
+  | KeyLabelSetSome<T>
+  | KeyLabelSetAllExceptSome<T>;
 
 /**
  * one type for each of the 4 sets
@@ -31,6 +36,12 @@ export enum KeySetTypes {
 }
 
 export type KeySetTypesEnumValues = "ALL" | "ALL_EXCEPT_SOME" | "NONE" | "SOME";
+
+export const KEY_SET_TYPES = Object.values(KeySetTypes).sort();
+
+export function isKeySetType(x: unknown): x is KeySetTypes {
+  return KEY_SET_TYPES.includes(x as KeySetTypes);
+}
 
 export type KeySetAllSerialized<T extends Key = Key> =
   | { type: KeySetTypes.all }
@@ -81,6 +92,9 @@ export type KeyLabelSetSerialized<T extends string | number = string | number> =
   | KeyLabelSetNoneSerialized<T>
   | KeyLabelSetSomeSerialized<T>
   | KeyLabelSetAllExceptSomeSerialized<T>;
+
+export type ComposedKeySetSerialized<T extends Key = Key> = Array<KeySetSerialized<T>>;
+export type ComposedKeyLabelSetSerialized = Array<KeyLabelSetSerialized>;
 
 export interface IKeySetClass<T extends Key> {
   /**
@@ -198,4 +212,13 @@ export function isKeySet<T extends Key>(x: KeySet<T> | KeySetSerialized<T>): x i
 export function isKeySet(x: unknown): x is KeySet;
 export function isKeySet(x: unknown): x is KeySet {
   return isKeySetAll(x) || isKeySetNone(x) || isKeySetSome(x) || isKeySetAllExceptSome(x);
+}
+
+export function isKeyLabelSet<T extends string | number>(
+  x: KeySet<T> | KeySetSerialized<T> | KeyLabelSet<T> | KeyLabelSetSerialized<T>,
+): x is KeyLabelSet<T>;
+export function isKeyLabelSet(x: unknown): x is KeyLabelSet;
+export function isKeyLabelSet(x: unknown): x is KeyLabelSet {
+  if (!isKeySet(x)) return false;
+  return x.elementsList.every(isKeyLabel);
 }

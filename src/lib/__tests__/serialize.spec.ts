@@ -1,7 +1,17 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  type ComposedKeySetSerialized,
+  type IKeyLabel,
   InvalidKeySetError,
+  type KeyLabelSetAll,
+  type KeyLabelSetAllExceptSome,
+  type KeyLabelSetAllExceptSomeSerialized,
+  type KeyLabelSetAllSerialized,
+  type KeyLabelSetNone,
+  type KeyLabelSetNoneSerialized,
+  type KeyLabelSetSome,
+  type KeyLabelSetSomeSerialized,
   type KeySet,
   KeySetAll,
   KeySetAllExceptSome,
@@ -15,13 +25,20 @@ import {
   KeySetTypes,
   all,
   allExceptSome,
+  composedKeySetFrom,
+  isComposedKeySetSerialized,
+  isKeyLabelSetSerialized,
   isKeySetAllExceptSomeSerialized,
   isKeySetAllSerialized,
   isKeySetNoneSerialized,
   isKeySetSerialized,
   isKeySetSomeSerialized,
   none,
+  parseComposedKeySet,
+  parseKeyLabelSet,
   parseKeySet,
+  serializeComposedKeySet,
+  serializeKeyLabelSet,
   serializeKeySet,
   some,
 } from "../..";
@@ -472,6 +489,167 @@ describe("serialize KeySet", () => {
 
     it("JSON.stringify(keySet) === JSON.stringify(keySetSerialized)", () => {
       expect(JSON.stringify(keySet)).toEqual(JSON.stringify(expected));
+    });
+  });
+
+  describe("KeyLabelSet", () => {
+    const allKS: KeyLabelSetAll<string> = all<IKeyLabel<string>>();
+    const allSerialized: KeyLabelSetAllSerialized<string> = { type: KeySetTypes.all };
+
+    const noneKS: KeyLabelSetNone<string> = none<IKeyLabel<string>>();
+    const noneSerialized: KeyLabelSetNoneSerialized<string> = { type: KeySetTypes.none };
+
+    const aesKS: KeyLabelSetAllExceptSome = allExceptSome([
+      { key: "a", label: "A" },
+      { key: "b", label: "B" },
+    ]);
+    const aesSerialized: KeyLabelSetAllExceptSomeSerialized = {
+      type: KeySetTypes.allExceptSome,
+      elements: [
+        { key: "a", label: "A" },
+        { key: "b", label: "B" },
+      ],
+    };
+    const someKS: KeyLabelSetSome = some([
+      { key: "a", label: "A" },
+      { key: "b", label: "B" },
+    ]);
+    const someSerialized: KeyLabelSetSomeSerialized = {
+      type: KeySetTypes.some,
+      elements: [
+        { key: "a", label: "A" },
+        { key: "b", label: "B" },
+      ],
+    };
+
+    const aesKeySetSerialized = {
+      type: KeySetTypes.allExceptSome,
+      elements: [1, 2],
+    };
+
+    const someKeySetSerialized = {
+      type: KeySetTypes.some,
+      elements: [1, 2],
+    };
+
+    describe("isKeyLabelSetSerialized()", () => {
+      it("isKeyLabelSetSerialized(keyLabelSetSerialized) -> true", () => {
+        expect(isKeyLabelSetSerialized(aesSerialized)).toBeTruthy();
+        expect(isKeyLabelSetSerialized(someSerialized)).toBeTruthy();
+        expect(isKeyLabelSetSerialized(allSerialized)).toBeTruthy();
+        expect(isKeyLabelSetSerialized(noneSerialized)).toBeTruthy();
+      });
+      it("isKeyLabelSetSerialized(normalKeySetSerialized some or AES) -> false", () => {
+        expect(isKeyLabelSetSerialized(aesKeySetSerialized)).toBeFalsy();
+        expect(isKeyLabelSetSerialized(someKeySetSerialized)).toBeFalsy();
+      });
+      it("isKeyLabelSetSerialized(keySet) -> false", () => {
+        expect(isKeyLabelSetSerialized(allKS)).toBeFalsy();
+        expect(isKeyLabelSetSerialized(noneKS)).toBeFalsy();
+        expect(isKeyLabelSetSerialized(someKS)).toBeFalsy();
+        expect(isKeyLabelSetSerialized(aesKS)).toBeFalsy();
+      });
+    });
+
+    describe("serializeKeyLabelSet()", () => {
+      it("serializeKeyLabelSet(keyLabelSetSerialized) -> return same", () => {
+        expect(serializeKeyLabelSet(aesSerialized)).toBe(aesSerialized);
+        expect(serializeKeyLabelSet(someSerialized)).toBe(someSerialized);
+        expect(serializeKeyLabelSet(allSerialized)).toBe(allSerialized);
+        expect(serializeKeyLabelSet(noneSerialized)).toBe(noneSerialized);
+      });
+      it("serializeKeyLabelSet(ks) -> serialize", () => {
+        expect(serializeKeyLabelSet(aesKS)).toEqual(aesSerialized);
+        expect(serializeKeyLabelSet(someKS)).toEqual(someSerialized);
+        expect(serializeKeyLabelSet(allKS)).toEqual(allSerialized);
+        expect(serializeKeyLabelSet(noneKS)).toEqual(noneSerialized);
+      });
+      it("serializeKeyLabelSet(invalid) -> throws", () => {
+        expect(() => serializeKeyLabelSet("whatever" as unknown as KeySet)).toThrow();
+      });
+    });
+
+    describe("parseKeyLabelSet()", () => {
+      it("parseKeyLabelSet(keyLabelSetSerialized) -> return same", () => {
+        expect(parseKeyLabelSet(aesSerialized)).toEqual(aesKS);
+        expect(parseKeyLabelSet(someSerialized)).toEqual(someKS);
+        expect(parseKeyLabelSet(allSerialized)).toEqual(allKS);
+        expect(parseKeyLabelSet(noneSerialized)).toEqual(noneKS);
+      });
+      it("parseKeyLabelSet(ks) -> parse", () => {
+        expect(parseKeyLabelSet(aesKS)).toBe(aesKS);
+        expect(parseKeyLabelSet(someKS)).toBe(someKS);
+        expect(parseKeyLabelSet(allKS)).toBe(allKS);
+        expect(parseKeyLabelSet(noneKS)).toBe(noneKS);
+      });
+      it("parseKeyLabelSet(invalid) -> throws", () => {
+        expect(() => parseKeyLabelSet("whatever" as unknown as KeySet)).toThrow();
+      });
+    });
+  });
+
+  describe("composedKeySet", () => {
+    const keySet1 = allExceptSome([1, 2]);
+    const keySetSerialized1 = {
+      type: KeySetTypes.allExceptSome,
+      elements: [1, 2],
+    };
+    const keySet2 = some([1, 2, 3, 4]);
+    const keySetSerialized2 = {
+      type: KeySetTypes.some,
+      elements: [1, 2, 3, 4],
+    };
+
+    const composedSerialized: KeySetSerialized[] = [keySetSerialized1, keySetSerialized2];
+    const composedKeySet = composedKeySetFrom([keySet1, keySet2]);
+
+    describe("isComposedKeySetSerialized()", () => {
+      it("isComposedKeySetSerialized(composedSerialized) -> OK", () => {
+        expect(isComposedKeySetSerialized(composedSerialized)).toBeTruthy();
+      });
+      it("isComposedKeySetSerialized([]) -> OK", () => {
+        expect(isComposedKeySetSerialized([])).toBeTruthy();
+      });
+      it("isComposedKeySetSerialized(keySet) -> NOPE", () => {
+        expect(isComposedKeySetSerialized(keySet1)).toBeFalsy();
+      });
+      it("isComposedKeySetSerialized(keySetSerialized) -> NOPE", () => {
+        expect(isComposedKeySetSerialized(keySetSerialized1)).toBeFalsy();
+      });
+      it("isComposedKeySetSerialized(composedKeySet) -> NOPE", () => {
+        expect(isComposedKeySetSerialized(composedKeySet)).toBeFalsy();
+      });
+      it("isComposedKeySetSerialized(composedKeySet) -> NOPE", () => {
+        expect(isComposedKeySetSerialized(keySet1)).toBeFalsy();
+      });
+    });
+
+    describe("serializeComposedKeySet()", () => {
+      it("serializeComposedKeySet(composedSerialized) -> return same", () => {
+        expect(serializeComposedKeySet(composedSerialized)).toBe(composedSerialized);
+      });
+      it("serializeComposedKeySet(composedKeySet) -> serialize each", () => {
+        expect(serializeComposedKeySet(composedKeySet)).toEqual(composedSerialized);
+      });
+      it("composedKeySet.serialized() -> serialize each", () => {
+        expect(composedKeySet.serialized()).toEqual(composedSerialized);
+      });
+    });
+
+    describe("parseComposedKeySet()", () => {
+      it("parseComposedKeySet() with key sets", () => {
+        expect(parseComposedKeySet(composedSerialized)).toEqual(composedKeySet);
+      });
+      it("parseComposedKeySet() with empty list", () => {
+        expect(parseComposedKeySet([])).toEqual(composedKeySetFrom([]));
+      });
+      it("parseComposedKeySet() with an already composedKeySet", () => {
+        expect(parseComposedKeySet(composedKeySet)).toBe(composedKeySet);
+      });
+
+      it("parseComposedKeySet() with empty list", () => {
+        expect(() => parseComposedKeySet([{ invalid: "stuff" }] as unknown as ComposedKeySetSerialized)).toThrow();
+      });
     });
   });
 });

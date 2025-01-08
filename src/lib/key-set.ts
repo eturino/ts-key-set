@@ -1,10 +1,16 @@
 import {
+  ComposedKeyLabelSetSerialized,
+  ComposedKeySetSerialized,
   Key,
   KeyLabelSet,
+  KeyLabelSetAll,
+  KeyLabelSetAllExceptSome,
   KeyLabelSetAllExceptSomeSerialized,
   KeyLabelSetAllSerialized,
+  KeyLabelSetNone,
   KeyLabelSetNoneSerialized,
   KeyLabelSetSerialized,
+  KeyLabelSetSome,
   KeyLabelSetSomeSerialized,
   KeySet,
   KeySetAllExceptSomeSerialized,
@@ -19,6 +25,7 @@ import {
   isKeySetAllExceptSome,
   isKeySetNone,
   isKeySetSome,
+  isKeySetType,
   isValidKey,
 } from "./key-set/-base";
 import { KeySetAll, all, allKeySet } from "./key-set/all";
@@ -46,12 +53,18 @@ import { InvalidEmptySetError } from "./key-set/invalid-empty-set-error";
 import { InvalidKeySetError } from "./key-set/invalid-key-set-error";
 import { KeySetNone, none, noneKeySet } from "./key-set/none";
 import {
+  isComposedKeySetSerialized,
+  isKeyLabelSetSerialized,
   isKeySetAllExceptSomeSerialized,
   isKeySetAllSerialized,
   isKeySetNoneSerialized,
   isKeySetSerialized,
   isKeySetSomeSerialized,
+  parseComposedKeySet,
+  parseKeyLabelSet,
   parseKeySet,
+  serializeComposedKeySet,
+  serializeKeyLabelSet,
   serializeKeySet,
 } from "./key-set/serialize";
 import { KeySetSome, some, someForced, someKeySet, someKeySetForced } from "./key-set/some";
@@ -77,10 +90,16 @@ export {
   composedKeySetFrom,
   // types and classes
   ComposedKeySet,
+  ComposedKeySetSerialized,
   ComposedKeyLabelSet,
+  ComposedKeyLabelSetSerialized,
   Key,
   KeySet,
   KeyLabelSet,
+  KeyLabelSetAll,
+  KeyLabelSetNone,
+  KeyLabelSetSome,
+  KeyLabelSetAllExceptSome,
   KeySetAll,
   KeySetAllExceptSome,
   KeySetNone,
@@ -104,6 +123,10 @@ export {
   // serialize functions
   serializeKeySet,
   parseKeySet,
+  parseComposedKeySet,
+  serializeComposedKeySet,
+  parseKeyLabelSet,
+  serializeKeyLabelSet,
   // set utils
   setByKeys,
   sortKeys,
@@ -124,6 +147,9 @@ export {
   isKeySetNoneSerialized,
   isKeySetSomeSerialized,
   isKeySetAllExceptSomeSerialized,
+  isKeySetType,
+  isComposedKeySetSerialized,
+  isKeyLabelSetSerialized,
   // utils
   isValidKey,
   isKeyLabel,
