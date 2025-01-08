@@ -48,11 +48,18 @@ import {
   isKeySetSerializedOfStringKeyLabels,
   isKeySetSerializedOfStrings,
 } from "./key-set/check-serialized-element-type";
-import { ComposedKeyLabelSet, ComposedKeySet, composedKeySetFrom, isComposedKeySet } from "./key-set/composed";
+import {
+  ComposedKeyLabelSet,
+  ComposedKeySet,
+  composedKeySetFrom,
+  isComposedKeyLabelSet,
+  isComposedKeySet,
+} from "./key-set/composed";
 import { InvalidEmptySetError } from "./key-set/invalid-empty-set-error";
 import { InvalidKeySetError } from "./key-set/invalid-key-set-error";
 import { KeySetNone, none, noneKeySet } from "./key-set/none";
 import {
+  isComposedKeyLabelSetSerialized,
   isComposedKeySetSerialized,
   isKeyLabelSetSerialized,
   isKeySetAllExceptSomeSerialized,
@@ -60,9 +67,11 @@ import {
   isKeySetNoneSerialized,
   isKeySetSerialized,
   isKeySetSomeSerialized,
+  parseComposedKeyLabelSet,
   parseComposedKeySet,
   parseKeyLabelSet,
   parseKeySet,
+  serializeComposedKeyLabelSet,
   serializeComposedKeySet,
   serializeKeyLabelSet,
   serializeKeySet,
@@ -127,6 +136,8 @@ export {
   serializeComposedKeySet,
   parseKeyLabelSet,
   serializeKeyLabelSet,
+  parseComposedKeyLabelSet,
+  serializeComposedKeyLabelSet,
   // set utils
   setByKeys,
   sortKeys,
@@ -137,6 +148,7 @@ export {
   isEmptyArray,
   isNonEmptyArray,
   isComposedKeySet,
+  isComposedKeyLabelSet,
   isKeySet,
   isKeySetAll,
   isKeySetNone,
@@ -149,6 +161,7 @@ export {
   isKeySetAllExceptSomeSerialized,
   isKeySetType,
   isComposedKeySetSerialized,
+  isComposedKeyLabelSetSerialized,
   isKeyLabelSetSerialized,
   // utils
   isValidKey,

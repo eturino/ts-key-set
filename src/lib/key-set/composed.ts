@@ -1,7 +1,7 @@
 import { uniqWith } from "es-toolkit";
 import { sortBy } from "es-toolkit/compat";
 import type { IKeyLabel } from "../util/object-utils";
-import type { ComposedKeySetSerialized, Key, KeySet } from "./-base";
+import { type ComposedKeySetSerialized, type Key, type KeySet, isKeyLabelSet } from "./-base";
 import { INSPECT } from "./-is-node-env";
 import { KeySetAll, all } from "./all";
 import { KeySetAllExceptSome } from "./all-except-some";
@@ -235,7 +235,16 @@ export function isComposedKeySet(x: unknown): x is ComposedKeySet {
   return x instanceof ComposedKeySet;
 }
 
-export type ComposedKeyLabelSet<T extends string | number> = ComposedKeySet<IKeyLabel<T>>;
+export type ComposedKeyLabelSet<T extends string | number = string | number> = ComposedKeySet<IKeyLabel<T>>;
+
+export function isComposedKeyLabelSet<T extends string | number>(
+  x: ComposedKeyLabelSet<T>,
+): x is ComposedKeyLabelSet<T>;
+export function isComposedKeyLabelSet(x: unknown): x is ComposedKeyLabelSet;
+export function isComposedKeyLabelSet(x: unknown): x is ComposedKeyLabelSet {
+  if (!isComposedKeySet(x)) return false;
+  return x.list.every((y) => isKeyLabelSet(y));
+}
 
 /**
  * creates a new ComposedKeySet with the given list

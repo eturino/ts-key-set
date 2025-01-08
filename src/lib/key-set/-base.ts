@@ -94,7 +94,9 @@ export type KeyLabelSetSerialized<T extends string | number = string | number> =
   | KeyLabelSetAllExceptSomeSerialized<T>;
 
 export type ComposedKeySetSerialized<T extends Key = Key> = Array<KeySetSerialized<T>>;
-export type ComposedKeyLabelSetSerialized = Array<KeyLabelSetSerialized>;
+export type ComposedKeyLabelSetSerialized<T extends string | number = string | number> = Array<
+  KeyLabelSetSerialized<T>
+>;
 
 export interface IKeySetClass<T extends Key> {
   /**

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  type ComposedKeyLabelSetSerialized,
   type ComposedKeySetSerialized,
   type IKeyLabel,
   InvalidKeySetError,
@@ -10,6 +11,7 @@ import {
   type KeyLabelSetAllSerialized,
   type KeyLabelSetNone,
   type KeyLabelSetNoneSerialized,
+  type KeyLabelSetSerialized,
   type KeyLabelSetSome,
   type KeyLabelSetSomeSerialized,
   type KeySet,
@@ -26,6 +28,7 @@ import {
   all,
   allExceptSome,
   composedKeySetFrom,
+  isComposedKeyLabelSetSerialized,
   isComposedKeySetSerialized,
   isKeyLabelSetSerialized,
   isKeySetAllExceptSomeSerialized,
@@ -34,9 +37,11 @@ import {
   isKeySetSerialized,
   isKeySetSomeSerialized,
   none,
+  parseComposedKeyLabelSet,
   parseComposedKeySet,
   parseKeyLabelSet,
   parseKeySet,
+  serializeComposedKeyLabelSet,
   serializeComposedKeySet,
   serializeKeyLabelSet,
   serializeKeySet,
@@ -649,6 +654,87 @@ describe("serialize KeySet", () => {
 
       it("parseComposedKeySet() with empty list", () => {
         expect(() => parseComposedKeySet([{ invalid: "stuff" }] as unknown as ComposedKeySetSerialized)).toThrow();
+      });
+    });
+  });
+
+  describe("composedKeyLabelSet", () => {
+    const keySet1 = allExceptSome([
+      { key: "a", label: "A" },
+      { key: "b", label: "B" },
+    ]);
+    const keySetSerialized1 = {
+      type: KeySetTypes.allExceptSome,
+      elements: [
+        { key: "a", label: "A" },
+        { key: "b", label: "B" },
+      ],
+    };
+    const keySet2 = some([
+      { key: "a", label: "A" },
+      { key: "b", label: "B" },
+      { key: "c", label: "C" },
+    ]);
+    const keySetSerialized2 = {
+      type: KeySetTypes.some,
+      elements: [
+        { key: "a", label: "A" },
+        { key: "b", label: "B" },
+        { key: "c", label: "C" },
+      ],
+    };
+
+    const composedSerialized: KeyLabelSetSerialized[] = [keySetSerialized1, keySetSerialized2];
+    const composedKeyLabelSet = composedKeySetFrom([keySet1, keySet2]);
+
+    describe("isComposedKeyLabelSetSerialized()", () => {
+      it("isComposedKeyLabelSetSerialized(composedSerialized) -> OK", () => {
+        expect(isComposedKeyLabelSetSerialized(composedSerialized)).toBeTruthy();
+      });
+      it("isComposedKeyLabelSetSerialized([]) -> OK", () => {
+        expect(isComposedKeyLabelSetSerialized([])).toBeTruthy();
+      });
+      it("isComposedKeyLabelSetSerialized(keySet) -> NOPE", () => {
+        expect(isComposedKeyLabelSetSerialized(keySet1)).toBeFalsy();
+      });
+      it("isComposedKeyLabelSetSerialized(keySetSerialized) -> NOPE", () => {
+        expect(isComposedKeyLabelSetSerialized(keySetSerialized1)).toBeFalsy();
+      });
+      it("isComposedKeyLabelSetSerialized(composedKeyLabelSet) -> NOPE", () => {
+        expect(isComposedKeyLabelSetSerialized(composedKeyLabelSet)).toBeFalsy();
+      });
+      it("isComposedKeyLabelSetSerialized(composedKeyLabelSet) -> NOPE", () => {
+        expect(isComposedKeyLabelSetSerialized(keySet1)).toBeFalsy();
+      });
+    });
+
+    describe("serializeComposedKeyLabelSet()", () => {
+      it("serializeComposedKeyLabelSet(composedSerialized) -> return same", () => {
+        expect(serializeComposedKeyLabelSet(composedSerialized)).toBe(composedSerialized);
+      });
+      it("serializeComposedKeyLabelSet(composedKeyLabelSet) -> serialize each", () => {
+        expect(serializeComposedKeyLabelSet(composedKeyLabelSet)).toEqual(composedSerialized);
+      });
+      it("composedKeyLabelSet.serialized() -> serialize each", () => {
+        expect(composedKeyLabelSet.serialized()).toEqual(composedSerialized);
+      });
+    });
+
+    describe("parseComposedKeyLabelSet()", () => {
+      it("parseComposedKeyLabelSet() with key sets", () => {
+        expect(parseComposedKeyLabelSet(composedSerialized)).toEqual(composedKeyLabelSet);
+      });
+      it("parseComposedKeyLabelSet() with empty list", () => {
+        expect(parseComposedKeyLabelSet([])).toEqual(composedKeySetFrom([]));
+      });
+      it("parseComposedKeyLabelSet() with an already composedKeyLabelSet", () => {
+        expect(parseComposedKeyLabelSet(composedKeyLabelSet)).toBe(composedKeyLabelSet);
+      });
+
+      it("parseComposedKeyLabelSet() with empty list", () => {
+        expect(() =>
+          parseComposedKeyLabelSet([{ invalid: "stuff" }] as unknown as ComposedKeyLabelSetSerialized),
+        ).toThrow();
       });
     });
   });

@@ -1,12 +1,22 @@
 import { sortBy } from "es-toolkit/compat";
 import { describe, expect, it } from "vitest";
-import type { KeySet } from "../-base";
-import { KeySetAll, all } from "../all";
-import { KeySetAllExceptSome, allExceptSome } from "../all-except-some";
-import { ComposedKeySet, composedKeySetFrom, isComposedKeySet } from "../composed";
-import { KeySetNone, none } from "../none";
-import { serializeKeySet } from "../serialize";
-import { KeySetSome, some } from "../some";
+import type { KeySet } from "../../..";
+import {
+  ComposedKeySet,
+  KeySetAll,
+  KeySetAllExceptSome,
+  KeySetNone,
+  KeySetSome,
+  all,
+  allExceptSome,
+  composedKeySetFrom,
+  isComposedKeyLabelSet,
+  isComposedKeySet,
+  none,
+  serializeKeyLabelSet,
+  serializeKeySet,
+  some,
+} from "../../..";
 
 describe("ComposedKeySet", () => {
   describe("isComposedKeySet", () => {
@@ -24,6 +34,24 @@ describe("ComposedKeySet", () => {
     });
     it("returns false with null", () => {
       expect(isComposedKeySet(null)).toBeFalsy();
+    });
+  });
+
+  describe("isComposedKeyLabelSet", () => {
+    it("returns true if the object is a ComposedKeyLabelSet", () => {
+      const ks = new ComposedKeySet([]);
+      expect(isComposedKeyLabelSet(ks)).toBeTruthy();
+    });
+    it("returns false with a KeyLabelSet", () => {
+      const ks = all<string>();
+      expect(isComposedKeyLabelSet(ks)).toBeFalsy();
+    });
+    it("returns false with a serialized KeyLabelSet", () => {
+      const ks = serializeKeyLabelSet(all());
+      expect(isComposedKeyLabelSet(ks)).toBeFalsy();
+    });
+    it("returns false with null", () => {
+      expect(isComposedKeyLabelSet(null)).toBeFalsy();
     });
   });
 

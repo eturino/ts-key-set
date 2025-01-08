@@ -1,5 +1,6 @@
 import { type IKeyLabel, isKeyLabel, isObject } from "../util/object-utils";
 import {
+  type ComposedKeyLabelSetSerialized,
   type ComposedKeySetSerialized,
   type Key,
   type KeyLabelSet,
@@ -25,7 +26,13 @@ import {
 } from "./-base";
 import { type KeySetAll, all } from "./all";
 import { type KeySetAllExceptSome, allExceptSome } from "./all-except-some";
-import { type ComposedKeySet, composedKeySetFrom, isComposedKeySet } from "./composed";
+import {
+  type ComposedKeyLabelSet,
+  type ComposedKeySet,
+  composedKeySetFrom,
+  isComposedKeyLabelSet,
+  isComposedKeySet,
+} from "./composed";
 import { InvalidKeySetError } from "./invalid-key-set-error";
 import { type KeySetNone, none } from "./none";
 import { type KeySetSome, some } from "./some";
@@ -114,13 +121,24 @@ export function isComposedKeySetSerialized(x: unknown): x is ComposedKeySetSeria
   return x.every((y) => isKeySetSerialized(y));
 }
 
+export function isComposedKeyLabelSetSerialized<T extends string | number>(
+  x: ComposedKeyLabelSetSerialized<T>,
+): x is ComposedKeyLabelSetSerialized<T>;
+export function isComposedKeyLabelSetSerialized(x: unknown): x is ComposedKeyLabelSetSerialized;
+export function isComposedKeyLabelSetSerialized(x: unknown): x is ComposedKeyLabelSetSerialized {
+  if (!x || !Array.isArray(x)) return false;
+
+  return x.every((y) => isKeyLabelSetSerialized(y));
+}
+
 export function serializeComposedKeySet<T extends Key>(
   x: ComposedKeySet<T> | ComposedKeySetSerialized<T>,
 ): ComposedKeySetSerialized<T> {
   if (isComposedKeySetSerialized(x)) return x;
-
-  return x.list.map((y) => serializeKeySet(y));
+  return x.serialized();
 }
+
+export const serializeComposedKeyLabelSet = serializeComposedKeySet;
 
 export function serializeKeySet<T extends string | number>(
   x: KeyLabelSetAllSerialized<T> | KeyLabelSetAll<T>,
@@ -163,6 +181,18 @@ export function parseComposedKeySet<T extends Key>(
   }
 
   return composedKeySetFrom(x.map((y) => parseKeySet(y)));
+}
+
+export function parseComposedKeyLabelSet<T extends string | number>(
+  x: ComposedKeyLabelSetSerialized<T> | ComposedKeyLabelSet<T>,
+): ComposedKeyLabelSet<T> {
+  if (isComposedKeyLabelSet(x)) return x;
+
+  if (!isComposedKeySetSerialized(x)) {
+    throw new InvalidKeySetError(`composedKeySetSerialized expected, given ${JSON.stringify(x)}`);
+  }
+
+  return composedKeySetFrom(x.map((y) => parseKeyLabelSet(y)));
 }
 
 export function parseKeySet<T extends Key>(x: KeySetAllSerialized<T> | KeySetAll<T>): KeySetAll<T>;

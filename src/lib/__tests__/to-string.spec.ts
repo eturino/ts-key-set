@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { allExceptSomeKeySetForced, allKeySet, composedKeySetFrom, noneKeySet, someKeySetForced } from "../key-set";
+import { allExceptSomeKeySetForced, allKeySet, composedKeySetFrom, noneKeySet, someKeySetForced } from "../..";
 
 describe("toString KeySet", () => {
   it("KeySetAll", () => {
