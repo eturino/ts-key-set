@@ -138,7 +138,12 @@ export function serializeComposedKeySet<T extends Key>(
   return x.serialized();
 }
 
-export const serializeComposedKeyLabelSet = serializeComposedKeySet;
+export function serializeComposedKeyLabelSet<T extends string | number>(
+  x: ComposedKeyLabelSet<T> | ComposedKeyLabelSetSerialized<T>,
+): ComposedKeyLabelSetSerialized<T> {
+  if (isComposedKeyLabelSetSerialized(x)) return x;
+  return x.serialized();
+}
 
 export function serializeKeySet<T extends string | number>(
   x: KeyLabelSetAllSerialized<T> | KeyLabelSetAll<T>,
