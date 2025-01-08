@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.9.0](https://github.com/eturino/ts-key-set/compare/v5.8.1...v5.9.0) (2025-01-08)
+
+
+### Features
+
+* ComposedKeyLabelSet and functions ([0a91908](https://github.com/eturino/ts-key-set/commit/0a919087f4dc93b95c5e4987ed817d9c8e5faa92))
+
 ## [5.8.1](https://github.com/eturino/ts-key-set/compare/v5.7.0...v5.8.1) (2025-01-08)
 
 
