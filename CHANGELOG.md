@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.10.0](https://github.com/eturino/ts-key-set/compare/v5.9.1...v5.10.0) (2025-01-09)
+
+
+### Features
+
+* serialize and parse ComposedKeySet to allow for array of keySets as input ([5b0791b](https://github.com/eturino/ts-key-set/commit/5b0791b9abd7928166f188ef0575323bc66fdb00))
+
 ### [5.9.1](https://github.com/eturino/ts-key-set/compare/v5.9.0...v5.9.1) (2025-01-08)
 
 

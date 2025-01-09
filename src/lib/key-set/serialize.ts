@@ -270,7 +270,7 @@ export function parseComposedKeyLabelSet<T extends string | number>(
     const newList: KeyLabelSet<T>[] = [];
     for (const ks of x) {
       if (isKeyLabelSet(ks)) {
-        newList.push(ks.clone());
+        newList.push(ks.clone() as KeyLabelSet<T>);
       } else if (isKeyLabelSetSerialized(ks)) {
         newList.push(parseKeyLabelSet<T>(ks));
       } else {
