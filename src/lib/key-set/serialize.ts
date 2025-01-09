@@ -132,17 +132,69 @@ export function isComposedKeyLabelSetSerialized(x: unknown): x is ComposedKeyLab
 }
 
 export function serializeComposedKeySet<T extends Key>(
-  x: ComposedKeySet<T> | ComposedKeySetSerialized<T>,
+  x: ComposedKeySet<T> | ComposedKeySetSerialized<T> | Array<KeySet<T>>,
 ): ComposedKeySetSerialized<T> {
-  if (isComposedKeySetSerialized(x)) return x;
-  return x.serialized();
+  if (isComposedKeySet(x)) return x.serialized();
+  if (Array.isArray(x)) {
+    let allSerialized = true;
+    const newList: KeySetSerialized<T>[] = [];
+    for (const ks of x) {
+      if (isKeySet(ks)) {
+        allSerialized = false;
+        newList.push(ks.serialized());
+      } else if (isKeySetSerialized(ks)) {
+        newList.push(ks);
+      } else {
+        // ERROR: invalid element
+        throw new InvalidKeySetError(
+          `ComposedKeySet or array of key sets expected. Invalid element found ${JSON.stringify(ks)}. Full argument given ${JSON.stringify(x)}`,
+        );
+      }
+    }
+
+    // if all elements are already serialized, return the original array, reusing the same instance in memory
+    return allSerialized ? (x as ComposedKeySetSerialized<T>) : newList;
+  }
+
+  // not recognised: error
+  throw new InvalidKeySetError(`ComposedKeySet expected, given ${JSON.stringify(x)}`);
 }
 
 export function serializeComposedKeyLabelSet<T extends string | number>(
-  x: ComposedKeyLabelSet<T> | ComposedKeyLabelSetSerialized<T>,
+  x: ComposedKeyLabelSet<T> | ComposedKeyLabelSetSerialized<T> | Array<KeyLabelSet<T>>,
 ): ComposedKeyLabelSetSerialized<T> {
-  if (isComposedKeyLabelSetSerialized(x)) return x;
-  return x.serialized();
+  if (isComposedKeySet(x)) {
+    if (isComposedKeyLabelSet(x)) {
+      return x.serialized();
+    }
+    throw new InvalidKeySetError(
+      `ComposedKeyLabelSet expected, a ComposedKeySet with no KeyLabels given ${JSON.stringify(x)}`,
+    );
+  }
+
+  if (Array.isArray(x)) {
+    let allSerialized = true;
+    const newList: KeyLabelSetSerialized<T>[] = [];
+    for (const ks of x) {
+      if (isKeyLabelSet(ks)) {
+        allSerialized = false;
+        newList.push(ks.serialized());
+      } else if (isKeyLabelSetSerialized(ks)) {
+        newList.push(ks);
+      } else {
+        // ERROR: invalid element
+        throw new InvalidKeySetError(
+          `ComposedKeyLabelSet or array of key sets expected. Invalid element found ${JSON.stringify(ks)}. Full argument given ${JSON.stringify(x)}`,
+        );
+      }
+    }
+
+    // if all elements are already serialized, return the original array, reusing the same instance in memory
+    return allSerialized ? (x as ComposedKeySetSerialized<T>) : newList;
+  }
+
+  // not recognised: error
+  throw new InvalidKeySetError(`ComposedKeySet expected, given ${JSON.stringify(x)}`);
 }
 
 export function serializeKeySet<T extends string | number>(
@@ -177,27 +229,62 @@ export function serializeKeySet<T extends Key>(keySet: KeySet<T> | KeySetSeriali
 export const serializeKeyLabelSet = serializeKeySet;
 
 export function parseComposedKeySet<T extends Key>(
-  x: ComposedKeySetSerialized<T> | ComposedKeySet<T>,
+  x: ComposedKeySetSerialized<T> | ComposedKeySet<T> | Array<KeySet<T>>,
 ): ComposedKeySet<T> {
   if (isComposedKeySet(x)) return x;
 
-  if (!isComposedKeySetSerialized(x)) {
-    throw new InvalidKeySetError(`composedKeySetSerialized expected, given ${JSON.stringify(x)}`);
+  if (Array.isArray(x)) {
+    const newList: KeySet<T>[] = [];
+    for (const ks of x) {
+      if (isKeySet(ks)) {
+        newList.push(ks.clone());
+      } else if (isKeySetSerialized(ks)) {
+        newList.push(parseKeySet<T>(ks));
+      } else {
+        // ERROR: invalid element
+        throw new InvalidKeySetError(
+          `ComposedKeySet or array of key sets expected. Invalid element found ${JSON.stringify(ks)}. Full argument given ${JSON.stringify(x)}`,
+        );
+      }
+    }
+    return composedKeySetFrom(newList);
   }
 
-  return composedKeySetFrom(x.map((y) => parseKeySet(y)));
+  // not recognised: error
+  throw new InvalidKeySetError(`ComposedKeySet expected, given ${JSON.stringify(x)}`);
 }
 
 export function parseComposedKeyLabelSet<T extends string | number>(
-  x: ComposedKeyLabelSetSerialized<T> | ComposedKeyLabelSet<T>,
+  x: ComposedKeyLabelSetSerialized<T> | ComposedKeyLabelSet<T> | Array<KeyLabelSet<T>>,
 ): ComposedKeyLabelSet<T> {
-  if (isComposedKeyLabelSet(x)) return x;
-
-  if (!isComposedKeySetSerialized(x)) {
-    throw new InvalidKeySetError(`composedKeySetSerialized expected, given ${JSON.stringify(x)}`);
+  if (isComposedKeySet(x)) {
+    if (isComposedKeyLabelSet(x)) {
+      return x as ComposedKeyLabelSet<T>;
+    }
+    throw new InvalidKeySetError(
+      `ComposedKeyLabelSet expected, a ComposedKeySet with no KeyLabels given ${JSON.stringify(x)}`,
+    );
   }
 
-  return composedKeySetFrom(x.map((y) => parseKeyLabelSet(y)));
+  if (Array.isArray(x)) {
+    const newList: KeyLabelSet<T>[] = [];
+    for (const ks of x) {
+      if (isKeyLabelSet(ks)) {
+        newList.push(ks.clone());
+      } else if (isKeyLabelSetSerialized(ks)) {
+        newList.push(parseKeyLabelSet<T>(ks));
+      } else {
+        // ERROR: invalid element
+        throw new InvalidKeySetError(
+          `ComposedKeyLabelSet or array of key sets expected. Invalid element found ${JSON.stringify(ks)}. Full argument given ${JSON.stringify(x)}`,
+        );
+      }
+    }
+    return composedKeySetFrom(newList);
+  }
+
+  // not recognised: error
+  throw new InvalidKeySetError(`ComposedKeyLabelSet expected, given ${JSON.stringify(x)}`);
 }
 
 export function parseKeySet<T extends Key>(x: KeySetAllSerialized<T> | KeySetAll<T>): KeySetAll<T>;

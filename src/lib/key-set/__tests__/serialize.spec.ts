@@ -5,6 +5,7 @@ import {
   type ComposedKeySetSerialized,
   type IKeyLabel,
   InvalidKeySetError,
+  type KeyLabelSet,
   type KeyLabelSetAll,
   type KeyLabelSetAllExceptSome,
   type KeyLabelSetAllExceptSomeSerialized,
@@ -46,7 +47,7 @@ import {
   serializeKeyLabelSet,
   serializeKeySet,
   some,
-} from "../..";
+} from "../../..";
 
 const allSerialized: KeySetAllSerialized = { type: KeySetTypes.all };
 const noneSerialized: KeySetNoneSerialized = { type: KeySetTypes.none };
@@ -606,6 +607,7 @@ describe("serialize KeySet", () => {
     };
 
     const composedSerialized: KeySetSerialized[] = [keySetSerialized1, keySetSerialized2];
+    const arrayKeySets: KeySet[] = [keySet1, keySet2];
     const composedKeySet = composedKeySetFrom([keySet1, keySet2]);
 
     describe("isComposedKeySetSerialized()", () => {
@@ -617,6 +619,9 @@ describe("serialize KeySet", () => {
       });
       it("isComposedKeySetSerialized(keySet) -> NOPE", () => {
         expect(isComposedKeySetSerialized(keySet1)).toBeFalsy();
+      });
+      it("isComposedKeySetSerialized(arrayKeySets) -> NOPE", () => {
+        expect(isComposedKeySetSerialized(arrayKeySets)).toBeFalsy();
       });
       it("isComposedKeySetSerialized(keySetSerialized) -> NOPE", () => {
         expect(isComposedKeySetSerialized(keySetSerialized1)).toBeFalsy();
@@ -633,8 +638,19 @@ describe("serialize KeySet", () => {
       it("serializeComposedKeySet(composedSerialized) -> return same", () => {
         expect(serializeComposedKeySet(composedSerialized)).toBe(composedSerialized);
       });
+      it("serializeComposedKeySet(arrayKeySets) -> serialize each", () => {
+        expect(serializeComposedKeySet(arrayKeySets)).toEqual(composedSerialized);
+      });
       it("serializeComposedKeySet(composedKeySet) -> serialize each", () => {
         expect(serializeComposedKeySet(composedKeySet)).toEqual(composedSerialized);
+      });
+      it("serializeComposedKeySet(invalid) -> throw", () => {
+        expect(() => serializeComposedKeySet(new Date() as unknown as ComposedKeySetSerialized)).toThrow();
+      });
+      it("serializeComposedKeySet(invalid element in array) -> throw", () => {
+        expect(() =>
+          serializeComposedKeySet([keySet1, new Date(), keySet2] as unknown as ComposedKeySetSerialized),
+        ).toThrow();
       });
       it("composedKeySet.serialized() -> serialize each", () => {
         expect(composedKeySet.serialized()).toEqual(composedSerialized);
@@ -642,8 +658,11 @@ describe("serialize KeySet", () => {
     });
 
     describe("parseComposedKeySet()", () => {
-      it("parseComposedKeySet() with key sets", () => {
+      it("parseComposedKeySet() with composedKeySetSerialized", () => {
         expect(parseComposedKeySet(composedSerialized)).toEqual(composedKeySet);
+      });
+      it("parseComposedKeySet() with a list of keySets", () => {
+        expect(parseComposedKeySet(arrayKeySets)).toEqual(composedKeySet);
       });
       it("parseComposedKeySet() with empty list", () => {
         expect(parseComposedKeySet([])).toEqual(composedKeySetFrom([]));
@@ -651,8 +670,10 @@ describe("serialize KeySet", () => {
       it("parseComposedKeySet() with an already composedKeySet", () => {
         expect(parseComposedKeySet(composedKeySet)).toBe(composedKeySet);
       });
-
-      it("parseComposedKeySet() with empty list", () => {
+      it("parseComposedKeySet() with invalid argument", () => {
+        expect(() => parseComposedKeySet({ invalid: "stuff" } as unknown as ComposedKeySetSerialized)).toThrow();
+      });
+      it("parseComposedKeySet() with invalid elements", () => {
         expect(() => parseComposedKeySet([{ invalid: "stuff" }] as unknown as ComposedKeySetSerialized)).toThrow();
       });
     });
@@ -685,6 +706,7 @@ describe("serialize KeySet", () => {
     };
 
     const composedSerialized: KeyLabelSetSerialized[] = [keySetSerialized1, keySetSerialized2];
+    const arrayKeySets: KeyLabelSet[] = [keySet1, keySet2];
     const composedKeyLabelSet = composedKeySetFrom([keySet1, keySet2]);
 
     describe("isComposedKeyLabelSetSerialized()", () => {
@@ -697,6 +719,9 @@ describe("serialize KeySet", () => {
       it("isComposedKeyLabelSetSerialized(keySet) -> NOPE", () => {
         expect(isComposedKeyLabelSetSerialized(keySet1)).toBeFalsy();
       });
+      it("isComposedKeyLabelSetSerialized(arrayKeySets) -> NOPE", () => {
+        expect(isComposedKeyLabelSetSerialized(arrayKeySets)).toBeFalsy();
+      });
       it("isComposedKeyLabelSetSerialized(keySetSerialized) -> NOPE", () => {
         expect(isComposedKeyLabelSetSerialized(keySetSerialized1)).toBeFalsy();
       });
@@ -705,6 +730,9 @@ describe("serialize KeySet", () => {
       });
       it("isComposedKeyLabelSetSerialized(composedKeyLabelSet) -> NOPE", () => {
         expect(isComposedKeyLabelSetSerialized(keySet1)).toBeFalsy();
+      });
+      it("isComposedKeyLabelSetSerialized(invalid) -> NOPE", () => {
+        expect(isComposedKeyLabelSetSerialized(new Date())).toBeFalsy();
       });
     });
 
@@ -715,6 +743,37 @@ describe("serialize KeySet", () => {
       it("serializeComposedKeyLabelSet(composedKeyLabelSet) -> serialize each", () => {
         expect(serializeComposedKeyLabelSet(composedKeyLabelSet)).toEqual(composedSerialized);
       });
+      it("serializeComposedKeyLabelSet(arrayKeySets) -> serialize each", () => {
+        expect(serializeComposedKeyLabelSet(arrayKeySets)).toEqual(composedSerialized);
+      });
+      it("serializeComposedKeyLabelSet(invalid) -> throw", () => {
+        expect(() => serializeComposedKeyLabelSet(new Date() as unknown as KeyLabelSetSerialized[])).toThrow();
+      });
+      it("serializeComposedKeyLabelSet(invalid) -> throw", () => {
+        expect(() =>
+          serializeComposedKeyLabelSet([keySet1, new Date(), keySetSerialized2] as unknown as KeyLabelSetSerialized[]),
+        ).toThrow();
+      });
+      it("serializeComposedKeyLabelSet(composedKeySet not of KeyLabels) -> throw", () => {
+        expect(() =>
+          serializeComposedKeyLabelSet(
+            composedKeySetFrom([allExceptSome([1, 2]), some([1, 2])]) as unknown as KeyLabelSetSerialized[],
+          ),
+        ).toThrow();
+      });
+      it("serializeComposedKeyLabelSet(array not of KeyLabels) -> throw", () => {
+        expect(() =>
+          serializeComposedKeyLabelSet([allExceptSome([1, 2]), some([1, 2])] as unknown as KeyLabelSetSerialized[]),
+        ).toThrow();
+      });
+      it("serializeComposedKeyLabelSet(array not of KeyLabel serialized) -> throw", () => {
+        expect(() =>
+          serializeComposedKeyLabelSet([
+            allExceptSome([1, 2]).serialized(),
+            some([1, 2]).serialized(),
+          ] as unknown as KeyLabelSetSerialized[]),
+        ).toThrow();
+      });
       it("composedKeyLabelSet.serialized() -> serialize each", () => {
         expect(composedKeyLabelSet.serialized()).toEqual(composedSerialized);
       });
@@ -724,6 +783,9 @@ describe("serialize KeySet", () => {
       it("parseComposedKeyLabelSet() with key sets", () => {
         expect(parseComposedKeyLabelSet(composedSerialized)).toEqual(composedKeyLabelSet);
       });
+      it("parseComposedKeyLabelSet() with arrayKeySets", () => {
+        expect(parseComposedKeyLabelSet(arrayKeySets)).toEqual(composedKeyLabelSet);
+      });
       it("parseComposedKeyLabelSet() with empty list", () => {
         expect(parseComposedKeyLabelSet([])).toEqual(composedKeySetFrom([]));
       });
@@ -731,9 +793,31 @@ describe("serialize KeySet", () => {
         expect(parseComposedKeyLabelSet(composedKeyLabelSet)).toBe(composedKeyLabelSet);
       });
 
-      it("parseComposedKeyLabelSet() with empty list", () => {
+      it("parseComposedKeyLabelSet() with key set not keyLabelSet", () => {
+        expect(() =>
+          parseComposedKeyLabelSet([allExceptSome([1, 2])] as unknown as ComposedKeyLabelSetSerialized),
+        ).toThrow();
+      });
+      it("parseComposedKeyLabelSet() with composedKeySet not keyLabelSet", () => {
+        expect(() =>
+          parseComposedKeyLabelSet(
+            composedKeySetFrom([allExceptSome([1, 2])]) as unknown as ComposedKeyLabelSetSerialized,
+          ),
+        ).toThrow();
+      });
+      it("parseComposedKeyLabelSet() with key set not keyLabelSet serialized", () => {
+        expect(() =>
+          parseComposedKeyLabelSet([allExceptSome([1, 2]).serialized()] as unknown as ComposedKeyLabelSetSerialized),
+        ).toThrow();
+      });
+      it("parseComposedKeyLabelSet() with invalid element", () => {
         expect(() =>
           parseComposedKeyLabelSet([{ invalid: "stuff" }] as unknown as ComposedKeyLabelSetSerialized),
+        ).toThrow();
+      });
+      it("parseComposedKeyLabelSet() with invalid", () => {
+        expect(() =>
+          parseComposedKeyLabelSet({ invalid: "stuff" } as unknown as ComposedKeyLabelSetSerialized),
         ).toThrow();
       });
     });
