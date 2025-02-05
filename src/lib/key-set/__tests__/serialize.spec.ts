@@ -31,6 +31,10 @@ import {
   composedKeySetFrom,
   isComposedKeyLabelSetSerialized,
   isComposedKeySetSerialized,
+  isComposedKeySetSerializedRepresentsAll,
+  isComposedKeySetSerializedRepresentsAllExceptSome,
+  isComposedKeySetSerializedRepresentsNone,
+  isComposedKeySetSerializedRepresentsSome,
   isKeyLabelSetSerialized,
   isKeySetAllExceptSomeSerialized,
   isKeySetAllSerialized,
@@ -48,12 +52,6 @@ import {
   serializeKeySet,
   some,
 } from "../../..";
-import {
-  isComposedKeySetSerializedRepresentsAll,
-  isComposedKeySetSerializedRepresentsAllExceptSome,
-  isComposedKeySetSerializedRepresentsNone,
-  isComposedKeySetSerializedRepresentsSome,
-} from "../serialize";
 
 const allSerialized: KeySetAllSerialized = { type: KeySetTypes.all };
 const noneSerialized: KeySetNoneSerialized = { type: KeySetTypes.none };
