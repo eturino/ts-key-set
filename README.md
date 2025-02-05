@@ -324,3 +324,7 @@ We have also a function to check type:
 - `isComposedKeySetSerializedRepresentsNone(x): x is ComposedKeySetSerializedRepresentsNone`
 - `isComposedKeySetSerializedRepresentsSome(x): x is ComposedKeySetSerializedRepresentsSome`
 - `isComposedKeySetSerializedRepresentsAllExceptSome(x): x is ComposedKeySetSerializedRepresentsAllExceptSome`
+
+# Yanked versions
+
+- `5.11.0` had some functions missing from the main package export.
