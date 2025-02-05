@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [5.10.0](https://github.com/eturino/ts-key-set/compare/v5.9.1...v5.10.0) (2025-02-05)
+## [5.11.0](https://github.com/eturino/ts-key-set/compare/v5.10.0...v5.11.0) (2025-02-05)
 
 
 ### Features
