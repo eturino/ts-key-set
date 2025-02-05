@@ -48,6 +48,12 @@ import {
   serializeKeySet,
   some,
 } from "../../..";
+import {
+  isComposedKeySetSerializedRepresentsAll,
+  isComposedKeySetSerializedRepresentsAllExceptSome,
+  isComposedKeySetSerializedRepresentsNone,
+  isComposedKeySetSerializedRepresentsSome,
+} from "../serialize";
 
 const allSerialized: KeySetAllSerialized = { type: KeySetTypes.all };
 const noneSerialized: KeySetNoneSerialized = { type: KeySetTypes.none };
@@ -222,6 +228,74 @@ describe("serialize KeySet", () => {
         expect(isKeySetAllExceptSomeSerialized(x)).toBeFalsy();
       });
     }
+  });
+
+  describe("composed serialized predicates", () => {
+    describe("composedKeySetSerializedRepresentsAll", () => {
+      it("valid", () => {
+        expect(isComposedKeySetSerializedRepresentsAll([allSerialized])).toBeTruthy();
+        expect(isComposedKeySetSerializedRepresentsAll([allSerialized, allSerialized])).toBeTruthy();
+      });
+
+      it("invalid: not everyone is of the same type", () => {
+        expect(isComposedKeySetSerializedRepresentsAll([noneSerialized])).toBeFalsy();
+        expect(isComposedKeySetSerializedRepresentsAll([allSerialized, noneSerialized])).toBeFalsy();
+      });
+    });
+
+    describe("composedKeySetSerializedRepresentsNone", () => {
+      it("valid", () => {
+        expect(isComposedKeySetSerializedRepresentsNone([noneSerialized])).toBeTruthy();
+        expect(isComposedKeySetSerializedRepresentsNone([noneSerialized, noneSerialized])).toBeTruthy();
+      });
+
+      it("invalid: not everyone is of the same type", () => {
+        expect(isComposedKeySetSerializedRepresentsNone([allSerialized])).toBeFalsy();
+        expect(isComposedKeySetSerializedRepresentsNone([noneSerialized, allSerialized])).toBeFalsy();
+      });
+    });
+
+    describe("composedKeySetSerializedRepresentsSome", () => {
+      it("valid", () => {
+        expect(isComposedKeySetSerializedRepresentsSome([someStringSerialized])).toBeTruthy();
+        expect(isComposedKeySetSerializedRepresentsSome([someStringSerialized, someStringSerialized])).toBeTruthy();
+        expect(isComposedKeySetSerializedRepresentsSome([someNumberSerialized, someNumberSerialized])).toBeTruthy();
+      });
+
+      it("invalid: not everyone is of the same type", () => {
+        expect(isComposedKeySetSerializedRepresentsSome([noneSerialized])).toBeFalsy();
+        expect(isComposedKeySetSerializedRepresentsSome([someStringSerialized, allSerialized])).toBeFalsy();
+        expect(isComposedKeySetSerializedRepresentsSome([someNumberSerialized, allSerialized])).toBeFalsy();
+      });
+    });
+
+    describe("composedKeySetSerializedRepresentsAllExceptSome", () => {
+      it("valid", () => {
+        expect(isComposedKeySetSerializedRepresentsAllExceptSome([allExceptSomeStringSerialized])).toBeTruthy();
+        expect(
+          isComposedKeySetSerializedRepresentsAllExceptSome([
+            allExceptSomeStringSerialized,
+            allExceptSomeStringSerialized,
+          ]),
+        ).toBeTruthy();
+        expect(
+          isComposedKeySetSerializedRepresentsAllExceptSome([
+            allExceptSomeNumberSerialized,
+            allExceptSomeNumberSerialized,
+          ]),
+        ).toBeTruthy();
+      });
+
+      it("invalid: not everyone is of the same type", () => {
+        expect(isComposedKeySetSerializedRepresentsAllExceptSome([noneSerialized])).toBeFalsy();
+        expect(
+          isComposedKeySetSerializedRepresentsAllExceptSome([allExceptSomeStringSerialized, allSerialized]),
+        ).toBeFalsy();
+        expect(
+          isComposedKeySetSerializedRepresentsAllExceptSome([allExceptSomeNumberSerialized, allSerialized]),
+        ).toBeFalsy();
+      });
+    });
   });
 
   describe("isKeySetSerialized()", () => {
@@ -500,10 +574,14 @@ describe("serialize KeySet", () => {
 
   describe("KeyLabelSet", () => {
     const allKS: KeyLabelSetAll<string> = all<IKeyLabel<string>>();
-    const allSerialized: KeyLabelSetAllSerialized<string> = { type: KeySetTypes.all };
+    const allSerialized: KeyLabelSetAllSerialized<string> = {
+      type: KeySetTypes.all,
+    };
 
     const noneKS: KeyLabelSetNone<string> = none<IKeyLabel<string>>();
-    const noneSerialized: KeyLabelSetNoneSerialized<string> = { type: KeySetTypes.none };
+    const noneSerialized: KeyLabelSetNoneSerialized<string> = {
+      type: KeySetTypes.none,
+    };
 
     const aesKS: KeyLabelSetAllExceptSome = allExceptSome([
       { key: "a", label: "A" },

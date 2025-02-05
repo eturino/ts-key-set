@@ -318,3 +318,9 @@ It can be serialized and parsed as the internal list (array) of KeySets.
 We have also a function to check type:
 
 - `isComposedKeySet(x): x is ComposedKeySet`
+- `isComposedKeySetSerialized(x): x is ComposedKeySetSerialized`
+- `isComposedKeyLabelSetSerialized(x): x is ComposedKeyLabelSetSerialized`
+- `isComposedKeySetSerializedRepresentsAll(x): x is ComposedKeySetSerializedRepresentsAll`
+- `isComposedKeySetSerializedRepresentsNone(x): x is ComposedKeySetSerializedRepresentsNone`
+- `isComposedKeySetSerializedRepresentsSome(x): x is ComposedKeySetSerializedRepresentsSome`
+- `isComposedKeySetSerializedRepresentsAllExceptSome(x): x is ComposedKeySetSerializedRepresentsAllExceptSome`

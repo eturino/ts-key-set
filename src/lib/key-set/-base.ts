@@ -98,6 +98,11 @@ export type ComposedKeyLabelSetSerialized<T extends string | number = string | n
   KeyLabelSetSerialized<T>
 >;
 
+export type ComposedKeySetAllSerialized<T extends Key = Key> = Array<KeySetAllSerialized<T>>;
+export type ComposedKeySetNoneSerialized<T extends Key = Key> = Array<KeySetNoneSerialized<T>>;
+export type ComposedKeySetSomeSerialized<T extends Key = Key> = Array<KeySetSomeSerialized<T>>;
+export type ComposedKeySetAllExceptSomeSerialized<T extends Key = Key> = Array<KeySetAllExceptSomeSerialized<T>>;
+
 export interface IKeySetClass<T extends Key> {
   /**
    * returns the KeySetType that defines this class

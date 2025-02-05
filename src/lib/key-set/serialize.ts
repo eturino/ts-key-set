@@ -1,7 +1,11 @@
 import { type IKeyLabel, isKeyLabel, isObject } from "../util/object-utils";
 import {
   type ComposedKeyLabelSetSerialized,
+  type ComposedKeySetAllExceptSomeSerialized,
+  type ComposedKeySetAllSerialized,
+  type ComposedKeySetNoneSerialized,
   type ComposedKeySetSerialized,
+  type ComposedKeySetSomeSerialized,
   type Key,
   type KeyLabelSet,
   type KeyLabelSetAll,
@@ -147,7 +151,9 @@ export function serializeComposedKeySet<T extends Key>(
       } else {
         // ERROR: invalid element
         throw new InvalidKeySetError(
-          `ComposedKeySet or array of key sets expected. Invalid element found ${JSON.stringify(ks)}. Full argument given ${JSON.stringify(x)}`,
+          `ComposedKeySet or array of key sets expected. Invalid element found ${JSON.stringify(
+            ks,
+          )}. Full argument given ${JSON.stringify(x)}`,
         );
       }
     }
@@ -184,7 +190,9 @@ export function serializeComposedKeyLabelSet<T extends string | number>(
       } else {
         // ERROR: invalid element
         throw new InvalidKeySetError(
-          `ComposedKeyLabelSet or array of key sets expected. Invalid element found ${JSON.stringify(ks)}. Full argument given ${JSON.stringify(x)}`,
+          `ComposedKeyLabelSet or array of key sets expected. Invalid element found ${JSON.stringify(
+            ks,
+          )}. Full argument given ${JSON.stringify(x)}`,
         );
       }
     }
@@ -195,6 +203,42 @@ export function serializeComposedKeyLabelSet<T extends string | number>(
 
   // not recognised: error
   throw new InvalidKeySetError(`ComposedKeySet expected, given ${JSON.stringify(x)}`);
+}
+
+/**
+ * returns true if ALL the sets in the list return representsAll()
+ */
+export function isComposedKeySetSerializedRepresentsAll<T extends Key>(
+  s: ComposedKeySetSerialized<T>,
+): s is ComposedKeySetAllSerialized<T> {
+  return s.every(isKeySetAllSerialized);
+}
+
+/**
+ * returns true if ALL the sets in the list return representsNone()
+ */
+export function isComposedKeySetSerializedRepresentsNone<T extends Key>(
+  s: ComposedKeySetSerialized<T>,
+): s is ComposedKeySetNoneSerialized<T> {
+  return s.every(isKeySetNoneSerialized);
+}
+
+/**
+ * returns true if ALL the sets in the list return representsSome()
+ */
+export function isComposedKeySetSerializedRepresentsSome<T extends Key>(
+  s: ComposedKeySetSerialized<T>,
+): s is ComposedKeySetSomeSerialized<T> {
+  return s.every(isKeySetSomeSerialized);
+}
+
+/**
+ * returns true if ALL the sets in the list return representsAllExceptSome()
+ */
+export function isComposedKeySetSerializedRepresentsAllExceptSome<T extends Key>(
+  s: ComposedKeySetSerialized<T>,
+): s is ComposedKeySetAllExceptSomeSerialized<T> {
+  return s.every(isKeySetAllExceptSomeSerialized);
 }
 
 export function serializeKeySet<T extends string | number>(
@@ -243,7 +287,9 @@ export function parseComposedKeySet<T extends Key>(
       } else {
         // ERROR: invalid element
         throw new InvalidKeySetError(
-          `ComposedKeySet or array of key sets expected. Invalid element found ${JSON.stringify(ks)}. Full argument given ${JSON.stringify(x)}`,
+          `ComposedKeySet or array of key sets expected. Invalid element found ${JSON.stringify(
+            ks,
+          )}. Full argument given ${JSON.stringify(x)}`,
         );
       }
     }
@@ -276,7 +322,9 @@ export function parseComposedKeyLabelSet<T extends string | number>(
       } else {
         // ERROR: invalid element
         throw new InvalidKeySetError(
-          `ComposedKeyLabelSet or array of key sets expected. Invalid element found ${JSON.stringify(ks)}. Full argument given ${JSON.stringify(x)}`,
+          `ComposedKeyLabelSet or array of key sets expected. Invalid element found ${JSON.stringify(
+            ks,
+          )}. Full argument given ${JSON.stringify(x)}`,
         );
       }
     }
