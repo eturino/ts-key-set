@@ -5,7 +5,12 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  "files": ["dist", "src", "LICENSE", "README.md"],
+  "files": [
+    "dist",
+    "src",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
     "commit": "git-cz",
     "build": "npm run build:tsup && npm run build:dts",
@@ -31,7 +36,11 @@
   },
   "homepage": "https://github.com/eturino/ts-key-set",
   "license": "MIT",
-  "keywords": ["key-set", "sets", "groups"],
+  "keywords": [
+    "key-set",
+    "sets",
+    "groups"
+  ],
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@commitlint/cli": "^19.6.1",

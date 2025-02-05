@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.11.0](https://github.com/eturino/ts-key-set/compare/v5.10.0...v5.11.0) (2025-02-05)
+
+
+### Features
+
+* adding isComposedKeySetSerializedXXX for specific types (type predicates) ([dcb374d](https://github.com/eturino/ts-key-set/commit/dcb374d650407e17a03f10917a3c5135ec2ec9f8))
+* serialize and parse ComposedKeySet to allow for array of keySets as input ([5b0791b](https://github.com/eturino/ts-key-set/commit/5b0791b9abd7928166f188ef0575323bc66fdb00))
+
+
+### Bug Fixes
+
+* **deps:** bump es-toolkit from 1.31.0 to 1.32.0 ([#720](https://github.com/eturino/ts-key-set/issues/720)) ([a464760](https://github.com/eturino/ts-key-set/commit/a464760eba89005b93cd30317765ce1f931c5e92))
+* **deps:** bump vite from 5.4.11 to 5.4.14 ([#710](https://github.com/eturino/ts-key-set/issues/710)) ([b831210](https://github.com/eturino/ts-key-set/commit/b8312105c1b5c9b94516e015afadb85811699790))
+
 ## [5.10.0](https://github.com/eturino/ts-key-set/compare/v5.9.1...v5.10.0) (2025-01-09)
 
 
