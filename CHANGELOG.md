@@ -2,17 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [5.11.0](https://github.com/eturino/ts-key-set/compare/v5.11.0...v5.11.0) (2025-02-05)
+## [5.11.1](https://github.com/eturino/ts-key-set/compare/v5.11.0...v5.11.1) (2025-02-05)
 
 
 ### Bug Fixes
 
 * export predicate functions in root of package ([1c1f56d](https://github.com/eturino/ts-key-set/commit/1c1f56da31c39c7f12a268b71e91b2af566ab642))
 
-
-### Miscellaneous Chores
-
-* release 5.11.0 ([8c8ac30](https://github.com/eturino/ts-key-set/commit/8c8ac301072f20b58d8ec57854cdb079faaa95f7))
 
 ## [5.11.0](https://github.com/eturino/ts-key-set/compare/v5.10.0...v5.11.0) (2025-02-05)
 
