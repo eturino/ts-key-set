@@ -34,7 +34,7 @@
   "keywords": ["key-set", "sets", "groups"],
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@commitlint/cli": "^19.6.1",
+    "@commitlint/cli": "^20.0.0",
     "@commitlint/config-conventional": "^19.6.0",
     "@commitlint/cz-commitlint": "^19.6.1",
     "@types/node": "^24.0.0",
