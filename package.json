@@ -33,7 +33,7 @@
   "license": "MIT",
   "keywords": ["key-set", "sets", "groups"],
   "devDependencies": {
-    "@biomejs/biome": "1.9.4",
+    "@biomejs/biome": "2.2.4",
     "@commitlint/cli": "^20.0.0",
     "@commitlint/config-conventional": "^20.0.0",
     "@commitlint/cz-commitlint": "^20.0.0",
