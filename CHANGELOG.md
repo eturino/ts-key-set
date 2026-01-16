@@ -2,6 +2,43 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.12.0](https://github.com/eturino/ts-key-set/compare/v5.11.1...v5.12.0) (2026-01-16)
+
+
+### Features
+
+* remove es-toolkit dependency, use native implementations ([2b40007](https://github.com/eturino/ts-key-set/commit/2b40007caeb0c0951e02700c64b55206e526c719))
+
+
+### Bug Fixes
+
+* **deps:** bump es-toolkit from 1.32.0 to 1.33.0 ([#753](https://github.com/eturino/ts-key-set/issues/753)) ([2eb9475](https://github.com/eturino/ts-key-set/commit/2eb9475ef8b167adc117ab690cfe68ce4e55eabe))
+* **deps:** bump es-toolkit from 1.33.0 to 1.34.1 ([#760](https://github.com/eturino/ts-key-set/issues/760)) ([991c5e3](https://github.com/eturino/ts-key-set/commit/991c5e3f0c3781dbba3715c4d8e9270912e02e65))
+* **deps:** bump es-toolkit from 1.34.1 to 1.35.0 ([#772](https://github.com/eturino/ts-key-set/issues/772)) ([3a12df2](https://github.com/eturino/ts-key-set/commit/3a12df2bfc635a39837c86bce2c3978e2264560b))
+* **deps:** bump es-toolkit from 1.35.0 to 1.36.0 ([#775](https://github.com/eturino/ts-key-set/issues/775)) ([c9888db](https://github.com/eturino/ts-key-set/commit/c9888db50ee1fe6f78e71c39d6e2d7b9dbbb8f2b))
+* **deps:** bump es-toolkit from 1.36.0 to 1.37.2 ([#781](https://github.com/eturino/ts-key-set/issues/781)) ([3ffaec1](https://github.com/eturino/ts-key-set/commit/3ffaec126a4c76265d2902e959e60dfdd64e227c))
+* **deps:** bump es-toolkit from 1.37.2 to 1.38.0 ([#795](https://github.com/eturino/ts-key-set/issues/795)) ([06e8fa3](https://github.com/eturino/ts-key-set/commit/06e8fa3ea8d15c8ef0ed503cb7ec61fbfc9596fa))
+* **deps:** bump es-toolkit from 1.38.0 to 1.39.0 ([#809](https://github.com/eturino/ts-key-set/issues/809)) ([68bc1d9](https://github.com/eturino/ts-key-set/commit/68bc1d9a8896ec509aee5528b53db3073851d03c))
+* **deps:** bump es-toolkit from 1.39.0 to 1.39.3 ([#812](https://github.com/eturino/ts-key-set/issues/812)) ([9c7a9b7](https://github.com/eturino/ts-key-set/commit/9c7a9b701754cdac14b2d3738c81c111e52c92b9))
+* **deps:** bump es-toolkit from 1.39.10 to 1.40.0 ([#878](https://github.com/eturino/ts-key-set/issues/878)) ([f72d3de](https://github.com/eturino/ts-key-set/commit/f72d3dedf6aa3b52d111daa33011f711013b8e52))
+* **deps:** bump es-toolkit from 1.39.3 to 1.39.4 ([#822](https://github.com/eturino/ts-key-set/issues/822)) ([cfe6bd9](https://github.com/eturino/ts-key-set/commit/cfe6bd90461279e197da20d5221470c6d2c2b43b))
+* **deps:** bump es-toolkit from 1.39.4 to 1.39.5 ([#824](https://github.com/eturino/ts-key-set/issues/824)) ([acc1ec9](https://github.com/eturino/ts-key-set/commit/acc1ec97eaef2b88327c8f3b17e65cecd8c705fe))
+* **deps:** bump es-toolkit from 1.39.5 to 1.39.6 ([#830](https://github.com/eturino/ts-key-set/issues/830)) ([6af6f32](https://github.com/eturino/ts-key-set/commit/6af6f32cce66310343eca9da2c142c560cc59e0f))
+* **deps:** bump es-toolkit from 1.39.6 to 1.39.7 ([#831](https://github.com/eturino/ts-key-set/issues/831)) ([5cafe15](https://github.com/eturino/ts-key-set/commit/5cafe152e42710639c054732f761eeb022d2eed1))
+* **deps:** bump es-toolkit from 1.39.7 to 1.39.8 ([#842](https://github.com/eturino/ts-key-set/issues/842)) ([eaf9a74](https://github.com/eturino/ts-key-set/commit/eaf9a749afdffdcff2bd2406afe8ed494edcad55))
+* **deps:** bump es-toolkit from 1.39.8 to 1.39.9 ([#849](https://github.com/eturino/ts-key-set/issues/849)) ([1e7ebdd](https://github.com/eturino/ts-key-set/commit/1e7ebdd19245909a9cc9127802937e0710bdabca))
+* **deps:** bump es-toolkit from 1.39.9 to 1.39.10 ([#853](https://github.com/eturino/ts-key-set/issues/853)) ([71ed970](https://github.com/eturino/ts-key-set/commit/71ed970f3ed310fe3804262bf685bcc4b0215d54))
+* **deps:** bump es-toolkit from 1.40.0 to 1.41.0 ([#892](https://github.com/eturino/ts-key-set/issues/892)) ([b76180b](https://github.com/eturino/ts-key-set/commit/b76180bd99d9e1a91a599bf5995a2bc6f98d3ad7))
+* **deps:** bump es-toolkit from 1.41.0 to 1.42.0 ([#916](https://github.com/eturino/ts-key-set/issues/916)) ([fc72b83](https://github.com/eturino/ts-key-set/commit/fc72b833b9cdc1ec1f40359062d8d40000964ab3))
+* **deps:** bump es-toolkit from 1.42.0 to 1.43.0 ([#940](https://github.com/eturino/ts-key-set/issues/940)) ([5aba02d](https://github.com/eturino/ts-key-set/commit/5aba02dbcd25401170b734f43dd41c1b07550054))
+* **deps:** bump es-toolkit from 1.43.0 to 1.44.0 ([#961](https://github.com/eturino/ts-key-set/issues/961)) ([3b9e6d0](https://github.com/eturino/ts-key-set/commit/3b9e6d0d4e001395d575976a99195db152e11bf6))
+* **deps:** bump vite from 6.2.2 to 6.2.4 ([#761](https://github.com/eturino/ts-key-set/issues/761)) ([7a49dff](https://github.com/eturino/ts-key-set/commit/7a49dffb9a3bd5124f453585b4fa73914229fc07))
+* **deps:** bump vite from 6.2.4 to 6.2.5 ([#768](https://github.com/eturino/ts-key-set/issues/768)) ([988d4cd](https://github.com/eturino/ts-key-set/commit/988d4cd54694266534d9a50c54a9ec81b5fa4501))
+* **deps:** bump vite from 6.2.5 to 6.2.6 ([#770](https://github.com/eturino/ts-key-set/issues/770)) ([0cc7671](https://github.com/eturino/ts-key-set/commit/0cc7671fdc19b431af7d75466bbc23d221754a3b))
+* **deps:** bump vite from 6.3.2 to 6.3.4 ([#780](https://github.com/eturino/ts-key-set/issues/780)) ([3a495ce](https://github.com/eturino/ts-key-set/commit/3a495ce393137eab7f86386163ab41b2dd51a73d))
+* **deps:** bump vite from 6.3.5 to 7.1.5 ([#860](https://github.com/eturino/ts-key-set/issues/860)) ([ee0d613](https://github.com/eturino/ts-key-set/commit/ee0d613a212a6aa7186f04065958376b2f5d5898))
+* **deps:** bump vite from 7.1.5 to 7.1.11 ([#884](https://github.com/eturino/ts-key-set/issues/884)) ([c7892ce](https://github.com/eturino/ts-key-set/commit/c7892ce79fb94812cbda2a0fcd0011bc9055103a))
+
 ## [5.11.1](https://github.com/eturino/ts-key-set/compare/v5.11.0...v5.11.1) (2025-02-05)
 
 
