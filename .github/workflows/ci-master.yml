@@ -50,12 +50,5 @@ jobs:
       - name: Build package
         run: npm run build
 
-      - name: Publish to npm using JS-DevTools/npm-publish (if not released already)
-        uses: JS-DevTools/npm-publish@v3
-        id: publish
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
-          access: public
-
-      - if: ${{ steps.publish.outputs.type }}
-        run: echo "Version changed!"
+      - name: Publish to npm (trusted publisher)
+        run: npm publish --provenance --access public
