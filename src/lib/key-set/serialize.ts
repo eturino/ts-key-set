@@ -6,6 +6,9 @@ import {
   type ComposedKeySetNoneSerialized,
   type ComposedKeySetSerialized,
   type ComposedKeySetSomeSerialized,
+  isKeyLabelSet,
+  isKeySet,
+  isKeySetType,
   type Key,
   type KeyLabelSet,
   type KeyLabelSetAll,
@@ -24,12 +27,9 @@ import {
   type KeySetSerialized,
   type KeySetSomeSerialized,
   KeySetTypes,
-  isKeyLabelSet,
-  isKeySet,
-  isKeySetType,
 } from "./-base";
-import { type KeySetAll, all } from "./all";
-import { type KeySetAllExceptSome, allExceptSome } from "./all-except-some";
+import { all, type KeySetAll } from "./all";
+import { allExceptSome, type KeySetAllExceptSome } from "./all-except-some";
 import {
   type ComposedKeyLabelSet,
   type ComposedKeySet,
@@ -45,7 +45,9 @@ import { type KeySetSome, some } from "./some";
  * @hidden
  * @internal
  */
-function hasShapeOfSerialized(given: unknown): given is { type: KeySetTypes; elements?: Key[] } {
+function hasShapeOfSerialized(
+  given: unknown,
+): given is { type: KeySetTypes; elements?: Key[] } {
   if (!isObject(given)) return false;
 
   if (given.elements && !Array.isArray(given.elements)) return false;
@@ -78,36 +80,60 @@ function isValidKeySetElements(type: unknown, elements: unknown): boolean {
 export function isKeySetSerialized(given: unknown): given is KeySetSerialized {
   if (!hasShapeOfSerialized(given)) return false;
 
-  return isValidKeySetAllNone(given.type, given.elements) || isValidKeySetElements(given.type, given.elements);
+  return (
+    isValidKeySetAllNone(given.type, given.elements) ||
+    isValidKeySetElements(given.type, given.elements)
+  );
 }
 
-export function isKeySetAllNoneSerialized(given: unknown): given is KeySetAllSerialized | KeySetNoneSerialized {
-  return hasShapeOfSerialized(given) && isValidKeySetAllNone(given.type, given.elements);
+export function isKeySetAllNoneSerialized(
+  given: unknown,
+): given is KeySetAllSerialized | KeySetNoneSerialized {
+  return (
+    hasShapeOfSerialized(given) &&
+    isValidKeySetAllNone(given.type, given.elements)
+  );
 }
 
 export function isKeySetElementsSerialized(
   given: unknown,
 ): given is KeySetSomeSerialized | KeySetAllExceptSomeSerialized {
-  return hasShapeOfSerialized(given) && isValidKeySetElements(given.type, given.elements);
+  return (
+    hasShapeOfSerialized(given) &&
+    isValidKeySetElements(given.type, given.elements)
+  );
 }
 
-export function isKeySetAllSerialized(given: unknown): given is KeySetAllSerialized {
+export function isKeySetAllSerialized(
+  given: unknown,
+): given is KeySetAllSerialized {
   return isKeySetAllNoneSerialized(given) && given.type === KeySetTypes.all;
 }
 
-export function isKeySetNoneSerialized(given: unknown): given is KeySetNoneSerialized {
+export function isKeySetNoneSerialized(
+  given: unknown,
+): given is KeySetNoneSerialized {
   return isKeySetAllNoneSerialized(given) && given.type === KeySetTypes.none;
 }
 
-export function isKeySetSomeSerialized(given: unknown): given is KeySetSomeSerialized {
+export function isKeySetSomeSerialized(
+  given: unknown,
+): given is KeySetSomeSerialized {
   return isKeySetElementsSerialized(given) && given.type === KeySetTypes.some;
 }
 
-export function isKeySetAllExceptSomeSerialized(given: unknown): given is KeySetAllExceptSomeSerialized {
-  return isKeySetElementsSerialized(given) && given.type === KeySetTypes.allExceptSome;
+export function isKeySetAllExceptSomeSerialized(
+  given: unknown,
+): given is KeySetAllExceptSomeSerialized {
+  return (
+    isKeySetElementsSerialized(given) &&
+    given.type === KeySetTypes.allExceptSome
+  );
 }
 
-export function isKeyLabelSetSerialized(given: unknown): given is KeyLabelSetSerialized {
+export function isKeyLabelSetSerialized(
+  given: unknown,
+): given is KeyLabelSetSerialized {
   if (isKeySetElementsSerialized(given)) {
     return given.elements.every((x) => isKeyLabel(x));
   }
@@ -118,8 +144,12 @@ export function isKeyLabelSetSerialized(given: unknown): given is KeyLabelSetSer
 export function isComposedKeySetSerialized<T extends Key>(
   x: ComposedKeySetSerialized<T>,
 ): x is ComposedKeySetSerialized<T>;
-export function isComposedKeySetSerialized(x: unknown): x is ComposedKeySetSerialized;
-export function isComposedKeySetSerialized(x: unknown): x is ComposedKeySetSerialized {
+export function isComposedKeySetSerialized(
+  x: unknown,
+): x is ComposedKeySetSerialized;
+export function isComposedKeySetSerialized(
+  x: unknown,
+): x is ComposedKeySetSerialized {
   if (!x || !Array.isArray(x)) return false;
 
   return x.every((y) => isKeySetSerialized(y));
@@ -128,8 +158,12 @@ export function isComposedKeySetSerialized(x: unknown): x is ComposedKeySetSeria
 export function isComposedKeyLabelSetSerialized<T extends string | number>(
   x: ComposedKeyLabelSetSerialized<T>,
 ): x is ComposedKeyLabelSetSerialized<T>;
-export function isComposedKeyLabelSetSerialized(x: unknown): x is ComposedKeyLabelSetSerialized;
-export function isComposedKeyLabelSetSerialized(x: unknown): x is ComposedKeyLabelSetSerialized {
+export function isComposedKeyLabelSetSerialized(
+  x: unknown,
+): x is ComposedKeyLabelSetSerialized;
+export function isComposedKeyLabelSetSerialized(
+  x: unknown,
+): x is ComposedKeyLabelSetSerialized {
   if (!x || !Array.isArray(x)) return false;
 
   return x.every((y) => isKeyLabelSetSerialized(y));
@@ -163,11 +197,16 @@ export function serializeComposedKeySet<T extends Key>(
   }
 
   // not recognised: error
-  throw new InvalidKeySetError(`ComposedKeySet expected, given ${JSON.stringify(x)}`);
+  throw new InvalidKeySetError(
+    `ComposedKeySet expected, given ${JSON.stringify(x)}`,
+  );
 }
 
 export function serializeComposedKeyLabelSet<T extends string | number>(
-  x: ComposedKeyLabelSet<T> | ComposedKeyLabelSetSerialized<T> | Array<KeyLabelSet<T>>,
+  x:
+    | ComposedKeyLabelSet<T>
+    | ComposedKeyLabelSetSerialized<T>
+    | Array<KeyLabelSet<T>>,
 ): ComposedKeyLabelSetSerialized<T> {
   if (isComposedKeySet(x)) {
     if (isComposedKeyLabelSet(x)) {
@@ -202,7 +241,9 @@ export function serializeComposedKeyLabelSet<T extends string | number>(
   }
 
   // not recognised: error
-  throw new InvalidKeySetError(`ComposedKeySet expected, given ${JSON.stringify(x)}`);
+  throw new InvalidKeySetError(
+    `ComposedKeySet expected, given ${JSON.stringify(x)}`,
+  );
 }
 
 /**
@@ -235,7 +276,9 @@ export function isComposedKeySetSerializedRepresentsSome<T extends Key>(
 /**
  * returns true if ALL the sets in the list return representsAllExceptSome()
  */
-export function isComposedKeySetSerializedRepresentsAllExceptSome<T extends Key>(
+export function isComposedKeySetSerializedRepresentsAllExceptSome<
+  T extends Key,
+>(
   s: ComposedKeySetSerialized<T>,
 ): s is ComposedKeySetAllExceptSomeSerialized<T> {
   return s.every(isKeySetAllExceptSomeSerialized);
@@ -253,21 +296,33 @@ export function serializeKeySet<T extends string | number>(
 export function serializeKeySet<T extends string | number>(
   x: KeyLabelSetAllExceptSomeSerialized<T> | KeyLabelSetAllExceptSome<T>,
 ): KeyLabelSetAllExceptSomeSerialized<T>;
-export function serializeKeySet<T extends Key>(x: KeySetAllSerialized<T> | KeySetAll<T>): KeySetAllSerialized<T>;
-export function serializeKeySet<T extends Key>(x: KeySetNoneSerialized<T> | KeySetNone<T>): KeySetNoneSerialized<T>;
-export function serializeKeySet<T extends Key>(x: KeySetSomeSerialized<T> | KeySetSome<T>): KeySetSomeSerialized<T>;
+export function serializeKeySet<T extends Key>(
+  x: KeySetAllSerialized<T> | KeySetAll<T>,
+): KeySetAllSerialized<T>;
+export function serializeKeySet<T extends Key>(
+  x: KeySetNoneSerialized<T> | KeySetNone<T>,
+): KeySetNoneSerialized<T>;
+export function serializeKeySet<T extends Key>(
+  x: KeySetSomeSerialized<T> | KeySetSome<T>,
+): KeySetSomeSerialized<T>;
 export function serializeKeySet<T extends Key>(
   x: KeySetAllExceptSomeSerialized<T> | KeySetAllExceptSome<T>,
 ): KeySetAllExceptSomeSerialized<T>;
-export function serializeKeySet<T extends Key>(x: KeySetSerialized<T> | KeySet<T>): KeySetSerialized<T>;
-export function serializeKeySet<T extends Key>(keySet: KeySet<T> | KeySetSerialized<T>): KeySetSerialized<T> {
+export function serializeKeySet<T extends Key>(
+  x: KeySetSerialized<T> | KeySet<T>,
+): KeySetSerialized<T>;
+export function serializeKeySet<T extends Key>(
+  keySet: KeySet<T> | KeySetSerialized<T>,
+): KeySetSerialized<T> {
   if (isKeySet(keySet)) {
     return keySet.serialized();
   }
 
   if (isKeySetSerialized(keySet)) return keySet;
 
-  throw new InvalidKeySetError(`keySet expected, given ${JSON.stringify(keySet)}`);
+  throw new InvalidKeySetError(
+    `keySet expected, given ${JSON.stringify(keySet)}`,
+  );
 }
 
 export const serializeKeyLabelSet = serializeKeySet;
@@ -297,11 +352,16 @@ export function parseComposedKeySet<T extends Key>(
   }
 
   // not recognised: error
-  throw new InvalidKeySetError(`ComposedKeySet expected, given ${JSON.stringify(x)}`);
+  throw new InvalidKeySetError(
+    `ComposedKeySet expected, given ${JSON.stringify(x)}`,
+  );
 }
 
 export function parseComposedKeyLabelSet<T extends string | number>(
-  x: ComposedKeyLabelSetSerialized<T> | ComposedKeyLabelSet<T> | Array<KeyLabelSet<T>>,
+  x:
+    | ComposedKeyLabelSetSerialized<T>
+    | ComposedKeyLabelSet<T>
+    | Array<KeyLabelSet<T>>,
 ): ComposedKeyLabelSet<T> {
   if (isComposedKeySet(x)) {
     if (isComposedKeyLabelSet(x)) {
@@ -332,21 +392,35 @@ export function parseComposedKeyLabelSet<T extends string | number>(
   }
 
   // not recognised: error
-  throw new InvalidKeySetError(`ComposedKeyLabelSet expected, given ${JSON.stringify(x)}`);
+  throw new InvalidKeySetError(
+    `ComposedKeyLabelSet expected, given ${JSON.stringify(x)}`,
+  );
 }
 
-export function parseKeySet<T extends Key>(x: KeySetAllSerialized<T> | KeySetAll<T>): KeySetAll<T>;
-export function parseKeySet<T extends Key>(x: KeySetNoneSerialized<T> | KeySetNone<T>): KeySetNone<T>;
-export function parseKeySet<T extends Key>(x: KeySetSomeSerialized<T> | KeySetSome<T>): KeySetSome<T>;
+export function parseKeySet<T extends Key>(
+  x: KeySetAllSerialized<T> | KeySetAll<T>,
+): KeySetAll<T>;
+export function parseKeySet<T extends Key>(
+  x: KeySetNoneSerialized<T> | KeySetNone<T>,
+): KeySetNone<T>;
+export function parseKeySet<T extends Key>(
+  x: KeySetSomeSerialized<T> | KeySetSome<T>,
+): KeySetSome<T>;
 export function parseKeySet<T extends Key>(
   x: KeySetAllExceptSomeSerialized<T> | KeySetAllExceptSome<T>,
 ): KeySetAllExceptSome<T>;
-export function parseKeySet<T extends Key>(x: KeySetSerialized<T> | KeySet<T>): KeySet<T>;
-export function parseKeySet<T extends Key>(x: KeySetSerialized<T> | KeySet<T>): KeySet<T> {
+export function parseKeySet<T extends Key>(
+  x: KeySetSerialized<T> | KeySet<T>,
+): KeySet<T>;
+export function parseKeySet<T extends Key>(
+  x: KeySetSerialized<T> | KeySet<T>,
+): KeySet<T> {
   if (isKeySet(x)) return x;
 
   if (!isKeySetSerialized(x)) {
-    throw new InvalidKeySetError(`keySetSerialized expected, given ${JSON.stringify(x)}`);
+    throw new InvalidKeySetError(
+      `keySetSerialized expected, given ${JSON.stringify(x)}`,
+    );
   }
 
   if (x.type === KeySetTypes.all) return all<T>();
@@ -378,7 +452,9 @@ export function parseKeyLabelSet<T extends string | number>(
   if (isKeyLabelSet<T>(x)) return x;
 
   if (!isKeyLabelSetSerialized(x)) {
-    throw new InvalidKeySetError(`KeyLabelSetSerialized expected, given ${JSON.stringify(x)}`);
+    throw new InvalidKeySetError(
+      `KeyLabelSetSerialized expected, given ${JSON.stringify(x)}`,
+    );
   }
 
   if (x.type === KeySetTypes.all) return all<IKeyLabel<T>>();

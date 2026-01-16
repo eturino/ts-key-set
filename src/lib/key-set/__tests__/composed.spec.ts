@@ -1,22 +1,22 @@
-import { sortBy } from "es-toolkit/compat";
 import { describe, expect, it } from "vitest";
 import type { KeySet } from "../../..";
 import {
+  all,
+  allExceptSome,
   ComposedKeySet,
+  composedKeySetFrom,
+  isComposedKeyLabelSet,
+  isComposedKeySet,
   KeySetAll,
   KeySetAllExceptSome,
   KeySetNone,
   KeySetSome,
-  all,
-  allExceptSome,
-  composedKeySetFrom,
-  isComposedKeyLabelSet,
-  isComposedKeySet,
   none,
   serializeKeyLabelSet,
   serializeKeySet,
   some,
 } from "../../..";
+import { sortBy } from "../../util/native-helpers";
 
 describe("ComposedKeySet", () => {
   describe("isComposedKeySet", () => {
@@ -176,7 +176,11 @@ describe("ComposedKeySet", () => {
       const ks3: KeySetSome<number> = new KeySetSome([1, 4]);
 
       const original = composedKeySetFrom([ks1, ks2, ks3]);
-      const expected = composedKeySetFrom([ks1.invert(), ks2.invert(), ks3.invert()]);
+      const expected = composedKeySetFrom([
+        ks1.invert(),
+        ks2.invert(),
+        ks3.invert(),
+      ]);
 
       const actual = original.invert();
       expect(actual).toEqual(expected);
@@ -250,7 +254,10 @@ describe("ComposedKeySet", () => {
       const original = composedKeySetFrom([ks1, ks2, ks3, cln]);
       const expected = composedKeySetFrom([ks1, ks2]);
 
-      const actual = original.withoutList([new KeySetSome([1, 4]), new KeySetSome([19191])]);
+      const actual = original.withoutList([
+        new KeySetSome([1, 4]),
+        new KeySetSome([19191]),
+      ]);
       expect(actual).toEqual(expected);
     });
 
@@ -272,7 +279,8 @@ describe("ComposedKeySet", () => {
       const ks2: KeySetSome<number> = new KeySetSome([1, 3, 9]);
       const ks3: KeySetSome<number> = new KeySetSome([1, 2]);
 
-      const fn = (ks: KeySet<number>) => ks instanceof KeySetSome && ks.includes(2);
+      const fn = (ks: KeySet<number>) =>
+        ks instanceof KeySetSome && ks.includes(2);
 
       const original = composedKeySetFrom([ks1, ks2, ks3]);
       const expected = composedKeySetFrom([ks1, ks3]);
@@ -303,7 +311,8 @@ describe("ComposedKeySet", () => {
       const ks3 = new KeySetSome([1, 2]);
       const ks4 = new KeySetAllExceptSome([1, 2]);
 
-      const fn = (ks: KeySet<number>) => (ks instanceof KeySetSome ? some([...ks.elements, 99]) : ks);
+      const fn = (ks: KeySet<number>) =>
+        ks instanceof KeySetSome ? some([...ks.elements, 99]) : ks;
 
       const eks1 = new KeySetSome([1, 2, 3, 99]);
       const eks2 = new KeySetSome([1, 3, 9, 99]);
@@ -375,7 +384,10 @@ describe("ComposedKeySet", () => {
   });
   describe("#representsAllExceptSome", () => {
     it("EVERY element representsAllExceptSome() => true", () => {
-      const original = composedKeySetFrom([allExceptSome([1, 2]), allExceptSome([3])]);
+      const original = composedKeySetFrom([
+        allExceptSome([1, 2]),
+        allExceptSome([3]),
+      ]);
       expect(original.representsAllExceptSome()).toBeTruthy();
     });
 
@@ -383,7 +395,11 @@ describe("ComposedKeySet", () => {
       const ks1 = composedKeySetFrom([some([1, 2]), allExceptSome([1])]);
       expect(ks1.representsAllExceptSome()).toBeFalsy();
 
-      const ks2 = composedKeySetFrom([allExceptSome([4, 1]), allExceptSome([1, 2]), all()]);
+      const ks2 = composedKeySetFrom([
+        allExceptSome([4, 1]),
+        allExceptSome([1, 2]),
+        all(),
+      ]);
       expect(ks2.representsAllExceptSome()).toBeFalsy();
 
       const ks3 = composedKeySetFrom([some([1, 2])]);
@@ -401,7 +417,11 @@ describe("ComposedKeySet", () => {
       const ks1 = composedKeySetFrom([some([1, 2]), none()]);
       expect(ks1.representsNone()).toBeFalsy();
 
-      const ks2 = composedKeySetFrom([allExceptSome([4, 1]), allExceptSome([1, 2]), none()]);
+      const ks2 = composedKeySetFrom([
+        allExceptSome([4, 1]),
+        allExceptSome([1, 2]),
+        none(),
+      ]);
       expect(ks2.representsNone()).toBeFalsy();
 
       const ks3 = composedKeySetFrom([all()]);
@@ -450,7 +470,10 @@ describe("ComposedKeySet", () => {
     const g = some([5]);
 
     it("removes duplicates", () => {
-      const original = composedKeySetFrom([allExceptSome([1, 2, 3]), allExceptSome([1, 2, 3])]);
+      const original = composedKeySetFrom([
+        allExceptSome([1, 2, 3]),
+        allExceptSome([1, 2, 3]),
+      ]);
       const expected = composedKeySetFrom([allExceptSome([1, 2, 3])]);
       expect(original.compactIntersect()).toEqual(expected);
       expect(original.compactIntersect().isEqual(expected)).toBeTruthy();

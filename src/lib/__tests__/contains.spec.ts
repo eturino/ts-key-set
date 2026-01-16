@@ -1,6 +1,13 @@
 import { describe, expect, it } from "vitest";
 
-import { type KeySetAllExceptSome, type KeySetSome, all, allExceptSome, none, some } from "../..";
+import {
+  all,
+  allExceptSome,
+  type KeySetAllExceptSome,
+  type KeySetSome,
+  none,
+  some,
+} from "../..";
 
 const element = "A";
 
@@ -46,7 +53,11 @@ describe("#contains(element) and #includes(element)", () => {
   });
 
   describe("AllExceptSome (including the element)", () => {
-    const ksAllExceptSome: KeySetAllExceptSome<string> = allExceptSome(["A", "B", "C"]);
+    const ksAllExceptSome: KeySetAllExceptSome<string> = allExceptSome([
+      "A",
+      "B",
+      "C",
+    ]);
     it("ksAllExceptSome.includes(element); // => false", () => {
       expect(ksAllExceptSome.includes(element)).toBeFalsy();
     });
@@ -56,7 +67,11 @@ describe("#contains(element) and #includes(element)", () => {
   });
 
   describe("AllExceptSome (not including the element)", () => {
-    const ksAllExceptSome: KeySetAllExceptSome<string> = allExceptSome(["X", "Y", "Z"]);
+    const ksAllExceptSome: KeySetAllExceptSome<string> = allExceptSome([
+      "X",
+      "Y",
+      "Z",
+    ]);
     it("ksAllExceptSome.includes(element); // => true", () => {
       expect(ksAllExceptSome.includes(element)).toBeTruthy();
     });

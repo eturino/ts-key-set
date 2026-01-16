@@ -1,8 +1,13 @@
 import type { EmptyArray, NonEmptyArray } from "../util/array-types";
-import { type Key, type KeySet, type KeySetAllExceptSomeSerialized, KeySetTypes } from "./-base";
+import {
+  type Key,
+  type KeySet,
+  type KeySetAllExceptSomeSerialized,
+  KeySetTypes,
+} from "./-base";
 import { KeySetByKeys } from "./-by-keys";
 import { INSPECT } from "./-is-node-env";
-import { KeySetAll, all } from "./all";
+import { all, KeySetAll } from "./all";
 import { InvalidEmptySetError } from "./invalid-empty-set-error";
 import { KeySetNone } from "./none";
 import { KeySetSome, some } from "./some";
@@ -19,7 +24,10 @@ export class KeySetAllExceptSome<T extends Key> extends KeySetByKeys<T> {
   }
 
   public serialized(): KeySetAllExceptSomeSerialized<T> {
-    return { type: this.type, elements: this.elementsSorted as NonEmptyArray<T> };
+    return {
+      type: this.type,
+      elements: this.elementsSorted as NonEmptyArray<T>,
+    };
   }
 
   public representsAll(): this is KeySetAll<T> {
@@ -55,7 +63,9 @@ export class KeySetAllExceptSome<T extends Key> extends KeySetByKeys<T> {
   }
 
   public remove(other: KeySetAll<T> | KeySetAll<Key>): KeySetNone<T>;
-  public remove(other: KeySetNone<T> | KeySetNone<Key> | KeySetSome<T>): KeySetAllExceptSome<T>;
+  public remove(
+    other: KeySetNone<T> | KeySetNone<Key> | KeySetSome<T>,
+  ): KeySetAllExceptSome<T>;
   public remove(other: KeySetAllExceptSome<T>): KeySetNone<T> | KeySetSome<T>;
   public remove(
     other: KeySet<T> | KeySetAll<Key> | KeySetNone<Key>,
@@ -77,12 +87,20 @@ export class KeySetAllExceptSome<T extends Key> extends KeySetByKeys<T> {
     return new KeySetAllExceptSome<T>(this.elementsList);
   }
 
-  public intersect(other: KeySetAll<T> | KeySetAll<Key>): KeySetAllExceptSome<T>;
+  public intersect(
+    other: KeySetAll<T> | KeySetAll<Key>,
+  ): KeySetAllExceptSome<T>;
   public intersect(other: KeySetNone<T> | KeySetNone<Key>): KeySetNone<T>;
   public intersect(other: KeySetSome<T>): KeySetNone<T> | KeySetSome<T>;
-  public intersect(other: KeySetAllExceptSome<T>): KeySetAll<T> | KeySetAllExceptSome<T>;
-  public intersect(other: KeySet<T> | KeySetAll<Key> | KeySetNone<Key>): KeySet<T>;
-  public intersect(other: KeySet<T> | KeySetAll<Key> | KeySetNone<Key>): KeySet<T> {
+  public intersect(
+    other: KeySetAllExceptSome<T>,
+  ): KeySetAll<T> | KeySetAllExceptSome<T>;
+  public intersect(
+    other: KeySet<T> | KeySetAll<Key> | KeySetNone<Key>,
+  ): KeySet<T>;
+  public intersect(
+    other: KeySet<T> | KeySetAll<Key> | KeySetNone<Key>,
+  ): KeySet<T> {
     if (other instanceof KeySetAll) {
       return new KeySetAllExceptSome(this.elementsList);
     }
@@ -99,10 +117,15 @@ export class KeySetAllExceptSome<T extends Key> extends KeySetByKeys<T> {
 
   public union(other: KeySetAll<T> | KeySetAll<Key>): KeySetAll<T>;
   public union(other: KeySetNone<T> | KeySetNone<Key>): KeySetAllExceptSome<T>;
-  public union(other: KeySet<T> | KeySetAll<Key> | KeySetNone<Key>): KeySetAll<T> | KeySetAllExceptSome<T>;
-  public union(other: KeySet<T> | KeySetAll<Key> | KeySetNone<Key>): KeySetAll<T> | KeySetAllExceptSome<T> {
+  public union(
+    other: KeySet<T> | KeySetAll<Key> | KeySetNone<Key>,
+  ): KeySetAll<T> | KeySetAllExceptSome<T>;
+  public union(
+    other: KeySet<T> | KeySetAll<Key> | KeySetNone<Key>,
+  ): KeySetAll<T> | KeySetAllExceptSome<T> {
     if (other instanceof KeySetAll) return new KeySetAll();
-    if (other instanceof KeySetNone) return new KeySetAllExceptSome([...this.elements]);
+    if (other instanceof KeySetNone)
+      return new KeySetAllExceptSome([...this.elements]);
 
     const otherKeys = other.elements;
 
@@ -132,10 +155,14 @@ export class KeySetAllExceptSome<T extends Key> extends KeySetByKeys<T> {
  * @param keys list of keys for the KeySet
  * @throws InvalidEmptySetError
  */
-export function allExceptSomeForced<T extends Key>(keys: Iterable<T>): KeySetAllExceptSome<T> {
+export function allExceptSomeForced<T extends Key>(
+  keys: Iterable<T>,
+): KeySetAllExceptSome<T> {
   const keysList = [...keys];
   if (!keysList.length) {
-    throw new InvalidEmptySetError("calling `someForced` with an empty list of keys");
+    throw new InvalidEmptySetError(
+      "calling `someForced` with an empty list of keys",
+    );
   }
 
   return new KeySetAllExceptSome(keysList);
@@ -147,9 +174,15 @@ export function allExceptSomeForced<T extends Key>(keys: Iterable<T>): KeySetAll
  * @param keys list of keys for the KeySet
  */
 export function allExceptSome<T extends Key>(keys: EmptyArray<T>): KeySetAll<T>;
-export function allExceptSome<T extends Key>(keys: NonEmptyArray<T>): KeySetAllExceptSome<T>;
-export function allExceptSome<T extends Key>(keys: Iterable<T>): KeySetAll<T> | KeySetAllExceptSome<T>;
-export function allExceptSome<T extends Key>(keys: Iterable<T>): KeySetAll<T> | KeySetAllExceptSome<T> {
+export function allExceptSome<T extends Key>(
+  keys: NonEmptyArray<T>,
+): KeySetAllExceptSome<T>;
+export function allExceptSome<T extends Key>(
+  keys: Iterable<T>,
+): KeySetAll<T> | KeySetAllExceptSome<T>;
+export function allExceptSome<T extends Key>(
+  keys: Iterable<T>,
+): KeySetAll<T> | KeySetAllExceptSome<T> {
   const keysList = [...keys];
   if (!keysList.length) {
     return all<T>();

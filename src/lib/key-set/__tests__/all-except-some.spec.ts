@@ -1,5 +1,10 @@
 import { expect, test } from "vitest";
-import { KeySetAllExceptSome, KeySetSome, allExceptSome, allExceptSomeKeySet } from "../../..";
+import {
+  allExceptSome,
+  allExceptSomeKeySet,
+  KeySetAllExceptSome,
+  KeySetSome,
+} from "../../..";
 
 const keySet = new KeySetAllExceptSome([3, 1, 2, 3, 2, 1]); // => keys 1, 2, 3
 

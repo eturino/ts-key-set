@@ -1,17 +1,17 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  all,
+  allExceptSome,
+  allExceptSomeForced,
   type IKeyLabel,
   InvalidEmptySetError,
+  isValidKey,
   KeySetAll,
   KeySetAllExceptSome,
   KeySetNone,
   KeySetSome,
   KeySetTypes,
-  all,
-  allExceptSome,
-  allExceptSomeForced,
-  isValidKey,
   none,
   some,
   someForced,
@@ -98,9 +98,15 @@ test("some([1, 3, 2])", () => {
 test("allExceptSome([1, 3, 2])", () => {
   const keySet = allExceptSome([1, 3, 2]);
   expect(keySet instanceof KeySetAllExceptSome).toBeTruthy();
-  expect((keySet as KeySetAllExceptSome<number>).elementsSorted).toEqual([1, 2, 3]);
-  expect((keySet as KeySetAllExceptSome<number>).elementsList).toEqual([1, 3, 2]);
-  expect((keySet as KeySetAllExceptSome<number>).elements).toEqual(new Set([1, 2, 3]));
+  expect((keySet as KeySetAllExceptSome<number>).elementsSorted).toEqual([
+    1, 2, 3,
+  ]);
+  expect((keySet as KeySetAllExceptSome<number>).elementsList).toEqual([
+    1, 3, 2,
+  ]);
+  expect((keySet as KeySetAllExceptSome<number>).elements).toEqual(
+    new Set([1, 2, 3]),
+  );
   expect(keySet.type).toEqual(KeySetTypes.allExceptSome);
 });
 
@@ -113,12 +119,16 @@ test("allExceptSome([{ key: 1, label: 'wa' }, { key: 1, label: 'B' }, { key: 1, 
     { key: 1, label: "wa" },
   ]);
   expect(keySet instanceof KeySetAllExceptSome).toBeTruthy();
-  expect((keySet as KeySetAllExceptSome<IKeyLabel<number>>).elementsSorted).toEqual([
+  expect(
+    (keySet as KeySetAllExceptSome<IKeyLabel<number>>).elementsSorted,
+  ).toEqual([
     { key: 1, label: "wa" },
     { key: 2, label: "wa" },
     { key: 3, label: "other" },
   ]);
-  expect((keySet as KeySetAllExceptSome<IKeyLabel<number>>).elementsList).toEqual([
+  expect(
+    (keySet as KeySetAllExceptSome<IKeyLabel<number>>).elementsList,
+  ).toEqual([
     { key: 3, label: "other" },
     { key: 1, label: "wa" },
     { key: 2, label: "wa" },
@@ -174,9 +184,15 @@ test("someForced([1, 3, 2])", () => {
 test("allExceptSomeForced([1, 3, 2])", () => {
   const keySet = allExceptSomeForced([1, 3, 2]);
   expect(keySet instanceof KeySetAllExceptSome).toBeTruthy();
-  expect((keySet as KeySetAllExceptSome<number>).elementsSorted).toEqual([1, 2, 3]);
-  expect((keySet as KeySetAllExceptSome<number>).elementsList).toEqual([1, 3, 2]);
-  expect((keySet as KeySetAllExceptSome<number>).elements).toEqual(new Set([1, 3, 2]));
+  expect((keySet as KeySetAllExceptSome<number>).elementsSorted).toEqual([
+    1, 2, 3,
+  ]);
+  expect((keySet as KeySetAllExceptSome<number>).elementsList).toEqual([
+    1, 3, 2,
+  ]);
+  expect((keySet as KeySetAllExceptSome<number>).elements).toEqual(
+    new Set([1, 3, 2]),
+  );
   expect(keySet.type).toEqual(KeySetTypes.allExceptSome);
 });
 

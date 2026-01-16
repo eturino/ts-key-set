@@ -1,6 +1,11 @@
 import { expect, test } from "vitest";
 
-import { KeySetAll, KeySetAllExceptSome, KeySetNone, KeySetSome } from "../../../..";
+import {
+  KeySetAll,
+  KeySetAllExceptSome,
+  KeySetNone,
+  KeySetSome,
+} from "../../../..";
 
 const keySetAll = new KeySetAll<number>();
 const keySetNone = new KeySetNone<number>();
@@ -12,7 +17,9 @@ const keySetSomeDiffKeys = new KeySetSome<number>([5, 6]);
 
 const keySetAllExceptSomeSameKeys = new KeySetAllExceptSome<number>([1, 2, 3]);
 const keySetAllExceptSomeSubSetKeys = new KeySetAllExceptSome<number>([1, 2]);
-const keySetAllExceptSomeMoreKeys = new KeySetAllExceptSome<number>([1, 2, 3, 4]);
+const keySetAllExceptSomeMoreKeys = new KeySetAllExceptSome<number>([
+  1, 2, 3, 4,
+]);
 const keySetAllExceptSomeDiffKeys = new KeySetAllExceptSome<number>([5, 6]);
 
 const keySet = new KeySetSome<number>([3, 1, 2, 3, 2, 1]); // => keys 1, 2, 3

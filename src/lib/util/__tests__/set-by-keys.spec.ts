@@ -11,15 +11,21 @@ describe("setByKeys()", () => {
   });
 
   it("setByKeys(new Set([1, 3, 1, 3, 4, 2]))", () => {
-    expect(setByKeys(new Set([1, 3, 1, 3, 4, 2]))).toEqual(new Set([1, 3, 4, 2]));
+    expect(setByKeys(new Set([1, 3, 1, 3, 4, 2]))).toEqual(
+      new Set([1, 3, 4, 2]),
+    );
   });
 
   it('setByKeys(["a", "c", "d", "c", "a", "b"])', () => {
-    expect(setByKeys(["a", "c", "d", "c", "a", "b"])).toEqual(new Set(["a", "c", "d", "b"]));
+    expect(setByKeys(["a", "c", "d", "c", "a", "b"])).toEqual(
+      new Set(["a", "c", "d", "b"]),
+    );
   });
 
   it('setByKeys(new Set(["a", "c", "d", "c", "a", "b"]))', () => {
-    expect(setByKeys(new Set(["a", "c", "d", "c", "a", "b"]))).toEqual(new Set(["a", "c", "d", "b"]));
+    expect(setByKeys(new Set(["a", "c", "d", "c", "a", "b"]))).toEqual(
+      new Set(["a", "c", "d", "b"]),
+    );
   });
 
   it("setByKeys([{ key: 1, label: 'a' }, { key: 1, label: 'b' }, { key: 2, label: 'a' }])", () => {

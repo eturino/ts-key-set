@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest";
 
-import { allExceptSomeKeySetForced, allKeySet, composedKeySetFrom, noneKeySet, someKeySetForced } from "../..";
+import {
+  allExceptSomeKeySetForced,
+  allKeySet,
+  composedKeySetFrom,
+  noneKeySet,
+  someKeySetForced,
+} from "../..";
 
 describe("toString KeySet", () => {
   it("KeySetAll", () => {
@@ -28,8 +34,13 @@ describe("toString KeySet", () => {
   });
 
   it("ComposedKeySet", () => {
-    const keySet = composedKeySetFrom([someKeySetForced([1, 2, 3]), allExceptSomeKeySetForced([1, 2, 3])]);
+    const keySet = composedKeySetFrom([
+      someKeySetForced([1, 2, 3]),
+      allExceptSomeKeySetForced([1, 2, 3]),
+    ]);
     console.log("ComposedKeySet:", keySet);
-    expect(keySet.toString()).toEqual("ComposedKeySet<KeySet<ALL_EXCEPT_SOME[1,2,3]>,KeySet<SOME[1,2,3]>>");
+    expect(keySet.toString()).toEqual(
+      "ComposedKeySet<KeySet<ALL_EXCEPT_SOME[1,2,3]>,KeySet<SOME[1,2,3]>>",
+    );
   });
 });

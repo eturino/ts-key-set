@@ -1,4 +1,3 @@
-import { sortBy } from "es-toolkit/compat";
 import type { Key } from "../key-set/-base";
 import { type IKeyLabel, isKeyLabel } from "./object-utils";
 import { firstOf } from "./set-by-keys";
@@ -15,17 +14,17 @@ export function sortKeys<T extends Key>(keys: Iterable<T>): T[] {
     return list;
   }
 
-  if (isArrayOfKeyLabels(list)) {
-    return sortBy(list, (key) => key.key);
+  const first = firstOf(list);
+  if (isKeyLabel(first)) {
+    const keyLabelList = list as IKeyLabel<string | number>[];
+    // Sort in place - list is already a copy from the spread above
+    return keyLabelList.sort((a, b) => {
+      if (a.key < b.key) return -1;
+      if (a.key > b.key) return 1;
+      return 0;
+    }) as T[];
   }
 
+  // Sort in place - list is already a copy from the spread above
   return list.sort();
-}
-
-/**
- * @internal
- * @hidden
- */
-function isArrayOfKeyLabels(keys: Key[]): keys is IKeyLabel<string | number>[] {
-  return isKeyLabel(firstOf(keys)); // we can check only one because all the keys should be the same type
 }

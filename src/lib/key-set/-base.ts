@@ -5,19 +5,33 @@ import { KeySetAllExceptSome } from "./all-except-some";
 import { KeySetNone } from "./none";
 import { KeySetSome } from "./some";
 
-export type Key = string | number | IKeyLabel<string | number> | IKeyLabel<string> | IKeyLabel<number>;
+export type Key =
+  | string
+  | number
+  | IKeyLabel<string | number>
+  | IKeyLabel<string>
+  | IKeyLabel<number>;
 
 export function isValidKey(x: unknown): x is Key {
   if (typeof x === "string" || typeof x === "number") return true;
   return isKeyLabel(x);
 }
 
-export type KeySet<T extends Key = Key> = KeySetAll<T> | KeySetNone<T> | KeySetSome<T> | KeySetAllExceptSome<T>;
+export type KeySet<T extends Key = Key> =
+  | KeySetAll<T>
+  | KeySetNone<T>
+  | KeySetSome<T>
+  | KeySetAllExceptSome<T>;
 
-export type KeyLabelSetAll<T extends string | number = string | number> = KeySetAll<IKeyLabel<T>>;
-export type KeyLabelSetNone<T extends string | number = string | number> = KeySetNone<IKeyLabel<T>>;
-export type KeyLabelSetSome<T extends string | number = string | number> = KeySetSome<IKeyLabel<T>>;
-export type KeyLabelSetAllExceptSome<T extends string | number = string | number> = KeySetAllExceptSome<IKeyLabel<T>>;
+export type KeyLabelSetAll<T extends string | number = string | number> =
+  KeySetAll<IKeyLabel<T>>;
+export type KeyLabelSetNone<T extends string | number = string | number> =
+  KeySetNone<IKeyLabel<T>>;
+export type KeyLabelSetSome<T extends string | number = string | number> =
+  KeySetSome<IKeyLabel<T>>;
+export type KeyLabelSetAllExceptSome<
+  T extends string | number = string | number,
+> = KeySetAllExceptSome<IKeyLabel<T>>;
 
 export type KeyLabelSet<T extends string | number = string | number> =
   | KeyLabelSetAll<T>
@@ -68,20 +82,28 @@ export type KeySetSerialized<T extends Key = Key> =
   | KeySetSomeSerialized<T>
   | KeySetAllExceptSomeSerialized<T>;
 
-export type KeyLabelSetAllSerialized<T extends string | number = string | number> =
+export type KeyLabelSetAllSerialized<
+  T extends string | number = string | number,
+> =
   | { type: KeySetTypes.all }
   | { type: KeySetTypes.all; elements: EmptyArray<T> };
 
-export type KeyLabelSetNoneSerialized<T extends string | number = string | number> =
+export type KeyLabelSetNoneSerialized<
+  T extends string | number = string | number,
+> =
   | { type: KeySetTypes.none }
   | { type: KeySetTypes.none; elements: EmptyArray<T> };
 
-export type KeyLabelSetSomeSerialized<T extends string | number = string | number> = {
+export type KeyLabelSetSomeSerialized<
+  T extends string | number = string | number,
+> = {
   type: KeySetTypes.some;
   elements: NonEmptyArray<IKeyLabel<T>>;
 };
 
-export type KeyLabelSetAllExceptSomeSerialized<T extends string | number = string | number> = {
+export type KeyLabelSetAllExceptSomeSerialized<
+  T extends string | number = string | number,
+> = {
   type: KeySetTypes.allExceptSome;
   elements: NonEmptyArray<IKeyLabel<T>>;
 };
@@ -93,15 +115,25 @@ export type KeyLabelSetSerialized<T extends string | number = string | number> =
   | KeyLabelSetSomeSerialized<T>
   | KeyLabelSetAllExceptSomeSerialized<T>;
 
-export type ComposedKeySetSerialized<T extends Key = Key> = Array<KeySetSerialized<T>>;
-export type ComposedKeyLabelSetSerialized<T extends string | number = string | number> = Array<
-  KeyLabelSetSerialized<T>
+export type ComposedKeySetSerialized<T extends Key = Key> = Array<
+  KeySetSerialized<T>
 >;
+export type ComposedKeyLabelSetSerialized<
+  T extends string | number = string | number,
+> = Array<KeyLabelSetSerialized<T>>;
 
-export type ComposedKeySetAllSerialized<T extends Key = Key> = Array<KeySetAllSerialized<T>>;
-export type ComposedKeySetNoneSerialized<T extends Key = Key> = Array<KeySetNoneSerialized<T>>;
-export type ComposedKeySetSomeSerialized<T extends Key = Key> = Array<KeySetSomeSerialized<T>>;
-export type ComposedKeySetAllExceptSomeSerialized<T extends Key = Key> = Array<KeySetAllExceptSomeSerialized<T>>;
+export type ComposedKeySetAllSerialized<T extends Key = Key> = Array<
+  KeySetAllSerialized<T>
+>;
+export type ComposedKeySetNoneSerialized<T extends Key = Key> = Array<
+  KeySetNoneSerialized<T>
+>;
+export type ComposedKeySetSomeSerialized<T extends Key = Key> = Array<
+  KeySetSomeSerialized<T>
+>;
+export type ComposedKeySetAllExceptSomeSerialized<T extends Key = Key> = Array<
+  KeySetAllExceptSomeSerialized<T>
+>;
 
 export interface IKeySetClass<T extends Key> {
   /**
@@ -191,38 +223,61 @@ export interface IKeySetClass<T extends Key> {
   includes(element: T): boolean;
 }
 
-export function isKeySetAll<T extends Key>(x: KeySet<T> | KeySetSerialized<T>): x is KeySetAll<T>;
+export function isKeySetAll<T extends Key>(
+  x: KeySet<T> | KeySetSerialized<T>,
+): x is KeySetAll<T>;
 export function isKeySetAll(x: unknown): x is KeySetAll;
 export function isKeySetAll(x: unknown): x is KeySetAll {
   return x instanceof KeySetAll;
 }
 
-export function isKeySetNone<T extends Key>(x: KeySet<T> | KeySetSerialized<T>): x is KeySetNone<T>;
+export function isKeySetNone<T extends Key>(
+  x: KeySet<T> | KeySetSerialized<T>,
+): x is KeySetNone<T>;
 export function isKeySetNone(x: unknown): x is KeySetNone;
 export function isKeySetNone(x: unknown): x is KeySetNone {
   return x instanceof KeySetNone;
 }
 
-export function isKeySetSome<T extends Key>(x: KeySet<T> | KeySetSerialized<T>): x is KeySetSome<T>;
+export function isKeySetSome<T extends Key>(
+  x: KeySet<T> | KeySetSerialized<T>,
+): x is KeySetSome<T>;
 export function isKeySetSome(x: unknown): x is KeySetSome<Key>;
 export function isKeySetSome(x: unknown): x is KeySetSome<Key> {
   return x instanceof KeySetSome;
 }
 
-export function isKeySetAllExceptSome<T extends Key>(x: KeySet<T> | KeySetSerialized<T>): x is KeySetAllExceptSome<T>;
-export function isKeySetAllExceptSome(x: unknown): x is KeySetAllExceptSome<Key>;
-export function isKeySetAllExceptSome(x: unknown): x is KeySetAllExceptSome<Key> {
+export function isKeySetAllExceptSome<T extends Key>(
+  x: KeySet<T> | KeySetSerialized<T>,
+): x is KeySetAllExceptSome<T>;
+export function isKeySetAllExceptSome(
+  x: unknown,
+): x is KeySetAllExceptSome<Key>;
+export function isKeySetAllExceptSome(
+  x: unknown,
+): x is KeySetAllExceptSome<Key> {
   return x instanceof KeySetAllExceptSome;
 }
 
-export function isKeySet<T extends Key>(x: KeySet<T> | KeySetSerialized<T>): x is KeySet<T>;
+export function isKeySet<T extends Key>(
+  x: KeySet<T> | KeySetSerialized<T>,
+): x is KeySet<T>;
 export function isKeySet(x: unknown): x is KeySet;
 export function isKeySet(x: unknown): x is KeySet {
-  return isKeySetAll(x) || isKeySetNone(x) || isKeySetSome(x) || isKeySetAllExceptSome(x);
+  return (
+    isKeySetAll(x) ||
+    isKeySetNone(x) ||
+    isKeySetSome(x) ||
+    isKeySetAllExceptSome(x)
+  );
 }
 
 export function isKeyLabelSet<T extends string | number>(
-  x: KeySet<T> | KeySetSerialized<T> | KeyLabelSet<T> | KeyLabelSetSerialized<T>,
+  x:
+    | KeySet<T>
+    | KeySetSerialized<T>
+    | KeyLabelSet<T>
+    | KeyLabelSetSerialized<T>,
 ): x is KeyLabelSet<T>;
 export function isKeyLabelSet(x: unknown): x is KeyLabelSet;
 export function isKeyLabelSet(x: unknown): x is KeyLabelSet {

@@ -1,12 +1,12 @@
 import { describe, expect, it } from "vitest";
 
 import {
-  type KeySet,
   all,
   isKeySetOfNumberKeyLabels,
   isKeySetOfNumbers,
   isKeySetOfStringKeyLabels,
   isKeySetOfStrings,
+  type KeySet,
   none,
   some,
 } from "../..";
@@ -93,11 +93,15 @@ describe("isKeySetOfStringKeyLabels()", () => {
   });
 
   it("isKeySetOfStringKeyLabels(some([{ key: 1, label: 'A' }])): false", () => {
-    expect(isKeySetOfStringKeyLabels(some([{ key: 1, label: "A" }]))).toBeFalsy();
+    expect(
+      isKeySetOfStringKeyLabels(some([{ key: 1, label: "A" }])),
+    ).toBeFalsy();
   });
 
   it("isKeySetOfStringKeyLabels(some([{ key: '1', label: 'A' }])): true", () => {
-    expect(isKeySetOfStringKeyLabels(some([{ key: "1", label: "A" }]))).toBeTruthy();
+    expect(
+      isKeySetOfStringKeyLabels(some([{ key: "1", label: "A" }])),
+    ).toBeTruthy();
   });
 });
 
@@ -123,10 +127,14 @@ describe("isKeySetOfNumberKeyLabels()", () => {
   });
 
   it("isKeySetOfNumberKeyLabels(some([{ key: 1, label: 'A' }])): true", () => {
-    expect(isKeySetOfNumberKeyLabels(some([{ key: 1, label: "A" }]))).toBeTruthy();
+    expect(
+      isKeySetOfNumberKeyLabels(some([{ key: 1, label: "A" }])),
+    ).toBeTruthy();
   });
 
   it("isKeySetOfNumberKeyLabels(some([{ key: '1', label: 'A' }])): false", () => {
-    expect(isKeySetOfNumberKeyLabels(some([{ key: "1", label: "A" }]))).toBeFalsy();
+    expect(
+      isKeySetOfNumberKeyLabels(some([{ key: "1", label: "A" }])),
+    ).toBeFalsy();
   });
 });

@@ -1,4 +1,4 @@
-import { isEqual } from "es-toolkit";
+import { setsEqual } from "../util/native-helpers";
 import { setByKeys } from "../util/set-by-keys";
 import { sortKeys } from "../util/sort-keys";
 import type {
@@ -42,11 +42,15 @@ export abstract class KeySetByKeys<T extends Key> implements IKeySetClass<T> {
     this.elements = elements;
   }
 
-  public toJSON(_key?: string): KeySetAllExceptSomeSerialized<T> | KeySetSomeSerialized<T> {
+  public toJSON(
+    _key?: string,
+  ): KeySetAllExceptSomeSerialized<T> | KeySetSomeSerialized<T> {
     return this.serialized();
   }
 
-  public abstract serialized(): KeySetAllExceptSomeSerialized<T> | KeySetSomeSerialized<T>;
+  public abstract serialized():
+    | KeySetAllExceptSomeSerialized<T>
+    | KeySetSomeSerialized<T>;
 
   public abstract representsAll(): this is KeySetAll<T>;
 
@@ -62,11 +66,17 @@ export abstract class KeySetByKeys<T extends Key> implements IKeySetClass<T> {
 
   public abstract isEqual(other: KeySet): boolean;
 
-  public abstract remove(other: KeySet | KeySetAll<Key> | KeySetNone<Key>): KeySet;
+  public abstract remove(
+    other: KeySet | KeySetAll<Key> | KeySetNone<Key>,
+  ): KeySet;
 
-  public abstract intersect(other: KeySet | KeySetAll<Key> | KeySetNone<Key>): KeySet;
+  public abstract intersect(
+    other: KeySet | KeySetAll<Key> | KeySetNone<Key>,
+  ): KeySet;
 
-  public abstract union(other: KeySet | KeySetAll<Key> | KeySetNone<Key>): KeySet;
+  public abstract union(
+    other: KeySet | KeySetAll<Key> | KeySetNone<Key>,
+  ): KeySet;
 
   public abstract includes(element: T): boolean;
 
@@ -75,6 +85,6 @@ export abstract class KeySetByKeys<T extends Key> implements IKeySetClass<T> {
   }
 
   protected hasSameKeys(other: KeySet<T>): boolean {
-    return isEqual(this.elements, other.elements);
+    return setsEqual(this.elements, other.elements);
   }
 }

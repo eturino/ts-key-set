@@ -7,7 +7,9 @@ import { sizeOf } from "./size-of";
  *
  * @param source
  */
-export function setByKeys<T extends Key>(source: T[] | ReadonlyArray<T> | Set<T>): Set<T> {
+export function setByKeys<T extends Key>(
+  source: T[] | ReadonlyArray<T> | Set<T>,
+): Set<T> {
   if (sizeOf(source) === 0) return new Set();
 
   const elements = source instanceof Set ? [...source.values()] : source;
@@ -22,7 +24,9 @@ export function setByKeys<T extends Key>(source: T[] | ReadonlyArray<T> | Set<T>
  * @internal
  * @hidden
  */
-function isArrayOfKeyLabels(source: unknown[] | ReadonlyArray<unknown>): source is IKeyLabel<string | number>[] {
+function isArrayOfKeyLabels(
+  source: unknown[] | ReadonlyArray<unknown>,
+): source is IKeyLabel<string | number>[] {
   const firstElement = firstOf(source);
   return isKeyLabel(firstElement);
 }
@@ -31,7 +35,9 @@ function isArrayOfKeyLabels(source: unknown[] | ReadonlyArray<unknown>): source 
  * @internal
  * @hidden
  */
-export function firstOf<T>(source: T[] | ReadonlyArray<T> | Set<T>): T | undefined {
+export function firstOf<T>(
+  source: T[] | ReadonlyArray<T> | Set<T>,
+): T | undefined {
   if (source instanceof Set) {
     return source.values().next().value;
   }

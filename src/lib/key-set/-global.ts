@@ -1,4 +1,11 @@
-import type { IKeySetClass, Key, KeySet, KeySetAllSerialized, KeySetNoneSerialized, KeySetTypes } from "./-base";
+import type {
+  IKeySetClass,
+  Key,
+  KeySet,
+  KeySetAllSerialized,
+  KeySetNoneSerialized,
+  KeySetTypes,
+} from "./-base";
 import type { KeySetAll } from "./all";
 import type { KeySetAllExceptSome } from "./all-except-some";
 import type { KeySetNone } from "./none";
@@ -21,11 +28,15 @@ export abstract class KeySetGlobal<T extends Key> implements IKeySetClass<T> {
     return [...this.elements].sort();
   }
 
-  public toJSON(_key?: string): KeySetAllSerialized<T> | KeySetNoneSerialized<T> {
+  public toJSON(
+    _key?: string,
+  ): KeySetAllSerialized<T> | KeySetNoneSerialized<T> {
     return this.serialized();
   }
 
-  public abstract serialized(): KeySetAllSerialized<T> | KeySetNoneSerialized<T>;
+  public abstract serialized():
+    | KeySetAllSerialized<T>
+    | KeySetNoneSerialized<T>;
 
   public abstract representsAll(): this is KeySetAll<T>;
 
@@ -41,11 +52,17 @@ export abstract class KeySetGlobal<T extends Key> implements IKeySetClass<T> {
 
   public abstract isEqual(other: KeySet): boolean;
 
-  public abstract remove(other: KeySet | KeySetAll<Key> | KeySetNone<Key>): KeySet;
+  public abstract remove(
+    other: KeySet | KeySetAll<Key> | KeySetNone<Key>,
+  ): KeySet;
 
-  public abstract intersect(other: KeySet | KeySetAll<Key> | KeySetNone<Key>): KeySet;
+  public abstract intersect(
+    other: KeySet | KeySetAll<Key> | KeySetNone<Key>,
+  ): KeySet;
 
-  public abstract union(other: KeySet | KeySetAll<Key> | KeySetNone<Key>): KeySet;
+  public abstract union(
+    other: KeySet | KeySetAll<Key> | KeySetNone<Key>,
+  ): KeySet;
 
   public abstract includes(element: T): boolean;
 

@@ -93,4 +93,16 @@ describe("sortKeys", () => {
       expect(sortKeys(sortedSet)).not.toBe(sorted);
     });
   });
+
+  describe("with key labels having equal keys", () => {
+    it("preserves order for equal keys", () => {
+      const input = [
+        { key: "a", label: "First" },
+        { key: "a", label: "Second" },
+      ];
+      const result = sortKeys(input);
+      expect(result).toEqual(input);
+      expect(result).not.toBe(input);
+    });
+  });
 });
