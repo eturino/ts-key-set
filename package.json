@@ -54,7 +54,7 @@
     "standard-version": "^9.5.0",
     "ts-enum-util": "^4.1.0",
     "tsup": "^8.3.5",
-    "typescript": "^5.7.2",
+    "typescript": "^6.0.3",
     "vitest": "^4.0.17"
   },
   "config": {
