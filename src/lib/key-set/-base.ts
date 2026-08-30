@@ -210,7 +210,7 @@ export interface IKeySetClass<T extends Key> {
    * returns a boolean if the KeySet includes the given element
    *
    * @param element
-   * @alias includes
+   * @see includes()
    */
   contains(element: T): boolean;
 
@@ -218,7 +218,7 @@ export interface IKeySetClass<T extends Key> {
    * returns a boolean if the KeySet includes the given element
    *
    * @param element
-   * @alias contains
+   * @see contains()
    */
   includes(element: T): boolean;
 }

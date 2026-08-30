@@ -150,7 +150,7 @@ export class KeySetAllExceptSome<T extends Key> extends KeySetByKeys<T> {
 }
 
 /**
- * if the given list is empty, it will throw an error, otherwise it will build a KeySetSome with those keys
+ * if the given list is empty, it will throw an error, otherwise it will build a KeySetAllExceptSome with those keys
  *
  * @param keys list of keys for the KeySet
  * @throws InvalidEmptySetError
@@ -161,7 +161,7 @@ export function allExceptSomeForced<T extends Key>(
   const keysList = [...keys];
   if (!keysList.length) {
     throw new InvalidEmptySetError(
-      "calling `someForced` with an empty list of keys",
+      "calling `allExceptSomeForced` with an empty list of keys",
     );
   }
 
@@ -169,7 +169,7 @@ export function allExceptSomeForced<T extends Key>(
 }
 
 /**
- * if the given list is empty, it will return a KeySetAll, otherwise it will build a KeySetSome with those keys
+ * if the given list is empty, it will return a KeySetAll, otherwise it will build a KeySetAllExceptSome with those keys
  *
  * @param keys list of keys for the KeySet
  */

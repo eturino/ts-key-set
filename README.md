@@ -1,20 +1,28 @@
 # key-set
 
 [![npm version](https://badge.fury.io/js/%40eturino%2Fkey-set.svg)](https://badge.fury.io/js/%40eturino%2Fkey-set)
-[![Build Status](https://travis-ci.org/eturino/ts-key-set.svg?branch=master)](https://travis-ci.org/eturino/ts-key-set)
-[![Maintainability](https://api.codeclimate.com/v1/badges/3b9c9332f98e9fdd30ac/maintainability)](https://codeclimate.com/github/eturino/ts-key-set/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/3b9c9332f98e9fdd30ac/test_coverage)](https://codeclimate.com/github/eturino/ts-key-set/test_coverage)
+[![CI](https://github.com/eturino/ts-key-set/actions/workflows/ci.yml/badge.svg)](https://github.com/eturino/ts-key-set/actions/workflows/ci.yml)
 
 
 [Github repo here](https://github.com/eturino/ts-key-set)
 
 KeySet with 4 classes to represent concepts of `All`, `None`, `Some`, and `AllExceptSome`, the last 2 with an internal `Set` of keys, and all with intersection calculations.
 
-It also has the concept of a `ComposedKeySet` which encapsulates a list of KeySets that can be act upon, and finally collapse using `union` or `intersect`
+It also has the concept of a `ComposedKeySet` which encapsulates a list of KeySets that can be acted upon, and finally collapsed with `collapseUnion()` or `collapseIntersect()`
 
 (Originally, a TypeScript port of <https://github.com/eturino/ruby_key_set>)
 
-Library bootstrapped using [typescript-starter](https://github.com/bitjson/typescript-starter).
+## Breaking changes in v6
+
+- `new ComposedKeySet([])` now normalises the empty list to a single `all()`, the way `composedKeySetFrom([])` always did. Previously the constructor kept the empty list, where `contains()` answered `true` (vacuously) while the new `containsByUnion()` would answer `false`.
+- The published entry points moved from `dist/` to `build/`: `main` is `build/main/index.js` (CommonJS), `module` is `build/module/index.js` (ES modules, for bundlers) and `types` is `build/main/index.d.ts`. Importing the package by name is unaffected; a deep import of a `dist/...` path is not.
+- The ES module build is no longer a single bundled file. Node resolves `main` (CommonJS) as it did before, since the package has no `exports` map.
+- `KEY_SET_TYPES`, `_IS_NODE_ENVIRONMENT` and `isKeyLabelBase` are no longer exported from their modules. None of them was ever re-exported from the package entry point, so only a deep import into `src/` could have reached them.
+- `allExceptSomeForced([])` now throws an error whose message names `allExceptSomeForced`. It used to say `someForced`.
+
+Also new in v6: `ComposedKeySet.containsByUnion()` / `containsByIntersection()`, and a published [JSON Schema](#json-schema) for the serialized format.
+
+Fixed in v6: the ES module build threw `Dynamic require of "util" is not supported` on import. See the yanked versions section.
 
 ## Breaking changes in v5
 
@@ -27,7 +35,7 @@ You can have more [info in the elements section of the readme](#elements-element
 
 ## Installation
 
-`yarn add @eturino/key-set` or `npm install @eturino/key-set`.
+`pnpm add @eturino/key-set`, `yarn add @eturino/key-set` or `npm install @eturino/key-set`.
 
 ## Usage
 
@@ -36,7 +44,7 @@ We have 4 classes:
 - `KeySetAll`: represents the entirety of possible keys (`𝕌`)
 - `KeySetNone`: represents an empty set (`∅`)
 - `KeySetSome`: represents a concrete set (`A ⊂ 𝕌`)
-- `KeySetAllExceptSome`: represents the complementary of a set, all the elements except the given ones (`A' = {x ∈ 𝕌 | x ∉ A}`) _(see [Complement in Wikipedia](https://en.wikipedia.org/wiki/Complement_\(set*theory\)))*
+- `KeySetAllExceptSome`: represents the complementary of a set, all the elements except the given ones (`A' = {x ∈ 𝕌 | x ∉ A}`) _(see [Complement in Wikipedia](<https://en.wikipedia.org/wiki/Complement_(set_theory)>))_
 
 We can have a KeySet of:
 
@@ -44,7 +52,7 @@ We can have a KeySet of:
 - `number`s
 - objects with `key` (`string` or `number`) and `label` (`string`)
 
-All elements have to have be of the same type.
+All elements have to be of the same type.
 
 ### Creation: `all()`, `none()`, `some([...])`, `allExceptSome([...])`, `allKeySet()`, `noneKeySet()`, `someKeySet([...])`, `allExceptSomeKeySet([...])`, `someForced([...])`, `allExceptSomeForced([...])`
 
@@ -77,7 +85,7 @@ allExceptSomeForced([]); // throws an InvalidEmptySetError
 
 ### `.elements`, `.elementsList` and `elementsSorted`
 
-- `.elements` returns the internal `Set` with the keys. It is frozen (`Object.freeze()`)
+- `.elements` returns the internal `Set` with the keys. The KeySet never mutates it, and it is passed through `Object.freeze()`, but note that freezing a `Set` does not stop `.add()`/`.delete()` - treat it as read-only by convention, and use `.elementsList` if you need an array you can own.
 - `.elementsList` returns a new array with the elements of the internal set, as is.
 - `.elementsSorted` returns a new array with the elements of the internal set, sorted.
 
@@ -135,7 +143,7 @@ If the KeySet is `KeySetSome` or `KeySetAllExceptSome`, they will have to have a
 
 ### `invert()`
 
-All KeySet has an `invert()` method that returns an instance of the opposite class, which represents the complementary KeySet. _(see [Complement in Wikipedia](https://en.wikipedia.org/wiki/Complement_\(set*theory\)))*
+All KeySet has an `invert()` method that returns an instance of the opposite class, which represents the complementary KeySet. _(see [Complement in Wikipedia](<https://en.wikipedia.org/wiki/Complement_(set_theory)>))_
 
 - `KeySetAll` ⟷ `KeySetNone`
 - `KeySetSome` ⟷ `KeySetAllExceptSome`
@@ -165,14 +173,14 @@ const diffKeySet = keySet.intersect(other);
 Returns a new KeySet with the union of both Sets `(A U B)`, representing the elements present in either A or B
 
 ```ts
-const diffKeySet = keySet.intersect(other);
+const unionKeySet = keySet.union(other);
 ```
 
 ### `includes(element)`
 
 alias `contains(element)`.
 
-Returns a boolean defining if the KeySet includes the given element. a new KeySet with the intersection of both Sets `(A ∩ B)`, representing the elements present in both sets
+Returns a boolean defining if the KeySet includes the given element.
 
 ```ts
 const element = "A";
@@ -216,13 +224,49 @@ There are 2 ways of getting the serialized representation of the keySet
 - `keySet.serialized()`
 - `serializeKeySet(keySet)`
 
+For KeyLabel sets and for composed sets there are dedicated functions with narrower types:
+
+- `serializeKeyLabelSet(keyLabelSet)`
+- `serializeComposedKeySet(comp)`
+- `serializeComposedKeyLabelSet(comp)`
+
 ## Parsing
 
 We can create a KeySet from the serialized representation
 
 - `parseKeySet(serialized)`
+- `parseKeyLabelSet(serialized)`
+- `parseComposedKeySet(serialized)`
+- `parseComposedKeyLabelSet(serialized)`
 
 we can also pass the actual KeySet to the `parseKeySet`, which will return the given KeySet without touching it.
+
+An invalid serialized value throws `InvalidKeySetError`.
+
+## JSON Schema
+
+The serialized wire format is published as a JSON Schema (draft 2020-12) so that clients in other languages can validate it without depending on this library.
+
+- In the repo: [`schemas/v1/key-set.schema.json`](./schemas/v1/key-set.schema.json)
+- Shipped inside the npm package under `schemas/v1/`
+- By URL, pinned to a tag for immutability:
+  `https://raw.githubusercontent.com/eturino/ts-key-set/v6.0.0/schemas/v1/key-set.schema.json`
+
+The root schema describes a single serialized KeySet. The other shapes are addressable as `$defs`:
+
+| pointer | shape |
+| --- | --- |
+| `#/$defs/keySet` | `KeySetSerialized` (the root) |
+| `#/$defs/keyLabelSet` | `KeyLabelSetSerialized` |
+| `#/$defs/composedKeySet` | `ComposedKeySetSerialized` |
+| `#/$defs/composedKeyLabelSet` | `ComposedKeyLabelSetSerialized` |
+| `#/$defs/key` | a single `Key` |
+| `#/$defs/keyLabel` | a single `IKeyLabel` |
+| `#/$defs/keySetType` | the `type` discriminator |
+
+The `v1` in the path is the version of the **wire format**, not of the package: it only changes if the serialized shape changes in a way existing documents would fail. The schema is checked against the library's real output on every test run, including the cases the parser rejects (`SOME` with no elements, `ALL` with elements, unknown types).
+
+Note the schema is slightly stricter than the runtime parser: it validates that every element is a valid `Key`, which `parseKeySet` does not check. Unknown properties are allowed by both.
 
 ## Type Predicates
 
@@ -314,7 +358,7 @@ const comp = composedKeySetFrom([some(A, B, C), allExceptSome(D)]);
 
 ### Checking elements on a `ComposedKeySet`
 
-Two semantics, three method names:
+Two semantics, four method names:
 
 - `containsByIntersection(element)`: true only if **every** key set in the list contains it. `contains(element)` and its alias `includes(element)` are the same check.
 - `containsByUnion(element)`: true if **any** key set in the list contains it.
@@ -330,18 +374,35 @@ comp.containsByUnion(3); // => true  (in the first)
 comp.containsByUnion(5); // => false (in neither)
 ```
 
-It can be serialized and parsed as the internal list (array) of KeySets.
+### Other `ComposedKeySet` methods
+
+- `collapseUnion()` / `collapseIntersect()`: reduce the list to a single KeySet.
+- `add(keySet)` / `addList(keySets)`: a new ComposedKeySet with the given sets added.
+- `without(keySet)` / `withoutList(keySets)`: a new ComposedKeySet without the given sets (compared with `isEqual`).
+- `filter(predicate)` / `map(fn)`: a new ComposedKeySet from the surviving / mapped members.
+- `compactUnion()` / `compactIntersect()`: merge the members of the same type into one, by union or by intersection.
+- `invert()`, `clone()`, `isEqual(other)`, `toString()`, and `representsAll()` / `representsNone()` / `representsSome()` / `representsAllExceptSome()`.
+- `list`: the underlying array of KeySets. An empty list is normalised to a single `all()`.
+
+### Serializing a `ComposedKeySet`
+
+Serialized as the internal list (array) of serialized KeySets.
+
+- `comp.serialized()` or `serializeComposedKeySet(comp)`, and `serializeComposedKeyLabelSet(comp)` for KeyLabel sets.
+- `parseComposedKeySet(serialized)`, and `parseComposedKeyLabelSet(serialized)` for KeyLabel sets.
 
 We have also a function to check type:
 
 - `isComposedKeySet(x): x is ComposedKeySet`
+- `isComposedKeyLabelSet(x): x is ComposedKeyLabelSet`
 - `isComposedKeySetSerialized(x): x is ComposedKeySetSerialized`
 - `isComposedKeyLabelSetSerialized(x): x is ComposedKeyLabelSetSerialized`
-- `isComposedKeySetSerializedRepresentsAll(x): x is ComposedKeySetSerializedRepresentsAll`
-- `isComposedKeySetSerializedRepresentsNone(x): x is ComposedKeySetSerializedRepresentsNone`
-- `isComposedKeySetSerializedRepresentsSome(x): x is ComposedKeySetSerializedRepresentsSome`
-- `isComposedKeySetSerializedRepresentsAllExceptSome(x): x is ComposedKeySetSerializedRepresentsAllExceptSome`
+- `isComposedKeySetSerializedRepresentsAll(x): x is ComposedKeySetAllSerialized`
+- `isComposedKeySetSerializedRepresentsNone(x): x is ComposedKeySetNoneSerialized`
+- `isComposedKeySetSerializedRepresentsSome(x): x is ComposedKeySetSomeSerialized`
+- `isComposedKeySetSerializedRepresentsAllExceptSome(x): x is ComposedKeySetAllExceptSomeSerialized`
 
 # Yanked versions
 
 - `5.11.0` had some functions missing from the main package export.
+- `5.11.1` is not yanked, but its ES module build (`dist/index.mjs`) throws `Dynamic require of "util" is not supported` at import time. Use v6 or the CommonJS entry point.

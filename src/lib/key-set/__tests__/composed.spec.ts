@@ -401,19 +401,34 @@ describe("ComposedKeySet", () => {
       expect(original.containsByIntersection(4)).toBeFalsy();
     });
 
-    it("matches contains() and includes()", () => {
-      const original = composedKeySetFrom([
-        new KeySetSome([1, 2, 3]),
-        new KeySetSome([1, 4]),
-      ]);
+    it("agrees with the collapsed algebra on every combination", () => {
+      // the element-wise definition (every/some over the list) and the
+      // algebraic one (collapse, then ask the resulting KeySet) must not
+      // diverge - intersect()/union() are exact for membership
+      const members = [
+        all<number>(),
+        none<number>(),
+        some([1, 2]),
+        some([2, 3]),
+        allExceptSome([2]),
+        allExceptSome([3, 4]),
+      ];
 
-      for (const element of [1, 2, 3, 4, 5]) {
-        expect(original.containsByIntersection(element)).toBe(
-          original.contains(element),
-        );
-        expect(original.containsByIntersection(element)).toBe(
-          original.includes(element),
-        );
+      for (const first of members) {
+        for (const second of members) {
+          const composed = composedKeySetFrom([first, second]);
+          const intersected = composed.collapseIntersect();
+          const united = composed.collapseUnion();
+
+          for (const element of [1, 2, 3, 4, 5]) {
+            expect(composed.containsByIntersection(element)).toBe(
+              intersected.contains(element),
+            );
+            expect(composed.containsByUnion(element)).toBe(
+              united.contains(element),
+            );
+          }
+        }
       }
     });
 

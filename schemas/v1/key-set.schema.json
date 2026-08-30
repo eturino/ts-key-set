@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/eturino/ts-key-set/master/schemas/v1/key-set.schema.json",
+  "title": "KeySetSerialized",
+  "description": "Wire format v1 for @eturino/key-set. The root schema describes a single serialized KeySet; the other shapes are addressable as $defs, e.g. #/$defs/composedKeySet. Pin a git tag instead of `master` for an immutable URL.",
+  "$ref": "#/$defs/keySet",
+  "$defs": {
+    "keySetType": {
+      "title": "KeySetTypes",
+      "description": "Discriminator. ALL is the whole universe, NONE the empty set, SOME an explicit set, ALL_EXCEPT_SOME the complement of an explicit set.",
+      "enum": ["ALL", "NONE", "SOME", "ALL_EXCEPT_SOME"]
+    },
+
+    "keyLabel": {
+      "title": "IKeyLabel",
+      "description": "A key paired with a human-readable label. Additional properties are ignored by the parser, so they are permitted here.",
+      "type": "object",
+      "properties": {
+        "key": { "type": ["string", "number"] },
+        "label": { "type": "string" }
+      },
+      "required": ["key", "label"]
+    },
+
+    "key": {
+      "title": "Key",
+      "anyOf": [
+        { "type": "string" },
+        { "type": "number" },
+        { "$ref": "#/$defs/keyLabel" }
+      ]
+    },
+
+    "keySetAll": {
+      "title": "KeySetAllSerialized",
+      "description": "`elements` may be omitted entirely, or present and empty. serialized() omits it.",
+      "type": "object",
+      "properties": {
+        "type": { "const": "ALL" },
+        "elements": { "type": "array", "maxItems": 0 }
+      },
+      "required": ["type"]
+    },
+
+    "keySetNone": {
+      "title": "KeySetNoneSerialized",
+      "description": "`elements` may be omitted entirely, or present and empty. serialized() omits it.",
+      "type": "object",
+      "properties": {
+        "type": { "const": "NONE" },
+        "elements": { "type": "array", "maxItems": 0 }
+      },
+      "required": ["type"]
+    },
+
+    "keySetSome": {
+      "title": "KeySetSomeSerialized",
+      "type": "object",
+      "properties": {
+        "type": { "const": "SOME" },
+        "elements": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/key" }
+        }
+      },
+      "required": ["type", "elements"]
+    },
+
+    "keySetAllExceptSome": {
+      "title": "KeySetAllExceptSomeSerialized",
+      "type": "object",
+      "properties": {
+        "type": { "const": "ALL_EXCEPT_SOME" },
+        "elements": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/key" }
+        }
+      },
+      "required": ["type", "elements"]
+    },
+
+    "keySet": {
+      "title": "KeySetSerialized",
+      "anyOf": [
+        { "$ref": "#/$defs/keySetAll" },
+        { "$ref": "#/$defs/keySetNone" },
+        { "$ref": "#/$defs/keySetSome" },
+        { "$ref": "#/$defs/keySetAllExceptSome" }
+      ]
+    },
+
+    "keyLabelSetSome": {
+      "title": "KeyLabelSetSomeSerialized",
+      "type": "object",
+      "properties": {
+        "type": { "const": "SOME" },
+        "elements": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/keyLabel" }
+        }
+      },
+      "required": ["type", "elements"]
+    },
+
+    "keyLabelSetAllExceptSome": {
+      "title": "KeyLabelSetAllExceptSomeSerialized",
+      "type": "object",
+      "properties": {
+        "type": { "const": "ALL_EXCEPT_SOME" },
+        "elements": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/keyLabel" }
+        }
+      },
+      "required": ["type", "elements"]
+    },
+
+    "keyLabelSet": {
+      "title": "KeyLabelSetSerialized",
+      "description": "Same shape as keySet, restricted to IKeyLabel elements.",
+      "anyOf": [
+        { "$ref": "#/$defs/keySetAll" },
+        { "$ref": "#/$defs/keySetNone" },
+        { "$ref": "#/$defs/keyLabelSetSome" },
+        { "$ref": "#/$defs/keyLabelSetAllExceptSome" }
+      ]
+    },
+
+    "composedKeySet": {
+      "title": "ComposedKeySetSerialized",
+      "description": "A ComposedKeySet serializes as the plain array of its members. An empty array is not produced: the library normalises an empty list to a single ALL.",
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/keySet" }
+    },
+
+    "composedKeyLabelSet": {
+      "title": "ComposedKeyLabelSetSerialized",
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/keyLabelSet" }
+    }
+  }
+}
