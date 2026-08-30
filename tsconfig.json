@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "es2020",
     "module": "esnext",
     "moduleResolution": "bundler",
-    "lib": ["es6"],
+    "lib": ["es2020"],
     "types": ["node", "vitest/globals"],
     "rootDir": "src",
     "declaration": true,
+    "noEmit": true,
     "inlineSourceMap": true,
     "skipLibCheck": true,
     "esModuleInterop": true,

@@ -23,11 +23,11 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm test
       - run: npm pack --dry-run
-      - run: npm publish --access public
+      - run: npm publish --provenance --access public
 
       # Extract the CHANGELOG section matching this tag. commit-and-tag-version
       # writes a stable `## [X.Y.Z]` anchor line per release, so we can pull
-      # the block between this anchor and the next `## ` (or EOF). If the
+      # the block between this anchor and the next `## [` (or EOF). If the
       # block is empty (missing entry, unexpected format), fall back to
       # GitHub's auto-generated notes rather than shipping an empty release.
       - name: Extract CHANGELOG section

@@ -25,11 +25,13 @@ Deferred because it needs a real refactor (likely a `-types.ts` / registry split
 
 Also worth a second look: `KEY_SET_TYPES` (`src/lib/key-set/-base.ts`), `_IS_NODE_ENVIRONMENT` (`src/lib/key-set/-is-node-env.ts`) and `isKeyLabelBase` (`src/lib/util/object-utils.ts`) were exported but only ever used inside their own file, so they are now module-private. If any of them should be public API instead, export them from `src/lib/key-set.ts` and add tests.
 
+Related contradiction to settle at the same time: `isObject` is marked `@internal @hidden` in its JSDoc yet is re-exported publicly from `src/lib/key-set.ts`. Either drop the tags or drop the export.
+
 **Done when:** both rules are on and `pnpm check:dead-code` passes.
 
 ## Harden the test suite
 
-581 tests at 100% statement/line/function coverage, but the suite is structurally blind to build- and toolchain-level regressions: every test imports `src/`, nothing imports `build/`, and until recently the specs were not even type-checked. Ranked by value per effort:
+609 tests at 100% statement/line/function coverage, but the suite is structurally blind to build- and toolchain-level regressions: every test imports `src/`, nothing imports `build/`, and until recently the specs were not even type-checked. Ranked by value per effort:
 
 1. **`build/` smoke test.** Import `build/main/index.js` (cjs) and `build/module/index.js` (esm) after a build; assert `serialized()`, `toString()`, `instanceof KeySetSome`, and that an empty-set error is `instanceof InvalidEmptySetError`. This is the only test that can see a tsc/target/module-format regression. A dynamic `require("node:util")` shipped broken in the ESM bundle of 5.11.1 for exactly this reason.
 2. **`KeySetTypes` wire values.** Assert `KeySetTypes.all === "ALL"` etc. literally. Every serialize fixture currently uses the enum on both sides of the assertion, so a changed emit stays green while every payload changes.
@@ -61,6 +63,20 @@ The typedoc site (`https://eturino.github.io/ts-key-set`, gh-pages branch) was r
 
 **If docs come back:** wait for typedoc to support TS 7, add it as a plain devDep, restore the `doc:*` scripts and the gh-pages publish step.
 
-## README housekeeping
+## Publish a release that supersedes 5.11.1
 
-The README still carries a Travis CI badge (`travis-ci.org/eturino/ts-key-set`) for a service that no longer exists, and Code Climate badges that may or may not still be wired up. Replace with the GitHub Actions CI badge, or drop.
+npm `latest` is **5.11.1**, whose ES module build throws `Dynamic require of "util" is not supported` at import time (fixed in `0a77b3b`). A local `v5.12.0` tag and CHANGELOG entry exist but were never published.
+
+**Done when:** a v6 release is on npm as `latest`. Consider `npm deprecate @eturino/key-set@5.11.1` with a pointer to it.
+
+## Write or delete .github/CONTRIBUTING.md
+
+It is still the verbatim typescript-starter placeholder ("This is an example of GitHub's contributing guidelines file"). It mentions none of the actual workflow: pnpm, mise, Conventional Commits (enforced by commitlint + husky), `pnpm test`.
+
+## Tighten the CI trigger
+
+`.github/workflows/ci.yml` uses a bare `on: push:` with no branch filter, so every branch push and every release tag runs the full suite, and dependabot PRs run it twice (push + pull_request). The `automerge` job also fires on non-PR events; the pinned action returns without failing, so it is noise rather than breakage.
+
+## Reconsider `reset` inside `prepare-release`
+
+`prepare-release` chains `reset`, which is `git clean -dfx -e .idea && git reset --hard && pnpm install`. That permanently discards all uncommitted changes and every untracked or ignored file, with no confirmation. RELEASING.md flags it in one line while presenting the chain as the convenient path. Either drop `reset` from the chain or gate it behind a prompt.

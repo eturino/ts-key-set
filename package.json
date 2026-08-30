@@ -7,6 +7,7 @@
   "types": "build/main/index.d.ts",
   "files": [
     "build",
+    "schemas",
     "src",
     "!src/**/__tests__/**",
     "!src/**/*.spec.ts",
@@ -16,6 +17,7 @@
   ],
   "scripts": {
     "prepare": "husky",
+    "prepack": "run-s build",
     "clean": "trash build coverage",
     "build": "run-s clean && run-p build:*",
     "build:main": "tsc -p tsconfig.build.json",
@@ -35,7 +37,8 @@
     "version": "commit-and-tag-version",
     "reset": "git clean -dfx -e .idea && git reset --hard && pnpm install",
     "lint-staged": "lint-staged",
-    "prepare-release": "run-s reset test version"
+    "prepare-release": "run-s reset test version",
+    "commit": "git-cz"
   },
   "author": "Eduardo Turiño <eturino@eturino.com>",
   "repository": {
@@ -59,7 +62,9 @@
     "@commitlint/config-conventional": "^21.2.2",
     "@types/node": "^26.3.0",
     "@vitest/coverage-v8": "^4.1.11",
+    "ajv": "^8.20.0",
     "commit-and-tag-version": "^13.1.2",
+    "commitizen": "^4.3.2",
     "cz-conventional-changelog": "^3.3.0",
     "dpdm": "^4.3.0",
     "husky": "^9.1.7",
