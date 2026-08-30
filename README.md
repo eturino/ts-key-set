@@ -294,7 +294,7 @@ We have a list of items with labels, where an item can have multiple labels.
 We need to filter the items with labels A, B and C but that do not have labels D.
 
 We cannot use `some(A, B, C).intersect(allExceptSome(D))` since that would end up with just `some(A, B, C)`.
-So we use `composedKeySet([some(A, B, C), allExceptSome(D)])`.
+So we use `composedKeySetFrom([some(A, B, C), allExceptSome(D)])`.
 
 This way, if we have a search engine that translates key sets like this:
 
@@ -309,7 +309,25 @@ then the composed key set above will end up with
 For this case, we have the `ComposedKeySet`
 
 ```ts
-const comp = composedKeySet([some(A, B, C), allExceptSome(D)]);
+const comp = composedKeySetFrom([some(A, B, C), allExceptSome(D)]);
+```
+
+### Checking elements on a `ComposedKeySet`
+
+Two semantics, three method names:
+
+- `containsByIntersection(element)`: true only if **every** key set in the list contains it. `contains(element)` and its alias `includes(element)` are the same check.
+- `containsByUnion(element)`: true if **any** key set in the list contains it.
+
+```ts
+const comp = composedKeySetFrom([some([1, 2, 3]), some([1, 4])]);
+
+comp.containsByIntersection(1); // => true  (in both)
+comp.containsByIntersection(3); // => false (only in the first)
+comp.contains(3); // => false (alias of containsByIntersection)
+
+comp.containsByUnion(3); // => true  (in the first)
+comp.containsByUnion(5); // => false (in neither)
 ```
 
 It can be serialized and parsed as the internal list (array) of KeySets.

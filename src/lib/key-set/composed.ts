@@ -188,6 +188,8 @@ export class ComposedKeySet<T extends Key = Key> {
   /**
    * true if ALL sets contain the element
    * @param element
+   * @see containsByUnion()
+   * @see containsByIntersection()
    */
   contains(element: T): boolean {
     return this.list.every((x) => x.contains(element));
@@ -199,6 +201,25 @@ export class ComposedKeySet<T extends Key = Key> {
    * @see contains()
    */
   includes(element: T): boolean {
+    return this.contains(element);
+  }
+
+  /**
+   * true if ANY of the sets contains the element
+   * @param element
+   */
+  containsByUnion(element: T): boolean {
+    return this.list.some((x) => x.contains(element));
+  }
+
+  /**
+   * true if ALL the sets contain the element
+   *
+   * alias of `contains`
+   * @param element
+   * @see contains()
+   */
+  containsByIntersection(element: T): boolean {
     return this.contains(element);
   }
 

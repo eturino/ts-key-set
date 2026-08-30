@@ -352,6 +352,91 @@ describe("ComposedKeySet", () => {
     });
   });
 
+  describe("#containsByUnion", () => {
+    it("true if any list member contains the element", () => {
+      const ks1: KeySetSome<number> = new KeySetSome([1, 2, 3]);
+      const ks2: KeySetSome<number> = new KeySetSome([1, 4]);
+      const original = composedKeySetFrom([ks1, ks2]);
+
+      expect(original.containsByUnion(1)).toBeTruthy();
+      expect(original.containsByUnion(3)).toBeTruthy();
+      expect(original.containsByUnion(4)).toBeTruthy();
+    });
+
+    it("false if no list member contains the element", () => {
+      const ks1: KeySetSome<number> = new KeySetSome([1, 2, 3]);
+      const ks2: KeySetSome<number> = new KeySetSome([1, 4]);
+      const original = composedKeySetFrom([ks1, ks2]);
+
+      expect(original.containsByUnion(5)).toBeFalsy();
+    });
+
+    it("works with the other key set types", () => {
+      expect(
+        composedKeySetFrom([none(), some([1])]).containsByUnion(1),
+      ).toBeTruthy();
+      expect(
+        composedKeySetFrom([none(), none()]).containsByUnion(1),
+      ).toBeFalsy();
+      expect(
+        composedKeySetFrom([none(), all()]).containsByUnion(1),
+      ).toBeTruthy();
+      expect(
+        composedKeySetFrom([none(), allExceptSome([1])]).containsByUnion(1),
+      ).toBeFalsy();
+      expect(
+        composedKeySetFrom([none(), allExceptSome([2])]).containsByUnion(1),
+      ).toBeTruthy();
+    });
+  });
+
+  describe("#containsByIntersection", () => {
+    it("true only if every list member contains the element", () => {
+      const ks1: KeySetSome<number> = new KeySetSome([1, 2, 3]);
+      const ks2: KeySetSome<number> = new KeySetSome([1, 4]);
+      const original = composedKeySetFrom([ks1, ks2]);
+
+      expect(original.containsByIntersection(1)).toBeTruthy();
+      expect(original.containsByIntersection(3)).toBeFalsy();
+      expect(original.containsByIntersection(4)).toBeFalsy();
+    });
+
+    it("matches contains() and includes()", () => {
+      const original = composedKeySetFrom([
+        new KeySetSome([1, 2, 3]),
+        new KeySetSome([1, 4]),
+      ]);
+
+      for (const element of [1, 2, 3, 4, 5]) {
+        expect(original.containsByIntersection(element)).toBe(
+          original.contains(element),
+        );
+        expect(original.containsByIntersection(element)).toBe(
+          original.includes(element),
+        );
+      }
+    });
+
+    it("works with the other key set types", () => {
+      expect(
+        composedKeySetFrom([all(), some([1])]).containsByIntersection(1),
+      ).toBeTruthy();
+      expect(
+        composedKeySetFrom([none(), some([1])]).containsByIntersection(1),
+      ).toBeFalsy();
+      expect(
+        composedKeySetFrom([all(), allExceptSome([1])]).containsByIntersection(
+          1,
+        ),
+      ).toBeFalsy();
+      expect(
+        composedKeySetFrom([all(), allExceptSome([2])]).containsByIntersection(
+          1,
+        ),
+      ).toBeTruthy();
+    });
+  });
+
   describe("#representsAll", () => {
     it("EVERY element representsAll() => true", () => {
       const original = composedKeySetFrom([all(), all()]);
