@@ -32,14 +32,10 @@
     "watch": "run-s clean build:main && run-p \"build:main -- -w\" test:unit:watch",
     "cov": "run-s build cov:html && open-cli coverage/index.html",
     "cov:html": "vitest run --coverage --coverage.reporter=html",
-    "doc": "run-s doc:html && open-cli build/docs/index.html",
-    "doc:html": "pnpm dlx --package typedoc@0.28.20 --package typescript@6.0.3 typedoc --theme default src/index.ts --exclude \"**/*.spec.ts\" --out build/docs",
-    "doc:json": "pnpm dlx --package typedoc@0.28.20 --package typescript@6.0.3 typedoc src/index.ts --exclude \"**/*.spec.ts\" --json build/docs/typedoc.json",
-    "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d build/docs",
     "version": "commit-and-tag-version",
     "reset": "git clean -dfx -e .idea && git reset --hard && pnpm install",
     "lint-staged": "lint-staged",
-    "prepare-release": "run-s reset test doc:html version doc:publish"
+    "prepare-release": "run-s reset test version"
   },
   "author": "Eduardo Turiño <eturino@eturino.com>",
   "repository": {
@@ -66,7 +62,6 @@
     "commit-and-tag-version": "^13.1.2",
     "cz-conventional-changelog": "^3.3.0",
     "dpdm": "^4.3.0",
-    "gh-pages": "^6.3.0",
     "husky": "^9.1.7",
     "knip": "^6.32.2",
     "lint-staged": "^17.3.0",

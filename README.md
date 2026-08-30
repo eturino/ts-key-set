@@ -5,7 +5,6 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/3b9c9332f98e9fdd30ac/maintainability)](https://codeclimate.com/github/eturino/ts-key-set/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/3b9c9332f98e9fdd30ac/test_coverage)](https://codeclimate.com/github/eturino/ts-key-set/test_coverage)
 
-[TypeDoc generated docs in here](https://eturino.github.io/ts-key-set)
 
 [Github repo here](https://github.com/eturino/ts-key-set)
 

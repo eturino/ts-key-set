@@ -1,0 +1,66 @@
+# Backlog
+
+Deferred work, newest first. Each entry says what, why it was deferred, and how to verify it is done.
+
+## Break the circular imports in the KeySet hierarchy
+
+`pnpm check:cycles` (dpdm) reports **19 circular import chains**, all inside `src/lib/key-set/`:
+
+```
+-base.ts -> all.ts -> -global.ts -> all-except-some.ts -> -by-keys.ts -> none.ts -> some.ts
+```
+
+The base module imports its own subclasses (for `represents*` / factory helpers), and the subclasses import the base. It works today because every cross-reference is used at call time rather than at module-evaluation time, but circular `extends` across an ESM boundary is a temporal-dead-zone hazard: reorder a top-level statement and `build/module` throws on import with no test catching it.
+
+Deferred because it needs a real refactor (likely a `-types.ts` / registry split so `-base.ts` stops importing concrete classes), not a config change.
+
+**Done when:** `pnpm check:cycles` exits 0 and it is back in the `test` script chain (`run-s build check:biome test:unit check:cycles check:dead-code type-check`).
+
+## Revisit the knip exceptions
+
+`knip.json` currently turns two rules off:
+
+- `duplicates: "off"` - the public API deliberately exposes alias pairs (`all`/`allKeySet`, `some`/`someKeySet`, `someForced`/`someKeySetForced`, `serializeKeySet`/`serializeKeyLabelSet`, ...). Decide whether both spellings stay supported forever, or one set gets deprecated and eventually dropped; then re-enable the rule.
+- `unresolved: "off"` - inherited from the apollo-link-scalars config, never diagnosed here. Turn it back on, see what it reports, and fix or document the finding.
+
+Also worth a second look: `KEY_SET_TYPES` (`src/lib/key-set/-base.ts`), `_IS_NODE_ENVIRONMENT` (`src/lib/key-set/-is-node-env.ts`) and `isKeyLabelBase` (`src/lib/util/object-utils.ts`) were exported but only ever used inside their own file, so they are now module-private. If any of them should be public API instead, export them from `src/lib/key-set.ts` and add tests.
+
+**Done when:** both rules are on and `pnpm check:dead-code` passes.
+
+## Harden the test suite
+
+581 tests at 100% statement/line/function coverage, but the suite is structurally blind to build- and toolchain-level regressions: every test imports `src/`, nothing imports `build/`, and until recently the specs were not even type-checked. Ranked by value per effort:
+
+1. **`build/` smoke test.** Import `build/main/index.js` (cjs) and `build/module/index.js` (esm) after a build; assert `serialized()`, `toString()`, `instanceof KeySetSome`, and that an empty-set error is `instanceof InvalidEmptySetError`. This is the only test that can see a tsc/target/module-format regression. A dynamic `require("node:util")` shipped broken in the ESM bundle of 5.11.1 for exactly this reason.
+2. **`KeySetTypes` wire values.** Assert `KeySetTypes.all === "ALL"` etc. literally. Every serialize fixture currently uses the enum on both sides of the assertion, so a changed emit stays green while every payload changes.
+3. **Sort order.** `sortKeys` and `elementsSorted` call `.sort()` with no comparator, so `[1, 2, 10]` sorts to `[1, 10, 2]`, and that feeds `serialized()` and `toString()`. Pin the current behavior (or fix it, if it is a bug - that is a breaking change).
+4. **The type-guard exports.** `isKeySet`, `isKeySetAll`, `isKeySetNone`, `isKeySetSome`, `isKeySetAllExceptSome`, `isKeySetType`, `isObject` have no direct tests. All are `instanceof`-based - the first thing a dual cjs+esm packaging change breaks.
+5. **Round-trip property.** Loop `{all, none, some, allExceptSome} x {number, string, KeyLabel}` asserting `parseKeySet(serializeKeySet(ks)).isEqual(ks)` and `JSON.parse(JSON.stringify(ks))` deep-equals `ks.serialized()`. One loop covers enum emit, sort order, and parse/serialize symmetry at once.
+6. **KeyLabel set operations.** The whole 4x4 intersect/union/remove/isEqual matrix uses number keys. `setByKeys` dedupes KeyLabels *by key* while `Set.has`/`setsEqual` compare *by reference*, so `some([{key:1,label:'a'}]).intersect(some([{key:1,label:'a'}]))` is empty. Real, load-bearing, unasserted.
+7. **`-is-node-env.ts` browser branch.** The only uncovered branch in the repo. `vi.stubGlobal("process", undefined)` + `vi.resetModules()`, then assert `typeof INSPECT === "symbol"` and that `toString()` still works.
+8. **Element-type predicate symmetry.** `check-element-type.spec.ts` and `check-serialized-element-type.spec.ts` never pass an `allExceptSome(...)` input. ~30 mechanical lines.
+9. **Immutability claims.** `Object.freeze` on a `Set` does not block `.add()`/`.delete()`. Assert what `elements` actually guarantees.
+
+Weak tests worth replacing while in there:
+
+- `src/lib/key-set/__tests__/base.spec.ts` - `acceptEnumValue` returns `true` unconditionally, so `toBeTruthy()` can never fail. Its real content is a compile-time check, which only became meaningful now that specs are type-checked.
+- `src/lib/__tests__/to-string.spec.ts` - `console.log(keySet)` runs `[INSPECT]()` with no assertion.
+- The `expect(keySet === rest).toBe(false)` lines across the matrix specs assert non-identity on paths that visibly construct new objects.
+- `src/lib/util/__tests__/array-types.spec.ts` - test names contradict their assertions (`it("isEmptyArray([1, 2]): true")` asserts falsy).
+- `src/lib/util/__tests__/native-helpers.spec.ts` - spends half its `sortBy` cases on `null`/`undefined` orderings the library cannot produce, while the reachable path (comparing KeyLabel objects, which falls through to `0`) is untested.
+
+## Adopt eslint + prettier
+
+The sibling repo (`eturino/apollo-link-scalars`) lints with eslint 10 + `typescript-eslint` (`strictTypeChecked` + `stylisticTypeChecked`) + prettier. This repo stays on biome because `typescript-eslint` peer-caps TypeScript at `<6.1.0` and this repo builds with 7.0.2.
+
+**Done when:** `typescript-eslint` supports TypeScript 7 - then either migrate to match the sibling repo, or decide biome is the better fit and record that decision.
+
+## Docs
+
+The typedoc site (`https://eturino.github.io/ts-key-set`, gh-pages branch) was removed rather than left to rot: no typedoc release supports the TypeScript 7 compiler this repo builds with (peer range stops at `6.0.x`), so the docs could only be produced through a pinned-TS-6 `pnpm dlx` workaround.
+
+**If docs come back:** wait for typedoc to support TS 7, add it as a plain devDep, restore the `doc:*` scripts and the gh-pages publish step.
+
+## README housekeeping
+
+The README still carries a Travis CI badge (`travis-ci.org/eturino/ts-key-set`) for a service that no longer exists, and Code Climate badges that may or may not still be wired up. Replace with the GitHub Actions CI badge, or drop.

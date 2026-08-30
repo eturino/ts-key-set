@@ -14,9 +14,6 @@ This repository uses [`commit-and-tag-version`](https://github.com/absolute-vers
 pnpm install --frozen-lockfile
 pnpm test
 
-# optional: regenerate docs locally and inspect them
-pnpm doc:html
-
 # creates:
 # - package.json version bump
 # - CHANGELOG.md update
@@ -82,11 +79,7 @@ pnpm prepare-release
 git push --follow-tags origin <release-branch>
 ```
 
-`pnpm prepare-release` runs `pnpm reset`, `pnpm test`, `pnpm doc:html`, `pnpm run version`, `pnpm doc:publish`. Note that `pnpm reset` is destructive.
-
-## Docs
-
-`pnpm doc:html` runs typedoc through `pnpm dlx` with a pinned TypeScript 6.0.3, because no typedoc release supports the TypeScript 7 compiler this repo builds with (its peer range stops at `6.0.x`). Once typedoc ships TS 7 support, move `typedoc` back into `devDependencies` and drop the `dlx` wrapper.
+`pnpm prepare-release` runs `pnpm reset`, `pnpm test`, `pnpm run version`. Note that `pnpm reset` is destructive.
 
 ## First Release / Special Cases
 
@@ -105,7 +98,6 @@ pnpm run version -- --sign
 - Always invoke as `pnpm run version`. Running `pnpm version` (no `run`) hits pnpm's built-in `version` command, which prints engine versions and ignores the package script entirely.
 - `commit-and-tag-version` rewrites the CHANGELOG.md preamble from a built-in template on every run, so edits to those lines do not survive across releases.
 - Review `CHANGELOG.md` before pushing tags.
-- The publish workflow does not regenerate the typedoc site. Run `pnpm doc:html && pnpm doc:publish` locally before tagging if you want it refreshed.
 - npm trusted publishing automatically generates provenance for public packages published from this public GitHub repository, so the workflow uses plain `npm publish --access public` (the `--access` flag is required for a scoped package).
 - `pnpm check:cycles` is intentionally not part of `pnpm test`: the KeySet class hierarchy has known circular imports between `-base.ts` and its subclasses. Run it manually when refactoring module boundaries.
 - Do not publish from a local machine unless you are intentionally bypassing the normal release path.
