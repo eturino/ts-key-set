@@ -135,9 +135,14 @@ describe("ComposedKeySet", () => {
       expect(actual.isEqual(original)).toBeTruthy();
       expect(actual).not.toBe(original);
 
-      expect(actual.list[0]).toEqual(original.list[0]);
-      expect(actual.list[0].isEqual(original.list[0])).toBeTruthy();
-      expect(actual.list[0]).not.toBe(original.list[0]);
+      const actualFirst = actual.list[0];
+      const originalFirst = original.list[0];
+      if (!actualFirst || !originalFirst)
+        throw new Error("expected non-empty lists");
+
+      expect(actualFirst).toEqual(originalFirst);
+      expect(actualFirst.isEqual(originalFirst)).toBeTruthy();
+      expect(actualFirst).not.toBe(originalFirst);
     });
   });
 

@@ -51,7 +51,7 @@ export enum KeySetTypes {
 
 export type KeySetTypesEnumValues = "ALL" | "ALL_EXCEPT_SOME" | "NONE" | "SOME";
 
-export const KEY_SET_TYPES = Object.values(KeySetTypes).sort();
+const KEY_SET_TYPES = Object.values(KeySetTypes).sort();
 
 export function isKeySetType(x: unknown): x is KeySetTypes {
   return KEY_SET_TYPES.includes(x as KeySetTypes);

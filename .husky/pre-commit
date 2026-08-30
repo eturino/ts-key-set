@@ -1,3 +1,1 @@
-pnpm run check
-pnpm run test
-git update-index --again
+pnpm lint-staged

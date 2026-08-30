@@ -1,4 +1,4 @@
-export const _IS_NODE_ENVIRONMENT =
+const _IS_NODE_ENVIRONMENT =
   typeof process !== "undefined" &&
   process.versions != null &&
   process.versions.node != null;

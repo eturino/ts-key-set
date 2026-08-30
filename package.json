@@ -2,29 +2,44 @@
   "name": "@eturino/key-set",
   "version": "5.12.0",
   "description": " (TypeScript port of https://github.com/eturino/ruby_key_set) KeySet with 4 classes to represent concepts of All, None, Some, and AllExceptSome, the last 2 with a sorted uniq list of keys, and all with intersection calculations",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "main": "build/main/index.js",
+  "module": "build/module/index.js",
+  "types": "build/main/index.d.ts",
   "files": [
-    "dist",
+    "build",
     "src",
+    "!src/**/__tests__/**",
+    "!src/**/*.spec.ts",
     "LICENSE",
-    "README.md"
+    "README.md",
+    "CHANGELOG.md"
   ],
   "scripts": {
-    "commit": "git-cz",
-    "build": "pnpm run build:tsup && pnpm run build:dts",
-    "build:tsup": "tsup",
-    "build:dts": "echo 'emitting Declaration using tsc' && tsc --emitDeclarationOnly",
-    "test": "vitest run --coverage",
-    "fix": "pnpm run fix:biome",
-    "fix:biome": "biome check --write --unsafe src",
-    "clean": "rm -rf dist",
-    "prepare": "pnpm run build",
-    "check": "pnpm run check:biome && pnpm run check:tsc",
+    "prepare": "husky",
+    "clean": "trash build coverage",
+    "build": "run-s clean && run-p build:*",
+    "build:main": "tsc -p tsconfig.build.json",
+    "build:module": "tsc -p tsconfig.module.json",
+    "fix": "biome check --write --unsafe src",
+    "type-check": "tsc --noEmit",
+    "check": "run-s check:biome type-check",
     "check:biome": "biome check src",
-    "check:tsc": "tsc --noEmit",
-    "prepare-release": "pnpm run fix && pnpm run check && pnpm run test && pnpm run build"
+    "check:cycles": "dpdm --no-tree --no-warning --exit-code circular:1 src/index.ts",
+    "check:dead-code": "knip --no-config-hints",
+    "test": "run-s build check:biome test:unit check:dead-code type-check",
+    "test:unit": "vitest run --coverage",
+    "test:unit:watch": "vitest",
+    "watch": "run-s clean build:main && run-p \"build:main -- -w\" test:unit:watch",
+    "cov": "run-s build cov:html && open-cli coverage/index.html",
+    "cov:html": "vitest run --coverage --coverage.reporter=html",
+    "doc": "run-s doc:html && open-cli build/docs/index.html",
+    "doc:html": "pnpm dlx --package typedoc@0.28.20 --package typescript@6.0.3 typedoc --theme default src/index.ts --exclude \"**/*.spec.ts\" --out build/docs",
+    "doc:json": "pnpm dlx --package typedoc@0.28.20 --package typescript@6.0.3 typedoc src/index.ts --exclude \"**/*.spec.ts\" --json build/docs/typedoc.json",
+    "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d build/docs",
+    "version": "commit-and-tag-version",
+    "reset": "git clean -dfx -e .idea && git reset --hard && pnpm install",
+    "lint-staged": "lint-staged",
+    "prepare-release": "run-s reset test doc:html version doc:publish"
   },
   "author": "Eduardo Turiño <eturino@eturino.com>",
   "repository": {
@@ -46,21 +61,28 @@
     "@biomejs/biome": "^2.5.10",
     "@commitlint/cli": "^21.2.2",
     "@commitlint/config-conventional": "^21.2.2",
-    "@commitlint/cz-commitlint": "^21.2.2",
     "@types/node": "^26.3.0",
     "@vitest/coverage-v8": "^4.1.11",
-    "commitizen": "^4.3.2",
+    "commit-and-tag-version": "^13.1.2",
+    "cz-conventional-changelog": "^3.3.0",
+    "dpdm": "^4.3.0",
+    "gh-pages": "^6.3.0",
     "husky": "^9.1.7",
-    "inquirer": "^12.11.1",
-    "standard-version": "^9.5.0",
+    "knip": "^6.32.2",
+    "lint-staged": "^17.3.0",
+    "npm-run-all": "^4.1.5",
+    "open-cli": "^9.0.0",
+    "trash-cli": "^7.2.0",
     "ts-enum-util": "^4.1.0",
-    "tsup": "^8.5.1",
     "typescript": "^7.0.2",
     "vitest": "^4.1.11"
   },
-  "config": {
-    "commitizen": {
-      "path": "@commitlint/cz-commitlint"
-    }
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "biome check --write --unsafe"
+    ]
   }
 }

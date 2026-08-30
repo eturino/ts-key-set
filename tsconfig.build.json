@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "module": "node16",
+    "moduleResolution": "node16",
+    "outDir": "build/main"
+  },
+  "exclude": ["node_modules/**", "src/**/__tests__/**", "src/**/*.spec.ts"]
+}
