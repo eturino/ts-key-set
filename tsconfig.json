@@ -1,13 +1,23 @@
 {
-  "include": ["src"],
-  "exclude": ["**/*.test.ts", "**/*.spec.ts"],
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "**/*.test.ts",
+    "**/*.spec.ts"
+  ],
   "compilerOptions": {
     "module": "esnext",
     "target": "esnext",
-    "lib": ["esnext"],
+    "lib": [
+      "esnext"
+    ],
+    "types": [
+      "node"
+    ],
     "declaration": true,
     "strict": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "skipLibCheck": true,
     "esModuleInterop": true,
     "outDir": "dist",

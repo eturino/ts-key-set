@@ -1,0 +1,12 @@
+# Supply-chain hardening: refuse versions published < 5 days ago (7200 min).
+minimumReleaseAge: 7200
+
+overrides:
+  # GHSA-3jxr-9vmj-r5cp: DoS in brace-expansion, reached via minimatch@3.
+  brace-expansion@<1.1.16: ^1.1.16
+  # GHSA-g7r4-m6w7-qqqr: esbuild dev-server file read; transitive via vite/tsup.
+  esbuild@<0.28.1: ^0.28.2
+
+# Install scripts stay opt-in; esbuild ships prebuilt platform binaries, needs none.
+allowBuilds:
+  esbuild: false

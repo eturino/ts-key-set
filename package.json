@@ -13,18 +13,18 @@
   ],
   "scripts": {
     "commit": "git-cz",
-    "build": "npm run build:tsup && npm run build:dts",
+    "build": "pnpm run build:tsup && pnpm run build:dts",
     "build:tsup": "tsup",
     "build:dts": "echo 'emitting Declaration using tsc' && tsc --emitDeclarationOnly",
     "test": "vitest run --coverage",
-    "fix": "npm run fix:biome",
+    "fix": "pnpm run fix:biome",
     "fix:biome": "biome check --write --unsafe src",
     "clean": "rm -rf dist",
-    "prepare": "npm run build",
-    "check": "npm run check:biome && npm run check:tsc",
+    "prepare": "pnpm run build",
+    "check": "pnpm run check:biome && pnpm run check:tsc",
     "check:biome": "biome check src",
     "check:tsc": "tsc --noEmit",
-    "prepare-release": "npm run fix && npm run check && npm run test && npm run build"
+    "prepare-release": "pnpm run fix && pnpm run check && pnpm run test && pnpm run build"
   },
   "author": "Eduardo Turiño <eturino@eturino.com>",
   "repository": {
@@ -41,21 +41,22 @@
     "sets",
     "groups"
   ],
+  "packageManager": "pnpm@11.24.0",
   "devDependencies": {
-    "@biomejs/biome": "^2.3.11",
-    "@commitlint/cli": "^21.0.0",
-    "@commitlint/config-conventional": "^21.0.0",
-    "@commitlint/cz-commitlint": "^21.0.0",
-    "@types/node": "^26.0.0",
-    "@vitest/coverage-v8": "^4.0.17",
-    "commitizen": "^4.3.1",
+    "@biomejs/biome": "^2.5.10",
+    "@commitlint/cli": "^21.2.2",
+    "@commitlint/config-conventional": "^21.2.2",
+    "@commitlint/cz-commitlint": "^21.2.2",
+    "@types/node": "^26.3.0",
+    "@vitest/coverage-v8": "^4.1.11",
+    "commitizen": "^4.3.2",
     "husky": "^9.1.7",
-    "inquirer": "^9.3.8",
+    "inquirer": "^12.11.1",
     "standard-version": "^9.5.0",
     "ts-enum-util": "^4.1.0",
-    "tsup": "^8.3.5",
-    "typescript": "^5.7.2",
-    "vitest": "^4.0.17"
+    "tsup": "^8.5.1",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11"
   },
   "config": {
     "commitizen": {
