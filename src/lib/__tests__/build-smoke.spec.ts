@@ -64,6 +64,7 @@ describe.skipIf(!built)("the published build", () => {
         "schemas/v1/key-set.canonical.schema.json",
       ]),
     );
+    expect(files.filter((f) => f.endsWith(".keep"))).toEqual([]);
   });
 
   it("emits the literal wire values for every type", () => {

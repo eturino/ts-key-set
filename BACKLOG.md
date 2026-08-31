@@ -2,16 +2,6 @@
 
 Deferred work, newest first. Each entry says what, why it was deferred, and how to verify it is done.
 
-## Drop `src/types/.keep` from the published package
-
-`npm pack` ships 118 files, one of which is `src/types/.keep` (0 bytes). It rides along because `files` includes `"src"`, and the directory exists only because git cannot track an empty one.
-
-Nothing references `src/types`: no `typeRoots`, no tsconfig `include` reaches it (`src/**/*.ts` does not match `.keep`), and the folder holds nothing else. It is a leftover from the typescript-starter template.
-
-Either delete the directory outright, or add `"!src/types/**"` to `files` if something still wants it in the repo. The `build-smoke.spec.ts` pack assertion is the place to pin whichever is chosen.
-
-**Done when:** `npm pack --dry-run` lists no `.keep`.
-
 ## Settle the falsy `elements` tolerance in the parser
 
 `parseKeySet({ type: "ALL", elements: null })` returns `all()`, and so do `0`, `""` and `false`, because both guards in `serialize.ts` (`hasShapeOfSerialized` line 52, `isValidKeySetAllNone` line 64) read a falsy non-array as an absent `elements`. Both published schemas refuse all four, so the parser is laxer than its own contract.
