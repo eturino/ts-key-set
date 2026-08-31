@@ -16,7 +16,7 @@ export interface IKeyLabel<K extends string | number> {
  * @internal
  * @hidden
  */
-export function isKeyLabelBase(
+function isKeyLabelBase(
   x: unknown,
 ): x is Record<string, unknown> & { label: string } {
   if (!isObject(x)) return false;

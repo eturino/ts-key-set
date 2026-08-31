@@ -1,9 +1,9 @@
-import type { EmptyArray, NonEmptyArray } from "../util/array-types";
-import { type IKeyLabel, isKeyLabel } from "../util/object-utils";
-import { KeySetAll } from "./all";
-import { KeySetAllExceptSome } from "./all-except-some";
-import { KeySetNone } from "./none";
-import { KeySetSome } from "./some";
+import type { EmptyArray, NonEmptyArray } from "../util/array-types.ts";
+import { type IKeyLabel, isKeyLabel } from "../util/object-utils.ts";
+import { KeySetAll } from "./all.ts";
+import { KeySetAllExceptSome } from "./all-except-some.ts";
+import { KeySetNone } from "./none.ts";
+import { KeySetSome } from "./some.ts";
 
 export type Key =
   | string
@@ -51,7 +51,7 @@ export enum KeySetTypes {
 
 export type KeySetTypesEnumValues = "ALL" | "ALL_EXCEPT_SOME" | "NONE" | "SOME";
 
-export const KEY_SET_TYPES = Object.values(KeySetTypes).sort();
+const KEY_SET_TYPES = Object.values(KeySetTypes).sort();
 
 export function isKeySetType(x: unknown): x is KeySetTypes {
   return KEY_SET_TYPES.includes(x as KeySetTypes);
@@ -210,7 +210,7 @@ export interface IKeySetClass<T extends Key> {
    * returns a boolean if the KeySet includes the given element
    *
    * @param element
-   * @alias includes
+   * @see includes()
    */
   contains(element: T): boolean;
 
@@ -218,7 +218,7 @@ export interface IKeySetClass<T extends Key> {
    * returns a boolean if the KeySet includes the given element
    *
    * @param element
-   * @alias contains
+   * @see contains()
    */
   includes(element: T): boolean;
 }

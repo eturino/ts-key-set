@@ -1,0 +1,13 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+
+  "ignoreDependencies": ["cz-conventional-changelog"],
+
+  "rules": {
+    "unresolved": "off",
+    "duplicates": "off"
+  },
+
+  "entry": ["src/index.ts", "src/**/__tests__/**/*.spec.ts"],
+  "project": ["src/**/*.ts"]
+}

@@ -9,7 +9,7 @@ import {
   type KeySet,
   none,
   some,
-} from "../..";
+} from "../../index.ts";
 
 describe("isKeySetOfStrings()", () => {
   it("isKeySetOfStrings(invalidKeySet): false", () => {

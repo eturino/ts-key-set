@@ -5,11 +5,11 @@ import type {
   KeySetAllSerialized,
   KeySetNoneSerialized,
   KeySetTypes,
-} from "./-base";
-import type { KeySetAll } from "./all";
-import type { KeySetAllExceptSome } from "./all-except-some";
-import type { KeySetNone } from "./none";
-import type { KeySetSome } from "./some";
+} from "./-base.ts";
+import type { KeySetAll } from "./all.ts";
+import type { KeySetAllExceptSome } from "./all-except-some.ts";
+import type { KeySetNone } from "./none.ts";
+import type { KeySetSome } from "./some.ts";
 
 /**
  * @internal

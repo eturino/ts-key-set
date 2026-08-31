@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { sortKeys } from "../../..";
+import { sortKeys } from "../../../index.ts";
 
 describe("sortKeys", () => {
   describe("with strings", () => {

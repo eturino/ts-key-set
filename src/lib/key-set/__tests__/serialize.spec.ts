@@ -51,7 +51,7 @@ import {
   serializeKeyLabelSet,
   serializeKeySet,
   some,
-} from "../../..";
+} from "../../../index.ts";
 
 const allSerialized: KeySetAllSerialized = { type: KeySetTypes.all };
 const noneSerialized: KeySetNoneSerialized = { type: KeySetTypes.none };

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { setByKeys } from "../../..";
+import { setByKeys } from "../../../index.ts";
 
 describe("setByKeys()", () => {
   it("setByKeys([])", () => {

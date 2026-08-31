@@ -1,6 +1,6 @@
-import type { Key } from "../key-set/-base";
-import { type IKeyLabel, isKeyLabel } from "./object-utils";
-import { firstOf } from "./set-by-keys";
+import type { Key } from "../key-set/-base.ts";
+import { type IKeyLabel, isKeyLabel } from "./object-utils.ts";
+import { firstOf } from "./set-by-keys.ts";
 
 /**
  * Sorts a list of keys. If the keys are actually KeyLabel objects, they are sorted by key. Otherwise, they are naturally sorted.

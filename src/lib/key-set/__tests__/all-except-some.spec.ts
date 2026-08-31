@@ -4,7 +4,7 @@ import {
   allExceptSomeKeySet,
   KeySetAllExceptSome,
   KeySetSome,
-} from "../../..";
+} from "../../../index.ts";
 
 const keySet = new KeySetAllExceptSome([3, 1, 2, 3, 2, 1]); // => keys 1, 2, 3
 

@@ -3,13 +3,13 @@ import {
   type KeySet,
   type KeySetNoneSerialized,
   KeySetTypes,
-} from "./-base";
-import { KeySetGlobal } from "./-global";
-import { INSPECT } from "./-is-node-env";
-import { KeySetAll } from "./all";
-import { KeySetAllExceptSome } from "./all-except-some";
-import { InvalidKeySetError } from "./invalid-key-set-error";
-import { KeySetSome } from "./some";
+} from "./-base.ts";
+import { KeySetGlobal } from "./-global.ts";
+import { INSPECT } from "./-is-node-env.ts";
+import { KeySetAll } from "./all.ts";
+import { KeySetAllExceptSome } from "./all-except-some.ts";
+import { InvalidKeySetError } from "./invalid-key-set-error.ts";
+import { KeySetSome } from "./some.ts";
 
 export class KeySetNone<T extends Key = Key> extends KeySetGlobal<T> {
   public readonly type = KeySetTypes.none;

@@ -1,21 +1,21 @@
-import { sortBy, uniqueWith } from "../util/native-helpers";
-import type { IKeyLabel } from "../util/object-utils";
+import { sortBy, uniqueWith } from "../util/native-helpers.ts";
+import type { IKeyLabel } from "../util/object-utils.ts";
 import {
   type ComposedKeySetSerialized,
   isKeyLabelSet,
   type Key,
   type KeySet,
-} from "./-base";
-import { INSPECT } from "./-is-node-env";
-import { all, KeySetAll } from "./all";
-import { KeySetAllExceptSome } from "./all-except-some";
-import { KeySetNone } from "./none";
-import { KeySetSome } from "./some";
+} from "./-base.ts";
+import { INSPECT } from "./-is-node-env.ts";
+import { all, KeySetAll } from "./all.ts";
+import { KeySetAllExceptSome } from "./all-except-some.ts";
+import { KeySetNone } from "./none.ts";
+import { KeySetSome } from "./some.ts";
 
 /**
  * Composition of a list of KeySets.
  *
- * On a normal use case, this is not needed and it can be solved with `first.intersect(second)`.
+ * On a normal use case, this is not needed and it can be solved with `first.intersect(second)` or `first.union(second)`.
  * But there are other cases where we have to be explicit about the 2 sets that we are intersecting.
  *
  * e.g.
@@ -23,7 +23,7 @@ import { KeySetSome } from "./some";
  * We need to filter the items with labels A, B and C but that do not have labels D.
  *
  * We cannot use `some(A, B, C).intersect(allExceptSome(D))` since that would end up with just `some(A, B, C)`.
- * So we use `composedKeySet([some(A, B, C), allExceptSome(D)])`.
+ * So we use `composedKeySetFrom([some(A, B, C), allExceptSome(D)])`.
  *
  * This way, if we have a search engine that translates key sets like this:
  *   - `All` => `WHERE 1=1`
@@ -35,7 +35,17 @@ import { KeySetSome } from "./some";
  *   `WHERE items.labels.contains(A, B, or C) AND NOT items.labels.contains(D)`
  */
 export class ComposedKeySet<T extends Key = Key> {
-  constructor(readonly list: KeySet<T>[]) {}
+  readonly list: KeySet<T>[];
+
+  /**
+   * an empty list is normalised to a single `all`, so that `contains()` and
+   * `containsByUnion()` cannot disagree on a set with nothing in it
+   *
+   * @param list
+   */
+  constructor(list: KeySet<T>[]) {
+    this.list = list.length ? list : [all<T>()];
+  }
 
   public toString(): string {
     return `ComposedKeySet<${this.list.map((x) => x.toString())}>`;
@@ -50,14 +60,14 @@ export class ComposedKeySet<T extends Key = Key> {
   }
 
   /**
-   * equivalent to `list[0].union(list[1]).union(list[2])...
+   * equivalent to `list[0].union(list[1]).union(list[2])...`
    */
   collapseUnion(): KeySet<T> {
     return this.list.reduce((acc, x) => acc.union(x), new KeySetNone<T>());
   }
 
   /**
-   * equivalent to `list[0].intersect(list[1]).intersect(list[2])...
+   * equivalent to `list[0].intersect(list[1]).intersect(list[2])...`
    */
   collapseIntersect(): KeySet<T> {
     return this.list.reduce((acc, x) => acc.intersect(x), new KeySetAll<T>());
@@ -108,7 +118,7 @@ export class ComposedKeySet<T extends Key = Key> {
   }
 
   /**
-   * returns the list of complementary KeySets, of the opposite type, representing the elements that this set does not include
+   * returns a new ComposedKeySet with the complementary KeySet of each member, of the opposite type, representing the elements that this set does not include
    *
    * All -> None
    * None -> All
@@ -188,6 +198,8 @@ export class ComposedKeySet<T extends Key = Key> {
   /**
    * true if ALL sets contain the element
    * @param element
+   * @see containsByUnion()
+   * @see containsByIntersection()
    */
   contains(element: T): boolean {
     return this.list.every((x) => x.contains(element));
@@ -199,6 +211,27 @@ export class ComposedKeySet<T extends Key = Key> {
    * @see contains()
    */
   includes(element: T): boolean {
+    return this.contains(element);
+  }
+
+  /**
+   * true if ANY of the sets contains the element
+   * @param element
+   * @see contains()
+   * @see containsByIntersection()
+   */
+  containsByUnion(element: T): boolean {
+    return this.list.some((x) => x.contains(element));
+  }
+
+  /**
+   * true if ALL the sets contain the element
+   *
+   * alias of `contains`
+   * @param element
+   * @see contains()
+   */
+  containsByIntersection(element: T): boolean {
     return this.contains(element);
   }
 
@@ -218,7 +251,7 @@ export class ComposedKeySet<T extends Key = Key> {
   }
 
   /**
-   * returns a new one with all the elements of the same type as union
+   * returns a new one with all the elements of the same type as intersection
    *
    * eg
    *
@@ -271,8 +304,6 @@ export function isComposedKeyLabelSet(x: unknown): x is ComposedKeyLabelSet {
 export function composedKeySetFrom<T extends Key>(
   list: KeySet<T>[],
 ): ComposedKeySet<T> {
-  if (!list.length) return new ComposedKeySet<T>([all<T>()]);
-
   const uniqList = uniqueWith(list, (a, b) => a.isEqual(b));
   const sorted = sortBy(uniqList, (x) => [x.type, x.elementsSorted]);
   return new ComposedKeySet<T>(sorted);

@@ -1,0 +1,19 @@
+{
+  "name": "@test-apps/node-esm",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Consumes the package the way a native ESM project does: import through the exports map, types from build/module. This is the shape that was broken before v6.",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "build": "tsc",
+    "start": "node dist/main.js"
+  },
+  "dependencies": {
+    "@eturino/key-set": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^26.3.0",
+    "typescript": "^7.0.2"
+  }
+}

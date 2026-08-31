@@ -1,16 +1,33 @@
 {
-  "include": ["src"],
-  "exclude": ["**/*.test.ts", "**/*.spec.ts"],
   "compilerOptions": {
+    "target": "es2020",
     "module": "esnext",
-    "target": "esnext",
-    "lib": ["esnext"],
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+    "lib": ["es2020"],
+    "types": ["node", "vitest/globals"],
+    "rootDir": "src",
     "declaration": true,
-    "strict": true,
-    "moduleResolution": "node",
+    "noEmit": true,
+    "inlineSourceMap": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "outDir": "dist",
-    "rootDir": "src"
-  }
+    "resolveJsonModule": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "pretty": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts"],
+  "exclude": ["node_modules/**"]
 }

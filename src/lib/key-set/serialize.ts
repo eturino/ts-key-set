@@ -1,4 +1,4 @@
-import { type IKeyLabel, isKeyLabel, isObject } from "../util/object-utils";
+import { type IKeyLabel, isKeyLabel, isObject } from "../util/object-utils.ts";
 import {
   type ComposedKeyLabelSetSerialized,
   type ComposedKeySetAllExceptSomeSerialized,
@@ -27,19 +27,19 @@ import {
   type KeySetSerialized,
   type KeySetSomeSerialized,
   KeySetTypes,
-} from "./-base";
-import { all, type KeySetAll } from "./all";
-import { allExceptSome, type KeySetAllExceptSome } from "./all-except-some";
+} from "./-base.ts";
+import { all, type KeySetAll } from "./all.ts";
+import { allExceptSome, type KeySetAllExceptSome } from "./all-except-some.ts";
 import {
   type ComposedKeyLabelSet,
   type ComposedKeySet,
   composedKeySetFrom,
   isComposedKeyLabelSet,
   isComposedKeySet,
-} from "./composed";
-import { InvalidKeySetError } from "./invalid-key-set-error";
-import { type KeySetNone, none } from "./none";
-import { type KeySetSome, some } from "./some";
+} from "./composed.ts";
+import { InvalidKeySetError } from "./invalid-key-set-error.ts";
+import { type KeySetNone, none } from "./none.ts";
+import { type KeySetSome, some } from "./some.ts";
 
 /**
  * @hidden

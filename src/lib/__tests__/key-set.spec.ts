@@ -15,7 +15,7 @@ import {
   none,
   some,
   someForced,
-} from "../..";
+} from "../../index.ts";
 
 describe("isValidKey()", () => {
   it("isValidKey(1): true", () => {

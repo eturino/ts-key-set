@@ -3,7 +3,9 @@ node_modules
 build
 dist
 test
-src/**.js
+src/**/*.js
+src/**/*.js.map
+src/**/*.d.ts
 .idea/*
 yarn-error.log
 

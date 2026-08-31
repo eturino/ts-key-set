@@ -2,12 +2,14 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
-    globals: true,
     environment: "node",
+    globals: true,
+    include: ["src/**/__tests__/**/*.spec.ts"],
     coverage: {
+      provider: "v8",
+      reporter: ["text", "json", "lcov"],
       include: ["src/**/*.ts"],
-      exclude: ["**/__tests__/**", "**/commitlint.config.js"],
-      reporter: ["text", "lcov"],
-    }
+      exclude: ["src/**/__tests__/**", "src/**/*.spec.ts"],
+    },
   },
 });

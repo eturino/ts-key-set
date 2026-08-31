@@ -1,10 +1,10 @@
-import { type IKeyLabel, isKeyLabel } from "../util/object-utils";
-import { firstOf } from "../util/set-by-keys";
-import { isKeySet, type Key, type KeySet } from "./-base";
-import { KeySetAll } from "./all";
-import type { KeySetAllExceptSome } from "./all-except-some";
-import { KeySetNone } from "./none";
-import type { KeySetSome } from "./some";
+import { type IKeyLabel, isKeyLabel } from "../util/object-utils.ts";
+import { firstOf } from "../util/set-by-keys.ts";
+import { isKeySet, type Key, type KeySet } from "./-base.ts";
+import { KeySetAll } from "./all.ts";
+import type { KeySetAllExceptSome } from "./all-except-some.ts";
+import { KeySetNone } from "./none.ts";
+import type { KeySetSome } from "./some.ts";
 
 export function isKeySetOfStrings(x: KeySetAll): x is KeySetAll;
 export function isKeySetOfStrings(x: KeySetNone): x is KeySetNone;
