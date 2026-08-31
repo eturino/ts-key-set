@@ -75,11 +75,13 @@ The typedoc site (`https://eturino.github.io/ts-key-set`, gh-pages branch) was r
 
 **If docs come back:** wait for typedoc to support TS 7, add it as a plain devDep, restore the `doc:*` scripts and the gh-pages publish step.
 
-## Publish a release that supersedes 5.11.1
+## Promote v6 to `latest`
 
-npm `latest` is **5.11.1**, whose ES module build throws `Dynamic require of "util" is not supported` at import time (fixed in `0a77b3b`). A local `v5.12.0` tag and CHANGELOG entry exist but were never published.
+`6.0.0-beta.0` is on npm under the `beta` dist-tag; `latest` is still **5.11.1**. A local `v5.12.0` tag and CHANGELOG entry exist but were never published, so there is no fixed 5.x on the registry.
 
-**Done when:** a v6 release is on npm as `latest`. Consider `npm deprecate @eturino/key-set@5.11.1` with a pointer to it.
+5.11.1 itself is usable: `require()`, `import` by package name and browser bundles all work. Only its `module` build (`dist/index.mjs`) throws, and only when evaluated as real ESM in a Node-like runtime (fixed in `0a77b3b`). No deprecation planned - the narrow break does not justify warning every install.
+
+**Done when:** a v6 release is on npm as `latest`.
 
 ## Write or delete .github/CONTRIBUTING.md
 

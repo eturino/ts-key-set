@@ -22,7 +22,7 @@ It also has the concept of a `ComposedKeySet` which encapsulates a list of KeySe
 
 Also new in v6: `ComposedKeySet.containsByUnion()` / `containsByIntersection()`, and a published [JSON Schema](#json-schema) for the serialized format.
 
-Fixed in v6: the ES module build threw `Dynamic require of "util" is not supported` on import. See the yanked versions section.
+Fixed in v6: the `module` build (`dist/index.mjs` in 5.x) threw `Dynamic require of "node:util" is not supported` when it was evaluated as real ESM in a Node-like runtime - an ESM-output server bundle, or importing that file by path. It did not affect `require()`, `import` by package name (5.x had no `exports` map, so Node resolved `main`), or browser bundles, where `process` is undefined and the `node:util` branch is never taken.
 
 ## Breaking changes in v5
 
@@ -432,5 +432,7 @@ We have also a function to check type:
 
 # Yanked versions
 
-- `5.11.0` had some functions missing from the main package export.
-- `5.11.1` is not yanked, but its ES module build (`dist/index.mjs`) throws `Dynamic require of "util" is not supported` at import time. Use v6 or the CommonJS entry point.
+Both were unpublished from npm and cannot be installed. `npm view` does not list them, so they are recorded here.
+
+- `5.8.0` shipped the compiled output of `5.7.0`. Superseded by `5.8.1`.
+- `5.11.0` had some functions missing from the main package export. Superseded by `5.11.1`.
