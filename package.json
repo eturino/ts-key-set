@@ -16,7 +16,7 @@
         "default": "./build/main/index.js"
       }
     },
-    "./schemas/v1/key-set.schema.json": "./schemas/v1/key-set.schema.json",
+    "./schemas/*": "./schemas/*",
     "./package.json": "./package.json"
   },
   "files": [
@@ -38,13 +38,18 @@
     "build:module": "run-s build:module:tsc build:module:pkg",
     "build:module:tsc": "tsc -p tsconfig.module.json",
     "build:module:pkg": "node -e \"require('node:fs').writeFileSync('build/module/package.json', JSON.stringify({ type: 'module' }))\"",
-    "fix": "biome check --write --unsafe src",
+    "fix": "biome check --write --unsafe",
     "type-check": "tsc --noEmit",
     "check": "run-s check:biome type-check",
-    "check:biome": "biome check src",
+    "check:biome": "biome check",
     "check:cycles": "dpdm --no-tree --no-warning --exit-code circular:1 src/index.ts",
     "check:dead-code": "knip --no-config-hints",
-    "test": "run-s build check:biome test:unit check:dead-code type-check",
+    "test": "run-s test:lib test:apps",
+    "test:lib": "run-s build check:biome test:unit check:dead-code type-check",
+    "test:apps": "run-s test:apps:*",
+    "test:apps:type-check": "pnpm -r --filter \"./test-apps/*\" run type-check",
+    "test:apps:build": "pnpm -r --filter \"./test-apps/*\" run build",
+    "test:apps:start": "pnpm -r --filter \"./test-apps/*\" run start",
     "test:unit": "vitest run --coverage",
     "test:unit:watch": "vitest",
     "watch": "run-s clean build:main && run-p \"build:main -- -w\" test:unit:watch",

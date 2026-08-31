@@ -1,0 +1,19 @@
+{
+  "name": "@test-apps/node-cjs",
+  "private": true,
+  "version": "0.0.0",
+  "type": "commonjs",
+  "description": "Consumes the package the way a CommonJS project does: require() through the exports map, types from build/main.",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "build": "tsc",
+    "start": "node dist/main.js"
+  },
+  "dependencies": {
+    "@eturino/key-set": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^26.3.0",
+    "typescript": "^7.0.2"
+  }
+}

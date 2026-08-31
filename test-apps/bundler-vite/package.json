@@ -1,0 +1,20 @@
+{
+  "name": "@test-apps/bundler-vite",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Consumes the package the way a bundler does: vite resolves the import condition and tree-shakes the ES module build.",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "build": "vite build",
+    "start": "node dist/main.js"
+  },
+  "dependencies": {
+    "@eturino/key-set": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^26.3.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.0.5"
+  }
+}

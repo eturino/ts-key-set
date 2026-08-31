@@ -70,6 +70,48 @@ importers:
         specifier: ^4.1.11
         version: 4.1.11(@types/node@26.3.0)(@vitest/coverage-v8@4.1.11)(vite@8.2.2(@types/node@26.3.0)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.0))
 
+  test-apps/bundler-vite:
+    dependencies:
+      '@eturino/key-set':
+        specifier: workspace:*
+        version: link:../..
+    devDependencies:
+      '@types/node':
+        specifier: ^26.3.0
+        version: 26.3.0
+      typescript:
+        specifier: ^7.0.2
+        version: 7.0.2
+      vite:
+        specifier: ^8.0.5
+        version: 8.2.2(@types/node@26.3.0)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.0)
+
+  test-apps/node-cjs:
+    dependencies:
+      '@eturino/key-set':
+        specifier: workspace:*
+        version: link:../..
+    devDependencies:
+      '@types/node':
+        specifier: ^26.3.0
+        version: 26.3.0
+      typescript:
+        specifier: ^7.0.2
+        version: 7.0.2
+
+  test-apps/node-esm:
+    dependencies:
+      '@eturino/key-set':
+        specifier: workspace:*
+        version: link:../..
+    devDependencies:
+      '@types/node':
+        specifier: ^26.3.0
+        version: 26.3.0
+      typescript:
+        specifier: ^7.0.2
+        version: 7.0.2
+
 packages:
 
   '@babel/code-frame@7.29.7':
