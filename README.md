@@ -257,8 +257,8 @@ Two profiles of the same `v1` format, same `$defs` names, so switching between t
 Both are shipped inside the npm package under `schemas/v1/`, and available by URL pinned to a tag for immutability:
 
 ```
-https://raw.githubusercontent.com/eturino/ts-key-set/v6.0.0/schemas/v1/key-set.schema.json
-https://raw.githubusercontent.com/eturino/ts-key-set/v6.0.0/schemas/v1/key-set.canonical.schema.json
+https://raw.githubusercontent.com/eturino/ts-key-set/v6.0.0-beta.0/schemas/v1/key-set.schema.json
+https://raw.githubusercontent.com/eturino/ts-key-set/v6.0.0-beta.0/schemas/v1/key-set.canonical.schema.json
 ```
 
 Pick the permissive one when you are on the reading side of Postel's law, the canonical one when a human types the file. The canonical profile forbids `elements` on `ALL`/`NONE` (the permissive one tolerates an empty array), forbids unknown properties, and requires `uniqueItems`. None of the three is a shape this library ever emits, so on a hand-edited file each one is a typo worth an error rather than a value that quietly does not mean what it looks like.
@@ -286,7 +286,7 @@ To narrow further than that - a pattern, an enum of known ids - `allOf` the prof
 ```json
 {
   "allOf": [
-    { "$ref": "https://raw.githubusercontent.com/eturino/ts-key-set/v6.0.0/schemas/v1/key-set.canonical.schema.json" },
+    { "$ref": "https://raw.githubusercontent.com/eturino/ts-key-set/v6.0.0-beta.0/schemas/v1/key-set.canonical.schema.json" },
     { "properties": { "elements": { "items": { "$ref": "#/$defs/myItemKey" } } } }
   ]
 }
