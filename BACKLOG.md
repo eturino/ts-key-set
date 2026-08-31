@@ -2,6 +2,14 @@
 
 Deferred work, newest first. Each entry says what, why it was deferred, and how to verify it is done.
 
+## Settle the falsy `elements` tolerance in the parser
+
+`parseKeySet({ type: "ALL", elements: null })` returns `all()`, and so do `0`, `""` and `false`, because both guards in `serialize.ts` (`hasShapeOfSerialized` line 52, `isValidKeySetAllNone` line 64) read a falsy non-array as an absent `elements`. Both published schemas refuse all four, so the parser is laxer than its own contract.
+
+Pinned rather than fixed: `json-schema.spec.ts` asserts the current behaviour and the divergence. Tightening the guards to `elements !== undefined && !Array.isArray(elements)` is a behaviour change, so it belongs in a major.
+
+**Done when:** the guards are tightened and the pinning test is inverted, or the tolerance is documented as deliberate in the schema descriptions.
+
 ## Break the circular imports in the KeySet hierarchy
 
 `pnpm check:cycles` (dpdm) reports **19 circular import chains**, all inside `src/lib/key-set/`:

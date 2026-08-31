@@ -247,10 +247,21 @@ An invalid serialized value throws `InvalidKeySetError`.
 
 The serialized wire format is published as a JSON Schema (draft 2020-12) so that clients in other languages can validate it without depending on this library.
 
-- In the repo: [`schemas/v1/key-set.schema.json`](./schemas/v1/key-set.schema.json)
-- Shipped inside the npm package under `schemas/v1/`
-- By URL, pinned to a tag for immutability:
-  `https://raw.githubusercontent.com/eturino/ts-key-set/v6.0.0/schemas/v1/key-set.schema.json`
+Two profiles of the same `v1` format, same `$defs` names, so switching between them costs one `$id`:
+
+| file | describes | use it to |
+| --- | --- | --- |
+| [`key-set.schema.json`](./schemas/v1/key-set.schema.json) | what `parseKeySet()` **accepts** | validate a payload written by another client of this library |
+| [`key-set.canonical.schema.json`](./schemas/v1/key-set.canonical.schema.json) | what `serialized()` **emits** | validate a hand-edited file that embeds a key set |
+
+Both are shipped inside the npm package under `schemas/v1/`, and available by URL pinned to a tag for immutability:
+
+```
+https://raw.githubusercontent.com/eturino/ts-key-set/v6.0.0/schemas/v1/key-set.schema.json
+https://raw.githubusercontent.com/eturino/ts-key-set/v6.0.0/schemas/v1/key-set.canonical.schema.json
+```
+
+Pick the permissive one when you are on the reading side of Postel's law, the canonical one when a human types the file. The canonical profile forbids `elements` on `ALL`/`NONE` (the permissive one tolerates an empty array), forbids unknown properties, and requires `uniqueItems`. None of the three is a shape this library ever emits, so on a hand-edited file each one is a typo worth an error rather than a value that quietly does not mean what it looks like.
 
 The root schema describes a single serialized KeySet. The other shapes are addressable as `$defs`:
 
@@ -264,9 +275,22 @@ The root schema describes a single serialized KeySet. The other shapes are addre
 | `#/$defs/keyLabel` | a single `IKeyLabel` |
 | `#/$defs/keySetType` | the `type` discriminator |
 
-The `v1` in the path is the version of the **wire format**, not of the package: it only changes if the serialized shape changes in a way existing documents would fail. The schema is checked against the library's real output on every test run, including the cases the parser rejects (`SOME` with no elements, `ALL` with elements, unknown types).
+The `v1` in the path is the version of the **wire format**, not of the package, and it covers both profiles: two `$id`s, one format. It only changes if the serialized shape changes in a way existing documents would fail. Both schemas are checked against the library's real output on every test run, and against each form that parses but is never emitted.
 
-Note the schema is slightly stricter than the runtime parser: it validates that every element is a valid `Key`, which `parseKeySet` does not check. Unknown properties are allowed by both.
+To narrow the element type for your own file format, `allOf` the canonical schema with your own `items`. The narrowing only tightens; the canonical branch keeps its own `additionalProperties: false`:
+
+```json
+{
+  "allOf": [
+    { "$ref": "https://raw.githubusercontent.com/eturino/ts-key-set/v6.0.0/schemas/v1/key-set.canonical.schema.json" },
+    { "properties": { "elements": { "items": { "$ref": "#/$defs/myItemKey" } } } }
+  ]
+}
+```
+
+Two things neither schema can express: elements are **sorted** on emit, and `IKeyLabel` elements are deduplicated **by key**, so two entries sharing a `key` with different labels are not emitted either - `uniqueItems` does not catch that pair.
+
+Both schemas are stricter than the runtime parser in two places: they validate that every element is a valid `Key`, which `parseKeySet` does not check, and they refuse a falsy non-array `elements` (`null`, `0`, `""`, `false`) on `ALL`/`NONE`, which the parser reads as an absent `elements`. Unknown properties are allowed by the parser and by the permissive profile; the canonical profile refuses them, except on an `IKeyLabel`, where the library emits back whatever object it was handed.
 
 ## Type Predicates
 
