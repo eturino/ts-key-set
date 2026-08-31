@@ -2,12 +2,6 @@
 
 Deferred work, newest first. Each entry says what, why it was deferred, and how to verify it is done.
 
-## Repoint the pinned schema URLs at the GA tag
-
-The README pins its example schema URLs to `v6.0.0-beta.0`, the first tag that carries them. Once `v6.0.0` is published, those three URLs (two in the JSON Schema section, one in the `allOf` recipe) should name the GA tag, so a reader does not copy a prerelease URL into their own file format.
-
-**Done when:** no `-beta` remains in a `raw.githubusercontent.com` URL in the README.
-
 ## Settle the falsy `elements` tolerance in the parser
 
 `parseKeySet({ type: "ALL", elements: null })` returns `all()`, and so do `0`, `""` and `false`, because both guards in `serialize.ts` (`hasShapeOfSerialized` line 52, `isValidKeySetAllNone` line 64) read a falsy non-array as an absent `elements`. Both published schemas refuse all four, so the parser is laxer than its own contract.
