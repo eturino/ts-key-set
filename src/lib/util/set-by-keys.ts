@@ -1,6 +1,6 @@
-import type { Key } from "../key-set/-base";
-import { type IKeyLabel, isKeyLabel } from "./object-utils";
-import { sizeOf } from "./size-of";
+import type { Key } from "../key-set/-base.ts";
+import { type IKeyLabel, isKeyLabel } from "./object-utils.ts";
+import { sizeOf } from "./size-of.ts";
 
 /**
  * Returns a new Set containing the unique elements of the source list. If the elements given are KeyLabel, they are compared by key.

@@ -1,9 +1,9 @@
-import type { EmptyArray, NonEmptyArray } from "../util/array-types";
-import { type IKeyLabel, isKeyLabel } from "../util/object-utils";
-import { KeySetAll } from "./all";
-import { KeySetAllExceptSome } from "./all-except-some";
-import { KeySetNone } from "./none";
-import { KeySetSome } from "./some";
+import type { EmptyArray, NonEmptyArray } from "../util/array-types.ts";
+import { type IKeyLabel, isKeyLabel } from "../util/object-utils.ts";
+import { KeySetAll } from "./all.ts";
+import { KeySetAllExceptSome } from "./all-except-some.ts";
+import { KeySetNone } from "./none.ts";
+import { KeySetSome } from "./some.ts";
 
 export type Key =
   | string

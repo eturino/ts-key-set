@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { isKeyLabel } from "../../..";
+import { isKeyLabel } from "../../../index.ts";
 
 describe("isKeyLabel()", () => {
   it("isKeyLabel({ key: 'a', label: 'b', otherStuff: 'whatever' }): true", () => {

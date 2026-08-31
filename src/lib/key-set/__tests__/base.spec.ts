@@ -1,6 +1,6 @@
 import { $enum } from "ts-enum-util";
 import { expect, test } from "vitest";
-import { KeySetTypes, type KeySetTypesEnumValues } from "../../..";
+import { KeySetTypes, type KeySetTypesEnumValues } from "../../../index.ts";
 
 function acceptEnumValue(_x: KeySetTypesEnumValues): boolean {
   return true;

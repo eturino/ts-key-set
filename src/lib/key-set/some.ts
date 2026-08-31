@@ -1,16 +1,16 @@
-import type { EmptyArray, NonEmptyArray } from "../util/array-types";
+import type { EmptyArray, NonEmptyArray } from "../util/array-types.ts";
 import {
   type Key,
   type KeySet,
   type KeySetSomeSerialized,
   KeySetTypes,
-} from "./-base";
-import { KeySetByKeys } from "./-by-keys";
-import { INSPECT } from "./-is-node-env";
-import { KeySetAll } from "./all";
-import { allExceptSome, KeySetAllExceptSome } from "./all-except-some";
-import { InvalidEmptySetError } from "./invalid-empty-set-error";
-import { KeySetNone, none } from "./none";
+} from "./-base.ts";
+import { KeySetByKeys } from "./-by-keys.ts";
+import { INSPECT } from "./-is-node-env.ts";
+import { KeySetAll } from "./all.ts";
+import { allExceptSome, KeySetAllExceptSome } from "./all-except-some.ts";
+import { InvalidEmptySetError } from "./invalid-empty-set-error.ts";
+import { KeySetNone, none } from "./none.ts";
 
 export class KeySetSome<T extends Key> extends KeySetByKeys<T> {
   public readonly type = KeySetTypes.some;

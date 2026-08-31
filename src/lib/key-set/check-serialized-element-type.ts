@@ -1,5 +1,5 @@
-import { type IKeyLabel, isKeyLabel } from "../util/object-utils";
-import { firstOf } from "../util/set-by-keys";
+import { type IKeyLabel, isKeyLabel } from "../util/object-utils.ts";
+import { firstOf } from "../util/set-by-keys.ts";
 import type {
   Key,
   KeySetAllExceptSomeSerialized,
@@ -7,11 +7,11 @@ import type {
   KeySetNoneSerialized,
   KeySetSerialized,
   KeySetSomeSerialized,
-} from "./-base";
+} from "./-base.ts";
 import {
   isKeySetAllNoneSerialized,
   isKeySetElementsSerialized,
-} from "./serialize";
+} from "./serialize.ts";
 
 export function isKeySetSerializedOfStrings(
   x: KeySetAllSerialized,

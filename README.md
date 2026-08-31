@@ -15,8 +15,8 @@ It also has the concept of a `ComposedKeySet` which encapsulates a list of KeySe
 ## Breaking changes in v6
 
 - `new ComposedKeySet([])` now normalises the empty list to a single `all()`, the way `composedKeySetFrom([])` always did. Previously the constructor kept the empty list, where `contains()` answered `true` (vacuously) while the new `containsByUnion()` would answer `false`.
-- The published entry points moved from `dist/` to `build/`: `main` is `build/main/index.js` (CommonJS), `module` is `build/module/index.js` (ES modules, for bundlers) and `types` is `build/main/index.d.ts`. Importing the package by name is unaffected; a deep import of a `dist/...` path is not.
-- The ES module build is no longer a single bundled file. Node resolves `main` (CommonJS) as it did before, since the package has no `exports` map.
+- The published entry points moved from `dist/` to `build/`, behind an `exports` map: `import` resolves `build/module/index.js` (ES modules) and `require` resolves `build/main/index.js` (CommonJS), each with its own `.d.ts`. `main`, `module` and `types` are still declared for older bundlers. Importing the package by name is unaffected; a deep import of a `dist/...` path is not, and the `exports` map now allows only `@eturino/key-set/schemas/v1/key-set.schema.json` and `@eturino/key-set/package.json` as subpaths.
+- The ES module build is no longer a single bundled file, and it now works under native Node ESM: relative specifiers carry their `.js` extension and `build/module/package.json` marks the directory as `type: module`. Before v6 the `module` build was only resolvable by a bundler.
 - `KEY_SET_TYPES`, `_IS_NODE_ENVIRONMENT` and `isKeyLabelBase` are no longer exported from their modules. None of them was ever re-exported from the package entry point, so only a deep import into `src/` could have reached them.
 - `allExceptSomeForced([])` now throws an error whose message names `allExceptSomeForced`. It used to say `someForced`.
 

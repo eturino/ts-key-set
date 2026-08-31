@@ -31,17 +31,15 @@ Related contradiction to settle at the same time: `isObject` is marked `@interna
 
 ## Harden the test suite
 
-609 tests at 100% statement/line/function coverage, but the suite is structurally blind to build- and toolchain-level regressions: every test imports `src/`, nothing imports `build/`, and until recently the specs were not even type-checked. Ranked by value per effort:
+612 tests at 100% statement/line/function coverage. `src/lib/__tests__/build-smoke.spec.ts` now covers the build (cjs + esm load, wire format, literal `KeySetTypes` values), so the toolchain-level blind spot is closed. What is left, ranked by value per effort:
 
-1. **`build/` smoke test.** Import `build/main/index.js` (cjs) and `build/module/index.js` (esm) after a build; assert `serialized()`, `toString()`, `instanceof KeySetSome`, and that an empty-set error is `instanceof InvalidEmptySetError`. This is the only test that can see a tsc/target/module-format regression. A dynamic `require("node:util")` shipped broken in the ESM bundle of 5.11.1 for exactly this reason.
-2. **`KeySetTypes` wire values.** Assert `KeySetTypes.all === "ALL"` etc. literally. Every serialize fixture currently uses the enum on both sides of the assertion, so a changed emit stays green while every payload changes.
-3. **Sort order.** `sortKeys` and `elementsSorted` call `.sort()` with no comparator, so `[1, 2, 10]` sorts to `[1, 10, 2]`, and that feeds `serialized()` and `toString()`. Pin the current behavior (or fix it, if it is a bug - that is a breaking change).
-4. **The type-guard exports.** `isKeySet`, `isKeySetAll`, `isKeySetNone`, `isKeySetSome`, `isKeySetAllExceptSome`, `isKeySetType`, `isObject` have no direct tests. All are `instanceof`-based - the first thing a dual cjs+esm packaging change breaks.
-5. **Round-trip property.** Loop `{all, none, some, allExceptSome} x {number, string, KeyLabel}` asserting `parseKeySet(serializeKeySet(ks)).isEqual(ks)` and `JSON.parse(JSON.stringify(ks))` deep-equals `ks.serialized()`. One loop covers enum emit, sort order, and parse/serialize symmetry at once.
-6. **KeyLabel set operations.** The whole 4x4 intersect/union/remove/isEqual matrix uses number keys. `setByKeys` dedupes KeyLabels *by key* while `Set.has`/`setsEqual` compare *by reference*, so `some([{key:1,label:'a'}]).intersect(some([{key:1,label:'a'}]))` is empty. Real, load-bearing, unasserted.
-7. **`-is-node-env.ts` browser branch.** The only uncovered branch in the repo. `vi.stubGlobal("process", undefined)` + `vi.resetModules()`, then assert `typeof INSPECT === "symbol"` and that `toString()` still works.
-8. **Element-type predicate symmetry.** `check-element-type.spec.ts` and `check-serialized-element-type.spec.ts` never pass an `allExceptSome(...)` input. ~30 mechanical lines.
-9. **Immutability claims.** `Object.freeze` on a `Set` does not block `.add()`/`.delete()`. Assert what `elements` actually guarantees.
+1. **Sort order.** `sortKeys` and `elementsSorted` call `.sort()` with no comparator, so `[1, 2, 10]` sorts to `[1, 10, 2]`, and that feeds `serialized()` and `toString()`. Pin the current behavior (or fix it, if it is a bug - that is a breaking change).
+2. **The type-guard exports.** `isKeySet`, `isKeySetAll`, `isKeySetNone`, `isKeySetSome`, `isKeySetAllExceptSome`, `isKeySetType`, `isObject` have no direct tests. All are `instanceof`-based - the first thing a dual cjs+esm packaging change breaks.
+3. **Round-trip property.** Loop `{all, none, some, allExceptSome} x {number, string, KeyLabel}` asserting `parseKeySet(serializeKeySet(ks)).isEqual(ks)` and `JSON.parse(JSON.stringify(ks))` deep-equals `ks.serialized()`. One loop covers enum emit, sort order, and parse/serialize symmetry at once.
+4. **KeyLabel set operations.** The whole 4x4 intersect/union/remove/isEqual matrix uses number keys. `setByKeys` dedupes KeyLabels *by key* while `Set.has`/`setsEqual` compare *by reference*, so `some([{key:1,label:'a'}]).intersect(some([{key:1,label:'a'}]))` is empty. Real, load-bearing, unasserted.
+5. **`-is-node-env.ts` browser branch.** The only uncovered branch in the repo. `vi.stubGlobal("process", undefined)` + `vi.resetModules()`, then assert `typeof INSPECT === "symbol"` and that `toString()` still works.
+6. **Element-type predicate symmetry.** `check-element-type.spec.ts` and `check-serialized-element-type.spec.ts` never pass an `allExceptSome(...)` input. ~30 mechanical lines.
+7. **Immutability claims.** `Object.freeze` on a `Set` does not block `.add()`/`.delete()`. Assert what `elements` actually guarantees.
 
 Weak tests worth replacing while in there:
 

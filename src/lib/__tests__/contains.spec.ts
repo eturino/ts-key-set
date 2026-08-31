@@ -7,7 +7,7 @@ import {
   type KeySetSome,
   none,
   some,
-} from "../..";
+} from "../../index.ts";
 
 const element = "A";
 

@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { KeySetAll, KeySetNone, none, noneKeySet } from "../../..";
+import { KeySetAll, KeySetNone, none, noneKeySet } from "../../../index.ts";
 
 const keySet = new KeySetNone();
 

@@ -31,37 +31,37 @@ import {
   KeySetSomeSerialized,
   KeySetTypes,
   KeySetTypesEnumValues,
-} from "./key-set/-base";
-import { all, allKeySet, KeySetAll } from "./key-set/all";
+} from "./key-set/-base.ts";
+import { all, allKeySet, KeySetAll } from "./key-set/all.ts";
 import {
   allExceptSome,
   allExceptSomeForced,
   allExceptSomeKeySet,
   allExceptSomeKeySetForced,
   KeySetAllExceptSome,
-} from "./key-set/all-except-some";
+} from "./key-set/all-except-some.ts";
 import {
   isKeySetOfNumberKeyLabels,
   isKeySetOfNumbers,
   isKeySetOfStringKeyLabels,
   isKeySetOfStrings,
-} from "./key-set/check-element-type";
+} from "./key-set/check-element-type.ts";
 import {
   isKeySetSerializedOfNumberKeyLabels,
   isKeySetSerializedOfNumbers,
   isKeySetSerializedOfStringKeyLabels,
   isKeySetSerializedOfStrings,
-} from "./key-set/check-serialized-element-type";
+} from "./key-set/check-serialized-element-type.ts";
 import {
   ComposedKeyLabelSet,
   ComposedKeySet,
   composedKeySetFrom,
   isComposedKeyLabelSet,
   isComposedKeySet,
-} from "./key-set/composed";
-import { InvalidEmptySetError } from "./key-set/invalid-empty-set-error";
-import { InvalidKeySetError } from "./key-set/invalid-key-set-error";
-import { KeySetNone, none, noneKeySet } from "./key-set/none";
+} from "./key-set/composed.ts";
+import { InvalidEmptySetError } from "./key-set/invalid-empty-set-error.ts";
+import { InvalidKeySetError } from "./key-set/invalid-key-set-error.ts";
+import { KeySetNone, none, noneKeySet } from "./key-set/none.ts";
 import {
   isComposedKeyLabelSetSerialized,
   isComposedKeySetSerialized,
@@ -83,23 +83,23 @@ import {
   serializeComposedKeySet,
   serializeKeyLabelSet,
   serializeKeySet,
-} from "./key-set/serialize";
+} from "./key-set/serialize.ts";
 import {
   KeySetSome,
   some,
   someForced,
   someKeySet,
   someKeySetForced,
-} from "./key-set/some";
+} from "./key-set/some.ts";
 import {
   EmptyArray,
   isEmptyArray,
   isNonEmptyArray,
   NonEmptyArray,
-} from "./util/array-types";
-import { IKeyLabel, isKeyLabel, isObject } from "./util/object-utils";
-import { setByKeys } from "./util/set-by-keys";
-import { sortKeys } from "./util/sort-keys";
+} from "./util/array-types.ts";
+import { IKeyLabel, isKeyLabel, isObject } from "./util/object-utils.ts";
+import { setByKeys } from "./util/set-by-keys.ts";
+import { sortKeys } from "./util/sort-keys.ts";
 
 export {
   all,

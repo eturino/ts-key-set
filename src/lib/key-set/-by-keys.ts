@@ -1,6 +1,6 @@
-import { setsEqual } from "../util/native-helpers";
-import { setByKeys } from "../util/set-by-keys";
-import { sortKeys } from "../util/sort-keys";
+import { setsEqual } from "../util/native-helpers.ts";
+import { setByKeys } from "../util/set-by-keys.ts";
+import { sortKeys } from "../util/sort-keys.ts";
 import type {
   IKeySetClass,
   Key,
@@ -8,12 +8,12 @@ import type {
   KeySetAllExceptSomeSerialized,
   KeySetSomeSerialized,
   KeySetTypes,
-} from "./-base";
-import type { KeySetAll } from "./all";
-import type { KeySetAllExceptSome } from "./all-except-some";
-import { InvalidEmptySetError } from "./invalid-empty-set-error";
-import type { KeySetNone } from "./none";
-import type { KeySetSome } from "./some";
+} from "./-base.ts";
+import type { KeySetAll } from "./all.ts";
+import type { KeySetAllExceptSome } from "./all-except-some.ts";
+import { InvalidEmptySetError } from "./invalid-empty-set-error.ts";
+import type { KeySetNone } from "./none.ts";
+import type { KeySetSome } from "./some.ts";
 
 /**
  * @internal

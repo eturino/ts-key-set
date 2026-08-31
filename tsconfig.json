@@ -3,6 +3,8 @@
     "target": "es2020",
     "module": "esnext",
     "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
     "lib": ["es2020"],
     "types": ["node", "vitest/globals"],
     "rootDir": "src",

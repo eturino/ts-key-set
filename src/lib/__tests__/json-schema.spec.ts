@@ -13,7 +13,7 @@ import {
   serializeComposedKeySet,
   serializeKeySet,
   some,
-} from "../..";
+} from "../../index.ts";
 
 const schema = JSON.parse(
   readFileSync(

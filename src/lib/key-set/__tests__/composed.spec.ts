@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { KeySet } from "../../..";
+import type { KeySet } from "../../../index.ts";
 import {
   all,
   allExceptSome,
@@ -15,8 +15,8 @@ import {
   serializeKeyLabelSet,
   serializeKeySet,
   some,
-} from "../../..";
-import { sortBy } from "../../util/native-helpers";
+} from "../../../index.ts";
+import { sortBy } from "../../util/native-helpers.ts";
 
 describe("ComposedKeySet", () => {
   describe("isComposedKeySet", () => {

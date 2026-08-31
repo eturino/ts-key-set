@@ -1,16 +1,16 @@
-import { sortBy, uniqueWith } from "../util/native-helpers";
-import type { IKeyLabel } from "../util/object-utils";
+import { sortBy, uniqueWith } from "../util/native-helpers.ts";
+import type { IKeyLabel } from "../util/object-utils.ts";
 import {
   type ComposedKeySetSerialized,
   isKeyLabelSet,
   type Key,
   type KeySet,
-} from "./-base";
-import { INSPECT } from "./-is-node-env";
-import { all, KeySetAll } from "./all";
-import { KeySetAllExceptSome } from "./all-except-some";
-import { KeySetNone } from "./none";
-import { KeySetSome } from "./some";
+} from "./-base.ts";
+import { INSPECT } from "./-is-node-env.ts";
+import { all, KeySetAll } from "./all.ts";
+import { KeySetAllExceptSome } from "./all-except-some.ts";
+import { KeySetNone } from "./none.ts";
+import { KeySetSome } from "./some.ts";
 
 /**
  * Composition of a list of KeySets.

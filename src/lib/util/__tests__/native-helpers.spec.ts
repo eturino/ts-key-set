@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { setsEqual, sortBy, uniqueWith } from "../native-helpers";
+import { setsEqual, sortBy, uniqueWith } from "../native-helpers.ts";
 
 describe("native-helpers", () => {
   describe("sortBy", () => {

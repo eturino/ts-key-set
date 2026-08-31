@@ -4,7 +4,7 @@ import {
   KeySetAllExceptSome,
   KeySetNone,
   KeySetSome,
-} from "../../../..";
+} from "../../../../index.ts";
 
 const keySetAll = new KeySetAll<number>();
 const keySetNone = new KeySetNone<number>();

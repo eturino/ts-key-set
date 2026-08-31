@@ -9,7 +9,7 @@ import {
   type KeySetSerialized,
   none,
   some,
-} from "../..";
+} from "../../index.ts";
 
 const invalidKeySetSerialized = "blah" as unknown as KeySetSerialized;
 

@@ -6,7 +6,7 @@ import {
   composedKeySetFrom,
   noneKeySet,
   someKeySetForced,
-} from "../..";
+} from "../../index.ts";
 
 describe("toString KeySet", () => {
   it("KeySetAll", () => {
