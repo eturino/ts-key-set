@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/eturino/ts-key-set/master/schemas/v1/key-set.canonical.schema.json",
   "title": "KeySetSerialized (canonical)",
-  "description": "Wire format v1 for @eturino/key-set, canonical profile: exactly what serialized() emits, and nothing else. The sibling key-set.schema.json describes what parseKeySet() accepts, which is deliberately wider. Use this one to validate a hand-edited file that embeds a key set, so a tolerated-but-never-emitted form is an error at edit time rather than a value that does not mean what it looks like. Same wire format, same v1, same $defs names as the permissive profile: switching costs one $id. Pin a git tag instead of `master` for an immutable URL. Two things this file cannot express: elements are sorted on emit, and IKeyLabel elements are deduplicated by `key`, so two entries with the same key and different labels are not emitted either (uniqueItems does not catch that pair).",
+  "description": "Wire format v1 for @eturino/key-set, canonical profile: exactly what serialized() emits, and nothing else. The sibling key-set.schema.json describes what parseKeySet() accepts, which is deliberately wider. Use this one to validate a hand-edited file that embeds a key set, so a tolerated-but-never-emitted form is an error at edit time rather than a value that does not mean what it looks like. Same wire format, same v1, same $defs names as the permissive profile: switching costs one $id. Three element profiles are addressable as $defs: #/$defs/keySet (any Key), #/$defs/keyLabelSet (IKeyLabel only) and #/$defs/stringKeySet (string only). Pin a git tag instead of `master` for an immutable URL. Two things this file cannot express: elements are sorted on emit, and IKeyLabel elements are deduplicated by `key`, so two entries with the same key and different labels are not emitted either (uniqueItems does not catch that pair).",
   "$ref": "#/$defs/keySet",
   "$defs": {
     "keySetType": {
@@ -132,6 +132,56 @@
         { "$ref": "#/$defs/keyLabelSetSome" },
         { "$ref": "#/$defs/keyLabelSetAllExceptSome" }
       ]
+    },
+
+    "stringKeySetSome": {
+      "title": "StringKeySetSomeSerialized",
+      "type": "object",
+      "properties": {
+        "type": { "const": "SOME" },
+        "elements": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["type", "elements"],
+      "additionalProperties": false
+    },
+
+    "stringKeySetAllExceptSome": {
+      "title": "StringKeySetAllExceptSomeSerialized",
+      "type": "object",
+      "properties": {
+        "type": { "const": "ALL_EXCEPT_SOME" },
+        "elements": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["type", "elements"],
+      "additionalProperties": false
+    },
+
+    "stringKeySet": {
+      "title": "StringKeySetSerialized",
+      "description": "Same shape as keySet, restricted to string elements: no numbers, no IKeyLabel. For a file format whose keys are string ids. Narrowing further (a pattern, an enum) is an allOf away, see the README.",
+      "anyOf": [
+        { "$ref": "#/$defs/keySetAll" },
+        { "$ref": "#/$defs/keySetNone" },
+        { "$ref": "#/$defs/stringKeySetSome" },
+        { "$ref": "#/$defs/stringKeySetAllExceptSome" }
+      ]
+    },
+
+    "composedStringKeySet": {
+      "title": "ComposedStringKeySetSerialized",
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/stringKeySet" }
     },
 
     "composedKeySet": {

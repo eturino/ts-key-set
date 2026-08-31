@@ -42,6 +42,11 @@ const composedKeySet = validator("key-set", "composedKeySet");
 const canonicalKeySet = validator("canonical", "keySet");
 const canonicalKeyLabelSet = validator("canonical", "keyLabelSet");
 const canonicalComposedKeySet = validator("canonical", "composedKeySet");
+const canonicalStringKeySet = validator("canonical", "stringKeySet");
+const canonicalComposedStringKeySet = validator(
+  "canonical",
+  "composedStringKeySet",
+);
 
 const keyLabels = [
   { key: 2, label: "b" },
@@ -198,6 +203,47 @@ describe("schemas/v1/key-set.canonical.schema.json", () => {
     ])("%s", (_name, given) => {
       expect(keySet(given)).toBe(true);
       expect(canonicalKeySet(given)).toBe(false);
+    });
+  });
+
+  describe("the string-only element profile", () => {
+    it.each([
+      ["all", all<string>()],
+      ["none", none<string>()],
+      ["some", some(["b", "a"])],
+      ["allExceptSome", allExceptSome(["b", "a"])],
+    ])("accepts %s over string keys", (_name, ks) => {
+      expect(canonicalStringKeySet(serializeKeySet(ks))).toBe(true);
+    });
+
+    it.each([
+      ["number elements", { type: "SOME", elements: [1] }],
+      ["key label elements", { type: "SOME", elements: [keyLabels[0]] }],
+      ["mixed elements", { type: "SOME", elements: ["a", 1] }],
+    ])("refuses %s that the wider profile accepts", (_name, given) => {
+      expect(canonicalKeySet(given)).toBe(true);
+      expect(canonicalStringKeySet(given)).toBe(false);
+    });
+
+    it("stays canonical about everything else", () => {
+      expect(canonicalStringKeySet({ type: "ALL", elements: [] })).toBe(false);
+      expect(
+        canonicalStringKeySet({ type: "SOME", elements: ["a", "a"] }),
+      ).toBe(false);
+      expect(
+        canonicalStringKeySet({ type: "SOME", elements: ["a"], extra: 1 }),
+      ).toBe(false);
+    });
+
+    it("composes", () => {
+      const comp = composedKeySetFrom([some(["a"]), allExceptSome(["b"])]);
+
+      expect(canonicalComposedStringKeySet(serializeComposedKeySet(comp))).toBe(
+        true,
+      );
+      expect(
+        canonicalComposedStringKeySet([{ type: "SOME", elements: [1] }]),
+      ).toBe(false);
     });
   });
 

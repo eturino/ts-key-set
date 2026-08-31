@@ -267,17 +267,21 @@ The root schema describes a single serialized KeySet. The other shapes are addre
 
 | pointer | shape |
 | --- | --- |
-| `#/$defs/keySet` | `KeySetSerialized` (the root) |
-| `#/$defs/keyLabelSet` | `KeyLabelSetSerialized` |
+| `#/$defs/keySet` | `KeySetSerialized` (the root), any `Key` element |
+| `#/$defs/keyLabelSet` | `KeyLabelSetSerialized`, `IKeyLabel` elements only |
+| `#/$defs/stringKeySet` | string elements only (canonical profile only) |
 | `#/$defs/composedKeySet` | `ComposedKeySetSerialized` |
 | `#/$defs/composedKeyLabelSet` | `ComposedKeyLabelSetSerialized` |
+| `#/$defs/composedStringKeySet` | composed, string elements only (canonical profile only) |
 | `#/$defs/key` | a single `Key` |
 | `#/$defs/keyLabel` | a single `IKeyLabel` |
 | `#/$defs/keySetType` | the `type` discriminator |
 
+If your file format keys on plain string ids, point at `key-set.canonical.schema.json#/$defs/stringKeySet`: same canonical rules, with `elements` restricted to strings, so a number or an `IKeyLabel` is an error rather than a valid key set of a kind you never meant to accept.
+
 The `v1` in the path is the version of the **wire format**, not of the package, and it covers both profiles: two `$id`s, one format. It only changes if the serialized shape changes in a way existing documents would fail. Both schemas are checked against the library's real output on every test run, and against each form that parses but is never emitted.
 
-To narrow the element type for your own file format, `allOf` the canonical schema with your own `items`. The narrowing only tightens; the canonical branch keeps its own `additionalProperties: false`:
+To narrow further than that - a pattern, an enum of known ids - `allOf` the profile you want with your own `items`. The narrowing only tightens; the canonical branch keeps its own `additionalProperties: false`:
 
 ```json
 {
