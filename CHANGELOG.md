@@ -1,7 +1,56 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [6.0.0-beta.0](https://github.com/eturino/ts-key-set/compare/v5.12.0...v6.0.0-beta.0) (2026-08-31)
+
+### ⚠ BREAKING CHANGES
+
+* `new ComposedKeySet([])` now normalises the empty list
+  to a single `all()`, the way `composedKeySetFrom([])` always did. The
+  constructor used to keep the empty list, where `contains()` answered
+  true (vacuously) while `containsByUnion()` answered false.
+
+  - schemas/v1/key-set.schema.json: the serialized wire format as a
+    draft-2020-12 JSON Schema, so clients in other languages can validate
+    it without this library. Root is a single KeySet; the KeyLabel and
+    composed shapes are $defs. Shipped in the package and pinnable by tag
+    from GitHub. `v1` versions the wire format, not the package
+  - 22 conformance tests validate the schema against the library's real
+    output and against every input the parser rejects
+  - export ComposedKeySetAllSerialized, ComposedKeySetNoneSerialized,
+    ComposedKeySetSomeSerialized and ComposedKeySetAllExceptSomeSerialized.
+    The isComposedKeySetSerializedRepresents* guards narrow to these, but
+    they were unreachable from the package entry point
+  - allExceptSomeForced([]) threw an error naming `someForced`
+  - the containsByIntersection test only re-asserted the alias. Replaced
+    with a property test over 36 composed pairs x 5 elements, checking the
+    element-wise definition against the collapsed algebra
+  - JSDoc: compactIntersect said "as union", both allExceptSome factories
+    claimed they build a KeySetSome, the class example named a factory that
+    is not exported, [@alias](https://github.com/alias) meant [@see](https://github.com/see), unclosed backticks
+  - README: the union example called intersect, four Represents* type names
+    that never existed, a 404 link, dead Travis and Code Climate badges, a
+    frozen-Set claim that Object.freeze does not deliver, and the composed
+    and key-label serialize/parse functions were undocumented
+* **esm:** the package now has an `exports` map, so deep imports
+  other than `./schemas/v1/key-set.schema.json` and `./package.json` are no
+  longer resolvable.
+
+### Features
+
+* **composed:** add containsByUnion and containsByIntersection ([e86fe7f](https://github.com/eturino/ts-key-set/commit/e86fe7f75db82ad3ce2a03b47041fc9fc3734386))
+* normalise the empty ComposedKeySet, publish a JSON Schema ([2f3c765](https://github.com/eturino/ts-key-set/commit/2f3c765037da320c5548b6380fd2156ff0b0a751))
+* **schema:** add a string-only element profile to the canonical schema ([f71b173](https://github.com/eturino/ts-key-set/commit/f71b1734b4e7a6e76d2033afd4cbd55a664da3d7))
+* **schema:** publish a canonical profile of the wire format ([6ac2161](https://github.com/eturino/ts-key-set/commit/6ac2161243da715e73700b8d2686d071ccfa9051))
+
+### Bug Fixes
+
+* **deps:** bump lodash and commitizen ([#1078](https://github.com/eturino/ts-key-set/issues/1078)) ([d10ac2a](https://github.com/eturino/ts-key-set/commit/d10ac2aa6040d9ee522ba3adb0798230dfde2b87))
+* **deps:** bump rollup from 4.55.1 to 4.59.0 ([#995](https://github.com/eturino/ts-key-set/issues/995)) ([68963ec](https://github.com/eturino/ts-key-set/commit/68963ec1f74237f00ead30da0af7f16d91fc7b54))
+* **deps:** bump vite from 8.0.3 to 8.0.5 ([#1029](https://github.com/eturino/ts-key-set/issues/1029)) ([dee5987](https://github.com/eturino/ts-key-set/commit/dee59872c5f0e9e3d352de2f9e2e73396cefd02a))
+* **esm:** ship an exports map and a native-ESM build ([77e96c4](https://github.com/eturino/ts-key-set/commit/77e96c4ffdab2a61b45ebe7780c42b44c3e21850))
+* **inspect:** drop dynamic require of node:util ([0738d70](https://github.com/eturino/ts-key-set/commit/0738d702461fdf7148b3dcb46e106b8a0241f9da))
 ## [5.12.0](https://github.com/eturino/ts-key-set/compare/v5.11.1...v5.12.0) (2026-01-16)
 
 
