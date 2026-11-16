@@ -15,3 +15,5 @@ coverage
 
 .DS_Store
 README.pdf
+
+.worktrees/
