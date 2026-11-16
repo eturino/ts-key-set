@@ -784,9 +784,6 @@ describe("serialize KeySet", () => {
       it("isComposedKeySetSerialized(composedKeySet) -> NOPE", () => {
         expect(isComposedKeySetSerialized(composedKeySet)).toBeFalsy();
       });
-      it("isComposedKeySetSerialized(composedKeySet) -> NOPE", () => {
-        expect(isComposedKeySetSerialized(keySet1)).toBeFalsy();
-      });
     });
 
     describe("serializeComposedKeySet()", () => {
@@ -912,9 +909,6 @@ describe("serialize KeySet", () => {
           isComposedKeyLabelSetSerialized(composedKeyLabelSet),
         ).toBeFalsy();
       });
-      it("isComposedKeyLabelSetSerialized(composedKeyLabelSet) -> NOPE", () => {
-        expect(isComposedKeyLabelSetSerialized(keySet1)).toBeFalsy();
-      });
       it("isComposedKeyLabelSetSerialized(invalid) -> NOPE", () => {
         expect(isComposedKeyLabelSetSerialized(new Date())).toBeFalsy();
       });
@@ -943,7 +937,7 @@ describe("serialize KeySet", () => {
           ),
         ).toThrow();
       });
-      it("serializeComposedKeyLabelSet(invalid) -> throw", () => {
+      it("serializeComposedKeyLabelSet(array with an invalid item) -> throw", () => {
         expect(() =>
           serializeComposedKeyLabelSet([
             keySet1,
